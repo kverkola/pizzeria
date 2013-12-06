@@ -44,7 +44,7 @@
 
     <jsp:include page="${partial}" />
 
-    <div>
+    <div class="navbar navbar-fixed-bottom" style="text-align: center">
         <hr>
         <footer>
             <p>&copy; NetCracker Courses 2013-2014</p>
