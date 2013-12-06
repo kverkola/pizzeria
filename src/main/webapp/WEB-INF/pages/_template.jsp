@@ -9,15 +9,19 @@
 </head>
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
+<div style="min-height: 30px;"></div>
+
+<div class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header" style="margin-top: -25px; max-height: 40px;">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.servletContext.contextPath}/">Pizzeria</a>
+            <a href="${pageContext.servletContext.contextPath}/">
+                <img src="${pageContext.servletContext.contextPath}/resources/logo.png"/>
+            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -36,7 +40,7 @@
     </div>
 </div>
 
-<div class="container" style="margin-top: 40px;">
+<div class="container">
 
     <jsp:include page="${partial}" />
 
