@@ -37,9 +37,10 @@ public class PizzaDaoImpl implements PizzaDao {
      * @param id
      * @return
      */
+    @Override
     public Pizza loadById(Integer id) {
 
-        Map<Ingredient, Integer> ingredientMap = new HashMap<>();
+        Map<Ingredient, Integer> ingredientMap = new HashMap();
         ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
         ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
         ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
@@ -49,9 +50,10 @@ public class PizzaDaoImpl implements PizzaDao {
         return new Pizza("TestPizza", ingredientMap, 25);
     }
 
+    @Override
     public List<Pizza> loadByOrder(Integer orderId) {
 
-        List<Pizza> pizzaList = new ArrayList<>();
+        List<Pizza> pizzaList = new ArrayList();
         return pizzaList;
     }
 }
