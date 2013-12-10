@@ -1,11 +1,13 @@
-package ua.opu.dl.pizzeria.entity;
+package ua.opu.dl.pizzeria.model;
 
-public class Additional {
+public class Ingredient {
 	private String name;
+	private double weight;
 	private double price;
 
-	public Additional(String name, double price) {
+	public Ingredient(String name, double weight, double price) {
 		this.name = name;
+		this.weight = weight;
 		this.price = price;
 	}
 
@@ -17,6 +19,14 @@ public class Additional {
 		this.name = name;
 	}
 
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
 	public double getPrice() {
 		return price;
 	}
@@ -24,5 +34,4 @@ public class Additional {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 }

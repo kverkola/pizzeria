@@ -1,4 +1,4 @@
-package ua.opu.dl.pizzeria.entity;
+package ua.opu.dl.pizzeria.model;
 
 import java.util.Date;
 import java.util.Map;

@@ -40,17 +40,17 @@
     </div>
 </div>
 
-<div class="container">
-
+<div class="container" style="padding-top: 40px;">
     <jsp:include page="${partial}" />
-
-    <div class="navbar navbar-fixed-bottom" style="text-align: center">
-        <hr>
-        <footer>
-            <p>&copy; NetCracker Courses 2013-2014</p>
-        </footer>
-    </div>
 </div>
+
+<div class="navbar navbar-fixed-bottom" style="text-align: center">
+    <hr>
+    <footer>
+        <p>&copy; NetCracker Courses 2013-2014</p>
+    </footer>
+</div>
+
 </div>
 <!-- Bootstrap core JavaScript
     ================================================== -->

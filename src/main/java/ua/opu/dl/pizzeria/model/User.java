@@ -1,4 +1,4 @@
-package ua.opu.dl.pizzeria.entity;
+package ua.opu.dl.pizzeria.model;
 
 public class User {
 	private String first_name;

@@ -1,4 +1,4 @@
-package ua.opu.dl.pizzeria.entity;
+package ua.opu.dl.pizzeria.model;
 
 import java.util.Map;
 
@@ -36,5 +36,4 @@ public class Pizza {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 }
