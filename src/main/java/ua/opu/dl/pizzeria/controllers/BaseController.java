@@ -17,7 +17,7 @@ public class BaseController {
 
     /**
      * Test controller, load data from DAO and count
-     * order total price
+     * total order price
      * @param model
      * @return
      */

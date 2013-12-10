@@ -25,12 +25,7 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <bean id="PizzaDAO" class="ua.opu.dl.pizzeria.dao.PizzaDao">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
-    <bean id="IngredientDAO" class="ua.opu.dl.pizzeria.dao.IngredientDao">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
+    <bean id="PizzaDao" class="ua.opu.dl.pizzeria.dao.PizzaDao" abstract="true" />
+    <bean id="PizzaDaoImpl" parent="PizzaDao" class="ua.opu.dl.pizzeria.dao.PizzaDaoImpl" autowire="byName" />
 
 </beans>
