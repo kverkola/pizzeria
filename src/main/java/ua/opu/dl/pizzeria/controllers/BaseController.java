@@ -5,15 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.service.PizzaService;
 
 @Controller
 public class BaseController {
 
     @Autowired
-    private PizzaDao pizzaDao;
+    private PizzaService pizzaService;
 
     /**
      * Test controller, load data from DAO and count
@@ -24,7 +24,7 @@ public class BaseController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String welcome(ModelMap model) {
 
-        Pizza pizza = pizzaDao.loadById(10);
+        Pizza pizza = pizzaService.loadById(10);
 
         Double totalPrice = pizza.getPrice();
         for (Ingredient ingredient : pizza.getMap().keySet()) {
