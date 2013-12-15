@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PizzaDao {
 
-    void insert(Pizza pizza);
-    void update(Pizza pizza);
-    void delete(Pizza pizza);
+    void addPizza(Pizza pizza);
+    void updatePizza(Pizza pizza);
+    void deletePizza(Pizza pizza);
     Pizza loadById(Integer id);
     List<Pizza> loadByOrder(Integer orderId);
 }

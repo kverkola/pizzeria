@@ -18,17 +18,17 @@ public class PizzaDaoImpl implements PizzaDao {
     }
 
     @Override
-    public void insert(Pizza pizza) {
+    public void addPizza(Pizza pizza) {
 
     }
 
     @Override
-    public void update(Pizza pizza) {
+    public void updatePizza(Pizza pizza) {
 
     }
 
     @Override
-    public void delete(Pizza pizza) {
+    public void deletePizza(Pizza pizza) {
 
     }
 
