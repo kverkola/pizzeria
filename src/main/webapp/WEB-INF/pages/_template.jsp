@@ -5,7 +5,7 @@
     <title>Pizzeria</title>
     <!-- Bootstrap theme -->
     <!-- Change theme name before /bootstrap.min.css, example flatly, spacelab, united etc. -->
-    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="http://bootswatch.com/amelia/bootstrap.min.css">
 </head>
 <body>
 
