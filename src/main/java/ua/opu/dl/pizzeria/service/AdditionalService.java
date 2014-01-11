@@ -1,10 +1,10 @@
-package ua.opu.dl.pizzeria.dao;
+package ua.opu.dl.pizzeria.service;
 
 import java.util.List;
 
 import ua.opu.dl.pizzeria.model.Additional;
 
-public interface AdditionalDao {
+public interface AdditionalService {
 	void addAdditional(Additional additional);
 
 	void updateAdditional(Additional additional);

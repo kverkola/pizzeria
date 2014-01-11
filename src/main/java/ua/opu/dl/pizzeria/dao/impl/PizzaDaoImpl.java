@@ -1,5 +1,6 @@
-package ua.opu.dl.pizzeria.dao;
+package ua.opu.dl.pizzeria.dao.impl;
 
+import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
 

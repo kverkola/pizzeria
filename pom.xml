@@ -75,8 +75,8 @@
         <!-- ORACLE database driver -->
         <dependency>
             <groupId>com.oracle</groupId>
-            <artifactId>oracle</artifactId>
-            <version>11.2.0.4</version>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0</version>
         </dependency>
 
     </dependencies>
@@ -100,7 +100,7 @@
                 <configuration>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>7777</port>
+                            <port>8088</port>
                         </connector>
                     </connectors>
                 </configuration>

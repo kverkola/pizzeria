@@ -1,8 +1,18 @@
 package ua.opu.dl.pizzeria.service;
 
+import java.util.List;
+
 import ua.opu.dl.pizzeria.model.Pizza;
 
 public interface PizzaService {
 
-    Pizza loadById(Integer id);
+	void addPizza(Pizza pizza);
+
+	void updatePizza(Pizza pizza);
+
+	void deletePizza(Pizza pizza);
+
+	Pizza loadById(Integer id);
+
+	List<Pizza> loadByOrder(Integer orderId);
 }
