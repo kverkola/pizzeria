@@ -68,7 +68,8 @@
                                 <p>-------------------------------------------------------</p>
 
                                     <table>
-                                        <c:forEach var="entry" items="${pizzasInOrder}">
+                                        <c:set var="pizzasInOrder" value="pizzasInOrder" />
+                                        <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
                                             <tr>
                                                 <td>${entry.key.name}
                                                     <p>

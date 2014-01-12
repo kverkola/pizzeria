@@ -49,9 +49,8 @@ public class BaseController {
     @RequestMapping(value = "/menu", method = RequestMethod.GET)
     public String menu(ModelMap model, HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
+        session.setAttribute("pizzasInOrder", orderService.loadById(10).getPizzas());
 
-        model.addAttribute("pizzasInOrder", orderService.loadById(10).getPizzas());
         model.addAttribute("menu", pizzaService.loadAll());
 
         return "menu";
