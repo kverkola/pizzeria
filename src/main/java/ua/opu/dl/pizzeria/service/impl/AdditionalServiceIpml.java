@@ -40,7 +40,7 @@ public class AdditionalServiceIpml implements AdditionalService {
 	@Override
 	public List<Additional> loadByOrder(Integer orderId) {
 
-		return addDao.loadByOrder(orderId);
+		return addDao.loadAdditionalsByOrder(orderId);
 	}
 
 }

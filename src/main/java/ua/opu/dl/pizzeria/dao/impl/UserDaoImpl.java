@@ -4,6 +4,7 @@ package ua.opu.dl.pizzeria.dao.impl;
 import java.util.List;
 
 import ua.opu.dl.pizzeria.dao.UserDao;
+import ua.opu.dl.pizzeria.model.Status;
 import ua.opu.dl.pizzeria.model.User;
 
 
@@ -24,19 +25,19 @@ public class UserDaoImpl implements UserDao{
 
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public User loadById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return new User("pup","pupkin","login","root",Status.COOK);
 	}
 
 	@Override
-	public List<User> loadAlluser() {
-		// TODO Auto-generated method stub
+	public List<User> loadAllusers() {
+		
 		return null;
 	}
 

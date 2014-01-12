@@ -13,5 +13,5 @@ public interface IngredientDao {
 
 	Ingredient loadById(Integer id);
 
-	List<Ingredient> loadByPizza(Integer pizzaId);
+	List<Ingredient> loadIngredientsByPizza(Integer pizzaId);
 }

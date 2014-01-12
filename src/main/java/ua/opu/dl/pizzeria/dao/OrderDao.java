@@ -14,5 +14,5 @@ public interface OrderDao {
 
 	Order loadById(Integer id);
 
-	List<Order> loadAllOrder();
+	List<Order> loadAllOrders();
 }

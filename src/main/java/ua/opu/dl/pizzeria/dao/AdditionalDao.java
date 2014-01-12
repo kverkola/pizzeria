@@ -13,5 +13,5 @@ public interface AdditionalDao {
 
 	Additional loadById(Integer id);
 
-	List<Additional> loadByOrder(Integer orderId);
+	List<Additional> loadAdditionalsByOrder(Integer orderId);
 }

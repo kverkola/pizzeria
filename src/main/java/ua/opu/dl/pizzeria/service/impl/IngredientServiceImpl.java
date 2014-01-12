@@ -39,7 +39,7 @@ public class IngredientServiceImpl implements IngredientService {
 	@Override
 	public List<Ingredient> loadByPizza(Integer pizzaId) {
 
-		return ingredientDao.loadByPizza(pizzaId);
+		return ingredientDao.loadIngredientsByPizza(pizzaId);
 	}
 
 }

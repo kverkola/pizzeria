@@ -14,5 +14,5 @@ public interface UserDao {
 
 	User loadById(Integer id);
 
-	List<User> loadAlluser();
+	List<User> loadAllusers();
 }

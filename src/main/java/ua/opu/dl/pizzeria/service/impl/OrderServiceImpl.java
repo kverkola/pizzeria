@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderServise {
 	@Override
 	public List<Order> loadAllOrder() {
 
-		return orderDao.loadAllOrder();
+		return orderDao.loadAllOrders();
 	}
 
 }

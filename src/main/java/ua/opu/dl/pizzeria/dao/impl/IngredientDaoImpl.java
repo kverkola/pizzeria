@@ -21,18 +21,18 @@ public class IngredientDaoImpl implements IngredientDao {
 
 	@Override
 	public void deleteIngredient(Ingredient ingredient) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public Ingredient loadById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return new Ingredient("cheese",50,5);
 	}
 
 	@Override
-	public List<Ingredient> loadByPizza(Integer pizzaId) {
+	public List<Ingredient> loadIngredientsByPizza(Integer pizzaId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
