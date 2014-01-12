@@ -44,6 +44,9 @@ public class OrderDaoImpl implements OrderDao {
 		addMap.put(new Additional("pepsi", 10), 5);
 		pizzaMap.put(pizza, 2);
 
+        Pizza pizza2 = new Pizza("TestPizza 2", ingredientMap, 25);
+        pizzaMap.put(pizza2, 1);
+
 		return new Order(pizzaMap, Status.IN_WORK, new Date(), new Date(), 136,
 				addMap, "5656565676573");
 	}

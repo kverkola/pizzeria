@@ -46,7 +46,7 @@
     </div>
 </div>
 
-        <div class="container" style="padding-top: 40px;">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-2">
                     <div class="bs-example">
@@ -66,20 +66,21 @@
                             </div>
                             <div class="panel-body">
                                 <p>-------------------------------------------------------</p>
-
                                     <table>
                                         <c:set var="pizzasInOrder" value="pizzasInOrder" />
                                         <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
                                             <tr>
                                                 <td>${entry.key.name}
-                                                    <p>
-                                                        ${entry.value}x ${entry.key.price * entry.value}
-                                                    </p>
+                                                    <div style="width: 270px;">
+                                                            ${entry.value}x
+                                                        <div style="float: right;">
+                                                            ${entry.key.price * entry.value}$
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </c:forEach>
                                     </table>
-
                                 <p>-------------------------------------------------------</p>
                                 <p style="text-align: center;">
                                     <a href="#" class="btn btn-sm btn-warning">Send order</a>

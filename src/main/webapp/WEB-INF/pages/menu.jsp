@@ -12,7 +12,7 @@
                 <td><img src="<c:url value='/resources/${pizza.logo}'/>"/></td>
                 <td style="padding-left: 20px; vertical-align: top;">
                     <h3>${pizza.name}</h3>
-                    ${pizza.description}
+                    <p>${pizza.description}</p>
                 </td>
             </tr>
             <tr>
