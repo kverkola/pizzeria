@@ -6,14 +6,23 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.opu.dl.pizzeria.model.Ingredient;
+import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.service.OrderServise;
 import ua.opu.dl.pizzeria.service.PizzaService;
+
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class BaseController {
 
     @Autowired
     private PizzaService pizzaService;
+
+    @Autowired
+    private OrderServise orderService;
 
     /**
      * Test controller, load data from DAO and count
@@ -35,6 +44,17 @@ public class BaseController {
         model.addAttribute("totalPrice", totalPrice);
 
         return "index";
+    }
+
+    @RequestMapping(value = "/menu", method = RequestMethod.GET)
+    public String menu(ModelMap model, HttpSession session) {
+
+        Order order = (Order) session.getAttribute("order");
+
+        model.addAttribute("pizzasInOrder", orderService.loadById(10).getPizzas());
+        model.addAttribute("menu", pizzaService.loadAll());
+
+        return "menu";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)

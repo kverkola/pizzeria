@@ -40,4 +40,9 @@ public class PizzaServiceImpl implements PizzaService {
 
 		return pizzaDao.loadByOrder(orderId);
 	}
+
+    @Override
+    public List<Pizza> loadAll() {
+        return pizzaDao.loadAll();
+    }
 }
