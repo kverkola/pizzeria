@@ -82,7 +82,7 @@
                                         <div style="width: 270px;">
                                                 ${entry.value} x
                                             <div style="float: right;">
-                                                    ${entry.key.price * entry.value}$
+                                                    ${entry.key.price * entry.value} $
                                             </div>
                                         </div>
                                     </td>
@@ -90,6 +90,14 @@
                             </c:forEach>
                         </table>
                         <p>-------------------------------------------------------</p>
+                        <div style="width: 270px;">
+                            <b>Total price:</b>
+                            <div style="float: right;">
+                                <c:set var="orderName" value="order"/>
+                                <b>${sessionScope[orderName].price} $</b>
+                            </div>
+                        </div>
+                        <p></p>
                         <p style="text-align: center;">
                             <c:choose>
                                 <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">

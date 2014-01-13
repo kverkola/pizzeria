@@ -39,14 +39,6 @@ public class BaseController {
 			totalPrice += ingredient.getPrice();
 		}
 
-        Order order = (Order) session.getAttribute("order");
-
-        if (order == null) {
-            order = new Order();
-            order.setPizzas(new HashMap<Pizza, Integer>());
-            session.setAttribute("order", order);
-        }
-
 		model.addAttribute("pizza", pizza);
 		model.addAttribute("totalPrice", totalPrice);
 
@@ -54,10 +46,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
-	public String menu(ModelMap model, HttpSession session) {
-
-		/*session.setAttribute("pizzasInOrder", orderService.loadById(10)
-				.getPizzas());*/
+	public String menu(ModelMap model) {
 
 		model.addAttribute("menu", pizzaService.loadAll());
 

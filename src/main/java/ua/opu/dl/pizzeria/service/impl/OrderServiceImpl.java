@@ -10,6 +10,7 @@ import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.OrderServise;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class OrderServiceImpl implements OrderServise {
 	@Autowired
@@ -55,5 +56,15 @@ public class OrderServiceImpl implements OrderServise {
         } else {
             pizzas.put(pizza, 1);
         }
+
+        Double price = 0.0;
+        for (Entry<Pizza, Integer> entry : order.getPizzas().entrySet()) {
+
+            Pizza p = entry.getKey();
+            Integer count = entry.getValue();
+
+            price += p.getPrice() * count;
+        }
+        order.setPrice(price);
     }
 }
