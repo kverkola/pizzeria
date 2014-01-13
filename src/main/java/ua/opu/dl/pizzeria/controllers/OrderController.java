@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.OrderServise;
@@ -44,7 +45,14 @@ public class OrderController {
 
     @RequestMapping(value = "/make-order", method = RequestMethod.GET)
     public String makeOrder() {
-
         return "completeOrder";
+    }
+
+    @RequestMapping(value = "/change-count", method = RequestMethod.POST, params = {"name", "value"})
+    public String changeCount(@RequestParam String name, @RequestParam Integer value) {
+
+        // recalculate price and change count
+
+        return "redirect:/order/make-order";
     }
 }

@@ -78,7 +78,7 @@
                             <c:set var="pizzasInOrder" value="pizzasInOrder"/>
                             <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
                                 <tr>
-                                    <td>${entry.key.name}
+                                    <td style="text-align: left;">${entry.key.name}
                                         <div style="width: 270px;">
                                                 ${entry.value} x
                                             <div style="float: right;">

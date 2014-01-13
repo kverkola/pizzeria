@@ -4,6 +4,7 @@
 <style>
     th, td {
         text-align: center;
+        vertical-align: middle;
     }
 </style>
 
@@ -13,9 +14,10 @@
 
 <table class="table">
     <tr>
-        <th style="width: 70%; text-align: left;">Name</th>
+        <th style="width: 65%; text-align: left;">Name</th>
         <th>Count</th>
         <th>Price, $</th>
+        <th></th>
     </tr>
     <c:set var="pizzasInOrder" value="pizzasInOrder"/>
     <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
@@ -25,15 +27,23 @@
             </td>
             <td>
                 <div>
-                    <form method="POST" action="changeCount" style="display: inline-block; text-align: center">
-                        <input type="text" class="form-control input-sm" value="${entry.value}"
+                    <form id="count" method="POST" action="/order/change-count" style="display: inline-block; text-align: center">
+                        <input id="name" name="name" type="hidden" value="${entry.key.name}" />
+                        <input id="value" name="value" type="text" class="form-control input-sm" value="${entry.value}"
                                style="width: 45px; text-align: center;"/>
                     </form>
-                    <a href="#"><img src="<c:url value='/resources/button_ref.png'/>"/></a>
+                    <a style="cursor: pointer;" onclick="document.getElementById('count').submit(); return false;">
+                        <img src="<c:url value='/resources/button_ref.png'/>"/>
+                    </a>
                 </div>
             </td>
-            <td>
+            <td style="font-size: 22;">
                  ${entry.key.price * entry.value}
+            </td>
+            <td>
+                <a href="#">
+                    <img src="<c:url value='/resources/del.png'/>"/>
+                </a>
             </td>
         </tr>
     </c:forEach>
