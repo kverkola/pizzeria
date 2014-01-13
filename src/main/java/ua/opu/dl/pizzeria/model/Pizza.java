@@ -64,4 +64,31 @@ public class Pizza {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Pizza pizza = (Pizza) o;
+
+        if (Double.compare(pizza.price, price) != 0) return false;
+        if (description != null ? !description.equals(pizza.description) : pizza.description != null) return false;
+        if (logo != null ? !logo.equals(pizza.logo) : pizza.logo != null) return false;
+        if (name != null ? !name.equals(pizza.name) : pizza.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = name != null ? name.hashCode() : 0;
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (logo != null ? logo.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
+    }
 }

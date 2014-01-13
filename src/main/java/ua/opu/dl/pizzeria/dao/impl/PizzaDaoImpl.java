@@ -52,6 +52,19 @@ public class PizzaDaoImpl implements PizzaDao {
     }
 
     @Override
+    public Pizza loadByName(String name) {
+
+        Map<Ingredient, Integer> ingredientMap = new HashMap();
+        ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
+        ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
+        ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
+        ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
+        ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
+
+        return new Pizza(name, ingredientMap, 25);
+    }
+
+    @Override
     public List<Pizza> loadByOrder(Integer orderId) {
 
         List<Pizza> pizzaList = new ArrayList();

@@ -14,7 +14,10 @@ public class Order {
 	private Map<Additional, Integer> additional;// название и количество
 	private String phone;
 
-	public Order(Map<Pizza, Integer> pizzas, Status status, Date starttime,
+    public Order() {
+    }
+
+    public Order(Map<Pizza, Integer> pizzas, Status status, Date starttime,
 			Date endtime, double price, Map<Additional, Integer> additional,
 			String phone) {
 		this.pizzas = pizzas;

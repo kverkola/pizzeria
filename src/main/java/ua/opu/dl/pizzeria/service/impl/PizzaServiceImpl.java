@@ -42,6 +42,11 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
     @Override
+    public Pizza loadByName(String name) {
+        return pizzaDao.loadByName(name);
+    }
+
+    @Override
     public List<Pizza> loadAll() {
         return pizzaDao.loadAll();
     }

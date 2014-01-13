@@ -90,7 +90,6 @@
                             </c:forEach>
                         </table>
                         <p>-------------------------------------------------------</p>
-
                         <p style="text-align: center;">
                             <c:choose>
                                 <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">
@@ -105,7 +104,6 @@
                                 </c:otherwise>
                             </c:choose>
                         </p>
-
                         <p>
                             Courier is obliged to issue a check.
                         </p>

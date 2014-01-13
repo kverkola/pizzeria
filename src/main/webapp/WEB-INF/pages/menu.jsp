@@ -19,8 +19,9 @@
                 <td></td>
                 <td style="text-align: right;">
                     ${pizza.price}$ &nbsp;&nbsp;
-                    <!--<a href="/add-pizza/${pizza.name}" class="btn btn-sm btn-success">Add to cart</a>-->
-                        <a href="#" class="btn btn-sm btn-success">Add to cart</a></td>
+                        <a href="<c:url value='/order/add-pizza/${pizza.name}'/>" class="btn btn-sm btn-success">
+                            Add to cart
+                        </a>
                 </td>
             </tr>
         </c:forEach>

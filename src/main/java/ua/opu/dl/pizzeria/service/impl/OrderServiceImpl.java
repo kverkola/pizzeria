@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.opu.dl.pizzeria.dao.OrderDao;
 import ua.opu.dl.pizzeria.model.Order;
+import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.OrderServise;
+
+import java.util.Map;
 
 public class OrderServiceImpl implements OrderServise {
 	@Autowired
@@ -42,4 +45,15 @@ public class OrderServiceImpl implements OrderServise {
 		return orderDao.loadAllOrders();
 	}
 
+    @Override
+    public void addPizza(Order order, Pizza pizza) {
+
+        Map<Pizza, Integer> pizzas = order.getPizzas();
+
+        if (pizzas.containsKey(pizza)) {
+            pizzas.put(pizza, pizzas.get(pizza) + 1);
+        } else {
+            pizzas.put(pizza, 1);
+        }
+    }
 }

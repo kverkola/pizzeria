@@ -12,8 +12,7 @@ import ua.opu.dl.pizzeria.service.OrderServise;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 @Controller
 public class BaseController {
@@ -31,7 +30,7 @@ public class BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String welcome(ModelMap model) {
+	public String welcome(ModelMap model, HttpSession session) {
 
 		Pizza pizza = pizzaService.loadById(10);
 
@@ -39,6 +38,14 @@ public class BaseController {
 		for (Ingredient ingredient : pizza.getMap().keySet()) {
 			totalPrice += ingredient.getPrice();
 		}
+
+        Order order = (Order) session.getAttribute("order");
+
+        if (order == null) {
+            order = new Order();
+            order.setPizzas(new HashMap<Pizza, Integer>());
+            session.setAttribute("order", order);
+        }
 
 		model.addAttribute("pizza", pizza);
 		model.addAttribute("totalPrice", totalPrice);
@@ -49,8 +56,8 @@ public class BaseController {
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public String menu(ModelMap model, HttpSession session) {
 
-		session.setAttribute("pizzasInOrder", orderService.loadById(10)
-				.getPizzas());
+		/*session.setAttribute("pizzasInOrder", orderService.loadById(10)
+				.getPizzas());*/
 
 		model.addAttribute("menu", pizzaService.loadAll());
 
