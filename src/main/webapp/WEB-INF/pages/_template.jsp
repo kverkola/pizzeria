@@ -70,7 +70,7 @@
             <div class="bs-example">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Your order</h3>
+                        <h3 class="panel-title" style="text-align: center;">Order</h3>
                     </div>
                     <div class="panel-body">
                         <p>-------------------------------------------------------</p>
@@ -101,12 +101,12 @@
                         <p style="text-align: center;">
                             <c:choose>
                                 <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">
-                                    <a href="<c:url value='#'/>" class="btn btn-sm btn-warning">
+                                    <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning">
                                         Make order
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a href="<c:url value='#'/>" class="btn btn-sm btn-warning disabled">
+                                    <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning disabled">
                                         Make order
                                     </a>
                                 </c:otherwise>
