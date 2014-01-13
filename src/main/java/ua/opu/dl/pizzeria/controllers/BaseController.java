@@ -18,48 +18,59 @@ import java.util.List;
 @Controller
 public class BaseController {
 
-    @Autowired
-    private PizzaService pizzaService;
+	@Autowired
+	private PizzaService pizzaService;
 
-    @Autowired
-    private OrderServise orderService;
+	@Autowired
+	private OrderServise orderService;
 
-    /**
-     * Test controller, load data from DAO and count
-     * total order price
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String welcome(ModelMap model) {
+	/**
+	 * Test controller, load data from DAO and count total order price
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String welcome(ModelMap model) {
 
-        Pizza pizza = pizzaService.loadById(10);
+		Pizza pizza = pizzaService.loadById(10);
 
-        Double totalPrice = pizza.getPrice();
-        for (Ingredient ingredient : pizza.getMap().keySet()) {
-            totalPrice += ingredient.getPrice();
-        }
+		Double totalPrice = pizza.getPrice();
+		for (Ingredient ingredient : pizza.getMap().keySet()) {
+			totalPrice += ingredient.getPrice();
+		}
 
-        model.addAttribute("pizza", pizza);
-        model.addAttribute("totalPrice", totalPrice);
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("totalPrice", totalPrice);
 
-        return "index";
-    }
+		return "index";
+	}
 
-    @RequestMapping(value = "/menu", method = RequestMethod.GET)
-    public String menu(ModelMap model, HttpSession session) {
+	@RequestMapping(value = "/menu", method = RequestMethod.GET)
+	public String menu(ModelMap model, HttpSession session) {
 
-        session.setAttribute("pizzasInOrder", orderService.loadById(10).getPizzas());
+		session.setAttribute("pizzasInOrder", orderService.loadById(10)
+				.getPizzas());
 
-        model.addAttribute("menu", pizzaService.loadAll());
+		model.addAttribute("menu", pizzaService.loadAll());
 
-        return "menu";
-    }
+		return "menu";
+	}
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about() {
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about() {
 
-        return "about";
-    }
+		return "about";
+	}
+
+	@RequestMapping(value = "/order", method = RequestMethod.GET)
+	public String order(ModelMap model) {
+
+		Order order = orderService.loadById(134);
+
+		model.addAttribute("order", order);
+
+		return "order";
+	}
+
 }
-
