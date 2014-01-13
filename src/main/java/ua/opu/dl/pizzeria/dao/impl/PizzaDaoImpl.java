@@ -78,7 +78,7 @@ public class PizzaDaoImpl implements PizzaDao {
                 "Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
         };
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < imgs.length; i++) {
             pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, 25, imgs[i], descrips[i]));
         }
         return pizzaList;

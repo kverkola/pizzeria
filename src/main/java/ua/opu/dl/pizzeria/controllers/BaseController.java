@@ -57,8 +57,14 @@ public class BaseController {
 		return "menu";
 	}
 
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about() {
+    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
+    public String feedback() {
+
+        return "feedback";
+    }
+
+    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    public String about() {
 
 		return "about";
 	}
