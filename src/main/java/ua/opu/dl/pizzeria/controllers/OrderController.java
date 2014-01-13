@@ -19,40 +19,53 @@ import java.util.HashMap;
 @RequestMapping(value = "/order")
 public class OrderController {
 
-    @Autowired
-    private PizzaService pizzaService;
+	@Autowired
+	private PizzaService pizzaService;
 
-    @Autowired
-    private OrderServise orderService;
+	@Autowired
+	private OrderServise orderService;
 
-    @RequestMapping(value = "/add-pizza/{name}", method = RequestMethod.GET)
-    public String addPizza(@PathVariable("name") String name,
-                           HttpSession session) {
+	@RequestMapping(value = "/add-pizza/{name}", method = RequestMethod.GET)
+	public String addPizza(@PathVariable("name") String name,
+			HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
+		Order order = (Order) session.getAttribute("order");
 
-        if (order == null) {
-            order = new Order();
-            order.setPizzas(new HashMap<Pizza, Integer>());
-        }
+		if (order == null) {
+			order = new Order();
+			order.setPizzas(new HashMap<Pizza, Integer>());
+		}
 
-        orderService.addPizza(order, pizzaService.loadByName(name));
-        session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getPizzas());
+		orderService.addPizza(order, pizzaService.loadByName(name));
+		session.setAttribute("order", order);
+		session.setAttribute("pizzasInOrder", order.getPizzas());
 
-        return "redirect:/menu";
-    }
+		return "redirect:/menu";
+	}
 
-    @RequestMapping(value = "/make-order", method = RequestMethod.GET)
-    public String makeOrder() {
-        return "completeOrder";
-    }
+	@RequestMapping(value = "/make-order", method = RequestMethod.GET)
+	public String makeOrder() {
+		return "completeOrder";
+	}
 
-    @RequestMapping(value = "/change-count", method = RequestMethod.POST, params = {"name", "value"})
-    public String changeCount(@RequestParam String name, @RequestParam Integer value) {
+	@RequestMapping(value = "/change-count", method = RequestMethod.POST, params = {
+			"name", "value" })
+	public String changeCount(@RequestParam String name,
+			@RequestParam Integer value) {
 
-        // recalculate price and change count
+		// recalculate price and change count
 
-        return "redirect:/order/make-order";
-    }
+		return "redirect:/order/make-order";
+	}
+
+	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
+	public String order(@RequestParam("orderId") Integer orderId, ModelMap model) {
+
+		Order order = orderService.loadById(orderId);
+
+		model.addAttribute("order", order);
+
+		return "searchOrder";
+
+	}
 }

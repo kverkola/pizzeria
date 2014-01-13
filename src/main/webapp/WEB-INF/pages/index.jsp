@@ -4,6 +4,21 @@
 <p>Pizza name: ${pizza.name}</p>
 <p>Pizza price: ${pizza.price}</p>
 
+
+
+
+<form method="get" action="order/searchOrder">
+
+        <form class="form-search">
+        <input type="text" class="inp" name="orderId" >
+        <button type="submit" class="btn">Search</button>
+        </form>
+
+
+</form>
+
+
+
 <table class="table table-hover" style="width: 30%;">
     <thead>
         <tr>

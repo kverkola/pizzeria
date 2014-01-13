@@ -3,8 +3,11 @@ package ua.opu.dl.pizzeria.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
@@ -65,14 +68,7 @@ public class BaseController {
 		return "about";
 	}
 
-	@RequestMapping(value = "/order", method = RequestMethod.GET)
-	public String order(ModelMap model) {
 
-		Order order = orderService.loadById(134);
-
-		model.addAttribute("order", order);
-
-		return "order";
 	}
 
-}
+
