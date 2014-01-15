@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.OrderServise;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
@@ -25,6 +26,8 @@ public class BaseController {
 
 	@Autowired
 	private OrderServise orderService;
+	@Autowired
+	private AdditionalService additionalService;
 
 	/**
 	 * Test controller, load data from DAO and count total order price
@@ -54,6 +57,13 @@ public class BaseController {
 		model.addAttribute("menu", pizzaService.loadAll());
 
 		return "menu";
+	}
+	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
+	public String Additional(ModelMap model) {
+		
+		model.addAttribute("menu", additionalService.AllAdditionals());
+		
+		return "Additional";
 	}
 
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)

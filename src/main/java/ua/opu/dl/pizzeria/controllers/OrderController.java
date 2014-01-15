@@ -62,7 +62,7 @@ public class OrderController {
 		session.setAttribute("order", order);
 		//session.setAttribute("pizzasInOrder", order.getPizzas());
 		
-		return "redirect:/menu";
+		return "redirect:/Additional";
 	}
 
 	@RequestMapping(value = "/make-order", method = RequestMethod.GET)

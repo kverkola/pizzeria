@@ -38,6 +38,12 @@
                     <a href="<c:url value='/menu'/>">Menu</a>
                     
                 </li>
+                <li <c:if test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/Additional'}">
+                    class="active"
+                </c:if> >
+                    <a href="<c:url value='/Additional'/>">Additional</a>
+                    
+                </li>
                 <li <c:if
                         test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/feedback'}">
                     class="active"
