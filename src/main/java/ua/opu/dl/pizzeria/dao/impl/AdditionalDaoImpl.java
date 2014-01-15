@@ -41,7 +41,7 @@ public class AdditionalDaoImpl implements AdditionalDao {
 	@Override
 	public Additional loadByName(String name) {
 		
-		return null;
+		return new  Additional("pepsi",10,"pepsi.png");
 	}
 
 	@Override

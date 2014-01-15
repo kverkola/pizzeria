@@ -61,7 +61,7 @@ public class BaseController {
 	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
 	public String Additional(ModelMap model) {
 		
-		model.addAttribute("menu", additionalService.AllAdditionals());
+		model.addAttribute("add", additionalService.AllAdditionals());
 		
 		return "Additional";
 	}

@@ -60,7 +60,7 @@ public class OrderController {
 		
 		orderService.addAdditional(order, AdditionalService.loadByName(name));
 		session.setAttribute("order", order);
-		//session.setAttribute("pizzasInOrder", order.getPizzas());
+		session.setAttribute("AdditionalInOrder", order.getAdditional());
 		
 		return "redirect:/Additional";
 	}

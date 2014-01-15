@@ -4,22 +4,22 @@
 <div>
     <h1>Additional</h1>
     <table>
-        <c:forEach var="pizza" items="${menu}">
+        <c:forEach var="add" items="${add}">
             <tr>
                 <th colspan="2"><hr style="border-color: #68a9ff;"></th>
             </tr>
             <tr>
-                <td><img src="<c:url value='/resources/${additional.logo}'/>"/></td>
+                <td><img src="<c:url value='/resources/${add.logo}'/>"/></td>
                 <td style="padding-left: 20px; vertical-align: top;">
-                    <h3>${additional.name}</h3>
-                    <p>${pizza.description}</p>
+                    <h3>${add.name}</h3>
+                    
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td style="text-align: right;">
-                    ${pizza.price}$ &nbsp;&nbsp;
-                        <a href="<c:url value='/order/add-pizza/${pizza.name}'/>" class="btn btn-sm btn-success">
+                    ${add.price}$ &nbsp;&nbsp;
+                        <a href="<c:url value='/order/add-additional/${add.name}'/>" class="btn btn-sm btn-success">
                             Add to cart
                         </a>
                 </td>
