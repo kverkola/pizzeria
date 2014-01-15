@@ -22,7 +22,8 @@
 
 					<c:forEach var="entry" items="${order.pizzas}">
 
-						<option>${entry.key.name} &nbsp &nbsp &nbsp &nbsp
+						<option>
+						${entry.key.name} &nbsp &nbsp &nbsp &nbsp
 							${entry.value}X &nbsp&nbsp&nbsp ${entry.key.price}&nbsp$</option>
 
 					</c:forEach>

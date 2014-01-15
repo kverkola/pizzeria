@@ -12,6 +12,7 @@ public interface AdditionalDao {
 	void deleteAdditional(Additional additional);
 
 	Additional loadById(Integer id);
+	Additional loadByName(String name);
 
 	List<Additional> loadAdditionalsByOrder(Integer orderId);
 }

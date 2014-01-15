@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.opu.dl.pizzeria.dao.OrderDao;
+import ua.opu.dl.pizzeria.model.Additional;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.OrderServise;
@@ -67,4 +68,10 @@ public class OrderServiceImpl implements OrderServise {
         }
         order.setPrice(price);
     }
+
+	@Override
+	public void addAdditional(Order order, Additional additional) {
+		// TODO Auto-generated method stub
+		
+	}
 }

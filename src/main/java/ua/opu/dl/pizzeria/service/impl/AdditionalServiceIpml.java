@@ -43,4 +43,10 @@ public class AdditionalServiceIpml implements AdditionalService {
 		return addDao.loadAdditionalsByOrder(orderId);
 	}
 
+	@Override
+	public Additional loadByName(String name) {
+		
+		return addDao.loadByName(name);
+	}
+
 }

@@ -28,11 +28,17 @@ public class AdditionalDaoImpl implements AdditionalDao {
 	@Override
 	public Additional loadById(Integer id) {
 		// TODO Auto-generated method stub
-		return new Additional("pepsi",30) ;
+		return new Additional("pepsi",30,"pepsi") ;
 	}
 
 	@Override
 	public List<Additional> loadAdditionalsByOrder(Integer orderId) {
+		
+		return null;
+	}
+
+	@Override
+	public Additional loadByName(String name) {
 		
 		return null;
 	}

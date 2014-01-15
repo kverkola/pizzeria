@@ -36,6 +36,7 @@
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/menu'/>">Menu</a>
+                    
                 </li>
                 <li <c:if
                         test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/feedback'}">

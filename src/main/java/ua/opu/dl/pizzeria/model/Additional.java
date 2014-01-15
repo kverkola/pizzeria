@@ -3,10 +3,11 @@ package ua.opu.dl.pizzeria.model;
 public class Additional {
 	private String name;
 	private double price;
-
-	public Additional(String name, double price) {
+	private String logo;
+	public Additional(String name, double price,String logo) {
 		this.name = name;
 		this.price = price;
+		this.logo= logo;
 	}
 
 	public String getName() {
@@ -23,6 +24,14 @@ public class Additional {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 }

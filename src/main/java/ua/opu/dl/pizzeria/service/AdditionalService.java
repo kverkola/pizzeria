@@ -13,5 +13,7 @@ public interface AdditionalService {
 
 	Additional loadById(Integer id);
 
+	Additional loadByName(String name);
+
 	List<Additional> loadByOrder(Integer orderId);
 }

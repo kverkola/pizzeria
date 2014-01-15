@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import ua.opu.dl.pizzeria.model.Additional;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.OrderServise;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
@@ -24,6 +27,8 @@ public class OrderController {
 
 	@Autowired
 	private OrderServise orderService;
+	@Autowired
+	private AdditionalService AdditionalService;
 
 	@RequestMapping(value = "/add-pizza/{name}", method = RequestMethod.GET)
 	public String addPizza(@PathVariable("name") String name,
@@ -40,6 +45,23 @@ public class OrderController {
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getPizzas());
 
+		return "redirect:/menu";
+	}
+	@RequestMapping(value = "/add-additional/{name}", method = RequestMethod.GET)
+	public String addAdditional(@PathVariable("name") String name,
+			HttpSession session) {
+		
+		Order order = (Order) session.getAttribute("order");
+		
+		if (order == null) {
+			order = new Order();
+			order.setAdditional(new HashMap<Additional, Integer>());
+		}
+		
+		orderService.addAdditional(order, AdditionalService.loadByName(name));
+		session.setAttribute("order", order);
+		//session.setAttribute("pizzasInOrder", order.getPizzas());
+		
 		return "redirect:/menu";
 	}
 

@@ -28,7 +28,7 @@
     <bean id="pizzaDao" class="ua.opu.dl.pizzeria.dao.impl.PizzaDaoImpl" autowire="byName" />
     <bean id="pizzaService" class="ua.opu.dl.pizzeria.service.impl.PizzaServiceImpl" autowire="byName" />
     <bean id="addDao" class="ua.opu.dl.pizzeria.dao.impl.AdditionalDaoImpl" autowire="byName" />
-    <!--bean id="additionalService" class="ua.opu.dl.pizzeria.service.impl.AdditionalServiceIpml" autowire="byName" /-->
+    <bean id="additionalService" class="ua.opu.dl.pizzeria.service.impl.AdditionalServiceIpml" autowire="byName" />
     <bean id="ingredientDao" class="ua.opu.dl.pizzeria.dao.impl.IngredientDaoImpl" autowire="byName" />
     <!--bean id="ingredientService" class="ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl" autowire="byName" /-->
     <bean id="orderDao" class="ua.opu.dl.pizzeria.dao.impl.OrderDaoImpl" autowire="byName" />
