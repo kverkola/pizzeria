@@ -16,7 +16,6 @@ import ua.opu.dl.pizzeria.service.OrderServise;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 @Controller
 public class BaseController {
@@ -58,7 +57,8 @@ public class BaseController {
 
 		return "menu";
 	}
-	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/Additional", method = RequestMethod.GET)
 	public String additional(ModelMap model) {
 		
 		model.addAttribute("add", additionalService.AllAdditionals());
@@ -78,8 +78,6 @@ public class BaseController {
 
 		return "about";
 	}
-
-
-	}
+}
 
 

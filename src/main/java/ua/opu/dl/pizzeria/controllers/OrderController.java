@@ -36,7 +36,7 @@ public class OrderController {
 
 		Order order = (Order) session.getAttribute("order");
 
-		if (order == null) {
+		if (order == null || order.getPizzas() == null) {
 			order = new Order();
 			order.setPizzas(new HashMap<Pizza, Integer>());
 		}
@@ -53,14 +53,14 @@ public class OrderController {
 		
 		Order order = (Order) session.getAttribute("order");
 		
-		if (order == null) {
+		if (order == null || order.getAdditional() == null) {
 			order = new Order();
 			order.setAdditional(new HashMap<Additional, Integer>());
 		}
 		
 		orderService.addAdditional(order, AdditionalService.loadByName(name));
 		session.setAttribute("order", order);
-		session.setAttribute("AdditionalInOrder", order.getAdditional());
+        session.setAttribute("additionalInOrder", order.getAdditional());
 		
 		return "redirect:/Additional";
 	}
@@ -85,7 +85,7 @@ public class OrderController {
 
 		Order order = orderService.loadById(orderId);
 
-		session.setAttribute("orderById",order);
+		session.setAttribute("orderById", order);
 		model.addAttribute("order", order);
 		return "searchOrder";
 

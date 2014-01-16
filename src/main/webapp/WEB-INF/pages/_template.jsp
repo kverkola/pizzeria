@@ -96,6 +96,19 @@
                                     </td>
                                 </tr>
                             </c:forEach>
+                            <c:set var="additionalInOrder" value="additionalInOrder"/>
+                            <c:forEach var="entry" items="${sessionScope[additionalInOrder]}">
+                                <tr>
+                                    <td style="text-align: left;">${entry.key.name}
+                                        <div style="width: 270px;">
+                                                ${entry.value} x
+                                            <div style="float: right;">
+                                                    ${entry.key.price * entry.value} $
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </table>
                         <p>-------------------------------------------------------</p>
                         <div style="width: 270px;">
