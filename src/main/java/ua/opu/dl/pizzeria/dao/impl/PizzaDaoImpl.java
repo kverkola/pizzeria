@@ -48,7 +48,7 @@ public class PizzaDaoImpl implements PizzaDao {
         ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
         ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
 
-        return new Pizza("TestPizza", ingredientMap, 25);
+        return new Pizza("TestPizza", ingredientMap, 25,5);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class PizzaDaoImpl implements PizzaDao {
         ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
         ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
 
-        return new Pizza(name, ingredientMap, 25);
+        return new Pizza(name, ingredientMap, 25,3);
     }
 
     @Override

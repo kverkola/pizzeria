@@ -10,10 +10,11 @@ public class Pizza {
     private String logo;
     private String description;
 
-    public Pizza(String name, Map<Ingredient, Integer> map, double price) {
+    public Pizza(String name, Map<Ingredient, Integer> map, double price,Integer id) {
         this.name = name;
         this.map = map;
         this.price = price;
+        this.id=id;
     }
 
     public Pizza(String name, Map<Ingredient,
@@ -24,6 +25,7 @@ public class Pizza {
         this.price = price;
         this.logo = logo;
         this.description = description;
+        
     }
 
     public String getName() {

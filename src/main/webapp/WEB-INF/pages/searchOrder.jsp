@@ -19,7 +19,7 @@
 		<tr>
 			<td><p class="text-info"><strong>Pizza</strong></p></td>
 			
-
+<td>
 				<table class="table table-hover" style="width: 50%;">
     <thead>
         <tr>
@@ -36,7 +36,7 @@
         </tr>
     </c:forEach>
 </table>
-		
+		</td>
 			
 		</tr>
 		

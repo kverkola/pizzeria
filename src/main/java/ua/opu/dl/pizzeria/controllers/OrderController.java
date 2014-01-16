@@ -91,14 +91,14 @@ public class OrderController {
 
 	}
 	
-	@RequestMapping(value = "/showIngredient/{pizzaId}", method = RequestMethod.GET)
-	public String showIngredient(@PathVariable("pizzaId") Integer pizzaId,
-			HttpSession session,ModelMap model) {
-	Pizza pizza=pizzaService.loadById(pizzaId);
-		
+	@RequestMapping(value = "/showIngredient/{id}", method = RequestMethod.GET)
+	public String showIngredient(@PathVariable("id") Integer id,ModelMap model,HttpSession session) {
+	Pizza pizza=pizzaService.loadById(0);
+		Order order=(Order)session.getAttribute("prderById");
+		model.addAttribute("order", order);
 		model.addAttribute("pizza", pizza);
 		
-		return "redirect:/ingredient";
+		return "showIngredient";
 	}
 
 }

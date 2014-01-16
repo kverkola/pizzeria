@@ -40,13 +40,13 @@ public class OrderDaoImpl implements OrderDao {
 		ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
 		ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
 		ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
-		Pizza pizza = new Pizza("TestPizza", ingredientMap, 25);
+		Pizza pizza = new Pizza("TestPizza", ingredientMap, 25,6);
 		addMap.put(new Additional("pepsi", 10,"pepsi"), 5);
 		addMap.put(new Additional("cola", 10,"cola"), 3);
 		addMap.put(new Additional("gorchica", 2,"gorchica"), 1);
 		pizzaMap.put(pizza, 2);
 
-        Pizza pizza2 = new Pizza("TestPizza2", ingredientMap, 25);
+        Pizza pizza2 = new Pizza("TestPizza2", ingredientMap, 25,7);
         pizzaMap.put(pizza2, 1);
 
 		return new Order(pizzaMap, Status.IN_WORK, new Date(), new Date(), 136,

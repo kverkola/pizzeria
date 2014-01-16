@@ -71,11 +71,7 @@ public class BaseController {
 
         return "feedback";
     }
-    @RequestMapping(value = "/ingredient", method = RequestMethod.GET)
-    public String ingredient() {
-    	
-    	return "ingredient";
-    }
+
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about() {

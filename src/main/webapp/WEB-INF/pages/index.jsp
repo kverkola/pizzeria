@@ -10,7 +10,7 @@
 
         <form class="form-search">
         <input type="text" class="inp" name="orderId" >
-        <button type="submit" class="btn">Search 0rder</button>
+        <button type="submit" class="btn">Search order</button>
         </form>
 
 
