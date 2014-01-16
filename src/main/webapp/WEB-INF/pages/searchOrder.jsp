@@ -30,7 +30,7 @@
     </thead>
     <c:forEach var="entry" items="${order.pizzas}">
         <tr>
-            <td><a href="/ingredient">${entry.key.name}<a></td>
+            <td><a href="<c:url value='/order/showIngredient/${entry.key.id}'/>">${entry.key.name}<a></td>
             <td>${entry.value}</td>
             <td>${entry.key.price}</td>
         </tr>

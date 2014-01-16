@@ -3,6 +3,7 @@ package ua.opu.dl.pizzeria.model;
 import java.util.Map;
 
 public class Pizza {
+	private Integer id;
 	private String name;
 	private Map<Ingredient, Integer> map;
 	private double price;
@@ -65,7 +66,15 @@ public class Pizza {
         this.description = description;
     }
 
-    @Override
+    public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

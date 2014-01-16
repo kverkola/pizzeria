@@ -81,13 +81,24 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
-	public String order(@RequestParam("orderId") Integer orderId, ModelMap model) {
+	public String order(@RequestParam("orderId") Integer orderId, HttpSession session,ModelMap model) {
 
 		Order order = orderService.loadById(orderId);
 
+		session.setAttribute("orderById",order);
 		model.addAttribute("order", order);
-
 		return "searchOrder";
 
 	}
+	
+	@RequestMapping(value = "/showIngredient/{pizzaId}", method = RequestMethod.GET)
+	public String showIngredient(@PathVariable("pizzaId") Integer pizzaId,
+			HttpSession session,ModelMap model) {
+	Pizza pizza=pizzaService.loadById(pizzaId);
+		
+		model.addAttribute("pizza", pizza);
+		
+		return "redirect:/ingredient";
+	}
+
 }
