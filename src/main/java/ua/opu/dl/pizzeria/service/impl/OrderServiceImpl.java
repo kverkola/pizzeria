@@ -58,20 +58,12 @@ public class OrderServiceImpl implements OrderServise {
             pizzas.put(pizza, 1);
         }
 
-        Double price = 0.0;
-        for (Entry<Pizza, Integer> entry : order.getPizzas().entrySet()) {
-
-            Pizza p = entry.getKey();
-            Integer count = entry.getValue();
-
-            price += p.getPrice() * count;
-        }
-        order.setPrice(price);
+        order.setPrice(order.getPrice() + pizza.getPrice());
     }
 
 	@Override
 	public void addAdditional(Order order, Additional additional) {
-		// TODO Auto-generated method stub
+
         Map<Additional, Integer> additions = order.getAdditional();
 
         if (additions.containsKey(additional)) {
@@ -80,14 +72,6 @@ public class OrderServiceImpl implements OrderServise {
             additions.put(additional, 1);
         }
 
-        Double price = 0.0;
-        for (Entry<Additional, Integer> entry : order.getAdditional().entrySet()) {
-
-            Additional a = entry.getKey();
-            Integer count = entry.getValue();
-
-            price += a.getPrice() * count;
-        }
-        order.setPrice(price);
+        order.setPrice(order.getPrice() + additional.getPrice());
 	}
 }
