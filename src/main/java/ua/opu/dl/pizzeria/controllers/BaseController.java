@@ -59,7 +59,7 @@ public class BaseController {
 		return "menu";
 	}
 	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
-	public String Additional(ModelMap model) {
+	public String additional(ModelMap model) {
 		
 		model.addAttribute("add", additionalService.AllAdditionals());
 		
@@ -70,6 +70,11 @@ public class BaseController {
     public String feedback() {
 
         return "feedback";
+    }
+    @RequestMapping(value = "/ingredient", method = RequestMethod.GET)
+    public String ingredient() {
+    	
+    	return "ingredient";
     }
 
     @RequestMapping(value = "/about", method = RequestMethod.GET)

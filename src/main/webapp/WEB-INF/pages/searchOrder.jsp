@@ -18,30 +18,48 @@
 		</tr>
 		<tr>
 			<td><p class="text-info"><strong>Pizza</strong></p></td>
-			<td><select>
+			
 
-					<c:forEach var="entry" items="${order.pizzas}">
-
-						<option>
-						${entry.key.name} &nbsp &nbsp &nbsp &nbsp
-							${entry.value}X &nbsp&nbsp&nbsp ${entry.key.price}&nbsp$</option>
-
-					</c:forEach>
-			</select></td>
+				<table class="table table-hover" style="width: 50%;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <c:forEach var="entry" items="${order.pizzas}">
+        <tr>
+            <td><a href="/ingredient">${entry.key.name}<a></td>
+            <td>${entry.value}</td>
+            <td>${entry.key.price}</td>
+        </tr>
+    </c:forEach>
+</table>
+		
+			
 		</tr>
-		<tr>
+		
 		<tr>
 			<td><p class="text-info"><strong>Additionals</strong></p></td>
-			<td><select>
-
-					<c:forEach var="entry" items="${order.additional}">
-
-						<option>${entry.key.name} &nbsp &nbsp &nbsp &nbsp
-							${entry.value}X &nbsp&nbsp&nbsp ${entry.key.price}&nbsp$</option>
-
-					</c:forEach>
-
-			</select></td>
+			<td>
+				<table class="table table-hover" style="width: 50%;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <c:forEach var="entry" items="${order.additional}">
+        <tr>
+            <td>${entry.key.name}</td>
+            <td>${entry.value}</td>
+            <td>${entry.key.price}</td>
+        </tr>
+    </c:forEach>
+</table>
+		</td>
 		</tr>
 		<tr>
 			<td><p class="text-info"><strong>Status</strong></p></td>
@@ -69,4 +87,3 @@
 
 
 
-<dl class="dl-horizontal">
