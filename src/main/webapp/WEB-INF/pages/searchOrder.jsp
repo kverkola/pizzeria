@@ -4,7 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <h1>Order</h1>
 
-<table class="table table-hover" style="width: 50%;">
+<table class="table " style="width: 50%;">
 	<thead>
 		<tr>
 			<th></th>
@@ -43,7 +43,7 @@
 		<tr>
 			<td><p class="text-info"><strong>Additionals</strong></p></td>
 			<td>
-				<table class="table table-hover" style="width: 50%;">
+				<table class="table " style="width: 50%;">
     <thead>
         <tr>
             <th>Name</th>
