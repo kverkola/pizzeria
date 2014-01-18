@@ -53,7 +53,7 @@
 
     <!-- Pizzas in order end -->
 
-    <!-- Additions in order -->
+    <!-- Additions in order begin -->
 
     <c:set var="additionalInOrder" value="additionalInOrder"/>
     <c:forEach var="entry" items="${sessionScope[additionalInOrder]}">

@@ -46,32 +46,4 @@ public class OrderServiceImpl implements OrderServise {
 
 		return orderDao.loadAllOrders();
 	}
-
-    @Override
-    public void addPizza(Order order, Pizza pizza) {
-
-        Map<Pizza, Integer> pizzas = order.getPizzas();
-
-        if (pizzas.containsKey(pizza)) {
-            pizzas.put(pizza, pizzas.get(pizza) + 1);
-        } else {
-            pizzas.put(pizza, 1);
-        }
-
-        order.setPrice(order.getPrice() + pizza.getPrice());
-    }
-
-	@Override
-	public void addAdditional(Order order, Additional additional) {
-
-        Map<Additional, Integer> additions = order.getAdditional();
-
-        if (additions.containsKey(additional)) {
-            additions.put(additional, additions.get(additional) + 1);
-        } else {
-            additions.put(additional, 1);
-        }
-
-        order.setPrice(order.getPrice() + additional.getPrice());
-	}
 }

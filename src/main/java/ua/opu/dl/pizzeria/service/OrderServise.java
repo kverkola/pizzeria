@@ -8,9 +8,6 @@ import ua.opu.dl.pizzeria.model.Pizza;
 
 public interface OrderServise {
 
-    void addPizza(Order order, Pizza pizza);
-    void addAdditional(Order order, Additional additional);
-
     void addOrder(Order order);
 
 	void updateOrder(Order order);

@@ -31,6 +31,7 @@ public class OrderController {
 
 	@Autowired
 	private OrderServise orderService;
+
 	@Autowired
 	private AdditionalService AdditionalService;
 
@@ -47,7 +48,8 @@ public class OrderController {
             order.setPizzas(new HashMap<Pizza, Integer>());
         }
 
-		orderService.addPizza(order, pizzaService.loadByName(name));
+        order.addPizza(pizzaService.loadByName(name));
+
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getPizzas());
 
@@ -76,8 +78,7 @@ public class OrderController {
     }
 
 	@RequestMapping(value = "/add-additional/{name}", method = RequestMethod.GET)
-	public String addAdditional(@PathVariable("name") String name,
-			HttpSession session) {
+	public String addAdditional(@PathVariable("name") String name, HttpSession session) {
 		
 		Order order = (Order) session.getAttribute("order");
 		
@@ -87,8 +88,9 @@ public class OrderController {
 		} else if (order.getAdditional() == null) {
             order.setAdditional(new HashMap<Additional, Integer>());
         }
-		
-		orderService.addAdditional(order, AdditionalService.loadByName(name));
+
+        order.addAdditional(AdditionalService.loadByName(name));
+
 		session.setAttribute("order", order);
         session.setAttribute("additionalInOrder", order.getAdditional());
 		
@@ -121,8 +123,8 @@ public class OrderController {
 		return "completeOrder";
 	}
 
-	@RequestMapping(value = "/change-count", method = RequestMethod.POST, params = {
-			"name", "value" })
+	@RequestMapping(value = "/change-count", method = RequestMethod.POST,
+            params = {"name", "value"})
 	public String changeCount(@RequestParam String name,
 			@RequestParam Integer value) {
 
@@ -132,28 +134,34 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
-	public String order(@RequestParam("orderId") Integer orderId, HttpSession session,ModelMap model) {
+	public String order(@RequestParam("orderId") Integer orderId, HttpSession session,
+                        ModelMap model) {
 
 		Order order = orderService.loadById(orderId);
 
 		session.setAttribute("orderById", order);
 		model.addAttribute("order", order);
+
 		return "searchOrder";
 	}
 	
 	@RequestMapping(value = "/showIngredient/{id}", method = RequestMethod.GET)
-	public String showIngredient(@PathVariable("id") Integer id,ModelMap model,HttpSession session) {
-	Pizza pizza=pizzaService.loadById(id);
+	public String showIngredient(@PathVariable("id") Integer id, ModelMap model,
+                                 HttpSession session) {
+
+        Pizza pizza=pizzaService.loadById(id);
 		Order order=(Order)session.getAttribute("orderById");
 		model.addAttribute("order", order);
+
 		model.addAttribute("pizza", pizza);
 		
 		return "showIngredient";
 	}
 
 	@RequestMapping(value = "/addIngredients/{id}", method = RequestMethod.GET)
-	public String addIngredients(@PathVariable("id") Integer id,ModelMap model,HttpSession session) {
-		Pizza pizza=pizzaService.loadById(id);
+	public String addIngredients(@PathVariable("id") Integer id, ModelMap model) {
+
+        Pizza pizza=pizzaService.loadById(id);
 		//Order order=(Order)session.getAttribute("orderById");
 		//model.addAttribute("order", order);
 		model.addAttribute("pizza", pizza);

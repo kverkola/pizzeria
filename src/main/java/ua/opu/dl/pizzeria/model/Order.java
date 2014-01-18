@@ -93,4 +93,25 @@ public class Order {
 		this.phone = phone;
 	}
 
+    public void addPizza(Pizza pizza) {
+
+        if (getPizzas().containsKey(pizza)) {
+            getPizzas().put(pizza, getPizzas().get(pizza) + 1);
+        } else {
+            getPizzas().put(pizza, 1);
+        }
+
+        setPrice(getPrice() + pizza.getPrice());
+    }
+
+    public void addAdditional(Additional additional) {
+
+        if (getAdditional().containsKey(additional)) {
+            getAdditional().put(additional, getAdditional().get(additional) + 1);
+        } else {
+            getAdditional().put(additional, 1);
+        }
+
+        setPrice(getPrice() + additional.getPrice());
+    }
 }
