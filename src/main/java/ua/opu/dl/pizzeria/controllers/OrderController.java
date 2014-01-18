@@ -75,6 +75,26 @@ public class OrderController {
         return "redirect:/order/make-order";
     }
 
+	@RequestMapping(value = "/add-additional/{name}", method = RequestMethod.GET)
+	public String addAdditional(@PathVariable("name") String name,
+			HttpSession session) {
+		
+		Order order = (Order) session.getAttribute("order");
+		
+		if (order == null) {
+			order = new Order();
+			order.setAdditional(new HashMap<Additional, Integer>());
+		} else if (order.getAdditional() == null) {
+            order.setAdditional(new HashMap<Additional, Integer>());
+        }
+		
+		orderService.addAdditional(order, AdditionalService.loadByName(name));
+		session.setAttribute("order", order);
+        session.setAttribute("additionalInOrder", order.getAdditional());
+		
+		return "redirect:/Additional";
+	}
+
     @RequestMapping(value = "/remove-additional/{name}", method = RequestMethod.GET)
     public String removeAdditional(@PathVariable("name") String name, HttpSession session) {
 
@@ -95,26 +115,6 @@ public class OrderController {
 
         return "redirect:/order/make-order";
     }
-
-	@RequestMapping(value = "/add-additional/{name}", method = RequestMethod.GET)
-	public String addAdditional(@PathVariable("name") String name,
-			HttpSession session) {
-		
-		Order order = (Order) session.getAttribute("order");
-		
-		if (order == null) {
-			order = new Order();
-			order.setAdditional(new HashMap<Additional, Integer>());
-		} else if (order.getAdditional() == null) {
-            order.setAdditional(new HashMap<Additional, Integer>());
-        }
-		
-		orderService.addAdditional(order, AdditionalService.loadByName(name));
-		session.setAttribute("order", order);
-        session.setAttribute("additionalInOrder", order.getAdditional());
-		
-		return "redirect:/Additional";
-	}
 
 	@RequestMapping(value = "/make-order", method = RequestMethod.GET)
 	public String makeOrder() {
@@ -139,7 +139,6 @@ public class OrderController {
 		session.setAttribute("orderById", order);
 		model.addAttribute("order", order);
 		return "searchOrder";
-
 	}
 	
 	@RequestMapping(value = "/showIngredient/{id}", method = RequestMethod.GET)
