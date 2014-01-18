@@ -41,20 +41,20 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public Pizza loadById(Integer id) {
 
-        Map<Ingredient, Integer> ingredientMap = new HashMap();
+        Map<Ingredient, Integer> ingredientMap = new HashMap<Ingredient, Integer>();
         ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
-        ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
+        ingredientMap.put(new Ingredient("Vegetables", 80, 10), 2);
         ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
-        ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
+        ingredientMap.put(new Ingredient("Sauce", 60, 15), 3);
         ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
 
-        return new Pizza("TestPizza", ingredientMap, 25,5);
+        return new Pizza("TestPizza", ingredientMap, 25,"chikenita_middle.png","wwwwwwwwwwwewert",1);
     }
 
     @Override
     public Pizza loadByName(String name) {
 
-        Map<Ingredient, Integer> ingredientMap = new HashMap();
+        Map<Ingredient, Integer> ingredientMap = new HashMap<Ingredient, Integer>();
         ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
         ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
         ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
@@ -67,7 +67,7 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public List<Pizza> loadByOrder(Integer orderId) {
 
-        List<Pizza> pizzaList = new ArrayList();
+        List<Pizza> pizzaList = new ArrayList<Pizza>();
 
         return pizzaList;
     }
@@ -75,9 +75,9 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public List<Pizza> loadAll() {
 
-        List<Pizza> pizzaList = new ArrayList();
+        List<Pizza> pizzaList = new ArrayList<Pizza>();
 
-        Map<Ingredient, Integer> ingredientMap = new HashMap();
+        Map<Ingredient, Integer> ingredientMap = new HashMap<Ingredient, Integer>();
         ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
         ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
         ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
@@ -92,7 +92,7 @@ public class PizzaDaoImpl implements PizzaDao {
         };
 
         for (int i = 0; i < imgs.length; i++) {
-            pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, 25, imgs[i], descrips[i]));
+            pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, 25, imgs[i], descrips[i],i));
         }
         return pizzaList;
     }

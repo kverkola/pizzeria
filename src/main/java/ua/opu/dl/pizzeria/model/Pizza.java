@@ -19,13 +19,13 @@ public class Pizza {
 
     public Pizza(String name, Map<Ingredient,
                  Integer> map, double price,
-                 String logo, String description) {
+                 String logo, String description,Integer id) {//не забыть удалить id из конструктора
         this.name = name;
         this.map = map;
         this.price = price;
         this.logo = logo;
         this.description = description;
-        
+        this.id=id;
     }
 
     public String getName() {
