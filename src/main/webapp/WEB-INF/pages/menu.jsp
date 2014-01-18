@@ -16,13 +16,9 @@
 					href="<c:url value='/order/addIngredients/${pizza.id}'/>"
 					class="btn btn-sm btn-success">Ingredients</a>
 				</td>
-
 			</tr>
 			<tr>
 				<td></td>
-
-
-
 				<td style="text-align: right;">${pizza.price}$ &nbsp;&nbsp; <a
 					href="<c:url value='/order/add-pizza/${pizza.name}'/>"
 					class="btn btn-sm btn-success"> Add to cart </a>

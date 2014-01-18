@@ -1,5 +1,7 @@
 package ua.opu.dl.pizzeria.controllers;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +23,8 @@ import java.util.HashMap;
 @Controller
 @RequestMapping(value = "/order")
 public class OrderController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 
 	@Autowired
 	private PizzaService pizzaService;
@@ -49,6 +53,45 @@ public class OrderController {
 
 		return "redirect:/menu";
 	}
+
+    @RequestMapping(value = "/remove-pizza/{name}", method = RequestMethod.GET)
+    public String removePizza(@PathVariable("name") String name, HttpSession session) {
+
+        Order order = (Order) session.getAttribute("order");
+
+        for (Pizza pizza : order.getPizzas().keySet()) {
+            if (pizza.getName().equals(name)) {
+                order.getPizzas().remove(pizza);
+                order.setPrice(order.getPrice() - pizza.getPrice());
+                LOG.info(pizza.getName() + " removed from order");
+            }
+        }
+
+        session.setAttribute("order", order);
+        session.setAttribute("pizzasInOrder", order.getPizzas());
+
+        return "redirect:/order/make-order";
+    }
+
+    @RequestMapping(value = "/remove-additional/{name}", method = RequestMethod.GET)
+    public String removeAdditional(@PathVariable("name") String name, HttpSession session) {
+
+        Order order = (Order) session.getAttribute("order");
+
+        for (Additional additional : order.getAdditional().keySet()) {
+            if (additional.getName().equals(name)) {
+                order.getAdditional().remove(additional);
+                order.setPrice(order.getPrice() - additional.getPrice());
+                LOG.info(additional.getName() + " removed from order");
+            }
+        }
+
+        session.setAttribute("order", order);
+        session.setAttribute("pizzasInOrder", order.getPizzas());
+
+        return "redirect:/order/make-order";
+    }
+
 	@RequestMapping(value = "/add-additional/{name}", method = RequestMethod.GET)
 	public String addAdditional(@PathVariable("name") String name,
 			HttpSession session) {
@@ -79,7 +122,7 @@ public class OrderController {
 	public String changeCount(@RequestParam String name,
 			@RequestParam Integer value) {
 
-		// recalculate price and change count
+        LOG.info("name " + name + " value " + value);
 
 		return "redirect:/order/make-order";
 	}
@@ -104,6 +147,7 @@ public class OrderController {
 		
 		return "showIngredient";
 	}
+
 	@RequestMapping(value = "/addIngredients/{id}", method = RequestMethod.GET)
 	public String addIngredients(@PathVariable("id") Integer id,ModelMap model,HttpSession session) {
 		Pizza pizza=pizzaService.loadById(id);
@@ -113,5 +157,4 @@ public class OrderController {
 		
 		return "addIngredients";
 	}
-
 }

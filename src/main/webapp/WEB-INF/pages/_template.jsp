@@ -62,7 +62,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="min-height: 70%;">
     <div class="row">
         <div class="col-lg-2">
             <div class="bs-example">
@@ -144,7 +144,7 @@
 </div>
 </div>
 
-<div class="navbar navbar-bottom" style="text-align: center">
+<div class="navbar-bottom" style="text-align: center;">
     <hr>
     <footer>
         <p>&copy; NetCracker Courses 2013-2014</p>
