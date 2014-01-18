@@ -24,7 +24,7 @@
 
 
 <form method="get" action="/order/searchOrder">
-	<input type="hidden" class="inp" name="orderId">
+	<input type="hidden" class="inp" name="orderId" value="${order.id}">
 	<button type="submit" class="btn btn-sm btn-success">Back</button>
 </form>
 
