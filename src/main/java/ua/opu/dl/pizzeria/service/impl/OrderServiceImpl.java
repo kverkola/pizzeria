@@ -5,34 +5,30 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.opu.dl.pizzeria.dao.OrderDao;
-import ua.opu.dl.pizzeria.model.Additional;
 import ua.opu.dl.pizzeria.model.Order;
-import ua.opu.dl.pizzeria.model.Pizza;
-import ua.opu.dl.pizzeria.service.OrderServise;
+import ua.opu.dl.pizzeria.service.OrderService;
 
-import java.util.Map;
-import java.util.Map.Entry;
+public class OrderServiceImpl implements OrderService {
 
-public class OrderServiceImpl implements OrderServise {
-	@Autowired
+    @Autowired
 	private OrderDao orderDao;
 
 	@Override
 	public void addOrder(Order order) {
-		orderDao.addOrder(order);
 
+        orderDao.addOrder(order);
 	}
 
 	@Override
 	public void updateOrder(Order order) {
-		orderDao.updateOrder(order);
 
+        orderDao.updateOrder(order);
 	}
 
 	@Override
 	public void deleteOrder(Order order) {
-		orderDao.deleteOrder(order);
 
+        orderDao.deleteOrder(order);
 	}
 
 	@Override

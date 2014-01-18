@@ -9,16 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/ingredients")
 public class IngredientsController {
 
-	
-	
-	
 	@RequestMapping(value = "/count", method = RequestMethod.GET)
-	public String getCount(
-			ModelMap model) {
-		
-		
-		
-		
-	
-	return "redirect:addIngredients";
-}}
+	public String getCount(ModelMap model) {
+
+	    return "redirect:addIngredients";
+    }
+}

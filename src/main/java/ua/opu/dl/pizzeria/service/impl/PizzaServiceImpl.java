@@ -14,25 +14,26 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Override
 	public Pizza loadById(Integer id) {
-		return pizzaDao.loadById(id);
+
+        return pizzaDao.loadById(id);
 	}
 
 	@Override
 	public void addPizza(Pizza pizza) {
-		pizzaDao.addPizza(pizza);
 
+        pizzaDao.addPizza(pizza);
 	}
 
 	@Override
 	public void updatePizza(Pizza pizza) {
-		pizzaDao.updatePizza(pizza);
 
+        pizzaDao.updatePizza(pizza);
 	}
 
 	@Override
 	public void deletePizza(Pizza pizza) {
-		pizzaDao.deletePizza(pizza);
 
+        pizzaDao.deletePizza(pizza);
 	}
 
 	@Override
@@ -43,11 +44,13 @@ public class PizzaServiceImpl implements PizzaService {
 
     @Override
     public Pizza loadByName(String name) {
+
         return pizzaDao.loadByName(name);
     }
 
     @Override
     public List<Pizza> loadAll() {
+
         return pizzaDao.loadAll();
     }
 }

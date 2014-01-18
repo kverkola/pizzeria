@@ -9,7 +9,8 @@ import ua.opu.dl.pizzeria.model.User;
 import ua.opu.dl.pizzeria.service.UserService;
 
 public class UserServiceImpl implements UserService {
-	@Autowired
+
+    @Autowired
 	private UserDao userDao;
 
 	@Override

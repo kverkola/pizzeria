@@ -14,7 +14,7 @@ import ua.opu.dl.pizzeria.model.Additional;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.AdditionalService;
-import ua.opu.dl.pizzeria.service.OrderServise;
+import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 import javax.servlet.http.HttpSession;
@@ -30,14 +30,13 @@ public class OrderController {
 	private PizzaService pizzaService;
 
 	@Autowired
-	private OrderServise orderService;
+	private OrderService orderService;
 
 	@Autowired
-	private AdditionalService AdditionalService;
+	private AdditionalService additionalService;
 
 	@RequestMapping(value = "/add-pizza/{name}", method = RequestMethod.GET)
-	public String addPizza(@PathVariable("name") String name,
-			HttpSession session) {
+	public String addPizza(@PathVariable("name") String name, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
@@ -89,7 +88,7 @@ public class OrderController {
             order.setAdditional(new HashMap<Additional, Integer>());
         }
 
-        order.addAdditional(AdditionalService.loadByName(name));
+        order.addAdditional(additionalService.loadByName(name));
 
 		session.setAttribute("order", order);
         session.setAttribute("additionalInOrder", order.getAdditional());
@@ -162,8 +161,7 @@ public class OrderController {
 	public String addIngredients(@PathVariable("id") Integer id, ModelMap model) {
 
         Pizza pizza=pizzaService.loadById(id);
-		//Order order=(Order)session.getAttribute("orderById");
-		//model.addAttribute("order", order);
+
 		model.addAttribute("pizza", pizza);
 		
 		return "addIngredients";
