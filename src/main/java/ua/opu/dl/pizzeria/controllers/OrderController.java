@@ -61,9 +61,11 @@ public class OrderController {
 
         for (Pizza pizza : order.getPizzas().keySet()) {
             if (pizza.getName().equals(name)) {
+                order.setPrice(order.getPrice() -
+                        pizza.getPrice() * order.getPizzas().get(pizza));
                 order.getPizzas().remove(pizza);
-                order.setPrice(order.getPrice() - pizza.getPrice());
                 LOG.info(pizza.getName() + " removed from order");
+                break;
             }
         }
 
@@ -80,9 +82,11 @@ public class OrderController {
 
         for (Additional additional : order.getAdditional().keySet()) {
             if (additional.getName().equals(name)) {
+                order.setPrice(order.getPrice() -
+                        additional.getPrice() * order.getAdditional().get(additional));
                 order.getAdditional().remove(additional);
-                order.setPrice(order.getPrice() - additional.getPrice());
                 LOG.info(additional.getName() + " removed from order");
+                break;
             }
         }
 
