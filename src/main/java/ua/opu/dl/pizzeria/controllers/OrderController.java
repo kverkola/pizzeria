@@ -36,9 +36,8 @@ public class OrderController {
 	@Autowired
 	private AdditionalService additionalService;
 
-	@RequestMapping(value = "/add-pizza/{name}", method = RequestMethod.GET)
-	public String addPizza(@PathVariable("name") String name,
-			HttpSession session) {
+	@RequestMapping(value = "/add-pizza/{id}", method = RequestMethod.GET)
+	public String addPizza(@PathVariable("id") Integer id, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
@@ -48,9 +47,13 @@ public class OrderController {
 		} else if (order.getPizzas() == null) {
 			order.setPizzas(new HashMap<Pizza, Integer>());
 		}
+		Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
 
-		order.addPizza(pizzaService.loadByName(name));
-
+		if (pizza == null) {
+			order.addPizza(pizzaService.loadById(id));
+		} else {
+			order.addPizza(pizza);
+		}
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getPizzas());
 
@@ -128,57 +131,57 @@ public class OrderController {
 		return "completeOrder";
 	}
 
-	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST,
-                        params = {"name", "value"})
-	public String changePizzasCount(@RequestParam String name, @RequestParam Integer value,
-                              HttpSession session) {
+	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST, params = {
+			"name", "value" })
+	public String changePizzasCount(@RequestParam String name,
+			@RequestParam Integer value, HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
+		Order order = (Order) session.getAttribute("order");
 
-        for (Pizza pizza : order.getPizzas().keySet()) {
-            if (pizza.getName().equals(name)) {
-                if (value != 0) {
-                    order.getPizzas().put(pizza, value);
-                } else {
-                    order.getPizzas().remove(pizza);
-                }
+		for (Pizza pizza : order.getPizzas().keySet()) {
+			if (pizza.getName().equals(name)) {
+				if (value != 0) {
+					order.getPizzas().put(pizza, value);
+				} else {
+					order.getPizzas().remove(pizza);
+				}
 
-                orderService.updatePrice(order);
-                break;
-            }
-        }
+				orderService.updatePrice(order);
+				break;
+			}
+		}
 
-        session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getPizzas());
+		session.setAttribute("order", order);
+		session.setAttribute("pizzasInOrder", order.getPizzas());
 
 		return "redirect:/order/make-order";
 	}
 
-    @RequestMapping(value = "/change-additions-count", method = RequestMethod.POST,
-                        params = {"name", "value"})
-    public String changeAdditionsCount(@RequestParam String name, @RequestParam Integer value,
-                              HttpSession session) {
+	@RequestMapping(value = "/change-additions-count", method = RequestMethod.POST, params = {
+			"name", "value" })
+	public String changeAdditionsCount(@RequestParam String name,
+			@RequestParam Integer value, HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
+		Order order = (Order) session.getAttribute("order");
 
-        for (Additional additional : order.getAdditional().keySet()) {
-            if (additional.getName().equals(name)) {
-                if (value != 0) {
-                    order.getAdditional().put(additional, value);
-                } else {
-                    order.getAdditional().remove(additional);
-                }
+		for (Additional additional : order.getAdditional().keySet()) {
+			if (additional.getName().equals(name)) {
+				if (value != 0) {
+					order.getAdditional().put(additional, value);
+				} else {
+					order.getAdditional().remove(additional);
+				}
 
-                orderService.updatePrice(order);
-                break;
-            }
-        }
+				orderService.updatePrice(order);
+				break;
+			}
+		}
 
-        session.setAttribute("order", order);
-        session.setAttribute("additionalInOrder", order.getAdditional());
+		session.setAttribute("order", order);
+		session.setAttribute("additionalInOrder", order.getAdditional());
 
-        return "redirect:/order/make-order";
-    }
+		return "redirect:/order/make-order";
+	}
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
 	public String order(@RequestParam("orderId") Integer orderId,
@@ -205,5 +208,4 @@ public class OrderController {
 		return "showIngredient";
 	}
 
-	
 }

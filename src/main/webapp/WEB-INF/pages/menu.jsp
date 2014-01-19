@@ -20,7 +20,7 @@
 			<tr>
 				<td></td>
 				<td style="text-align: right;">${pizza.price}$ &nbsp;&nbsp; <a
-					href="<c:url value='/order/add-pizza/${pizza.name}'/>"
+					href="<c:url value='/order/add-pizza/${pizza.id}'/>"
 					class="btn btn-sm btn-success"> Add to cart </a>
 				</td>
 			</tr>
