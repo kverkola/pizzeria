@@ -21,9 +21,9 @@ public class IngredientsController {
 	@Autowired
 	private PizzaService pizzaService;
 
-	@RequestMapping(value = "/count/{ingredientName}/{action}", method = RequestMethod.GET)
-	public String getCount(
-			@PathVariable("ingredientName") String ingredientName,@PathVariable("action") String action,
+	@RequestMapping(value = "/countPlus/{ingredientName}", method = RequestMethod.GET)
+	public String actionPlus(
+			@PathVariable("ingredientName") String ingredientName,
 			ModelMap model, HttpSession session) {
 
 		Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
@@ -32,13 +32,30 @@ public class IngredientsController {
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
 			if (ingr.getName().equals(ingredientName)) {
-				if(action.equals("up")){
+				
 				ingrMap.put(ingr, key + 1);}
-				else{ingrMap.put(ingr, key - 1);}
+				
 			}
 
+		model.addAttribute("pizza", pizza);
+		return "/addIngredients";
+	}
+	@RequestMapping(value = "/countMinus/{ingredientName}", method = RequestMethod.GET)
+	public String actionMinus(
+			@PathVariable("ingredientName") String ingredientName,
+			ModelMap model, HttpSession session) {
+		
+		Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
+		Map<Ingredient, Integer> ingrMap = pizza.getMap();
+		Integer key = 0;
+		for (Ingredient ingr : ingrMap.keySet()) {
+			key = ingrMap.get(ingr);
+			if (ingr.getName().equals(ingredientName)) {
+				
+				ingrMap.put(ingr, key-1);}
+			
 		}
-
+		
 		model.addAttribute("pizza", pizza);
 		return "/addIngredients";
 	}
@@ -47,6 +64,8 @@ public class IngredientsController {
 	public String addIngredients(@PathVariable("id") Integer id,
 			ModelMap model, HttpSession session) {
 		Pizza pizza;
+		
+		
 		pizza = (Pizza) session.getAttribute("pizzaChanged");
 		if (pizza == null) {
 			pizza = pizzaService.loadById(id);
@@ -55,6 +74,7 @@ public class IngredientsController {
 		}
 
 		model.addAttribute("pizza", pizza);
+		
 
 		return "addIngredients";
 	}

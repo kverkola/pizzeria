@@ -25,11 +25,11 @@
 			<td>${entry.key.name}
 			<td>${entry.key.weight}</td>
 			<td>
-					 <a href="<c:url value='/ingredients/count/${entry.key.name}/{up}'/>">
+					 <a href="<c:url value='/ingredients/countPlus/${entry.key.name}'/>">
                         <img src="<c:url value='/resources/up.png'/>"/>
                     </a>
 					&nbsp ${entry.value} &nbsp
-     		  <a href="<c:url value='/ingredients/count/${entry.key.name}/{down}'/>">
+     		  <a href="<c:url value='/ingredients/countMinus/${entry.key.name}'/>">
                         <img src="<c:url value='/resources/down.png'/>"/>
                     </a>
 
