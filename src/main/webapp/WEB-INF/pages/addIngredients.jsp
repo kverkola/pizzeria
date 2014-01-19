@@ -24,14 +24,17 @@
 		<tr>
 			<td>${entry.key.name}
 			<td>${entry.key.weight}</td>
-			<td><form method="get" action="/ingredients/searchOrder">
-					<button class="btn btn-warning btn-primary" type="submit">u</button>
+			<td>
+					 <a href="<c:url value='/ingredients/count/${entry.key.name}/{up}'/>">
+                        <img src="<c:url value='/resources/up.png'/>"/>
+                    </a>
 					&nbsp ${entry.value} &nbsp
+     		  <a href="<c:url value='/ingredients/count/${entry.key.name}/{down}'/>">
+                        <img src="<c:url value='/resources/down.png'/>"/>
+                    </a>
 
-					<button class="btn btn-warning btn-primary" type="submit">d</button>
-<input type="hidden" class="inp" name="${entry.key.weight}">
 
-				</form></td>
+				</td>
 			<td>${entry.key.price}</td>
 		</tr>
 

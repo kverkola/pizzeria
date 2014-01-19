@@ -13,7 +13,7 @@
 				<td style="padding-left: 20px; vertical-align: top;">
 					<h3>${pizza.name}</h3>
 					<p>${pizza.description}</p> <a
-					href="<c:url value='/order/addIngredients/${pizza.id}'/>"
+					href="<c:url value='/ingredients/addIngredients/${pizza.id}'/>"
 					class="btn btn-sm btn-success">Ingredients</a>
 				</td>
 			</tr>

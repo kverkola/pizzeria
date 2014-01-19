@@ -142,7 +142,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <div class="navbar-bottom" style="text-align: center;">
     <hr>
@@ -151,7 +151,7 @@
     </footer>
 </div>
 
-</div>
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <script src="http://getbootstrap.com/assets/js/jquery.js"></script>
