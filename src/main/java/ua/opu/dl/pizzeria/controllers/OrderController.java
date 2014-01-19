@@ -124,18 +124,61 @@ public class OrderController {
 
 	@RequestMapping(value = "/make-order", method = RequestMethod.GET)
 	public String makeOrder() {
+
 		return "completeOrder";
 	}
 
-	@RequestMapping(value = "/change-count", method = RequestMethod.POST, params = {
-			"name", "value" })
-	public String changeCount(@RequestParam String name,
-			@RequestParam Integer value) {
+	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST,
+                        params = {"name", "value"})
+	public String changePizzasCount(@RequestParam String name, @RequestParam Integer value,
+                              HttpSession session) {
 
-		LOG.info("name " + name + " value " + value);
+        Order order = (Order) session.getAttribute("order");
+
+        for (Pizza pizza : order.getPizzas().keySet()) {
+            if (pizza.getName().equals(name)) {
+                if (value != 0) {
+                    order.getPizzas().put(pizza, value);
+                } else {
+                    order.getPizzas().remove(pizza);
+                }
+
+                orderService.updatePrice(order);
+                break;
+            }
+        }
+
+        session.setAttribute("order", order);
+        session.setAttribute("pizzasInOrder", order.getPizzas());
 
 		return "redirect:/order/make-order";
 	}
+
+    @RequestMapping(value = "/change-additions-count", method = RequestMethod.POST,
+                        params = {"name", "value"})
+    public String changeAdditionsCount(@RequestParam String name, @RequestParam Integer value,
+                              HttpSession session) {
+
+        Order order = (Order) session.getAttribute("order");
+
+        for (Additional additional : order.getAdditional().keySet()) {
+            if (additional.getName().equals(name)) {
+                if (value != 0) {
+                    order.getAdditional().put(additional, value);
+                } else {
+                    order.getAdditional().remove(additional);
+                }
+
+                orderService.updatePrice(order);
+                break;
+            }
+        }
+
+        session.setAttribute("order", order);
+        session.setAttribute("additionalInOrder", order.getAdditional());
+
+        return "redirect:/order/make-order";
+    }
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
 	public String order(@RequestParam("orderId") Integer orderId,

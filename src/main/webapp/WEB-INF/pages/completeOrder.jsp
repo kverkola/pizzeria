@@ -23,19 +23,19 @@
     <!-- Pizzas in order begin -->
 
     <c:set var="pizzasInOrder" value="pizzasInOrder"/>
-    <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
+    <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}" varStatus="status">
         <tr>
             <td style="text-align: left;">
                 ${entry.key.name}
             </td>
             <td>
                 <div>
-                    <form id="pizzas" method="POST" action="/order/change-count" style="display: inline-block; text-align: center">
+                    <form id="pizzas+${status.count}" method="POST" action="/order/change-pizzas-count" style="display: inline-block; text-align: center">
                         <input name="name" type="hidden" value="${entry.key.name}" />
                         <input name="value" type="text" class="form-control input-sm" value="${entry.value}"
                                style="width: 45px; text-align: center;"/>
                     </form>
-                    <a style="cursor: pointer;" onclick="document.getElementById('pizzas').submit(); return false;">
+                    <a style="cursor: pointer;" onclick="document.getElementById('pizzas+${status.count}').submit(); return false;">
                         <img src="<c:url value='/resources/button_ref.png'/>"/>
                     </a>
                 </div>
@@ -56,20 +56,20 @@
     <!-- Additions in order begin -->
 
     <c:set var="additionalInOrder" value="additionalInOrder"/>
-    <c:forEach var="entry" items="${sessionScope[additionalInOrder]}">
+    <c:forEach var="entry" items="${sessionScope[additionalInOrder]}" varStatus="status">
         <tr>
             <td style="text-align: left;">
                     ${entry.key.name}
             </td>
             <td>
                 <div>
-                    <form id="additions" method="POST" action="/order/change-count"
+                    <form id="additions+${status.count}" method="POST" action="/order/change-additions-count"
                           style="display: inline-block; text-align: center">
                         <input name="name" type="hidden" value="${entry.key.name}" />
                         <input name="value" type="text" class="form-control input-sm" value="${entry.value}"
                                style="width: 45px; text-align: center;"/>
                     </form>
-                    <a style="cursor: pointer;" onclick="document.getElementById('additions').submit(); return false;">
+                    <a style="cursor: pointer;" onclick="document.getElementById('additions+${status.count}').submit(); return false;">
                         <img src="<c:url value='/resources/button_ref.png'/>"/>
                     </a>
                 </div>

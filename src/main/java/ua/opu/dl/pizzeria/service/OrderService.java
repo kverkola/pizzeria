@@ -12,6 +12,8 @@ public interface OrderService {
 
     void deleteOrder(Order order);
 
+    void updatePrice(Order order);
+
     Order loadById(Integer id);
 
     List<Order> loadAllOrder();
