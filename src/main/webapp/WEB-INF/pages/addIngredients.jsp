@@ -17,16 +17,17 @@
 		<tr>
 			<th>Ingredient</th>
 			<th>Weight</th>
-			<th>Count</th>
 			<th>Price</th>
+			<th>Count</th>
 		</tr>
 	</thead>
 
 	<c:forEach var="entry" items="${pizza.map}">
 
 		<tr>
-			<td>${entry.key.name}
+			<td>${entry.key.name}</td>
 			<td>${entry.key.weight}</td>
+			<td>${entry.key.price}</td>
 			<td><a
 				href="<c:url value='/ingredients/countPlus/${entry.key.name}'/>">
 					<img src="<c:url value='/resources/up.png'/>" />
@@ -34,7 +35,7 @@
 				href="<c:url value='/ingredients/countMinus/${entry.key.name}'/>">
 					<img src="<c:url value='/resources/down.png'/>" />
 			</a></td>
-			<td>${entry.key.price}</td>
+		
 		</tr>
 
 	</c:forEach>

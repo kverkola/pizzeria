@@ -154,8 +154,10 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="http://getbootstrap.com/assets/js/jquery.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+ <script src="https://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+
 
 </body>
 </html>

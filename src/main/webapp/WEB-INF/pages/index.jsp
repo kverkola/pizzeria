@@ -16,5 +16,19 @@
 
 </form>
 
-
-       
+ 
+              
+               <script src="http://getbootstrap.com/dist/js/bootstrap-dropdown.js"></script>
+                <div class="btn-group">
+                 <script src="http://getbootstrap.com/dist/js/bootstrap-dropdown.js"></script>
+        <a class="btn dropdown-toggle" Переключение данных="dropdown" href="#">
+        Действие
+        <span class="caret"></span>
+        </a>
+         <script src="http://getbootstrap.com/dist/js/bootstrap-dropdown.js"></script>
+        <ul class="dropdown-menu">
+     <script src="https://code.jquery.com/jquery.js"></script>
+        </ul>
+        </div>      
+              
+              
