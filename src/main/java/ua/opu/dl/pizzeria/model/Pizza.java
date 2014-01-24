@@ -89,38 +89,30 @@ public class Pizza {
 
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-		Pizza pizza = (Pizza) o;
+        Pizza pizza = (Pizza) o;
 
-		if (Double.compare(pizza.price, price) != 0)
-			return false;
-		if (description != null ? !description.equals(pizza.description)
-				: pizza.description != null)
-			return false;
-		if (logo != null ? !logo.equals(pizza.logo) : pizza.logo != null)
-			return false;
-		if (name != null ? !name.equals(pizza.name) : pizza.name != null)
-			return false;
+        if (Double.compare(pizza.price, price) != 0) return false;
+        if (id != null ? !id.equals(pizza.id) : pizza.id != null) return false;
+        if (map != null ? !map.equals(pizza.map) : pizza.map != null) return false;
+        if (name != null ? !name.equals(pizza.name) : pizza.name != null) return false;
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public int hashCode() {
-		int result;
-		long temp;
-		result = name != null ? name.hashCode() : 0;
-		temp = Double.doubleToLongBits(price);
-		result = 31 * result + (int) (temp ^ (temp >>> 32));
-		result = 31 * result + (logo != null ? logo.hashCode() : 0);
-		result = 31 * result
-				+ (description != null ? description.hashCode() : 0);
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (map != null ? map.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

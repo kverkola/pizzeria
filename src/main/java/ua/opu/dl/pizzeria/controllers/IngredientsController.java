@@ -18,8 +18,10 @@ import ua.opu.dl.pizzeria.service.PizzaService;
 @Controller
 @RequestMapping(value = "/ingredients")
 public class IngredientsController {
+
 	@Autowired
 	private PizzaService pizzaService;
+
 	private Integer key;
 	private Pizza pizza;
 

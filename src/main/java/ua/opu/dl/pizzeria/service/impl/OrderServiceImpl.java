@@ -10,6 +10,8 @@ import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.OrderService;
 
+import java.util.Map;
+
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -49,14 +51,19 @@ public class OrderServiceImpl implements OrderService {
     public void updatePrice(Order order) {
 
         Double totalPrice = 0.0;
-        for (Additional a : order.getAdditional().keySet()) {
-            totalPrice += a.getPrice() * order.getAdditional().get(a);
+        Map<Additional, Integer> additions = order.getAdditional();
+        if (additions != null) {
+            for (Additional a : additions.keySet()) {
+                totalPrice += a.getPrice() * additions.get(a);
+            }
         }
 
-        for (Pizza p : order.getPizzas().keySet()) {
-            totalPrice += p.getPrice() * order.getPizzas().get(p);
+        Map<Pizza, Integer> pizzas = order.getPizzas();
+        if (pizzas != null) {
+            for (Pizza p : pizzas.keySet()) {
+                totalPrice += p.getPrice() * pizzas.get(p);
+            }
         }
-
         order.setPrice(totalPrice);
     }
 }

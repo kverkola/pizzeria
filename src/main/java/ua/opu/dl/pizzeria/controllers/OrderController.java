@@ -19,6 +19,7 @@ import ua.opu.dl.pizzeria.service.PizzaService;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/order")
@@ -47,13 +48,15 @@ public class OrderController {
 		} else if (order.getPizzas() == null) {
 			order.setPizzas(new HashMap<Pizza, Integer>());
 		}
-		Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
+
+        order.addPizza(pizzaService.loadById(id));
+		/*Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
 
 		if (pizza == null) {
 			order.addPizza(pizzaService.loadById(id));
 		} else {
 			order.addPizza(pizza);
-		}
+		}*/
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getPizzas());
 
@@ -65,12 +68,13 @@ public class OrderController {
 			HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
+        Map<Pizza, Integer> pizzas = order.getPizzas();
 
-		for (Pizza pizza : order.getPizzas().keySet()) {
+		for (Pizza pizza : pizzas.keySet()) {
 			if (pizza.getName().equals(name)) {
 				order.setPrice(order.getPrice() - pizza.getPrice()
-						* order.getPizzas().get(pizza));
-				order.getPizzas().remove(pizza);
+						* pizzas.get(pizza));
+				pizzas.remove(pizza);
 				LOG.info(pizza.getName() + " removed from order");
 				break;
 			}

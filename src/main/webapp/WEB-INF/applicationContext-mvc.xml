@@ -14,7 +14,8 @@
 
     <mvc:annotation-driven />
 
-    <mvc:resources mapping="/resources/**" location="/resources/images/" />
+    <mvc:resources mapping="/resources/**" location="/resources/images/, /resources/js/,
+                                                /resources/css/" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="ua.opu.dl.pizzeria.util.JstlView" />

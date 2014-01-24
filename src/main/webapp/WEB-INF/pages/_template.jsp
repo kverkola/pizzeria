@@ -5,10 +5,7 @@
 <html>
 <head>
     <title>Pizzeria</title>
-    <!-- Bootstrap theme -->
-    <!-- Change theme name before /bootstrap.min.css, example flatly, spacelab, united etc. -->
-    <link rel="stylesheet"
-          href="http://bootswatch.com/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value='/resources/bootstrap.min.css'/>"/>
 </head>
 <body>
 
@@ -154,10 +151,9 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
- <script src="https://code.jquery.com/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-
+<script src="https://code.jquery.com/jquery.js" />
+<script src="<c:url value='/resources/js/bootstrap.min.js'/>" />
+<script src="<c:url value='/resources/js/bootswatch.js'/>" />
 
 </body>
 </html>
