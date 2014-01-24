@@ -50,28 +50,22 @@ public class OrderController {
 		}
 
         order.addPizza(pizzaService.loadById(id));
-		/*Pizza pizza = (Pizza) session.getAttribute("pizzaChanged");
 
-		if (pizza == null) {
-			order.addPizza(pizzaService.loadById(id));
-		} else {
-			order.addPizza(pizza);
-		}*/
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getPizzas());
 
 		return "redirect:/menu";
 	}
 
-	@RequestMapping(value = "/remove-pizza/{name}", method = RequestMethod.GET)
-	public String removePizza(@PathVariable("name") String name,
+	@RequestMapping(value = "/remove-pizza/{id}", method = RequestMethod.GET)
+	public String removePizza(@PathVariable("id") Integer id,
 			HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
         Map<Pizza, Integer> pizzas = order.getPizzas();
 
 		for (Pizza pizza : pizzas.keySet()) {
-			if (pizza.getName().equals(name)) {
+			if (pizza.getId().equals(id)) {
 				order.setPrice(order.getPrice() - pizza.getPrice()
 						* pizzas.get(pizza));
 				pizzas.remove(pizza);
@@ -136,14 +130,14 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST, params = {
-			"name", "value" })
-	public String changePizzasCount(@RequestParam String name,
+			"id", "value" })
+	public String changePizzasCount(@RequestParam Integer id,
 			@RequestParam Integer value, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
 		for (Pizza pizza : order.getPizzas().keySet()) {
-			if (pizza.getName().equals(name)) {
+			if (pizza.getId().equals(id)) {
 				if (value != 0) {
 					order.getPizzas().put(pizza, value);
 				} else {

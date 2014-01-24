@@ -31,7 +31,7 @@
             <td>
                 <div>
                     <form id="pizzas+${status.count}" method="POST" action="/order/change-pizzas-count" style="display: inline-block; text-align: center">
-                        <input name="name" type="hidden" value="${entry.key.name}" />
+                        <input name="id" type="hidden" value="${entry.key.id}" />
                         <input name="value" type="text" class="form-control input-sm" value="${entry.value}"
                                style="width: 45px; text-align: center;"/>
                     </form>
@@ -44,7 +44,7 @@
                  ${entry.key.price * entry.value}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-pizza/${entry.key.name}'/>">
+                <a href="<c:url value='/order/remove-pizza/${entry.key.id}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>
