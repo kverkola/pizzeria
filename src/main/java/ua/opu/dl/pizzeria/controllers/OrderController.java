@@ -129,8 +129,8 @@ public class OrderController {
 		return "completeOrder";
 	}
 
-	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST, params = {
-			"id", "value" })
+	@RequestMapping(value = "/change-pizzas-count", method = RequestMethod.POST,
+            params = {"id", "value" })
 	public String changePizzasCount(@RequestParam Integer id,
 			@RequestParam Integer value, HttpSession session) {
 

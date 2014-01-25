@@ -1,8 +1,8 @@
 /* 
 
-Пример реализации реляционной модели 
-EAV/CR – Entity-Attribute-Value with Classes and Relationships 
-(Сущность-Атрибут-Значение с Классами и Отношениями)." 
+РџСЂРёРјРµСЂ СЂРµР°Р»РёР·Р°С†РёРё СЂРµР»СЏС†РёРѕРЅРЅРѕР№ РјРѕРґРµР»Рё 
+EAV/CR вЂ“ Entity-Attribute-Value with Classes and Relationships 
+(РЎСѓС‰РЅРѕСЃС‚СЊ-РђС‚СЂРёР±СѓС‚-Р—РЅР°С‡РµРЅРёРµ СЃ РљР»Р°СЃСЃР°РјРё Рё РћС‚РЅРѕС€РµРЅРёСЏРјРё)." 
 */
 
 drop table OBJTYPE CASCADE CONSTRAINTS;
@@ -22,26 +22,26 @@ CREATE TABLE OBJTYPE
     CONSTRAINT CON_PARENT_ID FOREIGN KEY (PARENT_ID) REFERENCES OBJTYPE (OBJECT_TYPE_ID) ON DELETE CASCADE ENABLE
   );
 
-COMMENT ON TABLE OBJTYPE IS 'Таблица описаний объектных типов';
+COMMENT ON TABLE OBJTYPE IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ РѕР±СЉРµРєС‚РЅС‹С… С‚РёРїРѕРІ';
  
-COMMENT ON COLUMN OBJTYPE.OBJECT_TYPE_ID IS 'Идентификатор объектного типа';
-COMMENT ON COLUMN OBJTYPE.PARENT_ID IS 'ссылка на идентификатор родительского объектного типа';
-COMMENT ON COLUMN OBJTYPE.CODE IS 'название объектного типа в английской кодировке';
-COMMENT ON COLUMN OBJTYPE.NAME IS 'название объектного типа в национальной кодировке (для GUI)';
-COMMENT ON COLUMN OBJTYPE.DESCRIPTION IS 'разверное описание объектного типа в национальной кодировке (для GUI)';
+COMMENT ON COLUMN OBJTYPE.OBJECT_TYPE_ID IS 'РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР°';
+COMMENT ON COLUMN OBJTYPE.PARENT_ID IS 'СЃСЃС‹Р»РєР° РЅР° РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР°';
+COMMENT ON COLUMN OBJTYPE.CODE IS 'РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ Р°РЅРіР»РёР№СЃРєРѕР№ РєРѕРґРёСЂРѕРІРєРµ';
+COMMENT ON COLUMN OBJTYPE.NAME IS 'РЅР°Р·РІР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ РЅР°С†РёРѕРЅР°Р»СЊРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ (РґР»СЏ GUI)';
+COMMENT ON COLUMN OBJTYPE.DESCRIPTION IS 'СЂР°Р·РІРµСЂРЅРѕРµ РѕРїРёСЃР°РЅРёРµ РѕР±СЉРµРєС‚РЅРѕРіРѕ С‚РёРїР° РІ РЅР°С†РёРѕРЅР°Р»СЊРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ (РґР»СЏ GUI)';
 
 
-/* При переходе от UML-диаграмме к EAV-модели рекомендуется:
-1) имена классов представить как OBJTYPE.name
-2) связь типа "обобщение" представить в виде связи между OBJTYPE.OBJECT_TYPE_ID и OBJTYPE.PARENT_ID
-3) связь типа "агрегатная ассоциация" представить в виде связи между OBJTYPE.id и OBJTYPE.PARENT_ID
+/* РџСЂРё РїРµСЂРµС…РѕРґРµ РѕС‚ UML-РґРёР°РіСЂР°РјРјРµ Рє EAV-РјРѕРґРµР»Рё СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ:
+1) РёРјРµРЅР° РєР»Р°СЃСЃРѕРІ РїСЂРµРґСЃС‚Р°РІРёС‚СЊ РєР°Рє OBJTYPE.name
+2) СЃРІСЏР·СЊ С‚РёРїР° "РѕР±РѕР±С‰РµРЅРёРµ" РїСЂРµРґСЃС‚Р°РІРёС‚СЊ РІ РІРёРґРµ СЃРІСЏР·Рё РјРµР¶РґСѓ OBJTYPE.OBJECT_TYPE_ID Рё OBJTYPE.PARENT_ID
+3) СЃРІСЏР·СЊ С‚РёРїР° "Р°РіСЂРµРіР°С‚РЅР°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ" РїСЂРµРґСЃС‚Р°РІРёС‚СЊ РІ РІРёРґРµ СЃРІСЏР·Рё РјРµР¶РґСѓ OBJTYPE.id Рё OBJTYPE.PARENT_ID
 */
 
-INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (1,NULL,'User','СОТРУДНИК',NULL);
-INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (2,null,'Additional','Дополнения',NULL);
-INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (3,NULL,'Ingredient','игридиент',NULL);
-INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (4,null,'Order','заказ',NULL);
-INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (5,null,'pizza','пицца',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (1,NULL,'User','РЎРћРўР РЈР”РќРРљ',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (2,null,'Additional','Р”РѕРїРѕР»РЅРµРЅРёСЏ',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (3,NULL,'Ingredient','РёРіСЂРёРґРёРµРЅС‚',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (4,null,'Order','Р·Р°РєР°Р·',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (5,null,'pizza','РїРёС†С†Р°',NULL);
 
 
 
@@ -52,7 +52,7 @@ INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (5,n
 
 
 
--- Пример команды создания таблицы типов атрибутов:
+-- РџСЂРёРјРµСЂ РєРѕРјР°РЅРґС‹ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ С‚РёРїРѕРІ Р°С‚СЂРёР±СѓС‚РѕРІ:
 CREATE TABLE ATTRTYPE
   (
     ATTR_ID      NUMBER(20) NOT NULL ENABLE,
@@ -63,25 +63,25 @@ CREATE TABLE ATTRTYPE
     CONSTRAINT CON_ATTR_TYPE_ID FOREIGN KEY (ATTR_TYPE_ID) REFERENCES OBJTYPE (OBJECT_TYPE_ID) ENABLE
   );
  
-COMMENT ON TABLE ATTRTYPE IS 'Таблица описаний атрибутных типов';
+COMMENT ON TABLE ATTRTYPE IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р°С‚СЂРёР±СѓС‚РЅС‹С… С‚РёРїРѕРІ';
  
--- ПРИМЕРЫ ЗАПОЛНЕНИЯ ТАБЛИЦ:
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (1,1,'first_name','имя');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (2,1,'last_name','фамилия');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (3,1,'login','логин');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (4,1,'password','пароль');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (5,1,'warker','работа');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (6,2,'NAME','НАЗВАНИЕ');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (7,2,'price','цена');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (8,3,'name','ИМЯ');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (9,3,'price','цена');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (10,3,'weight','порция');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (11,4,'start_time','старт заказа');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (12,4,'end_time','конец заказа');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (13,4,'price','общая стоимость');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (14,4,'phone','телефон');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (15,5,'NAME','название');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (16,5,'price','цена');
+-- РџР РРњР•Р Р« Р—РђРџРћР›РќР•РќРРЇ РўРђР‘Р›РР¦:
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (1,1,'first_name','РёРјСЏ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (2,1,'last_name','С„Р°РјРёР»РёСЏ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (3,1,'login','Р»РѕРіРёРЅ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (4,1,'password','РїР°СЂРѕР»СЊ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (5,1,'warker','СЂР°Р±РѕС‚Р°');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (6,2,'NAME','РќРђР—Р’РђРќРР•');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (7,2,'price','С†РµРЅР°');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (8,3,'name','РРњРЇ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (9,3,'price','С†РµРЅР°');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (10,3,'weight','РїРѕСЂС†РёСЏ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (11,4,'start_time','СЃС‚Р°СЂС‚ Р·Р°РєР°Р·Р°');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (12,4,'end_time','РєРѕРЅРµС† Р·Р°РєР°Р·Р°');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (13,4,'price','РѕР±С‰Р°СЏ СЃС‚РѕРёРјРѕСЃС‚СЊ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (14,4,'phone','С‚РµР»РµС„РѕРЅ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (15,5,'NAME','РЅР°Р·РІР°РЅРёРµ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (16,5,'price','С†РµРЅР°');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (17,4,'id','id order');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (18,1,'id','id user');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (19,2,'id','id additional');
@@ -90,9 +90,9 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (21,5,'id','id pizz
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (22,3,'id pizza','id pizza for ingredients ');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (23,5,'id order','id order for pizza');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (24,2,'id order','id order for additional');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (25,2,'logo','отображение');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (26,5,'logo','отображение');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description','описание');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (25,2,'logo','РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (26,5,'logo','РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description','РѕРїРёСЃР°РЅРёРµ');
 
 
 
@@ -100,7 +100,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description'
 
 
 
- -- Пример команды создания таблицы объектов:
+ -- РџСЂРёРјРµСЂ РєРѕРјР°РЅРґС‹ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ РѕР±СЉРµРєС‚РѕРІ:
 CREATE TABLE OBJECTS
   (
     OBJECT_ID      NUMBER(20) NOT NULL ENABLE,
@@ -139,7 +139,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
 
 
 
--- Пример команды создания таблицы значений атрибутов:
+-- РџСЂРёРјРµСЂ РєРѕРјР°РЅРґС‹ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ Р·РЅР°С‡РµРЅРёР№ Р°С‚СЂРёР±СѓС‚РѕРІ:
 CREATE TABLE ATTRIBUTES
   (
     ATTR_ID    NUMBER(20) NOT NULL ENABLE,
@@ -284,11 +284,11 @@ INSERT INTO ATTRIBUTES values(27,14,'Cum sociis natoque penatibus et magnis dis 
 
 
 /*
-COMMENT ON TABLE ATTRIBUTES IS 'Таблица описаний атрибутов экземпляров объектов';
-COMMENT ON COLUMN ATTRIBUTES.VALUE IS 'Значение атрибута экземпляра объекта в виде строки или числа';
-COMMENT ON COLUMN ATTRIBUTES.DATE_VALUE IS 'Значение атрибута экземпляра объекта в виде даты';
+COMMENT ON TABLE ATTRIBUTES IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ Р°С‚СЂРёР±СѓС‚РѕРІ СЌРєР·РµРјРїР»СЏСЂРѕРІ РѕР±СЉРµРєС‚РѕРІ';
+COMMENT ON COLUMN ATTRIBUTES.VALUE IS 'Р—РЅР°С‡РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р° СЌРєР·РµРјРїР»СЏСЂР° РѕР±СЉРµРєС‚Р° РІ РІРёРґРµ СЃС‚СЂРѕРєРё РёР»Рё С‡РёСЃР»Р°';
+COMMENT ON COLUMN ATTRIBUTES.DATE_VALUE IS 'Р—РЅР°С‡РµРЅРёРµ Р°С‚СЂРёР±СѓС‚Р° СЌРєР·РµРјРїР»СЏСЂР° РѕР±СЉРµРєС‚Р° РІ РІРёРґРµ РґР°С‚С‹';
 */
--- Пример команды создания таблицы связей:
+-- РџСЂРёРјРµСЂ РєРѕРјР°РЅРґС‹ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ СЃРІСЏР·РµР№:
 CREATE TABLE OBJREFERENCE
   (
     ATTR_ID   NUMBER(20) NOT NULL ENABLE,
@@ -299,18 +299,18 @@ CREATE TABLE OBJREFERENCE
     CONSTRAINT CON_RATTR_ID FOREIGN KEY (ATTR_ID) REFERENCES ATTRTYPE (ATTR_ID) ON DELETE CASCADE ENABLE
   ); 
 
-COMMENT ON TABLE OBJREFERENCE IS 'Таблица описаний связей между экземплярами объектов';
-COMMENT ON COLUMN OBJREFERENCE.ATTR_ID IS 'Тип связи между экземплярами объектов как атрибутный тип';
-COMMENT ON COLUMN OBJREFERENCE.OBJECT_ID IS 'Ссылка на экземпляр 1-го объекта в связи "простая ассоциация"';
-COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'Ссылка на экземпляр 2-го объекта в связи "простая ассоциация"';
+COMMENT ON TABLE OBJREFERENCE IS 'РўР°Р±Р»РёС†Р° РѕРїРёСЃР°РЅРёР№ СЃРІСЏР·РµР№ РјРµР¶РґСѓ СЌРєР·РµРјРїР»СЏСЂР°РјРё РѕР±СЉРµРєС‚РѕРІ';
+COMMENT ON COLUMN OBJREFERENCE.ATTR_ID IS 'РўРёРї СЃРІСЏР·Рё РјРµР¶РґСѓ СЌРєР·РµРјРїР»СЏСЂР°РјРё РѕР±СЉРµРєС‚РѕРІ РєР°Рє Р°С‚СЂРёР±СѓС‚РЅС‹Р№ С‚РёРї';
+COMMENT ON COLUMN OBJREFERENCE.OBJECT_ID IS 'РЎСЃС‹Р»РєР° РЅР° СЌРєР·РµРјРїР»СЏСЂ 1-РіРѕ РѕР±СЉРµРєС‚Р° РІ СЃРІСЏР·Рё "РїСЂРѕСЃС‚Р°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ"';
+COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'РЎСЃС‹Р»РєР° РЅР° СЌРєР·РµРјРїР»СЏСЂ 2-РіРѕ РѕР±СЉРµРєС‚Р° РІ СЃРІСЏР·Рё "РїСЂРѕСЃС‚Р°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ"';
 
 
-/* При переходе от UML-диаграмме к ORM рекомендуется:
-4) связь типа "простая ассоциация" представить в виде связи между OBJREFERENCE.OBJECT_ID и OBJREFERENCE.REFERENCE
+/* РџСЂРё РїРµСЂРµС…РѕРґРµ РѕС‚ UML-РґРёР°РіСЂР°РјРјРµ Рє ORM СЂРµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ:
+4) СЃРІСЏР·СЊ С‚РёРїР° "РїСЂРѕСЃС‚Р°СЏ Р°СЃСЃРѕС†РёР°С†РёСЏ" РїСЂРµРґСЃС‚Р°РІРёС‚СЊ РІ РІРёРґРµ СЃРІСЏР·Рё РјРµР¶РґСѓ OBJREFERENCE.OBJECT_ID Рё OBJREFERENCE.REFERENCE
 */
 
 
---тоблица связей может несовсем правильна
+--С‚РѕР±Р»РёС†Р° СЃРІСЏР·РµР№ РјРѕР¶РµС‚ РЅРµСЃРѕРІСЃРµРј РїСЂР°РІРёР»СЊРЅР°
 
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,11,4);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,11,5);
@@ -332,7 +332,7 @@ INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,22);
 
 
 
--- Функция для получения уникального id 
+-- Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СѓРЅРёРєР°Р»СЊРЅРѕРіРѕ id 
 
 CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
   AS
@@ -344,6 +344,6 @@ CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
     RETURN v_ret;
   END;
   
--- пример использования
+-- РїСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ
 
 select get_id from dual

@@ -3,91 +3,91 @@ package ua.opu.dl.pizzeria.model;
 import java.util.Map;
 
 public class Pizza {
-	private Integer id;
-	private String name;
-	private Map<Ingredient, Integer> map;
-	private double price;
-	private String logo;
-	private String description;
+    private Integer id;
+    private String name;
+    private Map<Ingredient, Integer> map;
+    private double price;
+    private String logo;
+    private String description;
 
-	public Pizza(String name, Map<Ingredient, Integer> map, Integer id) {
-		this.name = name;
-		this.map = map;
-		this.id = id;
-		countTotalPrice();
-	}
+    public Pizza(String name, Map<Ingredient, Integer> map, Integer id) {
+        this.name = name;
+        this.map = map;
+        this.id = id;
+        countTotalPrice();
+    }
 
-	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
-			String description, Integer id) {// не забыть удалить
-												// id из
-												// конструктора
-		this.name = name;
-		this.map = map;
-		this.logo = logo;
-		this.description = description;
-		this.id = id;
-		countTotalPrice();
-	}
+    public Pizza(String name, Map<Ingredient, Integer> map, String logo,
+                 String description, Integer id) {// не забыть удалить
+        // id из
+        // конструктора
+        this.name = name;
+        this.map = map;
+        this.logo = logo;
+        this.description = description;
+        this.id = id;
+        countTotalPrice();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Map<Ingredient, Integer> getMap() {
-		return map;
-	}
+    public Map<Ingredient, Integer> getMap() {
+        return map;
+    }
 
-	public void setMap(Map<Ingredient, Integer> map) {
-		this.map = map;
-	}
+    public void setMap(Map<Ingredient, Integer> map) {
+        this.map = map;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	public String getLogo() {
-		return logo;
-	}
+    public String getLogo() {
+        return logo;
+    }
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void countTotalPrice() {
-		double price = 0;
-		Integer key;
-		Map<Ingredient, Integer> ingrMap = getMap();
-		for (Ingredient ingr : ingrMap.keySet()) {
-			key = ingrMap.get(ingr);
-			price = price + ingr.getPrice() * key;
-		}
-		setPrice(price);
+    public void countTotalPrice() {
+        double price = 0;
+        Integer key;
+        Map<Ingredient, Integer> ingrMap = getMap();
+        for (Ingredient ingr : ingrMap.keySet()) {
+            key = ingrMap.get(ingr);
+            price = price + ingr.getPrice() * key;
+        }
+        setPrice(price);
 
-	}
+    }
 
     @Override
     public boolean equals(Object o) {
