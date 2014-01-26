@@ -14,8 +14,6 @@ public interface PizzaDao {
 
 	Pizza loadById(Integer id);
 
-    Pizza loadByName(String name);
-
 	List<Pizza> loadByOrder(Integer orderId);
 
     List<Pizza> loadAll();

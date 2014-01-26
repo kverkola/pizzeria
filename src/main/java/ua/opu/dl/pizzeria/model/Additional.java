@@ -1,35 +1,24 @@
 package ua.opu.dl.pizzeria.model;
 
-public class Additional {
-	private int id;
+public class Additional extends Product {
+
 	private int orderId;
-    private String name;
-    private double price;
     private String logo;
 
     public Additional() {
 	}
 
 	public Additional(String name, double price, String logo) {
-        this.name = name;
-        this.price = price;
+        super(1, name, 1, price);
         this.logo = logo;
     }
 
-    public String getName() {
-        return name;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getLogo() {
@@ -40,56 +29,28 @@ public class Additional {
         this.logo = logo;
     }
 
-	public int getId() {
-		return id;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+        Additional that = (Additional) o;
 
-	public int getOrderId() {
-		return orderId;
-	}
+        if (Double.compare(that.getPrice(), getPrice()) != 0) return false;
+        if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
+        if (getName() != null ? !getName().equals(that.getName()) : that.getName() != null) return false;
 
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
+        return true;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + id;
-		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof Additional))
-			return false;
-		Additional other = (Additional) obj;
-		if (id != other.id)
-			return false;
-		if (logo == null) {
-			if (other.logo != null)
-				return false;
-		} else if (!logo.equals(other.logo))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-
-	
-  
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = getName() != null ? getName().hashCode() : 0;
+        temp = Double.doubleToLongBits(getPrice());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (logo != null ? logo.hashCode() : 0);
+        return result;
+    }
 }

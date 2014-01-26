@@ -46,24 +46,4 @@ public class OrderServiceImpl implements OrderService {
 
 		return orderDao.loadAllOrders();
 	}
-
-    @Override
-    public void updatePrice(Order order) {
-
-        Double totalPrice = 0.0;
-        Map<Additional, Integer> additions = order.getAdditional();
-        if (additions != null) {
-            for (Additional a : additions.keySet()) {
-                totalPrice += a.getPrice() * additions.get(a);
-            }
-        }
-
-        Map<Pizza, Integer> pizzas = order.getPizzas();
-        if (pizzas != null) {
-            for (Pizza p : pizzas.keySet()) {
-                totalPrice += p.getPrice() * pizzas.get(p);
-            }
-        }
-        order.setPrice(totalPrice);
-    }
 }

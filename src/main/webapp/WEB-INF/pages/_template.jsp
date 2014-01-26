@@ -81,26 +81,26 @@
                         <p>-------------------------------------------------------</p>
                         <table>
                             <c:set var="pizzasInOrder" value="pizzasInOrder"/>
-                            <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}">
+                            <c:forEach var="pizza" items="${sessionScope[pizzasInOrder]}">
                                 <tr>
-                                    <td style="text-align: left;">${entry.key.name}
+                                    <td style="text-align: left;">${pizza.name}
                                         <div style="width: 270px;">
-                                                ${entry.value} x
+                                                ${pizza.quantity} x
                                             <div style="float: right;">
-                                                    ${entry.key.price * entry.value} $
+                                                    ${pizza.price * pizza.quantity} $
                                             </div>
                                         </div>
                                     </td>
                                 </tr>
                             </c:forEach>
                             <c:set var="additionalInOrder" value="additionalInOrder"/>
-                            <c:forEach var="entry" items="${sessionScope[additionalInOrder]}">
+                            <c:forEach var="addition" items="${sessionScope[additionalInOrder]}">
                                 <tr>
-                                    <td style="text-align: left;">${entry.key.name}
+                                    <td style="text-align: left;">${addition.name}
                                         <div style="width: 270px;">
-                                                ${entry.value} x
+                                                ${addition.quantity} x
                                             <div style="float: right;">
-                                                    ${entry.key.price * entry.value} $
+                                                    ${addition.price * addition.quantity} $
                                             </div>
                                         </div>
                                     </td>

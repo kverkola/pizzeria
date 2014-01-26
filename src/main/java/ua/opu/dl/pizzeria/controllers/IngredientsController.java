@@ -30,7 +30,7 @@ public class IngredientsController {
 			@PathVariable("ingredientName") String ingredientName,
 			ModelMap model, HttpSession session) {
 
-		pizza = (Pizza) session.getAttribute("pizzaChanged");
+		pizza = (Pizza) session.getAttribute("customPizza");
 		Map<Ingredient, Integer> ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
@@ -42,11 +42,11 @@ public class IngredientsController {
 				ingrMap.put(ingr, key + 1);
 				break;
 			}
-
 		}
 		
 		pizza.countTotalPrice();
 		model.addAttribute("pizza", pizza);
+
 		return "/addIngredients";
 	}
 
@@ -55,7 +55,7 @@ public class IngredientsController {
 			@PathVariable("ingredientName") String ingredientName,
 			ModelMap model, HttpSession session) {
 
-		pizza = (Pizza) session.getAttribute("pizzaChanged");
+		pizza = (Pizza) session.getAttribute("customPizza");
 		Map<Ingredient, Integer> ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
@@ -68,11 +68,11 @@ public class IngredientsController {
 				ingrMap.put(ingr, key - 1);
 				break;
 			}
-
 		}
 		
 		pizza.countTotalPrice();
 		model.addAttribute("pizza", pizza);
+
 		return "/addIngredients";
 	}
 
@@ -80,17 +80,13 @@ public class IngredientsController {
 	public String addIngredients(@PathVariable("id") Integer id,
 			ModelMap model, HttpSession session) {
 
-		pizza = (Pizza) session.getAttribute("pizzaChanged");
-		if (pizza == null) {
-			pizza = pizzaService.loadById(id);
-			session.setAttribute("pizzaChanged", pizza);
-
-		}
-
+        Pizza pizza = pizzaService.loadById(id);
+        session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
 
 		return "addIngredients";
 	}
+
 	@RequestMapping(value = "/reset/{id}", method = RequestMethod.GET)
 	public String reset(ModelMap model,@PathVariable("id") Integer id){
 		
@@ -98,6 +94,4 @@ public class IngredientsController {
 		model.addAttribute("pizza",pizza);
 		return "/addIngredients";	
 	}
-	
-	
 }

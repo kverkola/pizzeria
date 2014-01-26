@@ -8,7 +8,7 @@
 	<td><img src="<c:url value='/resources/${pizza.logo}'/>" /></td>
 
 	<td style="text-align: right;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a
-		href="<c:url value='/order/add-pizza/${pizza.id}'/>"
+		href="<c:url value='/order/add-custom-pizza'/>"
 		class="btn btn-sm btn-success"> Add to cart </a></td>
 </tr>
 

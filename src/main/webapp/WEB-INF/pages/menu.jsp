@@ -12,9 +12,11 @@
 				<td><img src="<c:url value='/resources/${pizza.logo}'/>" /></td>
 				<td style="padding-left: 20px; vertical-align: top;">
 					<h3>${pizza.name}</h3>
-					<p>${pizza.description}</p> <a
-					href="<c:url value='/ingredients/addIngredients/${pizza.id}'/>"
-					class="btn btn-sm btn-success">Ingredients</a>
+					<p>${pizza.description}</p>
+                    <a href="<c:url value='/ingredients/addIngredients/${pizza.id}'/>"
+					class="btn btn-sm btn-success">
+                        Ingredients
+                    </a>
 				</td>
 			</tr>
 			<tr>

@@ -2,39 +2,21 @@ package ua.opu.dl.pizzeria.model;
 
 import java.util.Map;
 
-public class Pizza {
-    private Integer id;
-    private String name;
+public class Pizza extends Product {
+
     private Map<Ingredient, Integer> map;
-    private double price;
     private String logo;
     private String description;
 
-    public Pizza(String name, Map<Ingredient, Integer> map, Integer id) {
-        this.name = name;
-        this.map = map;
-        this.id = id;
-        countTotalPrice();
-    }
-
     public Pizza(String name, Map<Ingredient, Integer> map, String logo,
-                 String description, Integer id) {// не забыть удалить
+                 String description, Integer id, double price) {// не забыть удалить
         // id из
         // конструктора
-        this.name = name;
+        super(id, name, 1, price);
         this.map = map;
         this.logo = logo;
         this.description = description;
-        this.id = id;
         countTotalPrice();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Map<Ingredient, Integer> getMap() {
@@ -43,14 +25,6 @@ public class Pizza {
 
     public void setMap(Map<Ingredient, Integer> map) {
         this.map = map;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getLogo() {
@@ -69,14 +43,6 @@ public class Pizza {
         this.description = description;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void countTotalPrice() {
         double price = 0;
         Integer key;
@@ -86,7 +52,6 @@ public class Pizza {
             price = price + ingr.getPrice() * key;
         }
         setPrice(price);
-
     }
 
     @Override
@@ -96,10 +61,10 @@ public class Pizza {
 
         Pizza pizza = (Pizza) o;
 
-        if (Double.compare(pizza.price, price) != 0) return false;
-        if (id != null ? !id.equals(pizza.id) : pizza.id != null) return false;
+        if (Double.compare(pizza.getPrice(), getPrice()) != 0) return false;
+        if (getId() != null ? !getId().equals(pizza.getId()) : pizza.getId() != null) return false;
         if (map != null ? !map.equals(pizza.map) : pizza.map != null) return false;
-        if (name != null ? !name.equals(pizza.name) : pizza.name != null) return false;
+        if (getName() != null ? !getName().equals(pizza.getName()) : pizza.getName() != null) return false;
 
         return true;
     }
@@ -108,10 +73,10 @@ public class Pizza {
     public int hashCode() {
         int result;
         long temp;
-        result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (map != null ? map.hashCode() : 0);
-        temp = Double.doubleToLongBits(price);
+        temp = Double.doubleToLongBits(getPrice());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

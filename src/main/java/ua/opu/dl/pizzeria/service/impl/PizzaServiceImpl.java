@@ -40,12 +40,6 @@ public class PizzaServiceImpl implements PizzaService {
 	public List<Pizza> loadByOrder(Integer orderId) {
 
 		return pizzaDao.loadByOrder(orderId);
-	}
-
-    @Override
-    public Pizza loadByName(String name) {
-
-        return pizzaDao.loadByName(name);
     }
 
     @Override

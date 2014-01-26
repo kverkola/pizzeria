@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import ua.opu.dl.pizzeria.service.AdditionalService;
-import ua.opu.dl.pizzeria.service.IngredientService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 @Controller

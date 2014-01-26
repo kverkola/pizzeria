@@ -23,28 +23,28 @@
     <!-- Pizzas in order begin -->
 
     <c:set var="pizzasInOrder" value="pizzasInOrder"/>
-    <c:forEach var="entry" items="${sessionScope[pizzasInOrder]}" varStatus="status">
+    <c:forEach var="pizza" items="${sessionScope[pizzasInOrder]}" varStatus="status">
         <tr>
             <td style="text-align: left;">
-                ${entry.key.name}
+                ${pizza.name}
             </td>
             <td>
                 <div>
-                    <form id="pizzas+${status.count}" method="POST" action="/order/change-pizzas-count" style="display: inline-block; text-align: center">
-                        <input name="id" type="hidden" value="${entry.key.id}" />
-                        <input name="value" type="text" class="form-control input-sm" value="${entry.value}"
+                    <form id="pizzas + ${status.count}" method="POST" action="/order/change-pizzas-count" style="display: inline-block; text-align: center">
+                        <input name="id" type="hidden" value="${pizza.id}" />
+                        <input name="value" type="text" class="form-control input-sm" value="${pizza.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>
-                    <a style="cursor: pointer;" onclick="document.getElementById('pizzas+${status.count}').submit(); return false;">
+                    <a style="cursor: pointer;" onclick="document.getElementById('pizzas + ${status.count}').submit(); return false;">
                         <img src="<c:url value='/resources/button_ref.png'/>"/>
                     </a>
                 </div>
             </td>
             <td style="font-size: 22;">
-                 ${entry.key.price * entry.value}
+                 ${pizza.price * pizza.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-pizza/${entry.key.id}'/>">
+                <a href="<c:url value='/order/remove-pizza/${pizza.id}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>
@@ -56,29 +56,29 @@
     <!-- Additions in order begin -->
 
     <c:set var="additionalInOrder" value="additionalInOrder"/>
-    <c:forEach var="entry" items="${sessionScope[additionalInOrder]}" varStatus="status">
+    <c:forEach var="addition" items="${sessionScope[additionalInOrder]}" varStatus="status">
         <tr>
             <td style="text-align: left;">
-                    ${entry.key.name}
+                    ${addition.name}
             </td>
             <td>
                 <div>
-                    <form id="additions+${status.count}" method="POST" action="/order/change-additions-count"
+                    <form id="additions + ${status.count}" method="POST" action="/order/change-additions-count"
                           style="display: inline-block; text-align: center">
-                        <input name="name" type="hidden" value="${entry.key.name}" />
-                        <input name="value" type="text" class="form-control input-sm" value="${entry.value}"
+                        <input name="name" type="hidden" value="${addition.name}" />
+                        <input name="value" type="text" class="form-control input-sm" value="${addition.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>
-                    <a style="cursor: pointer;" onclick="document.getElementById('additions+${status.count}').submit(); return false;">
+                    <a style="cursor: pointer;" onclick="document.getElementById('additions + ${status.count}').submit(); return false;">
                         <img src="<c:url value='/resources/button_ref.png'/>"/>
                     </a>
                 </div>
             </td>
             <td style="font-size: 22;">
-                    ${entry.key.price * entry.value}
+                    ${addition.price * addition.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-additional/${entry.key.name}'/>">
+                <a href="<c:url value='/order/remove-additional/${addition.id}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>

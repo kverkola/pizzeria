@@ -32,7 +32,7 @@ public class OrderDaoImpl implements OrderDao {
 	@Override
 	public Order loadById(Integer id) {
 
-		Map<Ingredient, Integer> ingredientMap = new HashMap<Ingredient, Integer>();
+		/*Map<Ingredient, Integer> ingredientMap = new HashMap<Ingredient, Integer>();
 		Map<Pizza, Integer> pizzaMap = new HashMap<Pizza, Integer>();
 		Map<Additional, Integer> addMap = new HashMap();
 		ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
@@ -50,7 +50,8 @@ public class OrderDaoImpl implements OrderDao {
         pizzaMap.put(pizza2, 1);
 
 		return new Order(pizzaMap, Status.IN_WORK, new Date(), new Date(), 136,
-				addMap, "5656565676573");
+				addMap, "5656565676573");*/
+        return null;
 	}
 
 	@Override

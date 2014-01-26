@@ -49,20 +49,7 @@ public class PizzaDaoImpl implements PizzaDao {
         ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
 
         return new Pizza("TestPizza " + id, ingredientMap,
-                "chikenita_middle.png", "wwwwwwwwwwwewert", id);
-    }
-
-    @Override
-    public Pizza loadByName(String name) {
-
-        Map<Ingredient, Integer> ingredientMap = new HashMap();
-        ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
-        ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
-        ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
-        ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
-        ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
-
-        return new Pizza(name, ingredientMap,3);
+                "chikenita_middle.png", "wwwwwwwwwwwewert", id, 45);
     }
 
     @Override
@@ -93,7 +80,7 @@ public class PizzaDaoImpl implements PizzaDao {
         };
 
         for (int i = 0; i < imgs.length; i++) {
-            pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, imgs[i], descrips[i], i));
+            pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, imgs[i], descrips[i], i, 45));
         }
         return pizzaList;
     }

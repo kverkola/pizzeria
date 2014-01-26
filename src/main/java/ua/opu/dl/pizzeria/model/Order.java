@@ -1,31 +1,35 @@
 package ua.opu.dl.pizzeria.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 public class Order {
 
+    private static final Logger LOG = LoggerFactory.getLogger(Order.class);
+
     private int id;
-    private Map<Pizza, Integer> pizzas;// название и количество
     private Status status;
     private Date starttime;
     private Date endtime;
     private double price;
-    private Map<Additional, Integer> additional;// название и количество
+    private List<Product> products;
     private String phone;
 
     public Order() {
     }
 
-    public Order(Map<Pizza, Integer> pizzas, Status status, Date starttime,
-                 Date endtime, double price, Map<Additional, Integer> additional,
+    public Order(List<Product> products, Status status, Date starttime,
+                 Date endtime, double price,
                  String phone) {
-        this.pizzas = pizzas;
+        this.products = products;
         this.status = status;
         this.starttime = starttime;
         this.endtime = endtime;
         this.price = price;
-        this.additional = additional;
         this.phone = phone;
     }
 
@@ -37,12 +41,17 @@ public class Order {
         this.id = id;
     }
 
-    public Map<Pizza, Integer> getPizzas() {
-        return pizzas;
-    }
+    public List<Pizza> getPizzas() {
 
-    public void setPizzas(Map<Pizza, Integer> pizzas) {
-        this.pizzas = pizzas;
+        List<Pizza> pizzas = new ArrayList();
+
+        for (Product product : products) {
+            if (product instanceof Pizza) {
+                pizzas.add((Pizza) product);
+            }
+        }
+
+        return pizzas;
     }
 
     public Status getStatus() {
@@ -77,12 +86,17 @@ public class Order {
         this.price = price;
     }
 
-    public Map<Additional, Integer> getAdditional() {
-        return additional;
-    }
+    public List<Additional> getAdditions() {
 
-    public void setAdditional(Map<Additional, Integer> additional) {
-        this.additional = additional;
+        List<Additional> additions = new ArrayList();
+
+        for (Product product : products) {
+            if (product instanceof Additional) {
+                additions.add((Additional) product);
+            }
+        }
+
+        return additions;
     }
 
     public String getPhone() {
@@ -93,12 +107,48 @@ public class Order {
         this.phone = phone;
     }
 
-    public void addPizza(Pizza pizza) {
+    public List<Product> getProducts() {
+        return products;
+    }
 
-        if (getPizzas().containsKey(pizza)) {
-            getPizzas().put(pizza, getPizzas().get(pizza) + 1);
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    public void addProduct(Product product) {
+
+        if (products.contains(product)) {
+            int pos = products.indexOf(product);
+            Product p = products.get(pos);
+            p.incrementQuantity();
+            products.set(pos, p);
         } else {
-            getPizzas().put(pizza, 1);
+            products.add(product);
+        }
+
+        setPrice(getPrice() + product.getPrice());
+    }
+
+    public void removeProduct(Integer id) {
+
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                products.remove(product);
+                setPrice(getPrice() - product.getPrice() * product.getQuantity());
+                break;
+            }
+        }
+    }
+
+    /*public void addPizza(Pizza pizza) {
+
+        if (getPizzas().contains(pizza)) {
+            int pos = pizzas.indexOf(pizza);
+            Pizza p = pizzas.get(pos);
+            p.incrementQuantity();
+            pizzas.set(pos, p);
+        } else {
+            pizzas.add(pizza);
         }
 
         setPrice(getPrice() + pizza.getPrice());
@@ -106,12 +156,48 @@ public class Order {
 
     public void addAdditional(Additional additional) {
 
-        if (getAdditional().containsKey(additional)) {
-            getAdditional().put(additional, getAdditional().get(additional) + 1);
+        if (additions.contains(additional)) {
+            int pos = additions.indexOf(additional);
+            Additional add = additions.get(pos);
+            add.incrementQuantity();
+            additions.set(pos, add);
         } else {
-            getAdditional().put(additional, 1);
+            additions.add(additional);
         }
 
         setPrice(getPrice() + additional.getPrice());
+    }
+
+    public void removeAdditional(String name) {
+
+        for (Additional add : getAdditions()) {
+            if (add.getName().equals(name)) {
+                additions.remove(add);
+                setPrice(getPrice() - add.getPrice() * add.getQuantity());
+                break;
+            }
+        }
+    }*/
+
+    public void changeProductQuantity(Integer id, Integer quantity) {
+
+        for (Product product : products) {
+            if (product.getId().equals(id)) {
+                product.setQuantity(quantity);
+                updatePrice();
+                break;
+            }
+        }
+    }
+
+    public void updatePrice() {
+
+        double totalPrice = 0.0;
+
+        for (Product product : products) {
+            totalPrice += product.getPrice() * product.getQuantity();
+        }
+
+        setPrice(totalPrice);
     }
 }
