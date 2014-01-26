@@ -41,19 +41,6 @@ public class Order {
         this.id = id;
     }
 
-    public List<Pizza> getPizzas() {
-
-        List<Pizza> pizzas = new ArrayList();
-
-        for (Product product : products) {
-            if (product instanceof Pizza) {
-                pizzas.add((Pizza) product);
-            }
-        }
-
-        return pizzas;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -86,17 +73,19 @@ public class Order {
         this.price = price;
     }
 
-    public List<Additional> getAdditions() {
+    public <T extends Product> List<T> getProducts(Class<T> clazz) {
 
-        List<Additional> additions = new ArrayList();
+        List<T> productsList = new ArrayList();
 
-        for (Product product : products) {
-            if (product instanceof Additional) {
-                additions.add((Additional) product);
+        LOG.info("" + clazz.getClass().getName());
+
+        for (Product o : products) {
+            if (clazz.isAssignableFrom(o.getClass())) {
+                productsList.add(clazz.cast(o));
             }
         }
 
-        return additions;
+        return productsList;
     }
 
     public String getPhone() {

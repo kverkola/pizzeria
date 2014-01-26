@@ -45,14 +45,14 @@ public class OrderController {
 		if (order == null) {
 			order = new Order();
             order.setProducts(new ArrayList<Product>());
-		} else if (order.getPizzas() == null) {
+		} else if (order.getProducts(Pizza.class) == null) {
             order.setProducts(new ArrayList<Product>());
 		}
 
         order.addProduct(pizzaService.loadById(id));
 
 		session.setAttribute("order", order);
-		session.setAttribute("pizzasInOrder", order.getPizzas());
+		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
 
 		return "redirect:/menu";
 	}
@@ -65,7 +65,7 @@ public class OrderController {
         if (order == null) {
             order = new Order();
             order.setProducts(new ArrayList<Product>());
-        } else if (order.getPizzas() == null) {
+        } else if (order.getProducts(Pizza.class) == null) {
             order.setProducts(new ArrayList<Product>());
         }
 
@@ -74,7 +74,7 @@ public class OrderController {
         order.addProduct(customPizza);
 
         session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getPizzas());
+        session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
 
         return "redirect:/menu";
     }
@@ -88,14 +88,14 @@ public class OrderController {
 		if (order == null) {
 			order = new Order();
             order.setProducts(new ArrayList<Product>());
-		} else if (order.getAdditions() == null) {
+		} else if (order.getProducts(Additional.class) == null) {
             order.setProducts(new ArrayList<Product>());
 		}
 
         order.addProduct(additionalService.loadByName("pepsi"));
 
 		session.setAttribute("order", order);
-		session.setAttribute("additionalInOrder", order.getAdditions());
+		session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
 		return "redirect:/Additional";
 	}
@@ -109,8 +109,8 @@ public class OrderController {
         order.removeProduct(id);
 
         session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getPizzas());
-        session.setAttribute("additionalInOrder", order.getAdditions());
+        session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+        session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
         return "redirect:/order/make-order";
     }
@@ -130,8 +130,8 @@ public class OrderController {
         order.changeProductQuantity(id, value);
 
 		session.setAttribute("order", order);
-		session.setAttribute("pizzasInOrder", order.getPizzas());
-        session.setAttribute("additionalInOrder", order.getAdditions());
+		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+        session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
 		return "redirect:/order/make-order";
 	}
