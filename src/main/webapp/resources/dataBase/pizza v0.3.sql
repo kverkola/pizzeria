@@ -176,8 +176,8 @@ INSERT INTO ATTRIBUTES values(6,4,'cola',null);
 INSERT INTO ATTRIBUTES values(6,5,'pepsi',null);
 INSERT INTO ATTRIBUTES values(24,4,'1',null);
 INSERT INTO ATTRIBUTES values(24,5,'1',null);
-INSERT INTO ATTRIBUTES values(25,4,'cola',null);
-INSERT INTO ATTRIBUTES values(25,5,'pepsi',null);
+INSERT INTO ATTRIBUTES values(25,4,'cola.png',null);
+INSERT INTO ATTRIBUTES values(25,5,'pepsi.png',null);
 INSERT INTO ATTRIBUTES values(19,14,'1',null);
 INSERT INTO ATTRIBUTES values(19,5,'2',null);
 INSERT INTO ATTRIBUTES values(7,4,'6',null);
@@ -190,8 +190,8 @@ INSERT INTO ATTRIBUTES values(19,16,'3',null);
 INSERT INTO ATTRIBUTES values(19,17,'4',null);
 INSERT INTO ATTRIBUTES values(7,16,'6',null);
 INSERT INTO ATTRIBUTES values(7,17,'5',null);
-INSERT INTO ATTRIBUTES values(25,16,'cola',null);
-INSERT INTO ATTRIBUTES values(25,17,'pepsi',null);
+INSERT INTO ATTRIBUTES values(25,16,'cola.png',null);
+INSERT INTO ATTRIBUTES values(25,17,'pepsi.png',null);
 INSERT INTO ATTRIBUTES values(8,6,'mushrooms',null);
 INSERT INTO ATTRIBUTES values(8,7,'chess',null);
 INSERT INTO ATTRIBUTES values(8,8,'chicken',null);
@@ -266,9 +266,9 @@ INSERT INTO ATTRIBUTES values(23,14,'3',null);
 INSERT INTO ATTRIBUTES values(16,12,'30',null);
 INSERT INTO ATTRIBUTES values(16,13,'40',null);
 INSERT INTO ATTRIBUTES values(16,14,'50',null);
-INSERT INTO ATTRIBUTES values(26,12,'chikenita_middle',null);
-INSERT INTO ATTRIBUTES values(26,13,'pizza_middle',null);
-INSERT INTO ATTRIBUTES values(26,14,'tanu_mini',null);
+INSERT INTO ATTRIBUTES values(26,12,'chikenita_middle.png',null);
+INSERT INTO ATTRIBUTES values(26,13,'pizza_middle.png',null);
+INSERT INTO ATTRIBUTES values(26,14,'tanu_mini.png',null);
 INSERT INTO ATTRIBUTES values(27,12,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',null);
 INSERT INTO ATTRIBUTES values(27,13,'Aenean commodo ligula eget dolor. Aenean massa.',null);
 INSERT INTO ATTRIBUTES values(27,14,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',null);
@@ -347,3 +347,16 @@ CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
 -- пример использования
 
 select get_id from dual
+
+
+
+
+
+
+
+
+
+
+
+
+ 
