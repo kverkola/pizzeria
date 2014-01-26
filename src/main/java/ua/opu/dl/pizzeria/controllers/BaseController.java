@@ -38,7 +38,7 @@ public class BaseController {
     @RequestMapping(value = "/Additional", method = RequestMethod.GET)
 	public String additional(ModelMap model) {
 		
-		model.addAttribute("add", additionalService.AllAdditionals());
+		model.addAttribute("add", additionalService.loadByOrder(1));//изменить на 0 позже
 
 		return "Additional";
 	}
