@@ -20,8 +20,7 @@ public class BaseController {
 
 	@Autowired
 	private AdditionalService additionalService;
-	@Autowired
-	private IngredientService ingredientService;
+
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -56,7 +55,7 @@ public class BaseController {
 //test page
     	
     	
-    	model.addAttribute("ingr", ingredientService.loadById(8));
+    	model.addAttribute("add", additionalService.loadById(4));
     	
 		return "about";
 	}

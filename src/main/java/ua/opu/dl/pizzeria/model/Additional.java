@@ -1,11 +1,16 @@
 package ua.opu.dl.pizzeria.model;
 
 public class Additional {
+	private int id;
+	private int orderId;
     private String name;
     private double price;
     private String logo;
 
-    public Additional(String name, double price, String logo) {
+    public Additional() {
+	}
+
+	public Additional(String name, double price, String logo) {
         this.name = name;
         this.price = price;
         this.logo = logo;
@@ -35,28 +40,56 @@ public class Additional {
         this.logo = logo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	public int getId() {
+		return id;
+	}
 
-        Additional that = (Additional) o;
+	public void setId(int id) {
+		this.id = id;
+	}
 
-        if (Double.compare(that.price, price) != 0) return false;
-        if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+	public int getOrderId() {
+		return orderId;
+	}
 
-        return true;
-    }
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = name != null ? name.hashCode() : 0;
-        temp = Double.doubleToLongBits(price);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (logo != null ? logo.hashCode() : 0);
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Additional))
+			return false;
+		Additional other = (Additional) obj;
+		if (id != other.id)
+			return false;
+		if (logo == null) {
+			if (other.logo != null)
+				return false;
+		} else if (!logo.equals(other.logo))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	
+  
 }
