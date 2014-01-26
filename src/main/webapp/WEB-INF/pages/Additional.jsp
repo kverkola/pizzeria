@@ -19,7 +19,7 @@
                 <td></td>
                 <td style="text-align: right;">
                     ${add.price}$ &nbsp;&nbsp;
-                        <a href="<c:url value='/order/add-additional/${add.name}'/>" class="btn btn-sm btn-success">
+                        <a href="<c:url value='/order/add-additional/${add.id}'/>" class="btn btn-sm btn-success">
                             Add to cart
                         </a>
                 </td>

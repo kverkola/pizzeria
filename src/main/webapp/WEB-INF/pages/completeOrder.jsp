@@ -30,7 +30,7 @@
             </td>
             <td>
                 <div>
-                    <form id="pizzas + ${status.count}" method="POST" action="/order/change-pizzas-count" style="display: inline-block; text-align: center">
+                    <form id="pizzas + ${status.count}" method="POST" action="/order/change-product-count" style="display: inline-block; text-align: center">
                         <input name="id" type="hidden" value="${pizza.id}" />
                         <input name="value" type="text" class="form-control input-sm" value="${pizza.quantity}"
                                style="width: 45px; text-align: center;"/>
@@ -44,7 +44,7 @@
                  ${pizza.price * pizza.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-pizza/${pizza.id}'/>">
+                <a href="<c:url value='/order/remove-product/${pizza.id}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>
@@ -63,9 +63,9 @@
             </td>
             <td>
                 <div>
-                    <form id="additions + ${status.count}" method="POST" action="/order/change-additions-count"
+                    <form id="additions + ${status.count}" method="POST" action="/order/change-product-count"
                           style="display: inline-block; text-align: center">
-                        <input name="name" type="hidden" value="${addition.name}" />
+                        <input name="id" type="hidden" value="${addition.id}" />
                         <input name="value" type="text" class="form-control input-sm" value="${addition.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>
@@ -78,7 +78,7 @@
                     ${addition.price * addition.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-additional/${addition.id}'/>">
+                <a href="<c:url value='/order/remove-product/${addition.id}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>

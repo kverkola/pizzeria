@@ -140,45 +140,6 @@ public class Order {
         }
     }
 
-    /*public void addPizza(Pizza pizza) {
-
-        if (getPizzas().contains(pizza)) {
-            int pos = pizzas.indexOf(pizza);
-            Pizza p = pizzas.get(pos);
-            p.incrementQuantity();
-            pizzas.set(pos, p);
-        } else {
-            pizzas.add(pizza);
-        }
-
-        setPrice(getPrice() + pizza.getPrice());
-    }
-
-    public void addAdditional(Additional additional) {
-
-        if (additions.contains(additional)) {
-            int pos = additions.indexOf(additional);
-            Additional add = additions.get(pos);
-            add.incrementQuantity();
-            additions.set(pos, add);
-        } else {
-            additions.add(additional);
-        }
-
-        setPrice(getPrice() + additional.getPrice());
-    }
-
-    public void removeAdditional(String name) {
-
-        for (Additional add : getAdditions()) {
-            if (add.getName().equals(name)) {
-                additions.remove(add);
-                setPrice(getPrice() - add.getPrice() * add.getQuantity());
-                break;
-            }
-        }
-    }*/
-
     public void changeProductQuantity(Integer id, Integer quantity) {
 
         for (Product product : products) {

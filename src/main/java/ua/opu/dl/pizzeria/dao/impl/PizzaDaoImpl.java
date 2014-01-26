@@ -55,7 +55,7 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public List<Pizza> loadByOrder(Integer orderId) {
 
-        List<Pizza> pizzaList = new ArrayList<Pizza>();
+        List<Pizza> pizzaList = new ArrayList();
 
         return pizzaList;
     }

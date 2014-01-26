@@ -22,10 +22,6 @@ public class Product {
         setQuantity(getQuantity() + 1);
     }
 
-    public void decrementQuantity() {
-        setQuantity(getQuantity() - 1);
-    }
-
     public int getQuantity() {
         return quantity;
     }
