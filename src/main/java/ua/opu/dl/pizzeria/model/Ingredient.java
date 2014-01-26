@@ -2,7 +2,7 @@ package ua.opu.dl.pizzeria.model;
 
 public class Ingredient {
 	private Integer id;
-	private Integer pizzaid;
+	private Integer pizzaId;
     private String name;
     private double weight;
     private double price;
@@ -80,12 +80,12 @@ public class Ingredient {
 		this.id = id;
 	}
 
-	public Integer getPizzaid() {
-		return pizzaid;
+	public Integer getPizzaId() {
+		return pizzaId;
 	}
 
-	public void setPizzaid(Integer pizzaid) {
-		this.pizzaid = pizzaid;
+	public void setPizzaId(Integer pizzaId) {
+		this.pizzaId = pizzaId;
 	}
 
   

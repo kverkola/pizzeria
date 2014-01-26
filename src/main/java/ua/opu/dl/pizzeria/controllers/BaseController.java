@@ -25,7 +25,7 @@ public class BaseController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
-
+		Locale.setDefault(Locale.ENGLISH);
 		return "index";
 	}
 
@@ -54,7 +54,7 @@ public class BaseController {
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(ModelMap model) {
 //test page
-    	Locale.setDefault(Locale.ENGLISH);
+    	
     	
     	model.addAttribute("ingr", ingredientService.loadById(8));
     	

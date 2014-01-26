@@ -15,34 +15,15 @@ import ua.opu.dl.pizzeria.model.Ingredient;
 import javax.sql.DataSource;
 public class IngredientDaoImpl implements IngredientDao {
 
-	private final String loadIngredientsById = "with tab1 as(  select att.value name_,ob.OBJECT_ID id_ from" +
-			" Attributes att, Objects ob, ATTRTYPE attr" +
-			"where ob.object_id = att.object_id " +
-			"and att.attr_id=attr.attr_id and attr.code='name' ),tab2 as " +
-			"(  select att.value price, ob.OBJECT_ID id_" +
-			" from Attributes att, Objects ob," +
-			" ATTRTYPE attr where  ob.object_id = att.object_id " +
-			"and att.attr_id=attr.attr_id and attr.code='price' ), tab3 as" +
-			" (  select att.value weight, ob.OBJECT_ID id_ from Attributes" +
-			" att, Objects ob, ATTRTYPE attr where  ob.object_id =" +
-			" att.object_id and att.attr_id=attr.attr_id and attr.code='weight' ), tab4 as " +
-			"(  select att.value pizzaId, ob.OBJECT_ID id_ from Attributes att, Objects ob, ATTRTYPE attr where " +
-			"ob.object_id = att.object_id and" +
-			"att.attr_id=ttr.attr_id and" +
-			"attr.code='pizzaId' )" +
-			"select tab4.pizzaId,tab1.name_,tab2.price,tab3.weight from tab1,tab2,tab3,tab4" +
-			"where tab1.ID_=tab2.ID_ and" +
-			"tab2.ID_=tab3.ID_ and" +
-			"tab3.Id_=tab4.Id_ and" +
-			"tab1.id_=8";
+	private final String loadIngredientsById = " with tab1 as(  select att.value name_,ob.OBJECT_ID id_ from Attributes att, Objects ob, ATTRTYPE attr where  ob.object_id = att.object_id and att.attr_id=attr.attr_id and attr.code='name' ), tab2 as (  select att.value price, ob.OBJECT_ID id_ from Attributes att, Objects ob, ATTRTYPE attr where  ob.object_id = att.object_id and att.attr_id=attr.attr_id and attr.code='price' ), tab3 as (  select att.value weight, ob.OBJECT_ID id_ from Attributes att, Objects ob, ATTRTYPE attr where  ob.object_id = att.object_id and att.attr_id=attr.attr_id and attr.code='weight' ), tab4 as (  select att.value pizzaId, ob.OBJECT_ID id_ from Attributes att, Objects ob, ATTRTYPE attr where ob.object_id = att.object_id and att.attr_id=attr.attr_id and attr.code='pizzaId' ) select tab4.pizzaId pizzaId,tab1.name_ name ,tab2.price price,tab3.weight weight from tab1,tab2,tab3,tab4 where tab1.ID_=tab2.ID_ and tab2.ID_=tab3.ID_ and tab3.Id_=tab4.Id_ and tab1.id_= ?";
 	
 	
 	private JdbcTemplate jdbcTemplate;
-private NamedParameterJdbcTemplate namedTemplate;
+//private NamedParameterJdbcTemplate namedTemplate;
  
 public void setDataSource(DataSource dataSource) {
 this.jdbcTemplate = new JdbcTemplate(dataSource);
-this.namedTemplate = new NamedParameterJdbcTemplate(dataSource);
+//this.namedTemplate = new NamedParameterJdbcTemplate(dataSource);
 }
 
 
@@ -50,8 +31,8 @@ private RowMapper<Ingredient> rowMapper = new RowMapper<Ingredient>() {
 @Override
 public Ingredient mapRow(ResultSet rs, int rowNum) throws SQLException {
 Ingredient ingredient = new Ingredient();
-ingredient.setId(rs.getInt("id"));
-ingredient.setPizzaid(rs.getInt("pizzaId"));
+//ingredient.setId(rs.getInt("id"));
+ingredient.setPizzaId(rs.getInt("pizzaId"));
 ingredient.setName(rs.getString("name"));
 ingredient.setPrice(rs.getDouble("price"));
 ingredient.setWeight(rs.getInt("weight"));
@@ -78,7 +59,7 @@ return ingredient;
 
 	@Override
 	public Ingredient loadById(Integer id) {
-		Ingredient ingredient=jdbcTemplate.queryForObject(loadIngredientsById, rowMapper);
+		Ingredient ingredient=jdbcTemplate.queryForObject(loadIngredientsById, rowMapper,id);
 		ingredient.setId(id);
 		 return ingredient;
 	}
