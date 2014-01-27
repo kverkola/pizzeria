@@ -9,7 +9,9 @@ public class Additional extends Product {
 	}
 
 	public Additional(String name, double price, String logo) {
+
         super(1, name, 1, price);
+
         this.logo = logo;
     }
 

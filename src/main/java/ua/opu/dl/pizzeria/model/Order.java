@@ -10,6 +10,7 @@ import java.util.List;
 public class Order {
 
     private static final Logger LOG = LoggerFactory.getLogger(Order.class);
+    private static Integer productIdCounter = 0;
 
     private int id;
     private Status status;
@@ -25,6 +26,7 @@ public class Order {
     public Order(List<Product> products, Status status, Date starttime,
                  Date endtime, double price,
                  String phone) {
+
         this.products = products;
         this.status = status;
         this.starttime = starttime;
@@ -106,10 +108,9 @@ public class Order {
 
         if (products.contains(product)) {
             int pos = products.indexOf(product);
-            Product p = products.get(pos);
-            p.incrementQuantity();
-            products.set(pos, p);
+            products.get(pos).incrementQuantity();
         } else {
+            product.setProductId(productIdCounter++);
             products.add(product);
         }
 

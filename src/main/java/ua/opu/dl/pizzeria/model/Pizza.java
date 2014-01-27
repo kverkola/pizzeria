@@ -8,18 +8,20 @@ public class Pizza extends Product {
 	private int orderId;
 	private String logo;
 	private String description;
+
 	public Pizza() {
 	}
 
 	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
-			String description, Integer id, double price) {// не забыть удалить
-		// id из
-		// конструктора
-		super(id, name, 1, price);
-		this.map = map;
+			String description, Integer id, double price) {
+
+        super(id, name, 1, price);
+
+        this.map = map;
 		this.logo = logo;
 		this.description = description;
-		countTotalPrice();
+
+        countTotalPrice();
 	}
 
 	public Map<Ingredient, Integer> getMap() {

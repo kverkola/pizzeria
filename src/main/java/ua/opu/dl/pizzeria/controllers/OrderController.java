@@ -86,7 +86,7 @@ public class OrderController {
             order.setProducts(new ArrayList<Product>());
 		}
 
-        order.addProduct(additionalService.loadByName("pepsi"));
+        order.addProduct(additionalService.loadById(id));
 
 		session.setAttribute("order", order);
 		session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
