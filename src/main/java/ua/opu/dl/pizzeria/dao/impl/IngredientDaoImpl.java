@@ -66,7 +66,7 @@ public class IngredientDaoImpl implements IngredientDao {
 	@Override
 	public List<Ingredient> loadIngredientsByPizza(Integer pizzaId) {
 
-		return jdbcTemplate.query(loadIngredientsByPizzaId, rowMapper, pizzaId);
+		return jdbcTemplate.query(loadIngredientsByPizzaId, rowMapper, String.valueOf(pizzaId));
 	}
 
 }

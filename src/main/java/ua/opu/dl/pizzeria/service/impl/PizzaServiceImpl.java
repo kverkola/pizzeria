@@ -1,9 +1,13 @@
 package ua.opu.dl.pizzeria.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import ua.opu.dl.pizzeria.dao.IngredientDao;
 import ua.opu.dl.pizzeria.dao.PizzaDao;
+import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
@@ -11,40 +15,63 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Autowired
 	private PizzaDao pizzaDao;
+	@Autowired
+	private IngredientDao ingredientDao;
 
 	@Override
 	public Pizza loadById(Integer id) {
 
-        return pizzaDao.loadById(id);
+		return pizzaDao.loadById(id);
 	}
 
 	@Override
 	public void addPizza(Pizza pizza) {
 
-        pizzaDao.addPizza(pizza);
+		pizzaDao.addPizza(pizza);
 	}
 
 	@Override
 	public void updatePizza(Pizza pizza) {
 
-        pizzaDao.updatePizza(pizza);
+		pizzaDao.updatePizza(pizza);
 	}
 
 	@Override
 	public void deletePizza(Pizza pizza) {
 
-        pizzaDao.deletePizza(pizza);
+		pizzaDao.deletePizza(pizza);
 	}
 
 	@Override
 	public List<Pizza> loadByOrder(Integer orderId) {
+		Pizza pizza;
+		//Ingredient ingredient;
+		List<Ingredient> listIngredients;
+		List<Pizza> listPizzas = pizzaDao.loadByOrder(orderId);
 
-		return pizzaDao.loadByOrder(orderId);
-    }
+		for (int a = 0; a < listPizzas.size(); a++) {
 
-    @Override
-    public List<Pizza> loadAll() {
+			pizza = listPizzas.get(a);
 
-        return pizzaDao.loadAll();
-    }
+			listIngredients = ingredientDao.loadIngredientsByPizza(pizza
+					.getId());
+
+			HashMap<Ingredient, Integer> ingredientsMap = new HashMap<Ingredient, Integer>();
+			Integer am;
+			for (Ingredient i : listIngredients) {
+
+				am = ingredientsMap.get(i);
+				ingredientsMap.put(i, am == null ? 1 : am + 1);
+			}   pizza.setMap(ingredientsMap);
+
+		}
+
+		return listPizzas;
+	}
+
+	@Override
+	public List<Pizza> loadAll() {
+
+		return pizzaDao.loadAll();
+	}
 }

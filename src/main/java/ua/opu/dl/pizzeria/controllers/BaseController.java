@@ -30,7 +30,7 @@ public class BaseController {
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public String menu(ModelMap model) {
 
-		model.addAttribute("menu", pizzaService.loadAll());
+		model.addAttribute("menu", pizzaService.loadByOrder(15));
 
 		return "menu";
 	}
