@@ -65,7 +65,7 @@ return ingredient;
 
 	@Override
 	public List<Ingredient> loadIngredientsByPizza(Integer pizzaId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
