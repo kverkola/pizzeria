@@ -116,10 +116,10 @@ public class Order {
         setPrice(getPrice() + product.getPrice());
     }
 
-    public void removeProduct(Integer id) {
+    public void removeProduct(Integer productId) {
 
         for (Product product : products) {
-            if (product.getId().equals(id)) {
+            if (product.getProductId().equals(productId)) {
                 products.remove(product);
                 setPrice(getPrice() - product.getPrice() * product.getQuantity());
                 break;
@@ -127,10 +127,10 @@ public class Order {
         }
     }
 
-    public void changeProductQuantity(Integer id, Integer quantity) {
+    public void changeProductQuantity(Integer productId, Integer quantity) {
 
         for (Product product : products) {
-            if (product.getId().equals(id)) {
+            if (product.getProductId().equals(productId)) {
                 product.setQuantity(quantity);
                 updatePrice();
                 break;
@@ -138,7 +138,7 @@ public class Order {
         }
     }
 
-    public void updatePrice() {
+    private void updatePrice() {
 
         double totalPrice = 0.0;
 

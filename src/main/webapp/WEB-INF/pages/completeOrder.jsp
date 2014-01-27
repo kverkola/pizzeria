@@ -31,7 +31,7 @@
             <td>
                 <div>
                     <form id="pizzas + ${status.count}" method="POST" action="/order/change-product-count" style="display: inline-block; text-align: center">
-                        <input name="id" type="hidden" value="${pizza.id}" />
+                        <input name="productId" type="hidden" value="${pizza.productId}" />
                         <input name="value" type="text" class="form-control input-sm" value="${pizza.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>
@@ -44,7 +44,7 @@
                  ${pizza.price * pizza.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-product/${pizza.id}'/>">
+                <a href="<c:url value='/order/remove-product/${pizza.productId}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>
@@ -65,7 +65,7 @@
                 <div>
                     <form id="additions + ${status.count}" method="POST" action="/order/change-product-count"
                           style="display: inline-block; text-align: center">
-                        <input name="id" type="hidden" value="${addition.id}" />
+                        <input name="productId" type="hidden" value="${addition.productId}" />
                         <input name="value" type="text" class="form-control input-sm" value="${addition.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>
@@ -78,7 +78,7 @@
                     ${addition.price * addition.quantity}
             </td>
             <td>
-                <a href="<c:url value='/order/remove-product/${addition.id}'/>">
+                <a href="<c:url value='/order/remove-product/${addition.productId}'/>">
                     <img src="<c:url value='/resources/del.png'/>"/>
                 </a>
             </td>

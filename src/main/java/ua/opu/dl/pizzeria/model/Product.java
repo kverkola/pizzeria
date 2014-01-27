@@ -2,6 +2,9 @@ package ua.opu.dl.pizzeria.model;
 
 public class Product {
 
+    private static Integer productIdCounter = 0;
+
+    private Integer productId;
     private Integer id;
     private String name;
     private int quantity;
@@ -12,6 +15,7 @@ public class Product {
     }
 
     public Product(Integer id, String name, int quantity, double price) {
+        this.productId = productIdCounter++;
         this.id = id;
         this.name = name;
         this.quantity = quantity;
@@ -20,6 +24,14 @@ public class Product {
 
     public void incrementQuantity() {
         setQuantity(getQuantity() + 1);
+    }
+
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {

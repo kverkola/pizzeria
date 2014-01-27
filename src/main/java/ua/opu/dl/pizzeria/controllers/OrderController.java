@@ -94,13 +94,13 @@ public class OrderController {
 		return "redirect:/Additional";
 	}
 
-    @RequestMapping(value = "/remove-product/{id}", method = RequestMethod.GET)
-    public String removePizza(@PathVariable("id") Integer id,
+    @RequestMapping(value = "/remove-product/{productId}", method = RequestMethod.GET)
+    public String removePizza(@PathVariable("productId") Integer productId,
                               HttpSession session) {
 
         Order order = (Order) session.getAttribute("order");
 
-        order.removeProduct(id);
+        order.removeProduct(productId);
 
         session.setAttribute("order", order);
         session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
@@ -116,12 +116,12 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/change-product-count", method = RequestMethod.POST,
-            params = {"id", "value"})
-	public String changePizzasCount(@RequestParam Integer id,
+            params = {"productId", "value"})
+	public String changePizzasCount(@RequestParam Integer productId,
 			@RequestParam Integer value, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
-        order.changeProductQuantity(id, value);
+        order.changeProductQuantity(productId, value);
 
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
