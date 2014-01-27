@@ -1,10 +1,3 @@
-/* 
-
-Пример реализации реляционной модели 
-EAV/CR – Entity-Attribute-Value with Classes and Relationships 
-(Сущность-Атрибут-Значение с Классами и Отношениями)." 
-*/
-
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
 drop table OBJECTS CASCADE CONSTRAINTS;
@@ -234,13 +227,13 @@ INSERT INTO ATTRIBUTES values(22,21,'13',null);
 INSERT INTO ATTRIBUTES values(22,22,'13',null);
 INSERT INTO ATTRIBUTES values(9,18,'5',null);
 INSERT INTO ATTRIBUTES values(9,19,'10',null);
-INSERT INTO ATTRIBUTES values(9,20,'3',null);
-INSERT INTO ATTRIBUTES values(9,21,'2',null);
+INSERT INTO ATTRIBUTES values(9,20,'10',null);
+INSERT INTO ATTRIBUTES values(9,21,'10',null);
 INSERT INTO ATTRIBUTES values(9,22,'1',null);
 INSERT INTO ATTRIBUTES values(10,18,'50',null);
 INSERT INTO ATTRIBUTES values(10,19,'100',null);
 INSERT INTO ATTRIBUTES values(10,20,'100',null);
-INSERT INTO ATTRIBUTES values(10,21,'50',null);
+INSERT INTO ATTRIBUTES values(10,21,'100',null);
 INSERT INTO ATTRIBUTES values(10,22,'50',null);
 INSERT INTO ATTRIBUTES values(11,11,'12.05.13 17.00',null);
 INSERT INTO ATTRIBUTES values(11,15,'12.05.13 18.00',null);
