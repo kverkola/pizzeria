@@ -45,8 +45,6 @@ public class OrderController {
 		if (order == null) {
 			order = new Order();
             order.setProducts(new ArrayList<Product>());
-		} else if (order.getProducts(Pizza.class) == null) {
-            order.setProducts(new ArrayList<Product>());
 		}
 
         order.addProduct(pizzaService.loadById(id));
@@ -64,8 +62,6 @@ public class OrderController {
 
         if (order == null) {
             order = new Order();
-            order.setProducts(new ArrayList<Product>());
-        } else if (order.getProducts(Pizza.class) == null) {
             order.setProducts(new ArrayList<Product>());
         }
 
@@ -87,8 +83,6 @@ public class OrderController {
 
 		if (order == null) {
 			order = new Order();
-            order.setProducts(new ArrayList<Product>());
-		} else if (order.getProducts(Additional.class) == null) {
             order.setProducts(new ArrayList<Product>());
 		}
 

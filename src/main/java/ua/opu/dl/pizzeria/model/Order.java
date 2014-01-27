@@ -77,11 +77,9 @@ public class Order {
 
         List<T> productsList = new ArrayList();
 
-        LOG.info("" + clazz.getClass().getName());
-
-        for (Product o : products) {
-            if (clazz.isAssignableFrom(o.getClass())) {
-                productsList.add(clazz.cast(o));
+        for (Product p : products) {
+            if (clazz.isAssignableFrom(p.getClass())) {
+                productsList.add(clazz.cast(p));
             }
         }
 
