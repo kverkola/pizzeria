@@ -30,11 +30,7 @@ public class PizzaServiceImpl implements PizzaService {
 		Integer am;
 		for (Ingredient i : listIngredients) {
 			am = ingredientsMap.get(i);
-			
-			//int count = Collections.frequency(listIngredients, i);
 			ingredientsMap.put(i, am == null ? 1 : am + 1);
-			//ingredientsMap.put(i, count);
-			
 		}
 		pizza.setMap(ingredientsMap);
 		return pizza;

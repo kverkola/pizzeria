@@ -1,3 +1,10 @@
+/* 
+
+Пример реализации реляционной модели 
+EAV/CR – Entity-Attribute-Value with Classes and Relationships 
+(Сущность-Атрибут-Значение с Классами и Отношениями)." 
+*/
+
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
 drop table OBJECTS CASCADE CONSTRAINTS;
@@ -86,6 +93,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (24,2,'orderId','id
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (25,2,'logo','отображение');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (26,5,'logo','отображение');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description','описание');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (28,4,'status','Status');
 
 
 
@@ -237,8 +245,8 @@ INSERT INTO ATTRIBUTES values(10,21,'100',null);
 INSERT INTO ATTRIBUTES values(10,22,'50',null);
 INSERT INTO ATTRIBUTES values(11,11,'12.05.13 17.00',null);
 INSERT INTO ATTRIBUTES values(11,15,'12.05.13 18.00',null);
---INSERT INTO ATTRIBUTES values(17,11,'1',null);
---INSERT INTO ATTRIBUTES values(17,15,'2',null);
+INSERT INTO ATTRIBUTES values(28,11,'IN_WORK',null);
+INSERT INTO ATTRIBUTES values(28,15,'IN_WORK',null);
 INSERT INTO ATTRIBUTES values(12,11,'12.05.13 18.50',null);
 INSERT INTO ATTRIBUTES values(12,15,'12.05.13 20.00',null);
 INSERT INTO ATTRIBUTES values(13,11,'50',null);

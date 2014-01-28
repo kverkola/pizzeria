@@ -14,8 +14,8 @@ public class Order {
 
     private int id;
     private Status status;
-    private Date starttime;
-    private Date endtime;
+    private String starttime;
+    private String endtime;
     private double price;
     private List<Product> products;
     private String phone;
@@ -29,8 +29,8 @@ public class Order {
 
         this.products = products;
         this.status = status;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.starttime = starttime.toString();
+        this.endtime = starttime.toString();;
         this.price = price;
         this.phone = phone;
     }
@@ -51,19 +51,19 @@ public class Order {
         this.status = status;
     }
 
-    public Date getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(Date starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
 
-    public Date getEndtime() {
+    public String getEndtime() {
         return endtime;
     }
 
-    public void setEndtime(Date endtime) {
+    public void setEndtime(String endtime) {
         this.endtime = endtime;
     }
 
