@@ -17,11 +17,22 @@ public class PizzaServiceImpl implements PizzaService {
 	private PizzaDao pizzaDao;
 	@Autowired
 	private IngredientDao ingredientDao;
+	private Pizza pizza;
+	private HashMap<Ingredient, Integer> ingredientsMap;
+	private List<Ingredient> listIngredients;
 
 	@Override
 	public Pizza loadById(Integer id) {
-
-		return pizzaDao.loadById(id);
+		ingredientsMap = new HashMap<Ingredient, Integer>();
+		pizza = pizzaDao.loadById(id);
+		listIngredients = ingredientDao.loadIngredientsByPizza(pizza.getId());
+		Integer am;
+		for (Ingredient i : listIngredients) {
+			am = ingredientsMap.get(i);
+			ingredientsMap.put(i, am == null ? 1 : am + 1);
+		}
+		pizza.setMap(ingredientsMap);
+		return pizza;
 	}
 
 	@Override
@@ -44,25 +55,18 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Override
 	public List<Pizza> loadByOrder(Integer orderId) {
-		Pizza pizza;
-		//Ingredient ingredient;
-		List<Ingredient> listIngredients;
 		List<Pizza> listPizzas = pizzaDao.loadByOrder(orderId);
-
 		for (int a = 0; a < listPizzas.size(); a++) {
-
 			pizza = listPizzas.get(a);
-
 			listIngredients = ingredientDao.loadIngredientsByPizza(pizza
 					.getId());
-
-			HashMap<Ingredient, Integer> ingredientsMap = new HashMap<Ingredient, Integer>();
+			ingredientsMap = new HashMap<Ingredient, Integer>();
 			Integer am;
 			for (Ingredient i : listIngredients) {
-
 				am = ingredientsMap.get(i);
 				ingredientsMap.put(i, am == null ? 1 : am + 1);
-			}   pizza.setMap(ingredientsMap);
+			}
+			pizza.setMap(ingredientsMap);
 
 		}
 
