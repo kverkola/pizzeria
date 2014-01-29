@@ -8,10 +8,10 @@ public class Additional extends Product {
     public Additional() {
 	}
 
-	public Additional(String name, double price, String logo) {
+	public Additional( long id, long orderId, String name, double price, String logo) {
 
-        super(1, name, 1, price);
-
+        super(id, name, 1, price);
+        this.orderId = orderId;
         this.logo = logo;
     }
 

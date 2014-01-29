@@ -43,12 +43,6 @@ public class AdditionalServiceIpml implements AdditionalService {
 	}
 
 	@Override
-	public Additional loadByName(String name) {
-
-		return addDao.loadByName(name);
-	}
-
-	@Override
 	public List<Additional> AllAdditionals() {
 
 		return addDao.AllAdditionals();

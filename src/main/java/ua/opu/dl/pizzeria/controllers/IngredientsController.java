@@ -4,6 +4,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,8 @@ import ua.opu.dl.pizzeria.service.PizzaService;
 @Controller
 @RequestMapping(value = "/ingredients")
 public class IngredientsController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(IngredientsController.class);
 
 	@Autowired
 	private PizzaService pizzaService;
@@ -81,6 +85,12 @@ public class IngredientsController {
 			ModelMap model, HttpSession session) {
 
         Pizza pizza = pizzaService.loadById(id);
+
+        LOG.info("Loaded ingredients for pizza: " + pizza.getName());
+        for (Map.Entry<Ingredient, Integer> entry : pizza.getMap().entrySet()) {
+            LOG.info("Ingredient: " + entry.getKey().getName() + " value: " + entry.getValue());
+        }
+
         session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
 
@@ -90,7 +100,7 @@ public class IngredientsController {
 	@RequestMapping(value = "/reset/{id}", method = RequestMethod.GET)
 	public String reset(ModelMap model,@PathVariable("id") Integer id){
 		
-		pizza=pizzaService.loadById(id);
+		pizza = pizzaService.loadById(id);
 		model.addAttribute("pizza",pizza);
 		return "/addIngredients";	
 	}

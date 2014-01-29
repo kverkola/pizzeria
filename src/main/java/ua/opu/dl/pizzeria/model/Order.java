@@ -17,8 +17,9 @@ public class Order {
     private String starttime;
     private String endtime;
     private double price;
-    private List<Product> products;
     private String phone;
+
+    private List<Product> products;
 
     public Order() {
     }

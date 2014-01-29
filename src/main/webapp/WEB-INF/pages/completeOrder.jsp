@@ -31,7 +31,7 @@
             <td>
                 <div>
                     <form id="pizzas + ${status.count}" method="POST" action="/order/change-product-count" style="display: inline-block; text-align: center">
-                        <input name="productId" type="hidden" value="${pizza.productId}" />
+                        <input name="productId" type="hidden" value="${pizza.productId}"/>
                         <input name="value" type="text" class="form-control input-sm" value="${pizza.quantity}"
                                style="width: 45px; text-align: center;"/>
                     </form>

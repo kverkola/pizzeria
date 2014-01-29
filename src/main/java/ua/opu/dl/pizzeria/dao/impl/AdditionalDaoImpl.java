@@ -30,12 +30,13 @@ public class AdditionalDaoImpl implements AdditionalDao {
 	private RowMapper<Additional> rowMapper = new RowMapper<Additional>() {
 		@Override
 		public Additional mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Additional additional = new Additional();
-			additional.setId(rs.getLong("id"));
-			additional.setOrderId(rs.getLong("orderId"));
-			additional.setName(rs.getString("name"));
-			additional.setPrice(rs.getDouble("price"));
-			additional.setLogo(rs.getString("logo"));
+			Additional additional = new Additional(
+                    rs.getLong("id"),
+                    rs.getLong("orderId"),
+                    rs.getString("name"),
+                    rs.getDouble("price"),
+                    rs.getString("logo")
+            );
 
 			return additional;
 		}
@@ -85,12 +86,6 @@ public class AdditionalDaoImpl implements AdditionalDao {
 
 		return jdbcTemplate.query(loadAllAdditionalsByOrderId, rowMapper,
 				String.valueOf(orderId));
-	}
-
-	@Override
-	public Additional loadByName(String name) {
-
-		return new Additional("pepsi", 10, "pepsi.png");
 	}
 
 	@Override
