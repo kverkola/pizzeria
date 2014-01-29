@@ -1,9 +1,4 @@
-/* 
 
-Пример реализации реляционной модели 
-EAV/CR – Entity-Attribute-Value with Classes and Relationships 
-(Сущность-Атрибут-Значение с Классами и Отношениями)." 
-*/
 
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
@@ -31,26 +26,13 @@ COMMENT ON COLUMN OBJTYPE.NAME IS 'название объектного тип�
 COMMENT ON COLUMN OBJTYPE.DESCRIPTION IS 'разверное описание объектного типа в национальной кодировке (для GUI)';
 
 
-/* При переходе от UML-диаграмме к EAV-модели рекомендуется:
-1) имена классов представить как OBJTYPE.name
-2) связь типа "обобщение" представить в виде связи между OBJTYPE.OBJECT_TYPE_ID и OBJTYPE.PARENT_ID
-3) связь типа "агрегатная ассоциация" представить в виде связи между OBJTYPE.id и OBJTYPE.PARENT_ID
-*/
+
 
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (1,NULL,'User','СОТРУДНИК',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (2,null,'Additional','Дополнения',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (3,NULL,'Ingredient','игридиент',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (4,null,'Order','заказ',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (5,null,'pizza','пицца',NULL);
-
-
-
-
-
-
-
-
-
 
 -- Пример команды создания таблицы типов атрибутов:
 CREATE TABLE ATTRTYPE
@@ -275,15 +257,6 @@ INSERT INTO ATTRIBUTES values(27,13,'Aenean commodo ligula eget dolor. Aenean ma
 INSERT INTO ATTRIBUTES values(27,14,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',null);
 
 
-
-
-
-
-
-
-
-
-
 /*
 COMMENT ON TABLE ATTRIBUTES IS 'Таблица описаний атрибутов экземпляров объектов';
 COMMENT ON COLUMN ATTRIBUTES.VALUE IS 'Значение атрибута экземпляра объекта в виде строки или числа';
@@ -306,9 +279,7 @@ COMMENT ON COLUMN OBJREFERENCE.OBJECT_ID IS 'Ссылка на экземпля�
 COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'Ссылка на экземпляр 2-го объекта в связи "простая ассоциация"';
 
 
-/* При переходе от UML-диаграмме к ORM рекомендуется:
-4) связь типа "простая ассоциация" представить в виде связи между OBJREFERENCE.OBJECT_ID и OBJREFERENCE.REFERENCE
-*/
+
 
 
 --тоблица связей может несовсем правильна
@@ -344,8 +315,43 @@ CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
     FROM DUAL;
     RETURN v_ret;
   END;
-  
+  /
 -- пример использования
 
-select get_id from dual
+--select get_id from dual
+
+
+
+CREATE OR REPLACE
+PROCEDURE addAdditional(
+    name  IN VARCHAR2,
+    order_id in varchar2,
+    price IN VARCHAR2,
+    logo in varchar2
+    
+    )
+is
+ id   NUMBER(20);
+BEGIN
+ 
+ 
+id:=get_id;
+ 
+ insert all 
+INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,2,'pepsi',NULL)
+INTO ATTRIBUTES values(24,id,order_id,null)
+INTO ATTRIBUTES values(6,id,name,null)
+INTO ATTRIBUTES values(7,id,price,null)
+INTO ATTRIBUTES values(25,id,logo,null)
+select * from dual;
+
+END addAdditional;
+/
+
+
+call addAdditional('cola','0','6','cola.png');
+call addAdditional('pepsi','0','8','pepsi.png');
+call addAdditional('gorchica','0','2','gorchica.png');
+
+commit;
 
