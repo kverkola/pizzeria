@@ -2,7 +2,7 @@ package ua.opu.dl.pizzeria.model;
 
 public class Product {
 
-    private Integer productId;
+    private long productId;
     private long id;
     private String name;
     private int quantity;
@@ -24,11 +24,11 @@ public class Product {
         setQuantity(getQuantity() + 1);
     }
 
-    public Integer getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(Integer productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 

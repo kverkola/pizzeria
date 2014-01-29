@@ -62,7 +62,8 @@ public class PizzaDaoImpl implements PizzaDao {
 
 	@Override
 	public Pizza loadById(long id) {
-	return	jdbcTemplate.queryForObject(loadPizzaById,rowMapper,id);
+
+        return	jdbcTemplate.queryForObject(loadPizzaById,rowMapper,id);
 	}
 
 	@Override
