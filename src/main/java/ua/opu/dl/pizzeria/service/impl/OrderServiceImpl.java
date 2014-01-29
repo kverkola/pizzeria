@@ -23,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDao orderDao;
 	@Autowired
 	private PizzaDao pizzaDao;
+	private List<Product> products;
 
 	@Override
 	public void addOrder(Order order) {
@@ -47,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Order loadById(Integer id) {
 		order = orderDao.loadById(id);
-		List<Product> products = new ArrayList<Product>();
+		products = new ArrayList<Product>();
 		products.addAll(pizzaDao.loadByOrder(id));
 		products.addAll(addDao.loadAdditionalsByOrder(id));
 		order.setProducts(products);
@@ -58,5 +59,15 @@ public class OrderServiceImpl implements OrderService {
 	public List<Order> loadAllOrder() {
 
 		return orderDao.loadAllOrders();
+	}
+
+	@Override
+	public Order loadByPhone(String phone) {
+		order = orderDao.loadByPhone(phone);
+		products = new ArrayList<Product>();
+		products.addAll(pizzaDao.loadByOrder(order.getId()));
+		products.addAll(addDao.loadAdditionalsByOrder(order.getId()));
+		order.setProducts(products);
+		return order;
 	}
 }

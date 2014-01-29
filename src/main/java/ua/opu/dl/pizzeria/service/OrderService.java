@@ -13,6 +13,6 @@ public interface OrderService {
     void deleteOrder(Order order);
 
     Order loadById(Integer id);
-
+    Order loadByPhone(String phone);
     List<Order> loadAllOrder();
 }

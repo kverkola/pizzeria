@@ -13,6 +13,7 @@ public interface OrderDao {
 	void deleteOrder(Order order);
 
 	Order loadById(Integer id);
+	Order loadByPhone(String phone);
 
 	List<Order> loadAllOrders();
 }
