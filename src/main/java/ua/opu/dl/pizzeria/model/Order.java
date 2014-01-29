@@ -35,6 +35,14 @@ public class Order {
         this.phone = phone;
     }
 
+    public static Integer getProductIdCounter() {
+        return productIdCounter;
+    }
+
+    public static void setProductIdCounter(Integer productIdCounter) {
+        Order.productIdCounter = productIdCounter;
+    }
+
     public int getId() {
         return id;
     }

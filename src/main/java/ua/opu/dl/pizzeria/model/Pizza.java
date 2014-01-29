@@ -12,6 +12,15 @@ public class Pizza extends Product {
 	public Pizza() {
 	}
 
+    public Pizza(String name, String logo,
+                 String description, Integer id, double price) {
+
+        super(id, name, 1, price);
+
+        this.logo = logo;
+        this.description = description;
+    }
+
 	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
 			String description, Integer id, double price) {
 
