@@ -12,9 +12,9 @@ public interface PizzaDao {
 
 	void deletePizza(Pizza pizza);
 
-	Pizza loadById(Integer id);
+	Pizza loadById(long id);
 
-	List<Pizza> loadByOrder(Integer orderId);
+	List<Pizza> loadByOrder(long orderId);
 
     List<Pizza> loadAll();
 }

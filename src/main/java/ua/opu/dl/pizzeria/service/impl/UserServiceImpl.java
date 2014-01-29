@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User loadById(Integer id) {
+	public User loadById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

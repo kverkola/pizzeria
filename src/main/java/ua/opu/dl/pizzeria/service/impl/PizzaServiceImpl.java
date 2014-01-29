@@ -23,7 +23,7 @@ public class PizzaServiceImpl implements PizzaService {
 	private List<Ingredient> listIngredients;
 
 	@Override
-	public Pizza loadById(Integer id) {
+	public Pizza loadById(long id) {
 		ingredientsMap = new HashMap<Ingredient, Integer>();
 		pizza = pizzaDao.loadById(id);
 		listIngredients = ingredientDao.loadIngredientsByPizza(pizza.getId());
@@ -55,7 +55,7 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
-	public List<Pizza> loadByOrder(Integer orderId) {
+	public List<Pizza> loadByOrder(long orderId) {
 		List<Pizza> listPizzas = pizzaDao.loadByOrder(orderId);
 		for (int a = 0; a < listPizzas.size(); a++) {
 			pizza = listPizzas.get(a);

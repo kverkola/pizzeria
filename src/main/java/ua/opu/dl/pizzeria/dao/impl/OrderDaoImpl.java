@@ -59,7 +59,7 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Order loadById(Integer id) {
+	public Order loadById(long id) {
 
 		
         return jdbcTemplate.queryForObject(loadOrderById,rowMapper, id);

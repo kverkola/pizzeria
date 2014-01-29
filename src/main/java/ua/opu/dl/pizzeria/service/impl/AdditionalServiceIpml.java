@@ -31,13 +31,13 @@ public class AdditionalServiceIpml implements AdditionalService {
 	}
 
 	@Override
-	public Additional loadById(Integer id) {
+	public Additional loadById(long id) {
 
 		return addDao.loadById(id);
 	}
 
 	@Override
-	public List<Additional> loadByOrder(Integer orderId) {
+	public List<Additional> loadByOrder(long orderId) {
 
 		return addDao.loadAdditionalsByOrder(orderId);
 	}

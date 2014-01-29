@@ -11,7 +11,7 @@ public interface IngredientDao {
 
 	void deleteIngredient(Ingredient ingredient);
 
-	Ingredient loadById(Integer id);
+	Ingredient loadById(long id);
 
-	List<Ingredient> loadIngredientsByPizza(Integer pizzaId);
+	List<Ingredient> loadIngredientsByPizza(long pizzaId);
 }

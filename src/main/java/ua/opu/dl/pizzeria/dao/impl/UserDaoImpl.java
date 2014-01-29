@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao{
 	}
 
 	@Override
-	public User loadById(Integer id) {
+	public User loadById(long id) {
 		
 		return new User("pup","pupkin","login","root",Status.COOK);
 	}

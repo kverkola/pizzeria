@@ -31,13 +31,13 @@ public class IngredientServiceImpl implements IngredientService {
 	}
 
 	@Override
-	public Ingredient loadById(Integer id) {
+	public Ingredient loadById(long id) {
 
 		return ingredientDao.loadById(id);
 	}
 
 	@Override
-	public List<Ingredient> loadByPizza(Integer pizzaId) {
+	public List<Ingredient> loadByPizza(long pizzaId) {
 
 		return ingredientDao.loadIngredientsByPizza(pizzaId);
 	}

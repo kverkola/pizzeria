@@ -2,7 +2,7 @@ package ua.opu.dl.pizzeria.model;
 
 public class Additional extends Product {
 
-	private int orderId;
+	private long orderId;
     private String logo;
 
     public Additional() {
@@ -15,11 +15,11 @@ public class Additional extends Product {
         this.logo = logo;
     }
 
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 

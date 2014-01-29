@@ -12,7 +12,7 @@ public interface OrderDao {
 
 	void deleteOrder(Order order);
 
-	Order loadById(Integer id);
+	Order loadById(long id);
 	Order loadByPhone(String phone);
 
 	List<Order> loadAllOrders();

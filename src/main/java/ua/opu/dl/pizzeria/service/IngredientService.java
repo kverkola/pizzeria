@@ -11,7 +11,7 @@ public interface IngredientService {
 
 	void deleteIngredient(Ingredient ingredient);
 
-	Ingredient loadById(Integer id);
+	Ingredient loadById(long id);
 
-	List<Ingredient> loadByPizza(Integer pizzaId);
+	List<Ingredient> loadByPizza(long pizzaId);
 }

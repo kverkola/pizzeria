@@ -58,13 +58,13 @@ public class IngredientDaoImpl implements IngredientDao {
 	}
 
 	@Override
-	public Ingredient loadById(Integer id) {
+	public Ingredient loadById(long id) {
 
 		return jdbcTemplate.queryForObject(loadIngredientsById, rowMapper, id);
 	}
 
 	@Override
-	public List<Ingredient> loadIngredientsByPizza(Integer pizzaId) {
+	public List<Ingredient> loadIngredientsByPizza(long pizzaId) {
 
 		return jdbcTemplate.query(loadIngredientsByPizzaId, rowMapper, String.valueOf(pizzaId));
 	}

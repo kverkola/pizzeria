@@ -11,10 +11,10 @@ public interface AdditionalService {
 
 	void deleteAdditional(Additional additional);
 
-	Additional loadById(Integer id);
+	Additional loadById(long id);
 
 	Additional loadByName(String name);
 
-	List<Additional> loadByOrder(Integer orderId);
+	List<Additional> loadByOrder(long orderId);
 	List<Additional> AllAdditionals();
 }

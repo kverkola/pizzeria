@@ -3,7 +3,7 @@ package ua.opu.dl.pizzeria.model;
 public class Product {
 
     private Integer productId;
-    private Integer id;
+    private long id;
     private String name;
     private int quantity;
     private double price;
@@ -12,7 +12,7 @@ public class Product {
 
     }
 
-    public Product(Integer id, String name, int quantity, double price) {
+    public Product(long id, String name, int quantity, double price) {
 
         this.id = id;
         this.name = name;
@@ -40,11 +40,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order loadById(Integer id) {
+	public Order loadById(long id) {
 		order = orderDao.loadById(id);
 		products = new ArrayList<Product>();
 		products.addAll(pizzaDao.loadByOrder(id));
