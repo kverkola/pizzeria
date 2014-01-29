@@ -17,7 +17,7 @@
 			<td>${order.id}</td>
 		</tr>
 		<tr>
-			<td><p class="text-info"><strong>Pizza</strong></p></td>
+			<td><p class="text-info"><strong>Products</strong></p></td>
 			
 <td>
 				<table class="table table-hover" style="width: 50%;">
@@ -28,11 +28,11 @@
             <th>Price</th>
         </tr>
     </thead>
-    <c:forEach var="entry" items="${order.pizzas}">
+    <c:forEach var="entry" items="${order.products}">
         <tr>
-            <td><a href="<c:url value='/order/showIngredient/${entry.key.id}'/>">${entry.key.name}<a></td>
-            <td>${entry.value}</td>
-            <td>${entry.key.price}</td>
+            <td><a href="<c:url value='/order/showIngredient/${entry.id}'/>">${entry.name}<a></td>
+             <td>${entry.quantity}</td>
+            <td>${entry.price}</td>
         </tr>
     </c:forEach>
 </table>
@@ -40,25 +40,8 @@
 			
 		</tr>
 		
-		<tr>
-			<td><p class="text-info"><strong>Additionals</strong></p></td>
-			<td>
-				<table class="table " style="width: 50%;">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Count</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <c:forEach var="entry" items="${order.additional}">
-        <tr>
-            <td>${entry.key.name}</td>
-            <td>${entry.value}</td>
-            <td>${entry.key.price}</td>
-        </tr>
-    </c:forEach>
-</table>
+		
+   
 		</td>
 		</tr>
 		<tr>
