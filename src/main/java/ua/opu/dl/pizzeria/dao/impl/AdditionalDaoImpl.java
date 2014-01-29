@@ -47,8 +47,8 @@ public class AdditionalDaoImpl implements AdditionalDao {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 
-				ps.setLong(1, additional.getOrderId());
-				ps.setString(2, additional.getName());
+				ps.setString(1, additional.getName());
+				ps.setLong(2, additional.getOrderId());
 				ps.setDouble(3, additional.getPrice());
 				ps.setString(4, additional.getLogo());
 			}

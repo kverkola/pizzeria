@@ -38,7 +38,7 @@ public class OrderController {
 	private AdditionalService additionalService;
 
 	@RequestMapping(value = "/add-pizza/{id}", method = RequestMethod.GET)
-	public String addPizza(@PathVariable("id") Integer id, HttpSession session) {
+	public String addPizza(@PathVariable("id") long id, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
@@ -76,7 +76,7 @@ public class OrderController {
     }
 
 	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)
-	public String addAdditional(@PathVariable("id") Integer id,
+	public String addAdditional(@PathVariable("id") long id,
 			HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
@@ -95,7 +95,7 @@ public class OrderController {
 	}
 
     @RequestMapping(value = "/remove-product/{productId}", method = RequestMethod.GET)
-    public String removePizza(@PathVariable("productId") Integer productId,
+    public String removePizza(@PathVariable("productId") long productId,
                               HttpSession session) {
 
         Order order = (Order) session.getAttribute("order");
@@ -117,7 +117,7 @@ public class OrderController {
 
 	@RequestMapping(value = "/change-product-count", method = RequestMethod.POST,
             params = {"productId", "value"})
-	public String changePizzasCount(@RequestParam Integer productId,
+	public String changePizzasCount(@RequestParam long productId,
 			@RequestParam Integer value, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");

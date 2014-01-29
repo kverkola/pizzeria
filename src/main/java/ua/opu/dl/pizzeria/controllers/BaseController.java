@@ -53,9 +53,7 @@ public class BaseController {
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(ModelMap model) {
 //test page
-    	Additional additional=new Additional("pepsi",6,"pepsi.png");
-    	additional.setOrderId(0);
-    	additionalService.addAdditional(additional);
+    
     	
 		return "about";
 	}

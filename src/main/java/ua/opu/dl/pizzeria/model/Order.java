@@ -117,7 +117,7 @@ public class Order {
         setPrice(getPrice() + product.getPrice());
     }
 
-    public void removeProduct(Integer productId) {
+    public void removeProduct(long productId) {
 
         for (Product product : products) {
             if (product.getProductId().equals(productId)) {
@@ -128,7 +128,7 @@ public class Order {
         }
     }
 
-    public void changeProductQuantity(Integer productId, Integer quantity) {
+    public void changeProductQuantity(long productId, Integer quantity) {
 
         for (Product product : products) {
             if (product.getProductId().equals(productId)) {
