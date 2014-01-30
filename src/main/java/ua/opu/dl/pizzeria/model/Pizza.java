@@ -5,7 +5,7 @@ import java.util.Map;
 public class Pizza extends Product {
 
 	private Map<Ingredient, Integer> map;
-	private int orderId;
+	private long orderId;
 	private String logo;
 	private String description;
 
@@ -13,7 +13,7 @@ public class Pizza extends Product {
 	}
 
     public Pizza(String name, String logo,
-                 String description, Integer id, double price) {
+                 String description, long id, double price) {
 
         super(id, name, 1, price);
 
@@ -22,7 +22,7 @@ public class Pizza extends Product {
     }
 
 	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
-			String description, Integer id, double price) {
+			String description, long id, double price) {
 
         super(id, name, 1, price);
 
@@ -57,11 +57,11 @@ public class Pizza extends Product {
 		this.description = description;
 	}
 
-	public int getOrderId() {
+	public long getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(int orderId) {
+	public void setOrderId(long orderId) {
 		this.orderId = orderId;
 	}
 
@@ -84,7 +84,7 @@ public class Pizza extends Product {
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
 		result = prime * result + ((map == null) ? 0 : map.hashCode());
-		result = prime * result + orderId;
+		result = prime * result + (int) (orderId ^ (orderId >>> 32));
 		return result;
 	}
 

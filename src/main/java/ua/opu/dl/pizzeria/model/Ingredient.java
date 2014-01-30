@@ -1,8 +1,8 @@
 package ua.opu.dl.pizzeria.model;
 
 public class Ingredient {
-	private int id;
-	private int pizzaId;
+	private long id;
+	private long pizzaId;
     private String name;
     private double weight;
     private double price;
@@ -43,20 +43,20 @@ public class Ingredient {
 
   
 
-    public Integer getId() {
+    public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Integer getPizzaId() {
+	public long getPizzaId() {
 		return pizzaId;
 	}
 
-	public void setPizzaId(Integer pizzaId) {
-		this.pizzaId = pizzaId;
+	public void setPizzaId(long id) {
+		this.pizzaId = id;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class Ingredient {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + pizzaId;
+		result = prime * result + (int) (pizzaId ^ (pizzaId >>> 32));
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -97,6 +97,7 @@ public class Ingredient {
 			return false;
 		return true;
 	}
+
 
   
 }

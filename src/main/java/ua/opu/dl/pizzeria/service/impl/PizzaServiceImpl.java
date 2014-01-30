@@ -2,6 +2,7 @@ package ua.opu.dl.pizzeria.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,8 +38,21 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Override
 	public void addPizza(Pizza pizza) {
-
-		pizzaDao.addPizza(pizza);
+Map<Ingredient,Integer> ingredients=pizza.getMap();
+		long id=pizzaDao.addPizza(pizza);
+		int count;
+		for (Ingredient i: ingredients.keySet()) {
+		count=ingredients.get(i);
+			for (int j = 0; j == count; j++) {
+				i.setPizzaId(id);
+				ingredientDao.addIngredient(i);
+			}
+			
+			
+		}
+		
+		
+		
 	}
 
 	@Override

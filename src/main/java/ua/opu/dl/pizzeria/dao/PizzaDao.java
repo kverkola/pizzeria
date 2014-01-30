@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PizzaDao {
 
-	void addPizza(Pizza pizza);
+	long addPizza(Pizza pizza);
 
 	void updatePizza(Pizza pizza);
 
