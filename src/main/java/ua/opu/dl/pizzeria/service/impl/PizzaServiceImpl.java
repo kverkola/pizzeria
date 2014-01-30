@@ -40,10 +40,11 @@ public class PizzaServiceImpl implements PizzaService {
 	public void addPizza(Pizza pizza) {
 Map<Ingredient,Integer> ingredients=pizza.getMap();
 		long id=pizzaDao.addPizza(pizza);
+		System.out.println(id);
 		int count;
 		for (Ingredient i: ingredients.keySet()) {
 		count=ingredients.get(i);
-			for (int j = 0; j == count; j++) {
+			for (int j = 1; j <= count; j++) {
 				i.setPizzaId(id);
 				ingredientDao.addIngredient(i);
 			}

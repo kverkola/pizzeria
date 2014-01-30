@@ -1,3 +1,10 @@
+/* 
+
+Пример реализации реляционной модели 
+EAV/CR – Entity-Attribute-Value with Classes and Relationships 
+(Сущность-Атрибут-Значение с Классами и Отношениями)." 
+*/
+
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
 drop table OBJECTS CASCADE CONSTRAINTS;
@@ -349,16 +356,12 @@ PROCEDURE addAdditional(
     name  IN VARCHAR2,
     order_id in varchar2,
     price IN VARCHAR2,
-    logo in varchar2
-    
+    logo in varchar2   
     )
 is
  id   NUMBER(20);
 BEGIN
- 
- 
 id:=get_id;
- 
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,2,'additional',NULL)
 INTO ATTRIBUTES values(24,id,order_id,null)
@@ -366,7 +369,6 @@ INTO ATTRIBUTES values(6,id,name,null)
 INTO ATTRIBUTES values(7,id,price,null)
 INTO ATTRIBUTES values(25,id,logo,null)
 select * from dual;
-
 END addAdditional;
 /
 
@@ -383,15 +385,11 @@ PROCEDURE addIngredients(
     name  IN VARCHAR2,
     price IN VARCHAR2,
     weight in varchar2
-    
     )
 is
  id   NUMBER(20);
 BEGIN
- 
- 
 id:=get_id;
- 
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,3,'ingr',NULL)
 INTO ATTRIBUTES values(8,id,name,null)
@@ -403,5 +401,35 @@ END addIngredients;
 /
 
 
+--add pizza
+CREATE OR REPLACE
+procedure addPizza(
+     name  IN VARCHAR2,
+    order_id in varchar2,
+    price IN VARCHAR2,
+    logo in varchar2,
+    description in varchar2,
+    id_ out number ) 
+is
+
+ id   NUMBER(20);
+BEGIN
+id:=get_id;
+ insert all 
+INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,5,'pizza',NULL)
+INTO ATTRIBUTES values(15,id,name,null)
+INTO ATTRIBUTES values(23,id,order_id,null)
+INTO ATTRIBUTES values(16,id,price,null)
+INTO ATTRIBUTES values(26,id,logo,null)
+INTO ATTRIBUTES values(27,id,description,null)
+select * from dual;
+id_:=id;
+END addPizza;
+/
+
+
+
+
 commit;
+
 

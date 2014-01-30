@@ -16,6 +16,7 @@ import ua.opu.dl.pizzeria.model.Additional;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.AdditionalService;
+import ua.opu.dl.pizzeria.service.IngredientService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 @Controller
@@ -26,7 +27,8 @@ public class BaseController {
 
 	@Autowired
 	private AdditionalService additionalService;
-
+	@Autowired
+	private IngredientService ingredientService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -59,7 +61,7 @@ public class BaseController {
     @RequestMapping(value = "/about", method = RequestMethod.GET)
     public String about(ModelMap model) {
 //test page
-    	List<Pizza> pizzaList = new ArrayList();
+   	List<Pizza> pizzaList = new ArrayList();
     	
    			Map<Ingredient, Integer> ingredientMap = new HashMap();
     			ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
@@ -82,7 +84,9 @@ public class BaseController {
    						descrips[i], i, 45));
     			}
     	pizzaService.addPizza(pizzaList.get(1));
-    	
+//    	Ingredient ingr=new Ingredient("Cheese", 90, 20);
+//    	ingr.setPizzaId(0);
+//    	ingredientService.addIngredient(ingr);
 		return "about";
 	}
 }
