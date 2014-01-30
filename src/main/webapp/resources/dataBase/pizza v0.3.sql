@@ -1,9 +1,4 @@
-/* 
 
-Пример реализации реляционной модели 
-EAV/CR – Entity-Attribute-Value with Classes and Relationships 
-(Сущность-Атрибут-Значение с Классами и Отношениями)." 
-*/
 
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
@@ -369,6 +364,12 @@ INTO ATTRIBUTES values(6,id,name,null)
 INTO ATTRIBUTES values(7,id,price,null)
 INTO ATTRIBUTES values(25,id,logo,null)
 select * from dual;
+
+if order_id>0 then
+INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,order_id,id);
+end if;
+
+
 END addAdditional;
 /
 
@@ -397,6 +398,9 @@ INTO ATTRIBUTES values(22,id,pizza_id,null)
 INTO ATTRIBUTES values(9,id,price,null)
 INTO ATTRIBUTES values(10,id,weight,null)
 select * from dual;
+if pizza_id>0 then
+INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,pizza_id,id);
+end if;
 END addIngredients;
 /
 
@@ -431,5 +435,3 @@ END addPizza;
 
 
 commit;
-
-
