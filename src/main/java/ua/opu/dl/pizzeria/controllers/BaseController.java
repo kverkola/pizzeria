@@ -33,6 +33,7 @@ public class BaseController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
 		Locale.setDefault(Locale.ENGLISH);
+
 		return "index";
 	}
 
@@ -44,51 +45,26 @@ public class BaseController {
 		return "menu";
 	}
 
-    @RequestMapping(value = "/Additional", method = RequestMethod.GET)
+	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
 	public String additional(ModelMap model) {
-		
-		model.addAttribute("add", additionalService.loadByOrder(0));//изменить на 0 позже
+
+		model.addAttribute("add", additionalService.loadByOrder(0));// изменить
+																	// на 0
+																	// позже
 
 		return "Additional";
 	}
 
-    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
-    public String feedback() {
+	@RequestMapping(value = "/feedback", method = RequestMethod.GET)
+	public String feedback() {
 
-        return "feedback";
-    }
+		return "feedback";
+	}
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
-    public String about(ModelMap model) {
-//test page
-   	List<Pizza> pizzaList = new ArrayList();
-    	
-   			Map<Ingredient, Integer> ingredientMap = new HashMap();
-    			ingredientMap.put(new Ingredient("Ham", 100, 30), 1);
-    			ingredientMap.put(new Ingredient("Vegetables", 80, 10), 1);
-    			ingredientMap.put(new Ingredient("Cheese", 90, 20), 1);
-    			ingredientMap.put(new Ingredient("Sauce", 60, 15), 1);
-    			ingredientMap.put(new Ingredient("Crust", 300, 30), 1);
-    	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(ModelMap model) {
+		// test page
 
-    			String[] imgs = { "chikenita_middle.png", "img_2.png",
-    					"pizza_middle.png", "tanu_mini.png" };
-    			String[] descrips = {
-    					"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-    					"Aenean commodo ligula eget dolor. Aenean massa.",
-    					"Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    					"Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim." };
-    	
-   			for (int i = 0; i < imgs.length; i++) {
-    				pizzaList.add(new Pizza("TestPizza " + i, ingredientMap, imgs[i],
-   						descrips[i], i, 45));
-    			}
-    	pizzaService.addPizza(pizzaList.get(1));
-//    	Ingredient ingr=new Ingredient("Cheese", 90, 20);
-//    	ingr.setPizzaId(0);
-//    	ingredientService.addIngredient(ingr);
 		return "about";
 	}
 }
-
-
