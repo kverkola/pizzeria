@@ -12,16 +12,16 @@
                 <td><img src="<c:url value='/resources/${add.logo}'/>"/></td>
                 <td style="padding-left: 20px; vertical-align: top;">
                     <h3>${add.name}</h3>
-                    
+
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td style="text-align: right;">
-                    ${add.price}$ &nbsp;&nbsp;
-                        <a href="<c:url value='/order/add-additional/${add.id}'/>" class="btn btn-sm btn-success">
-                            Add to cart
-                        </a>
+                        ${add.price}$ &nbsp;&nbsp;
+                    <a href="<c:url value='/order/add-additional/${add.id}'/>" class="btn btn-sm btn-success">
+                        Add to cart
+                    </a>
                 </td>
             </tr>
         </c:forEach>

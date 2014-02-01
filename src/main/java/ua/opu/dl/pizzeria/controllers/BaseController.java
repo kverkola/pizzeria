@@ -52,7 +52,7 @@ public class BaseController {
 																	// на 0
 																	// позже
 
-		return "Additional";
+		return "additional";
 	}
 
 	@RequestMapping(value = "/feedback", method = RequestMethod.GET)

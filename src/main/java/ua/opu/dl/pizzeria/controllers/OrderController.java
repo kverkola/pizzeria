@@ -77,7 +77,7 @@ public class OrderController {
 
         Order order = (Order) session.getAttribute("order");
 
-        if (order.getProducts().size() == 0) {
+        if (order != null && order.getProducts().size() == 0) {
 
             LOG.error("Your must add pizza to order before send it!");
 

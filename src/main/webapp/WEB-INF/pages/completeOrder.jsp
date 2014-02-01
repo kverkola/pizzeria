@@ -29,7 +29,7 @@
             </td>
             <td>
                 <div>
-                    <form id="pizzas + ${status.count}" method="POST" action="/order/change-product-count" style="display: inline-block; text-align: center">
+                    <form id="pizzas + ${status.count}" method="POST" action="<c:url value='/order/change-product-count'/>" style="display: inline-block; text-align: center">
                         <input name="productId" type="hidden" value="${pizza.productId}"/>
                         <input name="value" type="text" class="form-control input-sm" value="${pizza.quantity}"
                                style="width: 45px; text-align: center;"/>
@@ -62,7 +62,7 @@
             </td>
             <td>
                 <div>
-                    <form id="additions + ${status.count}" method="POST" action="/order/change-product-count"
+                    <form id="additions + ${status.count}" method="POST" action="<c:url value='/order/change-product-count'/>"
                           style="display: inline-block; text-align: center">
                         <input name="productId" type="hidden" value="${addition.productId}" />
                         <input name="value" type="text" class="form-control input-sm" value="${addition.quantity}"
@@ -99,7 +99,7 @@
         </div>
     </c:if>
 
-    <form class="bs-example form-horizontal" method="POST" action="/order/send-order">
+    <form class="bs-example form-horizontal" method="POST" action="<c:url value='/order/send-order'/>">
         <fieldset>
             <legend>Order form</legend>
             <div class="form-group">
