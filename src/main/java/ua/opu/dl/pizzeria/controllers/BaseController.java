@@ -48,10 +48,7 @@ public class BaseController {
 	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
 	public String additional(ModelMap model) {
 
-		model.addAttribute("add", additionalService.loadByOrder(0));// изменить
-																	// на 0
-																	// позже
-
+		model.addAttribute("add", additionalService.loadByOrder(0));
 		return "additions";
 	}
 
@@ -64,7 +61,10 @@ public class BaseController {
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
 	public String about(ModelMap model) {
 		// test page
-
+		
+		
+		
+		
 		return "about";
 	}
 }

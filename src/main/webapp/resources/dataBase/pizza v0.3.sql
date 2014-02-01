@@ -1,5 +1,6 @@
 
 
+
 /* 
 
 Пример реализации реляционной модели 
@@ -447,12 +448,42 @@ INTO ATTRIBUTES values(26,id,logo,null)
 INTO ATTRIBUTES values(27,id,description,null)
 select * from dual;
 id_:=id;
+if order_id>0 then
+INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (23,order_id,id);
+end if;
 DBMS_LOCK.sleep(0.9);
 END addPizza;
 /
 
 
 
+--add order
+CREATE OR REPLACE
+procedure addOrder(
+    starttime IN VARCHAR2,
+    endtime in varchar2,
+    price in varchar2,
+    status in varchar2,
+    phone in varchar2,
+    id_ out number) 
+is
+ id   NUMBER(20);
+BEGIN
+id:=get_id;
+ insert all 
+INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,4,'order',NULL)
+INTO ATTRIBUTES values(11,id,starttime,null)
+INTO ATTRIBUTES values(28,id,status,null)
+INTO ATTRIBUTES values(12,id,endtime,null)
+INTO ATTRIBUTES values(13,id,price,null)
+INTO ATTRIBUTES values(14,id,phone,null)
+select * from dual;
+id_:=id;
+DBMS_LOCK.sleep(0.9);
+END addOrder;
+/
+
+--ua.opu.dl.pizzeria.model.Pizza
 
 CREATE OR REPLACE
 procedure addd 
@@ -510,5 +541,4 @@ END addd;
 call addd();
 
 commit;
-
 

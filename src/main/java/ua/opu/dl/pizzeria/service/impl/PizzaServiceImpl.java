@@ -10,6 +10,7 @@ import ua.opu.dl.pizzeria.dao.IngredientDao;
 import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 public class PizzaServiceImpl implements PizzaService {
@@ -17,7 +18,7 @@ public class PizzaServiceImpl implements PizzaService {
 	@Autowired
 	private PizzaDao pizzaDao;
 	@Autowired
-	private IngredientDao ingredientDao;
+	private IngredientServiceImpl ingredientService;
 	private Pizza pizza;
 	private HashMap<Ingredient, Integer> ingredientsMap;
 	private List<Ingredient> listIngredients;
@@ -26,7 +27,7 @@ public class PizzaServiceImpl implements PizzaService {
 	public Pizza loadById(long id) {
 		ingredientsMap = new HashMap<Ingredient, Integer>();
 		pizza = pizzaDao.loadById(id);
-		listIngredients = ingredientDao.loadIngredientsByPizza(pizza.getId());
+		listIngredients = ingredientService.loadByPizza(pizza.getId());
 		Integer am;
 		for (Ingredient i : listIngredients) {
 			am = ingredientsMap.get(i);
@@ -38,22 +39,19 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Override
 	public void addPizza(Pizza pizza) {
-Map<Ingredient,Integer> ingredients=pizza.getMap();
-		long id=pizzaDao.addPizza(pizza);
+		Map<Ingredient, Integer> ingredients = pizza.getMap();
+		long id = pizzaDao.addPizza(pizza);
 		System.out.println(id);
 		int count;
-		for (Ingredient i: ingredients.keySet()) {
-		count=ingredients.get(i);
+		for (Ingredient i : ingredients.keySet()) {
+			count = ingredients.get(i);
 			for (int j = 1; j <= count; j++) {
 				i.setPizzaId(id);
-				ingredientDao.addIngredient(i);
+				ingredientService.addIngredient(i);
 			}
-			
-			
+
 		}
-		
-		
-		
+
 	}
 
 	@Override
@@ -73,8 +71,7 @@ Map<Ingredient,Integer> ingredients=pizza.getMap();
 		List<Pizza> listPizzas = pizzaDao.loadByOrder(orderId);
 		for (int a = 0; a < listPizzas.size(); a++) {
 			pizza = listPizzas.get(a);
-			listIngredients = ingredientDao.loadIngredientsByPizza(pizza
-					.getId());
+			listIngredients = ingredientService.loadByPizza(pizza.getId());
 			ingredientsMap = new HashMap<Ingredient, Integer>();
 			Integer am;
 			for (Ingredient i : listIngredients) {

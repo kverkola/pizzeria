@@ -12,7 +12,7 @@ public class Order {
     private static final Logger LOG = LoggerFactory.getLogger(Order.class);
     private static Integer productIdCounter = 0;
 
-    private int id;
+    private long id;
     private Status status;
     private String starttime;
     private String endtime;
@@ -44,11 +44,11 @@ public class Order {
         Order.productIdCounter = productIdCounter;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

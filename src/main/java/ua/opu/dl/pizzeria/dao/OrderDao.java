@@ -6,7 +6,7 @@ import java.util.List;
 import ua.opu.dl.pizzeria.model.Order;
 
 public interface OrderDao {
-	void addOrder(Order order);
+	long addOrder(Order order);
 
 	void updateOrder(Order order);
 

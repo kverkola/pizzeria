@@ -168,11 +168,10 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
-	public String order(@RequestParam("orderId") Integer orderId,
+	public String order(@RequestParam("orderId") long orderId,
 			HttpSession session, ModelMap model) {
 
-		Order order = orderService.loadById(orderId);
-
+		Order order = orderService.loadById(orderId);		
 		session.setAttribute("orderById", order);
 		model.addAttribute("order", order);
 
@@ -180,7 +179,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/showIngredient/{id}", method = RequestMethod.GET)
-	public String showIngredient(@PathVariable("id") Integer id,
+	public String showIngredient(@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
 
 		Pizza pizza = pizzaService.loadById(id);
