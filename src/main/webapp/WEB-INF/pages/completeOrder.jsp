@@ -90,15 +90,37 @@
 <tr>
     <hr style="border-color: #68a9ff;">
 </tr>
-<tr>
-    <td>
-        <p class="text-center text-info" style="font-size: 25px; padding-left: 30%; padding-right: 30%">
-            <b>Total price:</b> &nbsp;&nbsp;&nbsp;
-            <c:set var="orderName" value="order"/>
-            <b>${sessionScope[orderName].price} $</b>
-            <a href="<c:url value='/order/send-order'/>" class="btn btn-large btn-block btn-primary">
-                Send
-            </a>
-        </p>
-    </td>
-</tr>
+
+<div class="well">
+    <form class="bs-example form-horizontal" method="POST" action="/order/send-order">
+        <fieldset>
+            <legend>Order form</legend>
+            <div class="form-group">
+                <label for="name" class="col-lg-2 control-label">Name</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-lg-2 control-label">Address</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="address" id="address" placeholder="Address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-lg-2 control-label">Phone</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                </div>
+            </div>
+            <p class="text-center text-info" style="font-size: 25px; padding-left: 30%; padding-right: 30%">
+                <b>Total price:</b> &nbsp;&nbsp;&nbsp;
+                <c:set var="orderName" value="order"/>
+                <b>${sessionScope[orderName].price} $</b>
+                <button type="submit" class="btn btn-large btn-block btn-primary">
+                    Send
+                </button>
+            </p>
+        </fieldset>
+    </form>
+</div>

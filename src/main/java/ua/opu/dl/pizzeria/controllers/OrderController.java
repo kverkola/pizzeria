@@ -5,20 +5,16 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
-import ua.opu.dl.pizzeria.model.Additional;
-import ua.opu.dl.pizzeria.model.Order;
-import ua.opu.dl.pizzeria.model.Pizza;
-import ua.opu.dl.pizzeria.model.Product;
+import ua.opu.dl.pizzeria.model.*;
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -75,12 +71,21 @@ public class OrderController {
         return "redirect:/menu";
     }
 
-    @RequestMapping(value = "/send-order", method = RequestMethod.GET)
-    public String send(ModelMap model, HttpSession session) {
+    @RequestMapping(value = "/send-order", method = RequestMethod.POST)
+    public String send(@Valid GuestUser guestUser, BindingResult result,
+                       ModelMap model, HttpSession session) {
 
         session.setAttribute("order", null);
         session.setAttribute("pizzasInOrder", null);
         session.setAttribute("additionalInOrder", null);
+
+        if (result.hasErrors()) {
+            LOG.info("Error!");
+        }
+
+        LOG.info("Name: " + guestUser.getName() +
+                ", address: " + guestUser.getAddress() +
+                ", phone: " + guestUser.getPhone());
 
         model.addAttribute("showResult", "success");
 

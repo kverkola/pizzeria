@@ -4,8 +4,8 @@
 <div>
     <form method="get" action="order/searchOrder">
             <form class="form-search">
-            <input type="text" class="inp" name="orderId" >
-            <button type="submit" class="btn">Search order</button>
+            <input type="text" class="form-control col-lg-8" placeholder="Search" type="text" class="inp" name="orderId" >
+            <button type="submit" class="btn btn-sm btn-default">Search order</button>
             </form>
     </form>
 
