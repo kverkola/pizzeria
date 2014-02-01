@@ -75,7 +75,18 @@ public class OrderController {
     public String send(@Valid GuestUser guestUser, BindingResult result,
                        ModelMap model, HttpSession session) {
 
-        if (result.hasErrors()) {
+        Order order = (Order) session.getAttribute("order");
+
+        if (order.getProducts().size() == 0) {
+
+            LOG.error("Your must add pizza to order before send it!");
+
+            model.addAttribute("errorMessage", "Your must add pizza to order before send it!");
+            model.addAttribute("guestUser", guestUser);
+
+            return "completeOrder";
+
+        } else if (result.hasErrors()) {
 
             LOG.error("Wrong guest authorities!");
 
