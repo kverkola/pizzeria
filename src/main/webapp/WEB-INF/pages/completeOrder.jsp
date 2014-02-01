@@ -84,7 +84,6 @@
         </tr>
     </c:forEach>
     <!-- Additions in order end -->
-
 </table>
 
 <tr>

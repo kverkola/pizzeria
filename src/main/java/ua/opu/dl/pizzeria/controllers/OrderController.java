@@ -88,9 +88,9 @@ public class OrderController {
 
         } else if (result.hasErrors()) {
 
-            LOG.error("Wrong guest authorities!");
+            LOG.error("Wrong input data!");
 
-            model.addAttribute("errorMessage", "Wrong guest authorities!");
+            model.addAttribute("errorMessage", "Wrong input data!");
             model.addAttribute("guestUser", guestUser);
 
             return "completeOrder";
@@ -156,11 +156,13 @@ public class OrderController {
 			@RequestParam Integer value, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
-        order.changeProductQuantity(productId, value);
 
-		session.setAttribute("order", order);
-		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-        session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
+        if (value > 0) {
+            order.changeProductQuantity(productId, value);
+            session.setAttribute("order", order);
+            session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+            session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
+        }
 
 		return "redirect:/order/make-order";
 	}
