@@ -75,21 +75,28 @@ public class OrderController {
     public String send(@Valid GuestUser guestUser, BindingResult result,
                        ModelMap model, HttpSession session) {
 
-        session.setAttribute("order", null);
-        session.setAttribute("pizzasInOrder", null);
-        session.setAttribute("additionalInOrder", null);
-
         if (result.hasErrors()) {
-            LOG.info("Error!");
+
+            LOG.error("Wrong guest authorities!");
+
+            model.addAttribute("errorMessage", "Wrong guest authorities!");
+            model.addAttribute("guestUser", guestUser);
+
+            return "completeOrder";
+
+        } else {
+            session.setAttribute("order", null);
+            session.setAttribute("pizzasInOrder", null);
+            session.setAttribute("additionalInOrder", null);
+
+            LOG.info("Name: " + guestUser.getName() +
+                    ", address: " + guestUser.getAddress() +
+                    ", phone: " + guestUser.getPhone());
+
+            model.addAttribute("showResult", "success");
+
+            return "index";
         }
-
-        LOG.info("Name: " + guestUser.getName() +
-                ", address: " + guestUser.getAddress() +
-                ", phone: " + guestUser.getPhone());
-
-        model.addAttribute("showResult", "success");
-
-        return "index";
     }
 
 	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)

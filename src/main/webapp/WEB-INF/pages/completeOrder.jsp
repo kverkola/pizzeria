@@ -92,25 +92,36 @@
 </tr>
 
 <div class="well">
+
+    <c:if test="${errorMessage != null}">
+        <div class="alert alert-dismissable alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${errorMessage}</strong>
+        </div>
+    </c:if>
+
     <form class="bs-example form-horizontal" method="POST" action="/order/send-order">
         <fieldset>
             <legend>Order form</legend>
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="name" id="name" placeholder="Name">
+                    <input type="text" value="${guestUser.name}" class="form-control"
+                           name="name" id="name" placeholder="Name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="address" class="col-lg-2 control-label">Address</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="address" id="address" placeholder="Address">
+                    <input type="text" value="${guestUser.address}" class="form-control"
+                           name="address" id="address" placeholder="Address">
                 </div>
             </div>
             <div class="form-group">
                 <label for="phone" class="col-lg-2 control-label">Phone</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone">
+                    <input type="text" value="${guestUser.phone}" class="form-control"
+                           name="phone" id="phone" placeholder="Phone">
                 </div>
             </div>
             <p class="text-center text-info" style="font-size: 25px; padding-left: 30%; padding-right: 30%">
