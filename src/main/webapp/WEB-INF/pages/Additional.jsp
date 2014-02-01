@@ -3,7 +3,7 @@
 
 <div>
     <h1>Additional</h1>
-    <table>
+    <table class="table table-condensed">
         <c:forEach var="add" items="${add}">
             <tr>
                 <th colspan="2"><hr style="border-color: #68a9ff;"></th>

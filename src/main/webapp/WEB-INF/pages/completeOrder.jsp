@@ -1,13 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<style>
-    th, td {
-        text-align: center;
-        vertical-align: middle;
-    }
-</style>
-
 <h4>Your order</h4>
 
 <hr style="border-color: #68a9ff;">
@@ -27,6 +20,12 @@
         <tr>
             <td style="text-align: left;">
                 ${pizza.name}
+                    <p>
+                        <span class="label label-info">contains:</span>
+                        <c:forEach var="ingredient" items="${pizza.map}">
+                            ${ingredient.key.name} - <span class="badge">${ingredient.value}</span>&nbsp;
+                        </c:forEach>
+                    </p>
             </td>
             <td>
                 <div>
@@ -84,7 +83,22 @@
             </td>
         </tr>
     </c:forEach>
-
     <!-- Additions in order end -->
 
 </table>
+
+<tr>
+    <hr style="border-color: #68a9ff;">
+</tr>
+<tr>
+    <td>
+        <p class="text-center text-info" style="font-size: 25px; padding-left: 30%; padding-right: 30%">
+            <b>Total price:</b> &nbsp;&nbsp;&nbsp;
+            <c:set var="orderName" value="order"/>
+            <b>${sessionScope[orderName].price} $</b>
+            <a href="<c:url value='/order/send-order'/>" class="btn btn-large btn-block btn-primary">
+                Send
+            </a>
+        </p>
+    </td>
+</tr>

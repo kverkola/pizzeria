@@ -151,9 +151,9 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="https://code.jquery.com/jquery.js" />
-<script src="<c:url value='/resources/js/bootstrap.min.js'/>" />
-<script src="<c:url value='/resources/js/bootswatch.js'/>" />
+<script src="<c:url value='/resources/jquery-1.10.2.min.js'/>" ></script>
+<script src="<c:url value='/resources/bootstrap.min.js'/>" ></script>
+<script src="<c:url value='/resources/bootswatch.js'/>" ></script>
 
 </body>
 </html>

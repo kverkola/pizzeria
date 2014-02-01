@@ -75,6 +75,18 @@ public class OrderController {
         return "redirect:/menu";
     }
 
+    @RequestMapping(value = "/send-order", method = RequestMethod.GET)
+    public String send(ModelMap model, HttpSession session) {
+
+        session.setAttribute("order", null);
+        session.setAttribute("pizzasInOrder", null);
+        session.setAttribute("additionalInOrder", null);
+
+        model.addAttribute("showResult", "success");
+
+        return "index";
+    }
+
 	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)
 	public String addAdditional(@PathVariable("id") long id,
 			HttpSession session) {
