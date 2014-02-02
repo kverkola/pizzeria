@@ -29,9 +29,9 @@ public class IngredientsController {
 	private Integer key;
 	private Pizza pizza;
 
-	@RequestMapping(value = "/countPlus/{ingredientName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/countPlus/{id}", method = RequestMethod.GET)
 	public String actionPlus(
-			@PathVariable("ingredientName") String ingredientName,
+			@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
@@ -39,7 +39,7 @@ public class IngredientsController {
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
-			if (ingr.getName().equals(ingredientName)) {
+			if (ingr.getId()==id) {
 				if (key == 20) {
 					break;
 				}
@@ -54,9 +54,9 @@ public class IngredientsController {
 		return "/addIngredients";
 	}
 
-	@RequestMapping(value = "/countMinus/{ingredientName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/countMinus/{id}", method = RequestMethod.GET)
 	public String actionMinus(
-			@PathVariable("ingredientName") String ingredientName,
+			@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
@@ -64,7 +64,7 @@ public class IngredientsController {
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
-			if (ingr.getName().equals(ingredientName)) {
+			if (ingr.getId()==id) {
 				if (key == 0) {
 					break;
 				}
@@ -84,7 +84,7 @@ public class IngredientsController {
 	public String addIngredients(@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
 
-        Pizza pizza = pizzaService.loadById(id);
+        pizza = pizzaService.loadById(id);
 
         LOG.info("Loaded ingredients for pizza: " + pizza.getName());
         for (Map.Entry<Ingredient, Integer> entry : pizza.getMap().entrySet()) {
@@ -94,13 +94,14 @@ public class IngredientsController {
         session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
 
-		return "addIngredients";
+		return "/addIngredients";
 	}
 
 	@RequestMapping(value = "/reset/{id}", method = RequestMethod.GET)
-	public String reset(ModelMap model,@PathVariable("id") long id){
+	public String reset(ModelMap model,@PathVariable("id") long id,HttpSession session){
 		
 		pizza = pizzaService.loadById(id);
+		session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza",pizza);
 		return "/addIngredients";	
 	}
