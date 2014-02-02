@@ -35,7 +35,7 @@ public class BaseController {
 		return "menu";
 	}
 
-	@RequestMapping(value = "/Additional", method = RequestMethod.GET)
+	@RequestMapping(value = "/additional", method = RequestMethod.GET)
 	public String additional(ModelMap model) {
 
 		model.addAttribute("add", additionalService.loadByOrder(0));

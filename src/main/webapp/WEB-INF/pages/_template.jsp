@@ -25,31 +25,31 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li <c:if test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/'}">
+                <li <c:if test="${pageContext.request.requestURI == '/pizzeria/'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/'/>">Home</a>
                 </li>
-                <li <c:if test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/menu'}">
+                <li <c:if test="${pageContext.request.requestURI == '/pizzeria/menu'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/menu'/>">Menu</a>
                     
                 </li>
-                <li <c:if test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/Additional'}">
+                <li <c:if test="${pageContext.request.requestURI == '/pizzeria/additional'}">
                     class="active"
                 </c:if> >
-                    <a href="<c:url value='/Additional'/>">Additional</a>
+                    <a href="<c:url value='/additional'/>">Additional</a>
                     
                 </li>
                 <li <c:if
-                        test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/feedback'}">
+                        test="${pageContext.request.requestURI == '/pizzeria/feedback'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/feedback'/>">Feedback</a>
                 </li>
                
-                <li <c:if test="${pageContext.request.requestURI == '${pageContext.servletContext.contextPath}/about'}">
+                <li <c:if test="${pageContext.request.requestURI == '/pizzeria/about'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/about'/>">About</a>
@@ -58,12 +58,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <sec:authorize access="isAnonymous()">
                     <li <c:if
-                            test="${pageContext.request.requestURI == '/login'}"> class="active" </c:if> >
-                        <a href="<c:url value='/login'/>">Log In</a></li>
+                            test="${pageContext.request.requestURI == '/pizzeria/login'}"> class="active" </c:if> >
+                        <a href="<c:url value='/login'/>">Log in</a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li><a style="font-weight:bold"><sec:authentication property="principal.username"/></a></li>
-                    <li><a href="<c:url value='/j_spring_security_logout' />">Log Out</a></li>
+                    <li><a href="<c:url value='/j_spring_security_logout' />">Log out</a></li>
                 </sec:authorize>
             </ul>
         </div>
