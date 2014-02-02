@@ -75,18 +75,7 @@ public class OrderController {
     public String send(@Valid GuestUser guestUser, BindingResult result,
                        ModelMap model, HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
-
-        if (order != null && order.getProducts().size() == 0) {
-
-            LOG.error("Your must add pizza to order before send it!");
-
-            model.addAttribute("errorMessage", "Your must add pizza to order before send it!");
-            model.addAttribute("guestUser", guestUser);
-
-            return "completeOrder";
-
-        } else if (result.hasErrors()) {
+        if (result.hasErrors()) {
 
             LOG.error("Wrong input data!");
 
@@ -96,9 +85,13 @@ public class OrderController {
             return "completeOrder";
 
         } else {
-            session.setAttribute("order", null);
-            session.setAttribute("pizzasInOrder", null);
-            session.setAttribute("additionalInOrder", null);
+
+            Order order = new Order();
+            order.setProducts(new ArrayList<Product>());
+
+            session.setAttribute("order", order);
+            session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+            session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
             LOG.info("Name: " + guestUser.getName() +
                     ", address: " + guestUser.getAddress() +
