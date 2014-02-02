@@ -3,47 +3,47 @@ package ua.opu.dl.pizzeria.model;
 public class Ingredient {
 	private long id;
 	private long pizzaId;
-    private String name;
-    private double weight;
-    private double price;
+	private String name;
+	private double weight;
+	private double price;
+	private String logo;
+	private String description;
 
-    public Ingredient(String name, double weight, double price) {
-        this.name = name;
-        this.weight = weight;
-        this.price = price;
-    }
+	public Ingredient(String name, double weight, double price) {
+		this.name = name;
+		this.weight = weight;
+		this.price = price;
+	}
 
-    public Ingredient() {
-		
+	public Ingredient() {
+
 	}
 
 	public String getName() {
-        return name;
-    }
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public double getWeight() {
-        return weight;
-    }
+	public double getWeight() {
+		return weight;
+	}
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public double getPrice() {
+		return price;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-  
-
-    public long getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -57,6 +57,22 @@ public class Ingredient {
 
 	public void setPizzaId(long id) {
 		this.pizzaId = id;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
@@ -98,6 +114,4 @@ public class Ingredient {
 		return true;
 	}
 
-
-  
 }

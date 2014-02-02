@@ -4,6 +4,8 @@
 
 <h1>${pizza.name} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 	${pizza.price}&nbsp&nbsp $</h1>
+	
+	<body>
 <tr>
 	<td><img src="<c:url value='/resources/${pizza.logo}'/>" /></td>
 
@@ -49,3 +51,35 @@
 	class="btn btn-info"> Reset </a>
 </td>
 
+
+
+<a href="#myModal" role="button" class="btn btn-sm btn-success" data-reveal-id="myModal">Upgrade Pizza</a>
+
+
+<body>
+
+
+
+		
+		
+		
+
+		<div id="myModal" class="reveal-modal">
+			<h1>add ingredients</h1>
+			<p>This is a default modal in all its glory, but any of the styles here can easily be changed in the CSS.</p>
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+			
+	</body>
+
+
+
+
+
+
+
+
+
+
+
+</body>

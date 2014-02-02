@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Pizzeria</title>
+        <link rel="stylesheet" href="<c:url value='/resources/reveal.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/bootstrap.min.css'/>"/>
 </head>
 <body>
@@ -166,9 +167,10 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="<c:url value='/resources/jquery-1.10.2.min.js'/>" ></script>
+<script src="<c:url value='/resources/jquery-1.8.3.min.js'/>" ></script>
 <script src="<c:url value='/resources/bootstrap.min.js'/>" ></script>
 <script src="<c:url value='/resources/bootswatch.js'/>" ></script>
+<script src="<c:url value='/resources/jquery.reveal.js'/>" ></script>
 
 </body>
 </html>
