@@ -14,5 +14,7 @@ public interface UserService {
 
 	User loadById(long id);
 
+    User loadByLogin(String login);
+
 	List<User> loadAlluser();
 }

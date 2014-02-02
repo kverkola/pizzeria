@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div>
+<div style="padding-top: 50px;">
 
     <p class="well">
         It's simple web application based on Spring Web Framework + JDBC +

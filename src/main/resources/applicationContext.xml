@@ -36,7 +36,7 @@
     <bean id="orderDao" class="ua.opu.dl.pizzeria.dao.impl.OrderDaoImpl" autowire="byName"/>
     <bean id="orderService" class="ua.opu.dl.pizzeria.service.impl.OrderServiceImpl" autowire="byName"/>
     <bean id="userDao" class="ua.opu.dl.pizzeria.dao.impl.UserDaoImpl" autowire="byName"/>
-    <!-- bean id="userService" class="ua.opu.dl.pizzeria.service.impl.UserServiceImpl" autowire="byName" /-->
+    <bean id="userService" class="ua.opu.dl.pizzeria.service.impl.UserServiceImpl" autowire="byName" />
 
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">

@@ -35,7 +35,12 @@ public class UserDaoImpl implements UserDao{
 		return new User("pup","pupkin","login","root",Status.COOK);
 	}
 
-	@Override
+    @Override
+    public User loadByLogin(String name) {
+        return null;
+    }
+
+    @Override
 	public List<User> loadAllusers() {
 		
 		return null;

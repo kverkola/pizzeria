@@ -86,16 +86,21 @@ public class OrderController {
 
         } else {
 
-            Order order = new Order();
+            LOG.info("Name: " + guestUser.getName() +
+                    ", address: " + guestUser.getAddress() +
+                    ", phone: " + guestUser.getPhone());
+
+            Order order = (Order) session.getAttribute("order");
+
+            order.setPhone(guestUser.getPhone());
+            //orderService.addOrder(order);
+
+            order = new Order();
             order.setProducts(new ArrayList<Product>());
 
             session.setAttribute("order", order);
             session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
             session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
-
-            LOG.info("Name: " + guestUser.getName() +
-                    ", address: " + guestUser.getAddress() +
-                    ", phone: " + guestUser.getPhone());
 
             model.addAttribute("showResult", "success");
 

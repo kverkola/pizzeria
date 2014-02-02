@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <head>
@@ -54,85 +55,96 @@
                     <a href="<c:url value='/about'/>">About</a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <sec:authorize access="isAnonymous()">
+                    <li <c:if
+                            test="${pageContext.request.requestURI == '/login'}"> class="active" </c:if> >
+                        <a href="<c:url value='/login'/>">Log In</a></li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <li><a style="font-weight:bold"><sec:authentication property="principal.username"/></a></li>
+                    <li><a href="<c:url value='/j_spring_security_logout' />">Log Out</a></li>
+                </sec:authorize>
+            </ul>
         </div>
         <!--/.nav-collapse -->
     </div>
 </div>
 
-<div class="container" style="min-height: 70%;">
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="bs-example">
+<div class="container-fluid" style="min-height: 70%;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
 
             </div>
-        </div>
-        <div class="col-lg-7">
-            <div class="bs-example">
-                <jsp:include page="${partial}"/>
+            <div class="col-lg-7">
+                <div class="bs-example">
+                    <jsp:include page="${partial}"/>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-3" style="float: right; position: fixed; right:20px; top:150px;">
-            <div class="bs-example">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" style="text-align: center;">Order</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>-------------------------------------------------------</p>
-                        <table>
-                            <c:set var="pizzasInOrder" value="pizzasInOrder"/>
-                            <c:forEach var="pizza" items="${sessionScope[pizzasInOrder]}">
-                                <tr>
-                                    <td style="text-align: left;">${pizza.name}
-                                        <div style="width: 270px;">
-                                                ${pizza.quantity} x
-                                            <div style="float: right;">
-                                                    ${pizza.price * pizza.quantity} $
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            <c:set var="additionalInOrder" value="additionalInOrder"/>
-                            <c:forEach var="addition" items="${sessionScope[additionalInOrder]}">
-                                <tr>
-                                    <td style="text-align: left;">${addition.name}
-                                        <div style="width: 270px;">
-                                                ${addition.quantity} x
-                                            <div style="float: right;">
-                                                    ${addition.price * addition.quantity} $
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                        <p>-------------------------------------------------------</p>
-                        <div style="width: 270px;">
-                            <b>Total price:</b>
-                            <div style="float: right;">
-                                <c:set var="orderName" value="order"/>
-                                <b>${sessionScope[orderName].price} $</b>
-                            </div>
+            <div class="col-lg-3" style="padding-top: 50px;">
+                <div class="bs-example">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" style="text-align: center;">Order</h3>
                         </div>
-                        <p></p>
-                        <p style="text-align: center;">
-                            <c:choose>
-                                <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">
-                                    <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning">
-                                        Make order
-                                    </a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning disabled">
-                                        Make order
-                                    </a>
-                                </c:otherwise>
-                            </c:choose>
-                        </p>
-                        <p>
-                            Courier is obliged to issue a check.
-                        </p>
+                        <div class="panel-body">
+                            <p>----------------------------------------------</p>
+                            <table>
+                                <c:set var="pizzasInOrder" value="pizzasInOrder"/>
+                                <c:forEach var="pizza" items="${sessionScope[pizzasInOrder]}">
+                                    <tr>
+                                        <td style="text-align: left;">${pizza.name}
+                                            <div style="width: 235px;">
+                                                    ${pizza.quantity} x
+                                                <div style="float: right;">
+                                                        ${pizza.price * pizza.quantity} $
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:set var="additionalInOrder" value="additionalInOrder"/>
+                                <c:forEach var="addition" items="${sessionScope[additionalInOrder]}">
+                                    <tr>
+                                        <td style="text-align: left;">${addition.name}
+                                            <div style="width: 235px;">
+                                                    ${addition.quantity} x
+                                                <div style="float: right;">
+                                                        ${addition.price * addition.quantity} $
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </table>
+                            <p>----------------------------------------------</p>
+                            <div style="width: 235px;">
+                                <b>Total price:</b>
+                                <div style="float: right;">
+                                    <c:set var="orderName" value="order"/>
+                                    <b>${sessionScope[orderName].price} $</b>
+                                </div>
+                            </div>
+                            <p></p>
+                            <p style="text-align: center;">
+                                <c:choose>
+                                    <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">
+                                        <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning">
+                                            Make order
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning disabled">
+                                            Make order
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </p>
+                            <p>
+                                Courier is obliged to issue a check.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,7 +153,7 @@
 </div>
 
 
-<div class="navbar-bottom" style="text-align: center;">
+<div class="navbar-bottom text-center">
     <hr>
     <footer>
         <p>&copy; NetCracker Courses 2013-2014</p>

@@ -14,5 +14,7 @@ public interface UserDao {
 
 	User loadById(long id);
 
+    User loadByLogin(String name);
+
 	List<User> loadAllusers();
 }

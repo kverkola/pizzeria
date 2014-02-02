@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <h4>Your order</h4>
 
@@ -105,33 +106,42 @@
         </div>
     </c:if>
 
-    <form class="bs-example form-horizontal" method="POST" action="<c:url value='/order/send-order'/>">
+    <form class="bs-example form-horizontal" method="POST"
+            <sec:authorize access="isAnonymous()">
+                action="<c:url value='/order/send-order'/>"
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                action="<c:url value='/user/send-order'/>"
+            </sec:authorize>>
         <fieldset>
-            <legend>Order form</legend>
-            <div class="form-group">
-                <label for="name" class="col-lg-2 control-label">Name</label>
 
-                <div class="col-lg-10">
-                    <input type="text" value="${guestUser.name}" class="form-control"
-                           name="name" id="name" placeholder="Name">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="address" class="col-lg-2 control-label">Address</label>
+            <sec:authorize access="isAnonymous()">
+                <legend>Order form</legend>
+                <div class="form-group">
+                    <label for="name" class="col-lg-2 control-label">Name</label>
 
-                <div class="col-lg-10">
-                    <input type="text" value="${guestUser.address}" class="form-control"
-                           name="address" id="address" placeholder="Address">
+                    <div class="col-lg-10">
+                        <input type="text" value="${guestUser.name}" class="form-control"
+                               name="name" id="name" placeholder="Name">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="phone" class="col-lg-2 control-label">Phone</label>
+                <div class="form-group">
+                    <label for="address" class="col-lg-2 control-label">Address</label>
 
-                <div class="col-lg-10">
-                    <input type="text" value="${guestUser.phone}" class="form-control"
-                           name="phone" id="phone" placeholder="Phone">
+                    <div class="col-lg-10">
+                        <input type="text" value="${guestUser.address}" class="form-control"
+                               name="address" id="address" placeholder="Address">
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="phone" class="col-lg-2 control-label">Phone</label>
+
+                    <div class="col-lg-10">
+                        <input type="text" value="${guestUser.phone}" class="form-control"
+                               name="phone" id="phone" placeholder="Phone">
+                    </div>
+                </div>
+            </sec:authorize>
 
             <p class="text-center text-info" style="font-size: 25px; padding-left: 30%; padding-right: 30%">
                 <b>Total price:</b> &nbsp;&nbsp;&nbsp;

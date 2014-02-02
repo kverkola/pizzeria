@@ -37,7 +37,12 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
-	@Override
+    @Override
+    public User loadByLogin(String login) {
+        return userDao.loadByLogin(login);
+    }
+
+    @Override
 	public List<User> loadAlluser() {
 		// TODO Auto-generated method stub
 		return null;

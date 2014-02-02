@@ -24,9 +24,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(List<Product> products, Status status, Date starttime,
-                 Date endtime, double price,
-                 String phone) {
+    public Order(List<Product> products, Status status,
+                 Date starttime, Date endtime,
+                 double price, String phone) {
 
         this.products = products;
         this.status = status;
