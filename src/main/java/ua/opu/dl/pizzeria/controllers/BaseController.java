@@ -22,16 +22,15 @@ public class BaseController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
-		Locale.setDefault(Locale.ENGLISH);
 
-		return "index";
+        Locale.setDefault(Locale.ENGLISH);
+        return "index";
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
 	public String menu(ModelMap model) {
 
 		model.addAttribute("menu", pizzaService.loadByOrder(0));
-
 		return "menu";
 	}
 
@@ -49,12 +48,8 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about(ModelMap model) {
-		// test page
-		
-		
-		
-		
+	public String about() {
+
 		return "about";
 	}
 }

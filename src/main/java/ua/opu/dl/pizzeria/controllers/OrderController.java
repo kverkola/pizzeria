@@ -102,9 +102,9 @@ public class OrderController {
             session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
             session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
-            model.addAttribute("showResult", "success");
+            session.setAttribute("showResult", "success");
 
-            return "index";
+            return "redirect:/";
         }
     }
 

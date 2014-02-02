@@ -60,6 +60,9 @@
                     <li <c:if
                             test="${pageContext.request.requestURI == '/pizzeria/login'}"> class="active" </c:if> >
                         <a href="<c:url value='/login'/>">Log in</a></li>
+                    <li <c:if
+                            test="${pageContext.request.requestURI == '/pizzeria/register'}"> class="active" </c:if> >
+                        <a href="<c:url value='/register'/>">Register</a></li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li><a style="font-weight:bold"><sec:authentication property="principal.username"/></a></li>

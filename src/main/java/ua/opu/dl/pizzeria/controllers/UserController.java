@@ -29,7 +29,6 @@ public class UserController {
 
     /**
      * Show login
-     *
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -46,6 +45,26 @@ public class UserController {
 
         model.addAttribute("error", "true");
         return "user/login";
+    }
+
+    /**
+     * Show registration page
+     * @return
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+
+        return "redirect:/";
+    }
+
+    /**
+     * Add new user
+     * @return
+     */
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public String addUser() {
+
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/user/send-order", method = RequestMethod.POST)
@@ -67,8 +86,8 @@ public class UserController {
         session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
         session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
-        model.addAttribute("showResult", "success");
+        session.setAttribute("showResult", "success");
 
-        return "index";
+        return "redirect:/";
     }
 }

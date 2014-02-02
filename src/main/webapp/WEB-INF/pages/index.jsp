@@ -9,12 +9,16 @@
         for people who like to create own pizzas. Enjoy:)
     </p>
 
-    <c:if test="${showResult == 'success'}">
+    <c:set var="showResult" value="showResult"/>
+
+    <c:if test="${not empty sessionScope[showResult]}">
         <div class="alert alert-dismissable alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>Well done!</strong> You successfully send your order. Wait for courier.
         </div>
     </c:if>
+
+    <c:remove var="showResult" scope="session" />
 
     <div>
         <h4>Find your order and check status</h4>
