@@ -168,10 +168,10 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
-	public String order(@RequestParam("orderId") long orderId,
+	public String order(@RequestParam("phone") String phone,
 			HttpSession session, ModelMap model) {
 
-		Order order = orderService.loadById(orderId);		
+		Order order = orderService.loadByPhone(phone);		
 		session.setAttribute("orderById", order);
 		model.addAttribute("order", order);
 

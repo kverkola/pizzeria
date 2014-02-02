@@ -23,7 +23,7 @@
                 <form>
                     <div class="input-group text-center">
                         <input type="text" class="form-control" placeholder="Search order"
-                               class="inp" name="orderId" >
+                               class="inp" name="phone" >
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default" type="button">Search</button>
                         </span>
