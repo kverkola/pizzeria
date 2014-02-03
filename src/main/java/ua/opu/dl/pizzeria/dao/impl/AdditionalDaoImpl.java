@@ -20,23 +20,16 @@ public class AdditionalDaoImpl implements AdditionalDao {
 	private final String addAdditional = "{call addAdditional(?,?,?,?)}";
 	private JdbcTemplate jdbcTemplate;
 
-	// private NamedParameterJdbcTemplate namedTemplate;
-
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		// this.namedTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	private RowMapper<Additional> rowMapper = new RowMapper<Additional>() {
 		@Override
 		public Additional mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Additional additional = new Additional(
-                    rs.getLong("id"),
-                    rs.getLong("orderId"),
-                    rs.getString("name"),
-                    rs.getDouble("price"),
-                    rs.getString("logo")
-            );
+			Additional additional = new Additional(rs.getLong("id"),
+					rs.getLong("orderId"), rs.getString("name"),
+					rs.getDouble("price"), rs.getString("logo"));
 
 			return additional;
 		}

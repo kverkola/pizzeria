@@ -5,19 +5,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
 import ua.opu.dl.pizzeria.dao.OrderDao;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Status;
@@ -32,7 +26,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	public void setDataSource(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
-		// this.namedTemplate = new NamedParameterJdbcTemplate(dataSource);
+
 	}
 
 	private RowMapper<Order> rowMapper = new RowMapper<Order>() {

@@ -110,7 +110,7 @@ List<Ingredient>ingredients=ingredientService.loadByPizza(0);
 		return "/addIngredients";	
 	}
 	@RequestMapping(value = "/upgradePizza/{id}", method = RequestMethod.GET)
-	public String UpgradePizza(ModelMap model,@PathVariable("id") long id,HttpSession session){
+	public  String UpgradePizza(ModelMap model,@PathVariable("id") long id,HttpSession session){
 		
 	Ingredient ingredient=	ingredientService.loadById(id);
 	pizza=(Pizza)session.getAttribute("customPizza");
