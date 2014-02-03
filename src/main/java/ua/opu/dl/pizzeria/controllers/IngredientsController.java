@@ -31,14 +31,14 @@ public class IngredientsController {
 	private IngredientServiceImpl ingredientService;
 	private Integer key;
 	private Pizza pizza;
-
+	Map<Ingredient, Integer> ingrMap;
 	@RequestMapping(value = "/countPlus/{id}", method = RequestMethod.GET)
 	public String actionPlus(
 			@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
-		Map<Ingredient, Integer> ingrMap = pizza.getMap();
+		ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
@@ -63,7 +63,7 @@ public class IngredientsController {
 			ModelMap model, HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
-		Map<Ingredient, Integer> ingrMap = pizza.getMap();
+		ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
@@ -107,6 +107,25 @@ List<Ingredient>ingredients=ingredientService.loadByPizza(0);
 		pizza = pizzaService.loadById(id);
 		session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza",pizza);
+		return "/addIngredients";	
+	}
+	@RequestMapping(value = "/upgradePizza/{id}", method = RequestMethod.GET)
+	public String UpgradePizza(ModelMap model,@PathVariable("id") long id,HttpSession session){
+		
+	Ingredient ingredient=	ingredientService.loadById(id);
+	pizza=(Pizza)session.getAttribute("customPizza");
+	ingrMap=pizza.getMap();
+	for (Ingredient ingr : ingrMap.keySet()) {
+		key = ingrMap.get(ingr);
+		if(ingr.getName().equals(ingredient.getName())){
+			if (key == 20) {
+				break;
+			}
+			ingrMap.put(ingr, key + 1);
+			break;		
+		}
+	} ingrMap.put(ingredient, 1);session.setAttribute("customPizza", pizza);
+	
 		return "/addIngredients";	
 	}
 }

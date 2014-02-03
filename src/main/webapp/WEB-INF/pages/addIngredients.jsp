@@ -9,9 +9,8 @@
 	<tr>
 		<td><img src="<c:url value='/resources/${pizza.logo}'/>" /></td>
 
-		<td style="text-align: right;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a
-			href="<c:url value='/order/add-custom-pizza'/>"
-			class="btn btn-sm btn-success"> Add to cart </a></td>
+		<td> <a href="#myModal" role="button" class="btn btn-sm btn-success"
+			data-reveal-id="myModal">Upgrade Pizza</a></td>
 	</tr>
 
 	<table class="table " style="width: 80%;">
@@ -45,23 +44,18 @@
 	</table>
 
 
-
-	<td style="text-align: right;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="pull-left">
+	
 		<a href="<c:url value='/ingredients/reset/${pizza.id}'/>"
-		class="btn btn-info"> Reset </a>
-	</td>
+		class="btn btn-info   "> Reset </a></div>
+	
 
-
-
-	<a href="#myModal" role="button" class="btn btn-sm btn-success"
-		data-reveal-id="myModal">Upgrade Pizza</a>
-
-
-
-
-
-
-
+	<div class="pull-right">
+<a
+			href="<c:url value='/order/add-custom-pizza'/>"
+			class="btn btn-sm btn-success  pull-right"> Add to cart </a>
+		
+	</div>
 
 
 
@@ -89,26 +83,16 @@
 
 				<img src="<c:url value='/resources/${entry.logo}'/>" />
 				<td style="padding-left: 20px; vertical-align: top;"></td>
-				
-				
-				<a
-		href="<c:url value='/order/add-custom-pizza'/>"
-		class="btn btn-sm btn-success"> Add to pizza </a>
+
+
+				<a href="<c:url value='/ingredients/upgradePizza/${entry.id}"'/>"
+					class="btn btn-sm btn-success"> Add to pizza </a>
 
 			</c:forEach>
 
 
 
 		</div>
-
-
-
-
-
-
-
-
-
 
 
 	</div>
@@ -118,13 +102,3 @@
 </body>
 
 
-
-
-
-
-
-
-
-
-
-</body>
