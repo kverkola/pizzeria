@@ -1,35 +1,56 @@
 package ua.opu.dl.pizzeria.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
+
 public class User {
-    private String first_name;
-    private String last_name;
+
+    @NotEmpty
+    @Size(min = 3, max = 20)
+    private String firstName;
+
+    @NotEmpty
+    @Size(min = 3, max = 20)
+    private String lastName;
+
+    @NotEmpty
+    @Size(min = 3, max = 20)
     private String login;
+
+    @NotEmpty
+    @Size(min = 6, max = 20)
     private String password;
+
     private Status warker;
 
-    public User(String first_name, String last_name, String login,
+    public User() {
+
+    }
+
+    public User(String firstName, String lastName, String login,
                 String password, Status warker) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.warker = warker;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getLogin() {

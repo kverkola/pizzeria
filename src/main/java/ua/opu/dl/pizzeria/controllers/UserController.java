@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.opu.dl.pizzeria.model.*;
@@ -13,6 +14,7 @@ import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -52,9 +54,11 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register() {
+    public String register(ModelMap model) {
 
-        return "redirect:/";
+        model.addAttribute("user", new User());
+
+        return "user/register";
     }
 
     /**
@@ -62,14 +66,36 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String addUser() {
+    public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result,
+                          ModelMap model, HttpSession session) {
 
-        return "redirect:/";
+        if (result.hasErrors()) {
+
+            LOG.error("Wrong registration data!");
+            model.addAttribute("user", user);
+
+            return "user/register";
+
+        } else {
+
+            LOG.info("Added user with first name: " + user.getFirstName()
+                    + ", last name: " + user.getLastName()  );
+
+            //userService.addUser(user);
+            session.setAttribute("showResult", "registerSuccess");
+
+            return "redirect:/";
+        }
     }
 
+    /**
+     * Send order from registered user
+     * @param session
+     * @param principal
+     * @return
+     */
     @RequestMapping(value = "/user/send-order", method = RequestMethod.POST)
-    public String send(ModelMap model, HttpSession session, Principal principal) {
-
+    public String send(HttpSession session, Principal principal) {
 
         Order order = (Order) session.getAttribute("order");
 
@@ -86,7 +112,7 @@ public class UserController {
         session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
         session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
-        session.setAttribute("showResult", "success");
+        session.setAttribute("showResult", "sendOrderSuccess");
 
         return "redirect:/";
     }

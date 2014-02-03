@@ -121,7 +121,7 @@
                     <label for="name" class="col-lg-2 control-label">Name</label>
 
                     <div class="col-lg-10">
-                        <input type="text" value="${guestUser.name}" class="form-control"
+                        <input type="text" value="${guestUser.name}" class="form-control input-sm"
                                name="name" id="name" placeholder="Name">
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                     <label for="address" class="col-lg-2 control-label">Address</label>
 
                     <div class="col-lg-10">
-                        <input type="text" value="${guestUser.address}" class="form-control"
+                        <input type="text" value="${guestUser.address}" class="form-control input-sm"
                                name="address" id="address" placeholder="Address">
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <label for="phone" class="col-lg-2 control-label">Phone</label>
 
                     <div class="col-lg-10">
-                        <input type="text" value="${guestUser.phone}" class="form-control"
+                        <input type="text" value="${guestUser.phone}" class="form-control input-sm"
                                name="phone" id="phone" placeholder="Phone">
                     </div>
                 </div>

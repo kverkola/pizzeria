@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="well" style="margin: 0 auto; width: 450px; margin-top: 50px;">
@@ -12,7 +13,7 @@
     <form class="bs-example form-horizontal" action="<c:url value='j_spring_security_check' />" method="POST">
         <fieldset>
 
-            <legend>Login form</legend>
+            <legend>Login</legend>
             <div class="form-group">
                 <label for="login" class="col-lg-2 control-label">Login</label>
 

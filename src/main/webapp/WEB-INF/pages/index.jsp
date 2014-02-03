@@ -11,10 +11,17 @@
 
     <c:set var="showResult" value="showResult"/>
 
-    <c:if test="${not empty sessionScope[showResult]}">
+    <c:if test="${sessionScope[showResult] == 'sendOrderSuccess'}">
         <div class="alert alert-dismissable alert-success">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>Well done!</strong> You successfully send your order. Wait for courier.
+        </div>
+    </c:if>
+
+    <c:if test="${sessionScope[showResult] == 'registerSuccess'}">
+        <div class="alert alert-dismissable alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Well done!</strong> You successfully registered. Now try to log in.
         </div>
     </c:if>
 

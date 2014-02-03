@@ -102,7 +102,7 @@ public class OrderController {
             session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
             session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
-            session.setAttribute("showResult", "success");
+            session.setAttribute("showResult", "sendOrderSuccess");
 
             return "redirect:/";
         }
@@ -124,7 +124,7 @@ public class OrderController {
 		session.setAttribute("order", order);
 		session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
 
-		return "redirect:/Additional";
+		return "redirect:/additional";
 	}
 
     @RequestMapping(value = "/remove-product/{productId}", method = RequestMethod.GET)
