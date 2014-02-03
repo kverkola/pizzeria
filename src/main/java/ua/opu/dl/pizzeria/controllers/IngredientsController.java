@@ -87,7 +87,7 @@ public class IngredientsController {
 	public String addIngredients(@PathVariable("id") long id, ModelMap model,
 			HttpSession session) {
 		if (id == 0) {
-			
+
 			pizza = (Pizza) session.getAttribute("customPizza");
 		} else
 			pizza = pizzaService.loadById(id);
@@ -128,12 +128,13 @@ public class IngredientsController {
 					break;
 				}
 				ingrMap.put(ingr, key + 1);
-				break;
+				session.setAttribute("customPizza", pizza);
+				return "redirect:/ingredients/upgradePizza";
+
 			}
 		}
 		ingrMap.put(ingredient, 1);
 		session.setAttribute("customPizza", pizza);
-
 		return "redirect:/ingredients/upgradePizza";
 	}
 
