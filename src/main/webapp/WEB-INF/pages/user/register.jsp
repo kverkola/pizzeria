@@ -15,7 +15,7 @@
                 <div class="col-lg-8">
                     <form:errors path="firstName" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="firstName" id="firstName"
-                                 placeholder="first name"/>
+                                 placeholder="First name"/>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
                 <div class="col-lg-8">
                     <form:errors path="lastName" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="lastName" id="lastName"
-                                 placeholder="last name"/>
+                                 placeholder="Last name"/>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                 <div class="col-lg-8">
                     <form:errors path="login" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="login" id="login"
-                                 placeholder="login"/>
+                                 placeholder="Login"/>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                 <div class="col-lg-8">
                     <form:errors path="password" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="password" id="password"
-                                type="password" placeholder="password"/>
+                                type="password" placeholder="Password"/>
                 </div>
             </div>
 
