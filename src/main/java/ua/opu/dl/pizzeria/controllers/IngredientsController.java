@@ -142,7 +142,6 @@ public class IngredientsController {
 	public String upgradePizza(ModelMap model) {
 		List<Ingredient> ingredients = ingredientService.loadByPizza(0);
 		model.addAttribute("ingredients", ingredients);
-
 		return "/upgradePizza";
 	}
 
