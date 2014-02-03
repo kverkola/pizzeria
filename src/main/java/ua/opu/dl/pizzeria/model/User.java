@@ -11,7 +11,13 @@ public class User {
     @NotEmpty
     @Size(min = 3, max = 20)
     private String firstName;
+
+    @NotEmpty
+    @Size(min = 3, max = 20)
     private String lastName;
+
+    @NotEmpty
+    @Size(min = 3, max = 20)
     private String login;
 
     @NotEmpty
