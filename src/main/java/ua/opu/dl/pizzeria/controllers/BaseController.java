@@ -1,5 +1,6 @@
 package ua.opu.dl.pizzeria.controllers;
 
+
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.PizzaService;
+import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 
 @Controller
 public class BaseController {
@@ -19,6 +22,8 @@ public class BaseController {
 
 	@Autowired
 	private AdditionalService additionalService;
+	@Autowired
+	private IngredientServiceImpl ingredientService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -52,4 +57,5 @@ public class BaseController {
 
 		return "about";
 	}
+	
 }

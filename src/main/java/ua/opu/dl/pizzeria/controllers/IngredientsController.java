@@ -23,7 +23,8 @@ import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 @RequestMapping(value = "/ingredients")
 public class IngredientsController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(IngredientsController.class);
+	private static final Logger LOG = LoggerFactory
+			.getLogger(IngredientsController.class);
 
 	@Autowired
 	private PizzaService pizzaService;
@@ -32,17 +33,17 @@ public class IngredientsController {
 	private Integer key;
 	private Pizza pizza;
 	Map<Ingredient, Integer> ingrMap;
+
 	@RequestMapping(value = "/countPlus/{id}", method = RequestMethod.GET)
-	public String actionPlus(
-			@PathVariable("id") long id,
-			ModelMap model, HttpSession session) {
+	public String actionPlus(@PathVariable("id") long id, ModelMap model,
+			HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
 		ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
-			if (ingr.getId()==id) {
+			if (ingr.getId() == id) {
 				if (key == 20) {
 					break;
 				}
@@ -50,7 +51,7 @@ public class IngredientsController {
 				break;
 			}
 		}
-		
+
 		pizza.countTotalPrice();
 		model.addAttribute("pizza", pizza);
 
@@ -58,16 +59,15 @@ public class IngredientsController {
 	}
 
 	@RequestMapping(value = "/countMinus/{id}", method = RequestMethod.GET)
-	public String actionMinus(
-			@PathVariable("id") long id,
-			ModelMap model, HttpSession session) {
+	public String actionMinus(@PathVariable("id") long id, ModelMap model,
+			HttpSession session) {
 
 		pizza = (Pizza) session.getAttribute("customPizza");
 		ingrMap = pizza.getMap();
 
 		for (Ingredient ingr : ingrMap.keySet()) {
 			key = ingrMap.get(ingr);
-			if (ingr.getId()==id) {
+			if (ingr.getId() == id) {
 				if (key == 0) {
 					break;
 				}
@@ -76,7 +76,7 @@ public class IngredientsController {
 				break;
 			}
 		}
-		
+
 		pizza.countTotalPrice();
 		model.addAttribute("pizza", pizza);
 
@@ -84,48 +84,65 @@ public class IngredientsController {
 	}
 
 	@RequestMapping(value = "/addIngredients/{id}", method = RequestMethod.GET)
-	public String addIngredients(@PathVariable("id") long id,
-			ModelMap model, HttpSession session) {
-List<Ingredient>ingredients=ingredientService.loadByPizza(0);
-        pizza = pizzaService.loadById(id);
+	public String addIngredients(@PathVariable("id") long id, ModelMap model,
+			HttpSession session) {
+		if (id == 0) {
+			
+			pizza = (Pizza) session.getAttribute("customPizza");
+		} else
+			pizza = pizzaService.loadById(id);
 
-        LOG.info("Loaded ingredients for pizza: " + pizza.getName());
-        for (Map.Entry<Ingredient, Integer> entry : pizza.getMap().entrySet()) {
-            LOG.info("Ingredient: " + entry.getKey().getName() + " value: " + entry.getValue());
-        }
+		LOG.info("Loaded ingredients for pizza: " + pizza.getName());
+		for (Map.Entry<Ingredient, Integer> entry : pizza.getMap().entrySet()) {
+			LOG.info("Ingredient: " + entry.getKey().getName() + " value: "
+					+ entry.getValue());
+		}
 
-        session.setAttribute("customPizza", pizza);
+		session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
-		model.addAttribute("ingredients", ingredients);
 
 		return "/addIngredients";
 	}
 
 	@RequestMapping(value = "/reset/{id}", method = RequestMethod.GET)
-	public String reset(ModelMap model,@PathVariable("id") long id,HttpSession session){
-		
+	public String reset(ModelMap model, @PathVariable("id") long id,
+			HttpSession session) {
+
 		pizza = pizzaService.loadById(id);
 		session.setAttribute("customPizza", pizza);
-		model.addAttribute("pizza",pizza);
-		return "/addIngredients";	
+		model.addAttribute("pizza", pizza);
+		return "/addIngredients";
 	}
-	@RequestMapping(value = "/upgradePizza/{id}", method = RequestMethod.GET)
-	public  String UpgradePizza(ModelMap model,@PathVariable("id") long id,HttpSession session){
-		
-	Ingredient ingredient=	ingredientService.loadById(id);
-	pizza=(Pizza)session.getAttribute("customPizza");
-	ingrMap=pizza.getMap();
-	for (Ingredient ingr : ingrMap.keySet()) {
-		key = ingrMap.get(ingr);
-		if(ingr.getName().equals(ingredient.getName())){
-			if (key == 20) {
+
+	@RequestMapping(value = "/addNewIngr/{id}", method = RequestMethod.GET)
+	public String UpgradePizza(ModelMap model, @PathVariable("id") long id,
+			HttpSession session) {
+
+		Ingredient ingredient = ingredientService.loadById(id);
+		pizza = (Pizza) session.getAttribute("customPizza");
+		ingrMap = pizza.getMap();
+		for (Ingredient ingr : ingrMap.keySet()) {
+			key = ingrMap.get(ingr);
+			if (ingr.getName().equals(ingredient.getName())) {
+				if (key == 20) {
+					break;
+				}
+				ingrMap.put(ingr, key + 1);
 				break;
 			}
-			ingrMap.put(ingr, key + 1);
-			break;		
 		}
-	} ingrMap.put(ingredient, 1);session.setAttribute("customPizza", pizza);
-	
-		return "/addIngredients";	
+		ingrMap.put(ingredient, 1);
+		session.setAttribute("customPizza", pizza);
+
+		return "redirect:/ingredients/upgradePizza";
 	}
+
+	@RequestMapping(value = "/upgradePizza", method = RequestMethod.GET)
+	public String upgradePizza(ModelMap model) {
+		List<Ingredient> ingredients = ingredientService.loadByPizza(0);
+		model.addAttribute("ingredients", ingredients);
+
+		return "/upgradePizza";
+	}
+
 }
