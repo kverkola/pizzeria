@@ -10,7 +10,7 @@
             <legend>Registration</legend>
 
             <div class="form-group">
-                <label for="firstName" class="col-lg-3 control-label">First Name</label>
+                <label for="firstName" class="col-lg-4 control-label">First Name</label>
 
                 <div class="col-lg-8">
                     <form:errors path="firstName" cssStyle="color: red;"/>
@@ -20,7 +20,7 @@
             </div>
 
             <div class="form-group">
-                <label for="lastName" class="col-lg-3 control-label">Last Name</label>
+                <label for="lastName" class="col-lg-4 control-label">Last Name</label>
 
                 <div class="col-lg-8">
                     <form:errors path="lastName" cssStyle="color: red;"/>
@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <label for="login" class="col-lg-3 control-label">Login</label>
+                <label for="login" class="col-lg-4 control-label">Login</label>
 
                 <div class="col-lg-8">
                     <form:errors path="login" cssStyle="color: red;"/>
@@ -40,12 +40,22 @@
             </div>
 
             <div class="form-group">
-                <label for="password" class="col-lg-3 control-label">Password</label>
+                <label for="password" class="col-lg-4 control-label">Password</label>
 
                 <div class="col-lg-8">
                     <form:errors path="password" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="password" id="password"
                                 type="password" placeholder="Password"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="col-lg-4 control-label">Confirm password</label>
+
+                <div class="col-lg-8">
+                    <form:errors path="confirmPassword" cssStyle="color: red;"/>
+                    <form:input class="form-control input-sm" path="confirmPassword" id="confirmPassword"
+                                type="password" placeholder="Confirm password"/>
                 </div>
             </div>
 
