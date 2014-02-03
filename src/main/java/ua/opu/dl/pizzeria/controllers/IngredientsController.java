@@ -1,5 +1,6 @@
 package ua.opu.dl.pizzeria.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.service.PizzaService;
+import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 
 @Controller
 @RequestMapping(value = "/ingredients")
@@ -25,7 +27,8 @@ public class IngredientsController {
 
 	@Autowired
 	private PizzaService pizzaService;
-
+	@Autowired
+	private IngredientServiceImpl ingredientService;
 	private Integer key;
 	private Pizza pizza;
 
@@ -83,7 +86,7 @@ public class IngredientsController {
 	@RequestMapping(value = "/addIngredients/{id}", method = RequestMethod.GET)
 	public String addIngredients(@PathVariable("id") long id,
 			ModelMap model, HttpSession session) {
-
+List<Ingredient>ingredients=ingredientService.loadByPizza(0);
         pizza = pizzaService.loadById(id);
 
         LOG.info("Loaded ingredients for pizza: " + pizza.getName());
@@ -93,6 +96,7 @@ public class IngredientsController {
 
         session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("ingredients", ingredients);
 
 		return "/addIngredients";
 	}

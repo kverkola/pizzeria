@@ -1,6 +1,5 @@
 
 
-
 /* 
 
 Пример реализации реляционной модели 
@@ -97,6 +96,8 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (25,2,'logo','от�
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (26,5,'logo','отображение');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description','описание');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (28,4,'status','Status');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (29,4,'logo','Logo');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (30,4,'description','description');
 
 
 
@@ -117,7 +118,7 @@ CREATE TABLE OBJECTS
     CONSTRAINT CON_OBJ_TYPE_ID FOREIGN KEY (OBJECT_TYPE_ID) REFERENCES OBJTYPE (OBJECT_TYPE_ID) ENABLE);
 
 
-
+/*
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (1,null,1,'ivanov ivan ivanich',NULL);
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (2,null,1,'petrov petr petrovich',NULL);
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (3,null,1,'sidorov sergey sidorovich',NULL);
@@ -139,7 +140,7 @@ INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (19,null,3,'chees',NULL);
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (20,null,3,'chees',NULL);
 INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (21,null,3,'chees',NULL);
-INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (22,null,3,'pepper',NULL);
+INSERT INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (22,null,3,'pepper',NULL);*/
 
 
 
@@ -157,7 +158,7 @@ CREATE TABLE ATTRIBUTES
 
 
 
-
+/*
 INSERT INTO ATTRIBUTES values(1,1,'ivanov',null);
 INSERT INTO ATTRIBUTES values(1,2,'petrtov',null);
 INSERT INTO ATTRIBUTES values(1,3,'sidirov',null);
@@ -275,7 +276,7 @@ INSERT INTO ATTRIBUTES values(26,13,'pizza_middle.png',null);
 INSERT INTO ATTRIBUTES values(26,14,'tanu_mini.png',null);
 INSERT INTO ATTRIBUTES values(27,12,'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',null);
 INSERT INTO ATTRIBUTES values(27,13,'Aenean commodo ligula eget dolor. Aenean massa.',null);
-INSERT INTO ATTRIBUTES values(27,14,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',null);
+INSERT INTO ATTRIBUTES values(27,14,'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',null);*/
 
 
 
@@ -315,7 +316,7 @@ COMMENT ON COLUMN OBJREFERENCE.REFERENCE IS 'Ссылка на экземпля�
 
 
 --тоблица связей может несовсем правильна
-
+/*
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,11,4);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,11,5);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,12,6);
@@ -331,7 +332,7 @@ INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,18);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,19);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,20);
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,21);
-INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,22);
+INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,22);*/
 
 
 
@@ -401,7 +402,9 @@ PROCEDURE addIngredients(
     pizza_id in varchar2,
     name  IN VARCHAR2,
     price IN VARCHAR2,
-    weight in varchar2
+    weight in varchar2,
+    logo in varchar2,
+    description in varchar2
     )
 is
  id   NUMBER(20);
@@ -415,6 +418,9 @@ INTO ATTRIBUTES values(8,id,name,null)
 INTO ATTRIBUTES values(22,id,pizza_id,null)
 INTO ATTRIBUTES values(9,id,price,null)
 INTO ATTRIBUTES values(10,id,weight,null)
+INTO ATTRIBUTES values(29,id,logo,null)
+INTO ATTRIBUTES values(30,id,description,null)
+
 select * from dual;
 if pizza_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,pizza_id,id);
@@ -493,46 +499,52 @@ BEGIN
 
 	addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit',id);
 
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Vegetables','10','100');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
 
 addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.',id);
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'"Sauce", ','6','40');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
 
 addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',id);
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'"Sauce", ','6','40');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
 
 
 addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',id);
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Cheese','3','50');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Ham','5','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'Vegetables','10','100');
-addIngredients(id,'Sauce','6','40');
-addIngredients(id,'crust','12','40');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
+addIngredients(id,'mushroom','4','50','mushroom.png','Meat');
 
 addAdditional('cola','0','6','cola.png');
 addAdditional('pepsi','0','8','pepsi.png');
 addAdditional('gorchica','0','2','gorchica.png');
+
+addIngredients(0,'Cheese','3','50','chees.png','Cheese');
+addIngredients(0,'Meat','8','50','meat.png','Meat');
+addIngredients(0,'mushroom','4','50','mushroom.png','Meat');
+addIngredients(0,'cucumber','1','30','cucumber.png','Meat');
+addIngredients(0,'red_pepper','3','50','red_pepper.png','Meat');
 
 END addd;
 /
@@ -541,4 +553,7 @@ END addd;
 call addd();
 
 commit;
+
+
+
 
