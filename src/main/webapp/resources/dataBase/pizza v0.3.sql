@@ -1,6 +1,4 @@
 
-
-
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
 drop table OBJECTS CASCADE CONSTRAINTS;
@@ -322,23 +320,7 @@ INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,13,22);*/
 
 -- Функция для получения уникального id 
 
-CREATE OR REPLACE FUNCTION get_id RETURN NUMBER
-  AS
-    v_ret NUMBER;
-  BEGIN
-  
-  
-  
-    SELECT TO_CHAR(sysdate,'yyyymmddhh24miss') || TRUNC (DBMS_RANDOM.VALUE (0, 100))
-      INTO v_ret
-    FROM DUAL;
-    RETURN v_ret;
-  END;
-  /
--- пример использования
-
---select get_id from dual
-
+CREATE SEQUENCE "ATIKIN"."SEQUENCE1" MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 421 CACHE 20 NOORDER NOCYCLE ;
 
 
 
@@ -358,7 +340,7 @@ is
 
 
 BEGIN
-id:=get_id;
+id:=SEQUENCE1.NEXTVAL;
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,2,'additional',NULL)
 INTO ATTRIBUTES values(24,id,order_id,null)
@@ -369,7 +351,6 @@ select * from dual;
 if order_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,order_id,id);
 end if;
-DBMS_LOCK.sleep(0.9);
 END ;
 /
 
@@ -391,7 +372,7 @@ is
  id   NUMBER(20);
 BEGIN
 
-id:=get_id;
+id:=SEQUENCE1.NEXTVAL;
 
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,3,'ingr',NULL)
@@ -406,7 +387,6 @@ select * from dual;
 if pizza_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,pizza_id,id);
 end if;
-DBMS_LOCK.sleep(0.9);
 END addIngredients;
 /
 
@@ -425,7 +405,7 @@ is
 
  id   NUMBER(20);
 BEGIN
-id:=get_id;
+id:=SEQUENCE1.NEXTVAL;
 
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,5,'pizza',NULL)
@@ -440,7 +420,6 @@ id_:=id;
 if order_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (23,order_id,id);
 end if;
-DBMS_LOCK.sleep(0.9);
 END addPizza;
 /
 
@@ -458,7 +437,7 @@ procedure addOrder(
 is
  id   NUMBER(20);
 BEGIN
-id:=get_id;
+id:=SEQUENCE1.NEXTVAL;
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,4,'order',NULL)
 INTO ATTRIBUTES values(11,id,starttime,null)
@@ -468,7 +447,6 @@ INTO ATTRIBUTES values(13,id,price,null)
 INTO ATTRIBUTES values(14,id,phone,null)
 select * from dual;
 id_:=id;
-DBMS_LOCK.sleep(0.9);
 END addOrder;
 /
 
@@ -480,7 +458,7 @@ is
 id number(20);
 BEGIN
 
-	addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit','Empty',id);
+addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit','Empty',id);
 
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -536,445 +514,4 @@ END addd;
 call addd();
 
 commit;
-
-
-
-
-
-
-
-
-
-/*
-
----loadAllAdditional
-  
-
-  with tab1 as(  select att.value start_time,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='start_time' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-    tab4 as (  select att.value orderId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='orderId' 
- )
- 
- select tab1.id_ id,tab4.orderId orderId,tab1.name_ name,tab2.price price,tab3.logo logo from tab1,tab2,tab3,tab4
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
-
-tab1.obtypeId=2 
- 
- --- load allAdditionalfromOrderId
-  with tab1 as(  select att.value name_,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='NAME' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-    tab4 as (  select att.value orderId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='orderId' 
- ),
-tab5 as
-( select tab1.id_ id,tab4.orderId orderId,tab1.name_ name,tab2.price price,tab3.logo logo from tab1,tab2,tab3,tab4
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
-
-tab1.obtypeId=2 )
-
-select* from tab5 where orderId='1'
- 
- 
- 
- --- load allingredientslfrompizzaId
- 
-  
-   with tab1 as(  select att.value name_,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='name' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value weight, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='weight' 
- ),
-    tab4 as (  select att.value pizzaId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='pizzaId' 
- ),
-     tab6 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-     tab7 as (  select att.value description, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='description' 
- ),
-tab5 as
-( select tab1.id_ id,tab4.pizzaId pizzaId,tab1.name_ name,tab2.price price,tab3.weight weight,tab6.logo logo,tab7.description description from tab1,tab2,tab3,tab4,tab6,tab7
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
-  tab4.Id_=tab6.Id_ and
-   tab6.Id_=tab7.Id_ and
-
-tab1.obtypeId=3 )
-
-select* from tab5 where pizzaId='2014020223493399';
- 
- 
-
-
---load ingredientbyId
-
-  
-   with tab1 as(  select att.value name_,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='name' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value weight, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='weight' 
- ),
-    tab4 as (  select att.value pizzaId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='pizzaId' 
- ),
-     tab6 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-     tab7 as (  select att.value description, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='description' 
- )
-select tab1.id_ id,tab4.pizzaId pizzaId,tab1.name_ name,tab2.price price,tab3.weight weight,tab6.logo logo,tab7.description description from tab1,tab2,tab3,tab4,tab6,tab7
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
-  tab4.Id_=tab6.Id_ and
-   tab6.Id_=tab7.Id_ and
-
-
-tab1.obtypeId=3 and tab1.id_=2014020223493429;
-
-
---- Pizza loadByorderId
- 
-  
-   with tab1 as(  select att.value name_,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='NAME' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-    tab4 as (  select att.value orderId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='orderId' 
- ),
-   tab44 as (  select att.value description, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='description' 
- ),
-  tab6 as (  select att.value cook, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='cook' 
- ),
- 
-tab5 as
-( select tab1.id_ id,tab1.name_ name,tab4.orderId orderId,tab2.price price,tab3.logo logo,tab44.description description,tab6.cook cook from tab1,tab2,tab3,tab4,tab44,tab6
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
- tab4.Id_=tab44.Id_ and
-  tab44.Id_=tab6.Id_ and
-
-
-tab1.obtypeId=5 )
-
-select* from tab5 where orderId='0'
- 
- 
-
-
-
-
---- Pizza loadById
- 
-  
-   with tab1 as(  select att.value name_,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='NAME' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value logo, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='logo' 
- ),
-    tab4 as (  select att.value orderId, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='orderId' 
- ),
-   tab44 as (  select att.value description, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='description' 
- ),
- tab6 as (  select att.value cook, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='cook' 
- )
-
- select tab1.id_ id,tab1.name_ name,tab4.orderId orderId,tab2.price price,tab3.logo logo,tab44.description description,tab6.cook cook from tab1,tab2,tab3,tab4,tab44,tab6
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
- tab4.Id_=tab44.Id_ and
-  tab44.Id_=tab6.Id_ and
-
-
-tab1.obtypeId=5 and tab1.id_=2014020415454431
-
---select* from tab5 where orderId='11'
-
-
---loadOrderById
-
- with tab1 as(  select att.value start_time,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='start_time' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value end_time, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='end_time' 
- ),
-    tab4 as (  select att.value status, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='status' 
- ),
-   tab44 as (  select att.value phone, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='phone' 
- )
- 
-
- select tab1.id_ id,tab4.status status,tab1.start_time start_time,tab3.end_time end_time,tab2.price price,tab44.phone phone from tab1,tab2,tab3,tab4,tab44
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
- tab4.Id_=tab44.Id_ and
-
-
-tab1.obtypeId=4 and tab1.id_=11
-
-
---loadOrderByPhone
-
- with tab1 as(  select att.value start_time,ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-  obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='start_time' 
- ),
-  
-  tab2 as (  select att.value price, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where
-     obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='price' 
- ),
- 
-   tab3 as (  select att.value end_time, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='end_time' 
- ),
-    tab4 as (  select att.value status, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='status' 
- ),
-   tab44 as (  select att.value phone, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
-      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
-ob.object_id = att.object_id and
-att.attr_id=attr.attr_id and
-attr.code='phone' 
- ),
- 
-tab5 as(
- select tab1.id_ id,tab4.status status,tab1.start_time start_time,tab3.end_time end_time,tab2.price price,tab44.phone phone from tab1,tab2,tab3,tab4,tab44
- where
- tab1.ID_=tab2.ID_ and
- tab2.ID_=tab3.ID_ and
- tab3.Id_=tab4.Id_ and
- tab4.Id_=tab44.Id_ and
-
-
-tab1.obtypeId=4 )
-
-
-select* from tab5 where phone='5656465456456'
-
-*/
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
 
