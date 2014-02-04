@@ -15,13 +15,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUser(User user) {
-		// TODO Auto-generated method stub
+		userDao.addUser(user);
 
 	}
 
 	@Override
 	public void updateUser(User user) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User loadById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userDao.loadById(id);
 	}
 
     @Override

@@ -1,4 +1,7 @@
 
+
+
+
 drop table OBJTYPE CASCADE CONSTRAINTS;
 drop table ATTRTYPE CASCADE CONSTRAINTS;
 drop table OBJECTS CASCADE CONSTRAINTS;
@@ -87,6 +90,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (28,4,'status','Sta
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (29,4,'logo','Logo');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (30,4,'description','description');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (31,5,'cook','cook');
+
 
 
 
@@ -450,6 +454,28 @@ id_:=id;
 END addOrder;
 /
 
+--add user
+CREATE OR REPLACE
+procedure addUser(
+    first_name IN VARCHAR2,
+    last_name in varchar2,
+    login in varchar2,
+    passsword in varchar2,
+    warker in varchar2) 
+is
+ id   NUMBER(20);
+BEGIN
+id:=SEQUENCE1.NEXTVAL;
+ insert all 
+INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,1,'user',NULL)
+INTO ATTRIBUTES values(1,id,first_name,null)
+INTO ATTRIBUTES values(2,id,last_name,null)
+INTO ATTRIBUTES values(3,id,login,null)
+INTO ATTRIBUTES values(4,id,passsword,null)
+INTO ATTRIBUTES values(5,id,warker,null)
+select * from dual;
+END addUser;
+/
 --ua.opu.dl.pizzeria.model.Pizza
 
 CREATE OR REPLACE
@@ -514,4 +540,9 @@ END addd;
 call addd();
 
 commit;
+
+
+
+
+
 

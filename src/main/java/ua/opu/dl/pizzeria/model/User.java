@@ -26,18 +26,19 @@ public class User {
     private String confirmPassword;
 
     private Status warker;
-
+    private long id;
     public User() {
 
     }
 
     public User(String firstName, String lastName, String login,
-                String password, Status warker) {
+                String password, Status warker,long id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
         this.warker = warker;
+        this.id=id;
     }
 
     public String getFirstName() {
@@ -87,5 +88,13 @@ public class User {
     public void setWarker(Status warker) {
         this.warker = warker;
     }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 }

@@ -80,8 +80,8 @@ public class UserController {
 
             LOG.info("Added user with first name: " + user.getFirstName()
                     + ", last name: " + user.getLastName()  );
-
-            //userService.addUser(user);
+user.setWarker(Status.COOK);//для проверки (незабыть удалить)
+            userService.addUser(user);
             session.setAttribute("showResult", "registerSuccess");
 
             return "redirect:/";

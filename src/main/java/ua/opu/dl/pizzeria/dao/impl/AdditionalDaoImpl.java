@@ -28,7 +28,7 @@ public class AdditionalDaoImpl implements AdditionalDao {
 		@Override
 		public Additional mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Additional additional = new Additional(rs.getLong("id"),
-					rs.getLong("orderId"), rs.getString("name"),
+					rs.getInt("orderId"), rs.getString("name"),
 					rs.getDouble("price"), rs.getString("logo"));
 
 			return additional;
