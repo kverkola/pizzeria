@@ -8,16 +8,18 @@ public class Pizza extends Product {
 	private long orderId;
 	private String logo;
 	private String description;
+	private String cook;
 
 	public Pizza() {
 	}
 
     public Pizza(String name, String logo,
-                 String description, long id, double price) {
+                 String description, long id, double price,String cook) {
 
         super(id, name, 1, price);
 
         this.logo = logo;
+        this.cook = cook;
         this.description = description;
     }
 
@@ -74,6 +76,14 @@ public class Pizza extends Product {
 			price = price + ingr.getPrice() * key;
 		}
 		setPrice(price);
+	}
+
+	public String getCook() {
+		return cook;
+	}
+
+	public void setCook(String cook) {
+		this.cook = cook;
 	}
 
 	@Override

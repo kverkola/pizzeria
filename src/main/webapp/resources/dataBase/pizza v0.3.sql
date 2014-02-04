@@ -88,6 +88,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description'
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (28,4,'status','Status');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (29,4,'logo','Logo');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (30,4,'description','description');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (31,5,'cook','cook');
 
 
 
@@ -418,6 +419,7 @@ procedure addPizza(
     price IN VARCHAR2,
     logo in varchar2,
     description in varchar2,
+    cook in varchar2,
     id_ out number ) 
 is
 
@@ -432,6 +434,7 @@ INTO ATTRIBUTES values(23,id,order_id,null)
 INTO ATTRIBUTES values(16,id,price,null)
 INTO ATTRIBUTES values(26,id,logo,null)
 INTO ATTRIBUTES values(27,id,description,null)
+INTO ATTRIBUTES values(31,id,cook,null)
 select * from dual;
 id_:=id;
 if order_id>0 then
@@ -477,7 +480,7 @@ is
 id number(20);
 BEGIN
 
-	addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit',id);
+	addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit','Empty',id);
 
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -486,17 +489,7 @@ addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 
-addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.',id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Sauce','6','40','','Sauce');
-
-addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.','Empty',id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
@@ -504,8 +497,18 @@ addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Sauce','6','40','','Sauce');
 
+addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.','Empty',id);
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
 
-addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',id);
+
+addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.','Empty',id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -767,19 +770,26 @@ ob.object_id = att.object_id and
 att.attr_id=attr.attr_id and
 attr.code='description' 
  ),
+  tab6 as (  select att.value cook, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
+      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
+ob.object_id = att.object_id and
+att.attr_id=attr.attr_id and
+attr.code='cook' 
+ ),
  
 tab5 as
-( select tab1.id_ id,tab4.orderId orderId,tab1.start_time start_time,tab2.price price,tab3.logo logo,tab44.description description from tab1,tab2,tab3,tab4,tab44
+( select tab1.id_ id,tab1.name_ name,tab4.orderId orderId,tab2.price price,tab3.logo logo,tab44.description description,tab6.cook cook from tab1,tab2,tab3,tab4,tab44,tab6
  where
  tab1.ID_=tab2.ID_ and
  tab2.ID_=tab3.ID_ and
  tab3.Id_=tab4.Id_ and
  tab4.Id_=tab44.Id_ and
+  tab44.Id_=tab6.Id_ and
 
 
 tab1.obtypeId=5 )
 
-select* from tab5 where orderId='11'
+select* from tab5 where orderId='0'
  
  
 
@@ -820,18 +830,24 @@ attr.code='orderId'
 ob.object_id = att.object_id and
 att.attr_id=attr.attr_id and
 attr.code='description' 
+ ),
+ tab6 as (  select att.value cook, ob.OBJECT_ID id_,obj.OBJECT_TYPE_ID obtypeId from Attributes att, Objects ob, ATTRTYPE attr,OBJTYPE obj where 
+      obj.OBJECT_TYPE_ID=ob.OBJECT_TYPE_ID and
+ob.object_id = att.object_id and
+att.attr_id=attr.attr_id and
+attr.code='cook' 
  )
- 
 
- select tab1.id_ id,tab4.orderId orderId,tab1.name_ name,tab2.price price,tab3.logo logo,tab44.description description from tab1,tab2,tab3,tab4,tab44
+ select tab1.id_ id,tab1.name_ name,tab4.orderId orderId,tab2.price price,tab3.logo logo,tab44.description description,tab6.cook cook from tab1,tab2,tab3,tab4,tab44,tab6
  where
  tab1.ID_=tab2.ID_ and
  tab2.ID_=tab3.ID_ and
  tab3.Id_=tab4.Id_ and
  tab4.Id_=tab44.Id_ and
+  tab44.Id_=tab6.Id_ and
 
 
-tab1.obtypeId=5 and tab1.id_=12
+tab1.obtypeId=5 and tab1.id_=2014020415454431
 
 --select* from tab5 where orderId='11'
 
