@@ -55,6 +55,14 @@
                 </c:if> >
                     <a href="<c:url value='/about'/>">About</a>
                 </li>
+                
+                 <li <c:if test="${pageContext.request.requestURI == '/pizzeria/cook'}">
+                    class="active"
+                </c:if> >
+                    <a href="<c:url value='/cook'/>">cook(after DElete test)</a>
+                </li>
+                
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <sec:authorize access="isAnonymous()">

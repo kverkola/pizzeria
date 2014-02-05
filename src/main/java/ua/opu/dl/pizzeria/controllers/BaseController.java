@@ -58,4 +58,12 @@ public class BaseController {
 		return "about";
 	}
 	
+	@RequestMapping(value = "/cook", method = RequestMethod.GET)
+	public String Cook(ModelMap model) {
+	
+		return "cook";
+	}
+	
+	
+	
 }

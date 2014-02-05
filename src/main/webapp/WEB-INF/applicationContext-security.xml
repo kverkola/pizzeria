@@ -31,6 +31,7 @@
         <intercept-url pattern="/ingredients/upgradePizza" access="permitAll" />
         <intercept-url pattern="/ingredients/addNewIngr/*" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/cook" access="permitAll" />
 
         <intercept-url pattern="/**" access="isAuthenticated()" />
         <form-login login-page="/login" default-target-url="/"
