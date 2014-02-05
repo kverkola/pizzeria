@@ -3,7 +3,7 @@ package ua.opu.dl.pizzeria.model;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-public class GuestUser {
+public class Customer {
 
     @NotEmpty
     @Size(min = 3, max = 25)
@@ -17,11 +17,11 @@ public class GuestUser {
     @Size(min = 10, max = 12)
     private String phone;
 
-    public GuestUser() {
+    public Customer() {
 
     }
 
-    public GuestUser(String name, String address, String phone) {
+    public Customer(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;

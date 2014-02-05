@@ -72,7 +72,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/send-order", method = RequestMethod.POST)
-    public String send(@Valid GuestUser guestUser, BindingResult result,
+    public String send(@Valid Customer guestUser, BindingResult result,
                        ModelMap model, HttpSession session) {
 
         if (result.hasErrors()) {
