@@ -40,10 +40,10 @@ public class OrderController {
 
 		if (order == null) {
 			order = new Order();
-            order.setProducts(new ArrayList<Product>());
+			order.setProducts(new ArrayList<Product>());
 		}
 
-        order.addProduct(pizzaService.loadById(id));
+		order.addProduct(pizzaService.loadById(id));
 
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
@@ -51,96 +51,99 @@ public class OrderController {
 		return "redirect:/menu";
 	}
 
-    @RequestMapping(value = "/add-custom-pizza", method = RequestMethod.GET)
-    public String addCustomPizza(HttpSession session) {
-
-        Order order = (Order) session.getAttribute("order");
-
-        if (order == null) {
-            order = new Order();
-            order.setProducts(new ArrayList<Product>());
-        }
-
-        Pizza customPizza = (Pizza) session.getAttribute("customPizza");
-
-        order.addProduct(customPizza);
-
-        session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-
-        return "redirect:/menu";
-    }
-
-    @RequestMapping(value = "/send-order", method = RequestMethod.POST)
-    public String send(@Valid Customer guestUser, BindingResult result,
-                       ModelMap model, HttpSession session) {
-
-        if (result.hasErrors()) {
-
-            LOG.error("Wrong input data!");
-
-            model.addAttribute("errorMessage", "Wrong input data!");
-            model.addAttribute("guestUser", guestUser);
-
-            return "completeOrder";
-
-        } else {
-
-            LOG.info("Name: " + guestUser.getName() +
-                    ", address: " + guestUser.getAddress() +
-                    ", phone: " + guestUser.getPhone());
-
-            Order order = (Order) session.getAttribute("order");
-
-            order.setPhone(guestUser.getPhone());
-            //orderService.addOrder(order);
-
-            order = new Order();
-            order.setProducts(new ArrayList<Product>());
-
-            session.setAttribute("order", order);
-            session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-            session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
-
-            session.setAttribute("showResult", "sendOrderSuccess");
-
-            return "redirect:/";
-        }
-    }
-
-	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)
-	public String addAdditional(@PathVariable("id") long id,
-			HttpSession session) {
+	@RequestMapping(value = "/add-custom-pizza", method = RequestMethod.GET)
+	public String addCustomPizza(HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
 		if (order == null) {
 			order = new Order();
-            order.setProducts(new ArrayList<Product>());
+			order.setProducts(new ArrayList<Product>());
 		}
 
-        order.addProduct(additionalService.loadById(id));
+		Pizza customPizza = (Pizza) session.getAttribute("customPizza");
+
+		order.addProduct(customPizza);
 
 		session.setAttribute("order", order);
-		session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
+		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+
+		return "redirect:/menu";
+	}
+
+	@RequestMapping(value = "/send-order", method = RequestMethod.POST)
+	public String send(@Valid Customer guestUser, BindingResult result,
+			ModelMap model, HttpSession session) {
+
+		if (result.hasErrors()) {
+
+			LOG.error("Wrong input data!");
+
+			model.addAttribute("errorMessage", "Wrong input data!");
+			model.addAttribute("guestUser", guestUser);
+
+			return "completeOrder";
+
+		} else {
+
+			LOG.info("Name: " + guestUser.getName() + ", address: "
+					+ guestUser.getAddress() + ", phone: "
+					+ guestUser.getPhone());
+
+			Order order = (Order) session.getAttribute("order");
+
+			order.setPhone(guestUser.getPhone());
+			// orderService.addOrder(order);
+
+			order = new Order();
+			order.setProducts(new ArrayList<Product>());
+
+			session.setAttribute("order", order);
+			session.setAttribute("pizzasInOrder",
+					order.getProducts(Pizza.class));
+			session.setAttribute("additionalInOrder",
+					order.getProducts(Additional.class));
+
+			session.setAttribute("showResult", "sendOrderSuccess");
+
+			return "redirect:/";
+		}
+	}
+
+	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)
+	public String addAdditional(@PathVariable("id") long id, HttpSession session) {
+
+		Order order = (Order) session.getAttribute("order");
+
+		if (order == null) {
+			order = new Order();
+			order.setProducts(new ArrayList<Product>());
+		}
+
+		order.addProduct(additionalService.loadById(id));
+
+		session.setAttribute("order", order);
+		session.setAttribute("additionalInOrder",
+				order.getProducts(Additional.class));
 
 		return "redirect:/additional";
 	}
 
-    @RequestMapping(value = "/remove-product/{productId}", method = RequestMethod.GET)
-    public String removePizza(@PathVariable("productId") long productId,
-                              HttpSession session) {
+	@RequestMapping(value = "/remove-product/{productId}", method = RequestMethod.GET)
+	public String removePizza(@PathVariable("productId") long productId,
+			HttpSession session) {
 
-        Order order = (Order) session.getAttribute("order");
+		Order order = (Order) session.getAttribute("order");
 
-        order.removeProduct(productId);
+		order.removeProduct(productId);
 
-        session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-        session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
+		session.setAttribute("order", order);
+		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+		session.setAttribute("additionalInOrder",
+				order.getProducts(Additional.class));
 
-        return "redirect:/order/make-order";
-    }
+		return "redirect:/order/make-order";
+	}
 
 	@RequestMapping(value = "/make-order", method = RequestMethod.GET)
 	public String makeOrder() {
@@ -148,19 +151,21 @@ public class OrderController {
 		return "completeOrder";
 	}
 
-	@RequestMapping(value = "/change-product-count", method = RequestMethod.POST,
-            params = {"productId", "value"})
+	@RequestMapping(value = "/change-product-count", method = RequestMethod.POST, params = {
+			"productId", "value" })
 	public String changePizzasCount(@RequestParam long productId,
 			@RequestParam Integer value, HttpSession session) {
 
 		Order order = (Order) session.getAttribute("order");
 
-        if (value > 0) {
-            order.changeProductQuantity(productId, value);
-            session.setAttribute("order", order);
-            session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-            session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
-        }
+		if (value > 0) {
+			order.changeProductQuantity(productId, value);
+			session.setAttribute("order", order);
+			session.setAttribute("pizzasInOrder",
+					order.getProducts(Pizza.class));
+			session.setAttribute("additionalInOrder",
+					order.getProducts(Additional.class));
+		}
 
 		return "redirect:/order/make-order";
 	}
@@ -168,17 +173,16 @@ public class OrderController {
 	@RequestMapping(value = "/searchOrder", method = RequestMethod.GET)
 	public String order(@RequestParam("phone") String phone,
 			HttpSession session, ModelMap model) {
-
-		Order order = orderService.loadByPhone(phone);		
-		session.setAttribute("orderById", order);
-		model.addAttribute("order", order);
-
+		List<Order> orders = new ArrayList<Order>();
+		orders = orderService.loadByPhone(phone);
+		session.setAttribute("orderById", orders);
+		model.addAttribute("orders", orders);
 		return "searchOrder";
 	}
 
 	@RequestMapping(value = "/showIngredient/{id}", method = RequestMethod.GET)
-	public String showIngredient(@PathVariable("id") long id,
-			ModelMap model, HttpSession session) {
+	public String showIngredient(@PathVariable("id") long id, ModelMap model,
+			HttpSession session) {
 
 		Pizza pizza = pizzaService.loadById(id);
 		Order order = (Order) session.getAttribute("orderById");

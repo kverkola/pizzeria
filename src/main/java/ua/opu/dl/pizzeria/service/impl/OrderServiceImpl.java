@@ -29,6 +29,7 @@ public class OrderServiceImpl implements OrderService {
 	private AdditionalService additionalService;
 
 	private List<Product> products;
+	private List<Order> orders;
 
 	@Override
 	public void addOrder(Order order) {
@@ -78,12 +79,14 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order loadByPhone(String phone) {
-		order = orderDao.loadByPhone(phone);
+	public List<Order> loadByPhone(String phone) {
+		orders = orderDao.loadByPhone(phone);
 		products = new ArrayList<Product>();
-		products.addAll(pizzaService.loadByOrder(order.getId()));
-		products.addAll(additionalService.loadByOrder(order.getId()));
-		order.setProducts(products);
-		return order;
+		for (Order order : orders) {
+			products.addAll(pizzaService.loadByOrder(order.getId()));
+			products.addAll(additionalService.loadByOrder(order.getId()));
+			order.setProducts(products);
+		}
+		return orders;
 	}
 }

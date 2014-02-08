@@ -6,13 +6,15 @@ import ua.opu.dl.pizzeria.model.Order;
 
 public interface OrderService {
 
-    void addOrder(Order order);
+	void addOrder(Order order);
 
-    void updateOrder(Order order);
+	void updateOrder(Order order);
 
-    void deleteOrder(Order order);
+	void deleteOrder(Order order);
 
-    Order loadById(long id);
-    Order loadByPhone(String phone);
-    List<Order> loadAllOrder();
+	Order loadById(long id);
+
+	List<Order> loadByPhone(String phone);
+
+	List<Order> loadAllOrder();
 }

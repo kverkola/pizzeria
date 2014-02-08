@@ -4,69 +4,41 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <h1>Order</h1>
 
-<table class="table " style="width: 50%;">
-	<thead>
-		<tr>
-			<th></th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><p class="text-info"><strong>id</strong></p></td>
-			<td>${order.id}</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>Products</strong></p></td>
-			
-<td>
-				<table class="table table-hover" style="width: 50%;">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Count</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <c:forEach var="entry" items="${order.products}">
-        <tr>
-            <td><a href="<c:url value='/order/showIngredient/${entry.id}'/>">${entry.name}<a></td>
-             <td>${entry.quantity}</td>
-            <td>${entry.price}</td>
-        </tr>
-    </c:forEach>
-</table>
-		</td>
-			
-		</tr>
-		
-		
+<div>
+
+	<c:forEach var="order" items="${orders}">
+	
+<dl class="dl-horizontal">
+    <dt>start time:</dt>
+    <dd>${order.starttime}</dd>
+     <dt>End Time:</dt>
+    <dd>${order.endtime}</dd>
+     <dt>Phone:</dt>
+    <dd>${order.phone}</dd>
+     <dt>Name customer:</dt>
+    <dd>${order.nameCustomer}</dd>
+     <dt>adress:</dt>
+        <dd>${order.address}</dd>
+     <dt>Price:</dt>
+        <dd>${order.price}&nbsp;$</dd>
+     <dt>Status:</dt>
+        <dd>${order.status}</dd>
+    </dl>
+
+
+
+<c:forEach var="product" items="${order.products}">
+
+<dl class="dl-horizontal">
+    <dt>Products:</dt>
+    <dd>${product.name}</dd>    
+    </dl>
+</c:forEach>
+
+</c:forEach>
+
+</div>
+
+
+
    
-		</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>Status</strong></p></td>
-			<td>${order.status}</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>Start time</strong></p></td>
-			<td>${order.starttime}</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>End time</strong></p></td>
-			<td>${order.endtime}</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>Phone</strong></p></td>
-			<td>${order.phone}</td>
-		</tr>
-		<tr>
-			<td><p class="text-info"><strong>Price</strong></p></td>
-			<td>${order.price}</td>
-		</tr>
-	</tbody>
-
-</table>
-
-
-

@@ -100,9 +100,9 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public Order loadByPhone(String phone) {
+	public List<Order> loadByPhone(String phone) {
 
-		return jdbcTemplate.queryForObject(loadOrderByPhone, rowMapper, phone);
+		return jdbcTemplate.query(loadOrderByPhone, rowMapper, phone);
 	}
 
 }
