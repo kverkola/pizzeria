@@ -67,7 +67,7 @@
 	<div class="pull-left">
 
 		<a href="<c:url value='/ingredients/reset/${pizza.id}'/>"
-			class="btn btn-info   "> Reset </a>
+			class="btn btn-sm btn-info"> Reset </a>
 	</div>
 
 

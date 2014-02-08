@@ -41,9 +41,14 @@
 
     <authentication-manager>
         <authentication-provider>
+            <password-encoder hash="sha"/>
             <user-service>
-                <user name="admin" password="1" authorities="ROLE_ADMIN" />
-                <user name="user" password="1" authorities="ROLE_USER" />
+                <user name="admin" password="356a192b7913b04c54574d18c28d46e6395428ab"
+                      authorities="ROLE_ADMIN" /> <!-- 1 -->
+                <user name="user" password="356a192b7913b04c54574d18c28d46e6395428ab"
+                      authorities="ROLE_USER" />  <!-- 1 -->
+                <user name="cook" password="356a192b7913b04c54574d18c28d46e6395428ab"
+                      authorities="ROLE_COOK" />  <!-- 1 -->
             </user-service>
         </authentication-provider>
     </authentication-manager>

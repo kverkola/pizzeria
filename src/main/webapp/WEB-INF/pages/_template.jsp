@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Pizzeria</title>
-        <link rel="stylesheet" href="<c:url value='/resources/reveal.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/reveal.css'/>"/>
     <link rel="stylesheet" href="<c:url value='/resources/bootstrap.min.css'/>"/>
 </head>
 <body>
@@ -35,13 +35,13 @@
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/menu'/>">Menu</a>
-                    
+
                 </li>
                 <li <c:if test="${pageContext.request.requestURI == '/pizzeria/additional'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/additional'/>">Additional</a>
-                    
+
                 </li>
                 <li <c:if
                         test="${pageContext.request.requestURI == '/pizzeria/feedback'}">
@@ -49,19 +49,20 @@
                 </c:if> >
                     <a href="<c:url value='/feedback'/>">Feedback</a>
                 </li>
-               
+
                 <li <c:if test="${pageContext.request.requestURI == '/pizzeria/about'}">
                     class="active"
                 </c:if> >
                     <a href="<c:url value='/about'/>">About</a>
                 </li>
-                
-                 <li <c:if test="${pageContext.request.requestURI == '/pizzeria/cook'}">
-                    class="active"
-                </c:if> >
-                    <a href="<c:url value='/cook'/>">cook(after DElete test)</a>
-                </li>
-                
+
+                <sec:authorize access="hasRole('ROLE_COOK')">
+                     <li <c:if test="${pageContext.request.requestURI == '/pizzeria/cook'}">
+                        class="active"
+                    </c:if> >
+                        <a href="<c:url value='/cook'/>">cook(after DElete test)</a>
+                    </li>
+                </sec:authorize>
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -131,14 +132,17 @@
                                 </c:forEach>
                             </table>
                             <p>----------------------------------------------</p>
+
                             <div style="width: 235px;">
                                 <b>Total price:</b>
+
                                 <div style="float: right;">
                                     <c:set var="orderName" value="order"/>
                                     <b>${sessionScope[orderName].price} $</b>
                                 </div>
                             </div>
                             <p></p>
+
                             <p style="text-align: center;">
                                 <c:choose>
                                     <c:when test="${fn:length(sessionScope[pizzasInOrder]) > 0}">
@@ -147,12 +151,14 @@
                                         </a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a href="<c:url value='/order/make-order'/>" class="btn btn-sm btn-warning disabled">
+                                        <a href="<c:url value='/order/make-order'/>"
+                                           class="btn btn-sm btn-warning disabled">
                                             Make order
                                         </a>
                                     </c:otherwise>
                                 </c:choose>
                             </p>
+
                             <p>
                                 Courier is obliged to issue a check.
                             </p>
@@ -175,10 +181,10 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<script src="<c:url value='/resources/jquery-1.8.3.min.js'/>" ></script>
-<script src="<c:url value='/resources/bootstrap.min.js'/>" ></script>
-<script src="<c:url value='/resources/bootswatch.js'/>" ></script>
-<script src="<c:url value='/resources/jquery.reveal.js'/>" ></script>
+<script src="<c:url value='/resources/jquery-1.8.3.min.js'/>"></script>
+<script src="<c:url value='/resources/bootstrap.min.js'/>"></script>
+<script src="<c:url value='/resources/bootswatch.js'/>"></script>
+<script src="<c:url value='/resources/jquery.reveal.js'/>"></script>
 
 </body>
 </html>

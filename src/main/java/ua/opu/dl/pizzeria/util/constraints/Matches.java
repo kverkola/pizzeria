@@ -16,7 +16,7 @@ import javax.validation.Payload;
 @Documented
 public @interface Matches {
 
-    String message() default "{springapp.util.constraints.matches}";
+    String message() default "{ua.opu.dl.pizzeria.util.constraints.matches}";
 
     Class<?>[] groups() default {};
 

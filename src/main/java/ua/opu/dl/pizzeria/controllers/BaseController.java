@@ -22,8 +22,6 @@ public class BaseController {
 
 	@Autowired
 	private AdditionalService additionalService;
-	@Autowired
-	private IngredientServiceImpl ingredientService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -63,7 +61,4 @@ public class BaseController {
 	
 		return "cook";
 	}
-	
-	
-	
 }
