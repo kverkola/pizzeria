@@ -103,7 +103,7 @@ public class UserController {
 
         LOG.info(principal.getName());
         //order.setPhone(user.getPhone());
-        //orderService.addOrder(order);
+        orderService.addOrder(order);
 
         order = new Order();
         order.setProducts(new ArrayList<Product>());

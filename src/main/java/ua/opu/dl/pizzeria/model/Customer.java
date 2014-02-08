@@ -14,7 +14,7 @@ public class Customer {
     private String address;
 
     @NotEmpty
-    @Size(min = 10, max = 12)
+    @Size(min = 7, max = 12)
     private String phone;
 
     public Customer() {

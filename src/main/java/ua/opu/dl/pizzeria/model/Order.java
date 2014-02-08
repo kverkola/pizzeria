@@ -24,14 +24,15 @@ public class Order {
     private List<Product> products;
 
     public Order() {
+    	status = Status.PRE_ORDER;
     }
 
-    public Order(List<Product> products, Status status,
+    public Order(List<Product> products,
                  Date starttime, Date endtime,
                  double price, String phone,String nameCustomer,String address) {
 
         this.products = products;
-        this.status = status;
+        this.status = Status.PRE_ORDER;
         this.starttime = starttime.toString();
         this.endtime = starttime.toString();;
         this.price = price;

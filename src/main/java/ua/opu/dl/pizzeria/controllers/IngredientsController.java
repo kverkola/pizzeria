@@ -101,6 +101,9 @@ public class IngredientsController {
 		session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
 
+	
+	
+		
 		return "/addIngredients";
 	}
 

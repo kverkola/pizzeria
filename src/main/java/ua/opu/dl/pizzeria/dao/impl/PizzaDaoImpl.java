@@ -66,7 +66,7 @@ public class PizzaDaoImpl implements PizzaDao {
 							throws SQLException, DataAccessException {
 						callablestatement.executeUpdate();
 
-						return String.valueOf(callablestatement.getObject(6));
+						return String.valueOf(callablestatement.getObject(7));
 					}
 				});
 		return Long.parseLong(resultValue);

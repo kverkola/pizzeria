@@ -60,9 +60,9 @@ public class OrderDaoImpl implements OrderDao {
 						sql.setString(3, String.valueOf(order.getPrice()));
 						sql.setString(4, String.valueOf(order.getStatus()));
 						sql.setString(5, order.getPhone());
-						sql.setString(5, order.getNameCustomer());
-						sql.setString(5, order.getAddress());
-						sql.registerOutParameter(6, Types.BIGINT);
+						sql.setString(6, order.getNameCustomer());
+						sql.setString(7, order.getAddress());
+						sql.registerOutParameter(8, Types.BIGINT);
 						return sql;
 					}
 				}, new CallableStatementCallback<String>() {
@@ -71,7 +71,7 @@ public class OrderDaoImpl implements OrderDao {
 							CallableStatement callablestatement)
 							throws SQLException, DataAccessException {
 						callablestatement.executeUpdate();
-						return String.valueOf(callablestatement.getObject(6));
+						return String.valueOf(callablestatement.getObject(8));
 					}
 				});
 		return Long.parseLong(resultValue);

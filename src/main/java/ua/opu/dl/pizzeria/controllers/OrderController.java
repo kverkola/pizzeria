@@ -72,7 +72,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(value = "/send-order", method = RequestMethod.POST)
-	public String send(@Valid Customer guestUser, BindingResult result,
+	public String send(@Valid Customer customer, BindingResult result,
 			ModelMap model, HttpSession session) {
 
 		if (result.hasErrors()) {
@@ -80,20 +80,22 @@ public class OrderController {
 			LOG.error("Wrong input data!");
 
 			model.addAttribute("errorMessage", "Wrong input data!");
-			model.addAttribute("guestUser", guestUser);
+			model.addAttribute("guestUser", customer);
 
 			return "completeOrder";
 
 		} else {
 
-			LOG.info("Name: " + guestUser.getName() + ", address: "
-					+ guestUser.getAddress() + ", phone: "
-					+ guestUser.getPhone());
+			LOG.info("Name: " + customer.getName() + ", address: "
+					+ customer.getAddress() + ", phone: "
+					+ customer.getPhone());
 
 			Order order = (Order) session.getAttribute("order");
 
-			order.setPhone(guestUser.getPhone());
-			// orderService.addOrder(order);
+			order.setPhone(customer.getPhone());
+			order.setAddress(customer.getAddress());
+			order.setNameCustomer(customer.getName());
+			 orderService.addOrder(order);
 
 			order = new Order();
 			order.setProducts(new ArrayList<Product>());
