@@ -25,19 +25,19 @@ public class User {
     private String password;
     private String confirmPassword;
 
-    private Status warker;
+    private UserRole role;
     private long id;
     public User() {
 
     }
 
     public User(String firstName, String lastName, String login,
-                String password, Status warker,long id) {
+                String password, UserRole role,long id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
-        this.warker = warker;
+        this.role = role;
         this.id=id;
     }
 
@@ -81,13 +81,15 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public Status getWarker() {
-        return warker;
-    }
+   
 
-    public void setWarker(Status warker) {
-        this.warker = warker;
-    }
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
 
 	public long getId() {
 		return id;

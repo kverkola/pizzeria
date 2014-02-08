@@ -80,7 +80,7 @@ public class UserController {
 
             LOG.info("Added user with first name: " + user.getFirstName()
                     + ", last name: " + user.getLastName()  );
-            user.setWarker(Status.COOK);//для проверки (незабыть удалить)
+            user.setRole(UserRole.CUSTOMER);//для проверки (незабыть удалить)
             userService.addUser(user);
             session.setAttribute("showResult", "registerSuccess");
 
