@@ -34,16 +34,24 @@ public class OrderServiceImpl implements OrderService {
 
 		List<Pizza> pizzas = order.getProducts(Pizza.class);
 		List<Additional> additionals = order.getProducts(Additional.class);
-		for (Pizza pizza : pizzas) {
+		for (Pizza pizza : pizzas) {	
+		
 			for (int i = 1; i <= pizza.getQuantity(); i++) {
+			
 				pizza.setOrderId(id);
-				pizzaService.addPizza(pizza);
+
+			pizzaService.addPizza(pizza);
 			}
 
 		}
+	
+		
+		
+		
+		
 		for (Additional additional : additionals) {
 
-			for (int i = 1; i < additional.getQuantity(); i++) {
+			for (int i = 1; i <= additional.getQuantity(); i++) {
 				additional.setOrderId(id);
 				additionalService.addAdditional(additional);
 			}

@@ -90,7 +90,7 @@ public class OrderController {
 					+ customer.getAddress() + ", phone: " + customer.getPhone());
 
 			Order order = (Order) session.getAttribute("order");
-
+			order.setStarttime(new Date().toString());
 			order.setCustomer(customer);
 			orderService.addOrder(order);
 

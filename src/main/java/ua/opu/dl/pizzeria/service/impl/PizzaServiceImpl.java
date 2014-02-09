@@ -41,7 +41,6 @@ public class PizzaServiceImpl implements PizzaService {
 	public void addPizza(Pizza pizza) {
 		Map<Ingredient, Integer> ingredients = pizza.getMap();
 		long id = pizzaDao.addPizza(pizza);
-		System.out.println(id);
 		int count;
 		for (Ingredient i : ingredients.keySet()) {
 			count = ingredients.get(i);
