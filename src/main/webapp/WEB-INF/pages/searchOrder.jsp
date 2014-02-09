@@ -14,11 +14,11 @@
      <dt>End Time:</dt>
     <dd>${order.endtime}</dd>
      <dt>Phone:</dt>
-    <dd>${order.phone}</dd>
+    <dd>${order.customer.phone}</dd>
      <dt>Name customer:</dt>
-    <dd>${order.nameCustomer}</dd>
+    <dd>${order.customer.name}</dd>
      <dt>adress:</dt>
-        <dd>${order.address}</dd>
+        <dd>${order.customer.address}</dd>
      <dt>Price:</dt>
         <dd>${order.price}&nbsp;$</dd>
      <dt>Status:</dt>
