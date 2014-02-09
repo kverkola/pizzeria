@@ -2,6 +2,6 @@ package ua.opu.dl.pizzeria.model;
 
 public enum Status {
 
-	PRE_ORDER, DELIVERY, IN_WORK
+	PRE_ORDER, DELIVERY, IN_WORK, CLOSE
 
 }

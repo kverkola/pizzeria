@@ -17,107 +17,117 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 public class UserController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
+	private static final Logger LOG = LoggerFactory
+			.getLogger(UserController.class);
 
-    @Autowired
-    private OrderService orderService;
+	@Autowired
+	private OrderService orderService;
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    /**
-     * Show login
-     * @return
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
+	/**
+	 * Show login
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
 
-        return "user/login";
-    }
+		return "user/login";
+	}
 
-    /**
-     * Login failed
-     */
-    @RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
-    public String loginError(ModelMap model) {
+	/**
+	 * Login failed
+	 */
+	@RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
+	public String loginError(ModelMap model) {
 
-        model.addAttribute("error", "true");
-        return "user/login";
-    }
+		model.addAttribute("error", "true");
+		return "user/login";
+	}
 
-    /**
-     * Show registration page
-     * @return
-     */
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(ModelMap model) {
+	/**
+	 * Show registration page
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(ModelMap model) {
 
-        model.addAttribute("user", new User());
+		model.addAttribute("user", new User());
 
-        return "user/register";
-    }
+		return "user/register";
+	}
 
-    /**
-     * Add new customer user
-     * @return
-     */
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-                          ModelMap model, HttpSession session) {
+	/**
+	 * Add new customer user
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String addUser(@Valid @ModelAttribute("user") User user,
+			BindingResult result, ModelMap model, HttpSession session) {
 
-        user.getCustomer().setName(user.getFirstName());
+		user.getCustomer().setName(user.getFirstName());
 
-        if (result.hasErrors()) {
+		if (result.hasErrors()) {
 
-            LOG.error("Wrong registration data! " + result.getAllErrors().toString());
-            model.addAttribute("user", user);
+			LOG.error("Wrong registration data! "
+					+ result.getAllErrors().toString());
+			model.addAttribute("user", user);
 
-            return "user/register";
+			return "user/register";
 
-        } else {
+		} else {
 
-            LOG.info("Added user with first name: " + user.getFirstName()
-                    + ", last name: " + user.getLastName() + ", phone: " + user.getCustomer().getPhone());
-            user.setRole(UserRole.CUSTOMER);//для проверки (незабыть удалить)
-            userService.addUser(user);
-            session.setAttribute("showResult", "registerSuccess");
+			LOG.info("Added user with first name: " + user.getFirstName()
+					+ ", last name: " + user.getLastName() + ", phone: "
+					+ user.getCustomer().getPhone());
+			user.setRole(UserRole.CUSTOMER);// для проверки (незабыть удалить)
+			userService.addUser(user);
+			session.setAttribute("showResult", "registerSuccess");
 
-            return "redirect:/";
-        }
-    }
+			return "redirect:/";
+		}
+	}
 
-    /**
-     * Send order from registered user
-     * @param session
-     * @param principal
-     * @return
-     */
-    @RequestMapping(value = "/user/send-order", method = RequestMethod.POST)
-    public String send(HttpSession session, Principal principal) {
+	/**
+	 * Send order from registered user
+	 * 
+	 * @param session
+	 * @param principal
+	 * @return
+	 */
+	@RequestMapping(value = "/user/send-order", method = RequestMethod.POST)
+	public String send(HttpSession session, Principal principal) {
 
-        Order order = (Order) session.getAttribute("order");
+		Order order = (Order) session.getAttribute("order");
 
-        User user = userService.loadByLogin(principal.getName());
+		User user = userService.loadByLogin(principal.getName());
 
-        LOG.info(principal.getName());
+		LOG.info(principal.getName());
 
-        order.setCustomer(new Customer(user.getFirstName(),
-                user.getCustomer().getAddress(), user.getCustomer().getPhone()));
-        orderService.addOrder(order);
+		order.setCustomer(new Customer(user.getFirstName(), user.getCustomer()
+				.getAddress(), user.getCustomer().getPhone()));
+		order.setStarttime(new Date().toString());
+		orderService.addOrder(order);
 
-        order = new Order();
-        order.setProducts(new ArrayList<Product>());
+		order = new Order();
+		order.setProducts(new ArrayList<Product>());
 
-        session.setAttribute("order", order);
-        session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
-        session.setAttribute("additionalInOrder", order.getProducts(Additional.class));
+		session.setAttribute("order", order);
+		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
+		session.setAttribute("additionalInOrder",
+				order.getProducts(Additional.class));
 
-        session.setAttribute("showResult", "sendOrderSuccess");
+		session.setAttribute("showResult", "sendOrderSuccess");
 
-        return "redirect:/";
-    }
+		return "redirect:/";
+	}
 }

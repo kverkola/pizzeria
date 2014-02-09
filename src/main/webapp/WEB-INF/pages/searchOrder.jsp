@@ -14,11 +14,11 @@
      <dt>End Time:</dt>
     <dd>${order.endtime}</dd>
      <dt>Phone:</dt>
-    <dd>${order.phone}</dd>
+    <dd>${order.customer.phone}</dd>
      <dt>Name customer:</dt>
-    <dd>${order.nameCustomer}</dd>
+    <dd>${order.customer.name}</dd>
      <dt>adress:</dt>
-        <dd>${order.address}</dd>
+        <dd>${order.customer.address}</dd>
      <dt>Price:</dt>
         <dd>${order.price}&nbsp;$</dd>
      <dt>Status:</dt>
@@ -31,8 +31,18 @@
 
 <dl class="dl-horizontal">
     <dt>Products:</dt>
-    <dd>${product.name}</dd>    
+    <dd><a href="#" class="big-link"
+					data-reveal-id="${product.id}"> ${product.name} </a></dd>    
     </dl>
+     
+    <div id="${product.id}" class="reveal-modal">
+				<h1>${product.name}</h1>
+				<p>${product.price}</P>
+				<img src="<c:url value='/resources/${product.logo}'/>" /> <a
+					class="close-reveal-modal">&#215;</a>
+			</div>
+    
+    
 </c:forEach>
 
 </c:forEach>
