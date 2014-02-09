@@ -23,6 +23,7 @@ public class Order {
 
     public Order() {
     	status = Status.PRE_ORDER;
+    	endtime="NOT FINISH";
     }
 
     public Order(List<Product> products,

@@ -44,7 +44,7 @@ public class OrderController {
 		}
 
 		order.addProduct(pizzaService.loadById(id));
-
+		order.setStarttime(new Date().toString());
 		session.setAttribute("order", order);
 		session.setAttribute("pizzasInOrder", order.getProducts(Pizza.class));
 
@@ -87,8 +87,7 @@ public class OrderController {
 		} else {
 
 			LOG.info("Name: " + customer.getName() + ", address: "
-					+ customer.getAddress() + ", phone: "
-					+ customer.getPhone());
+					+ customer.getAddress() + ", phone: " + customer.getPhone());
 
 			Order order = (Order) session.getAttribute("order");
 
