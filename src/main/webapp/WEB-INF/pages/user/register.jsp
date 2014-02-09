@@ -16,6 +16,8 @@
                     <form:errors path="firstName" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="firstName" id="firstName"
                                  placeholder="First name"/>
+                    <form:input type="hidden" class="form-control input-sm" path="customer.name"
+                                value="null"/>
                 </div>
             </div>
 
@@ -36,6 +38,26 @@
                     <form:errors path="login" cssStyle="color: red;"/>
                     <form:input class="form-control input-sm" path="login" id="login"
                                  placeholder="Login"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="col-lg-4 control-label">Phone</label>
+
+                <div class="col-lg-8">
+                    <form:errors path="customer.phone" cssStyle="color: red;"/>
+                    <form:input class="form-control input-sm" path="customer.phone" id="phone"
+                                placeholder="Phone"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="col-lg-4 control-label">Address</label>
+
+                <div class="col-lg-8">
+                    <form:errors path="customer.address" cssStyle="color: red;"/>
+                    <form:input class="form-control input-sm" path="customer.address" id="address"
+                                placeholder="Address"/>
                 </div>
             </div>
 

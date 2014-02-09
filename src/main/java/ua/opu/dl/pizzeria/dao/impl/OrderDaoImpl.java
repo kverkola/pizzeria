@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import ua.opu.dl.pizzeria.dao.OrderDao;
+import ua.opu.dl.pizzeria.model.Customer;
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Status;
 
@@ -38,9 +39,13 @@ public class OrderDaoImpl implements OrderDao {
 			order.setStarttime(rs.getString("start_time"));
 			order.setEndtime(rs.getString("end_time"));
 			order.setPrice(rs.getDouble("price"));
-			order.setPhone(rs.getString("phone"));
-			order.setNameCustomer(rs.getString("nameCustomer"));
-			order.setAddress(rs.getString("address"));
+
+            Customer customer = new Customer();
+            customer.setPhone(rs.getString("phone"));
+			customer.setName(rs.getString("nameCustomer"));
+			customer.setAddress(rs.getString("address"));
+
+            order.setCustomer(customer);
 
 			return order;
 		}
@@ -59,9 +64,9 @@ public class OrderDaoImpl implements OrderDao {
 						sql.setString(2, String.valueOf(order.getEndtime()));
 						sql.setString(3, String.valueOf(order.getPrice()));
 						sql.setString(4, String.valueOf(order.getStatus()));
-						sql.setString(5, order.getPhone());
-						sql.setString(6, order.getNameCustomer());
-						sql.setString(7, order.getAddress());
+						sql.setString(5, order.getCustomer().getPhone());
+						sql.setString(6, order.getCustomer().getName());
+						sql.setString(7, order.getCustomer().getAddress());
 						sql.registerOutParameter(8, Types.BIGINT);
 						return sql;
 					}

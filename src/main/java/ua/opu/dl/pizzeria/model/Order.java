@@ -17,9 +17,7 @@ public class Order {
     private String starttime;
     private String endtime;
     private double price;
-    private String phone;
-    private String address;
-    private String nameCustomer;
+    private Customer customer;
 
     private List<Product> products;
 
@@ -29,16 +27,14 @@ public class Order {
 
     public Order(List<Product> products,
                  Date starttime, Date endtime,
-                 double price, String phone,String nameCustomer,String address) {
+                 double price, Customer customer) {
 
         this.products = products;
         this.status = Status.PRE_ORDER;
         this.starttime = starttime.toString();
-        this.endtime = starttime.toString();;
+        this.endtime = starttime.toString();
         this.price = price;
-        this.phone = phone;
-        this.nameCustomer=nameCustomer;
-        this.address=address;
+        this.customer = customer;
     }
 
     public static Integer getProductIdCounter() {
@@ -89,6 +85,14 @@ public class Order {
         this.price = price;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     public <T extends Product> List<T> getProducts(Class<T> clazz) {
 
         List<T> productsList = new ArrayList();
@@ -102,14 +106,6 @@ public class Order {
         return productsList;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public List<Product> getProducts() {
         return products;
     }
@@ -117,22 +113,6 @@ public class Order {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-
-    public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getNameCustomer() {
-		return nameCustomer;
-	}
-
-	public void setNameCustomer(String nameCustomer) {
-		this.nameCustomer = nameCustomer;
-	}
 
 	public void addProduct(Product product) {
 

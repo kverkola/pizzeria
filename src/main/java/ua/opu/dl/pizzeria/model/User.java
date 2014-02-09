@@ -3,6 +3,7 @@ package ua.opu.dl.pizzeria.model;
 import org.hibernate.validator.constraints.NotEmpty;
 import ua.opu.dl.pizzeria.util.constraints.Matches;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 @Matches(fields={"password"}, verifyFields={"confirmPassword"})
@@ -25,20 +26,24 @@ public class User {
     private String password;
     private String confirmPassword;
 
+    @Valid
+    private Customer customer;
     private UserRole role;
     private long id;
+
     public User() {
 
     }
 
     public User(String firstName, String lastName, String login,
-                String password, UserRole role,long id) {
+                String password, Customer customer, UserRole role, long id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
+        this.customer = customer;
         this.role = role;
-        this.id=id;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -81,8 +86,6 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-   
-
 	public UserRole getRole() {
 		return role;
 	}
@@ -99,4 +102,11 @@ public class User {
 		this.id = id;
 	}
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

@@ -92,10 +92,8 @@ public class OrderController {
 
 			Order order = (Order) session.getAttribute("order");
 
-			order.setPhone(customer.getPhone());
-			order.setAddress(customer.getAddress());
-			order.setNameCustomer(customer.getName());
-			 orderService.addOrder(order);
+			order.setCustomer(customer);
+			orderService.addOrder(order);
 
 			order = new Order();
 			order.setProducts(new ArrayList<Product>());

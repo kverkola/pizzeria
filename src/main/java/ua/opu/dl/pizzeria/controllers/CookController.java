@@ -18,15 +18,5 @@ public class CookController {
 	@Autowired
 	private PizzaService pizzaService;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

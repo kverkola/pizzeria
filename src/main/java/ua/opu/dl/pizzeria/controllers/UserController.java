@@ -62,16 +62,18 @@ public class UserController {
     }
 
     /**
-     * Add new user
+     * Add new customer user
      * @return
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result,
                           ModelMap model, HttpSession session) {
 
+        user.getCustomer().setName(user.getFirstName());
+
         if (result.hasErrors()) {
 
-            LOG.error("Wrong registration data!");
+            LOG.error("Wrong registration data! " + result.getAllErrors().toString());
             model.addAttribute("user", user);
 
             return "user/register";
@@ -79,7 +81,7 @@ public class UserController {
         } else {
 
             LOG.info("Added user with first name: " + user.getFirstName()
-                    + ", last name: " + user.getLastName()  );
+                    + ", last name: " + user.getLastName() + ", phone: " + user.getCustomer().getPhone());
             user.setRole(UserRole.CUSTOMER);//для проверки (незабыть удалить)
             userService.addUser(user);
             session.setAttribute("showResult", "registerSuccess");
@@ -102,7 +104,9 @@ public class UserController {
         User user = userService.loadByLogin(principal.getName());
 
         LOG.info(principal.getName());
-        //order.setPhone(user.getPhone());
+
+        order.setCustomer(new Customer(user.getFirstName(),
+                user.getCustomer().getAddress(), user.getCustomer().getPhone()));
         orderService.addOrder(order);
 
         order = new Order();
