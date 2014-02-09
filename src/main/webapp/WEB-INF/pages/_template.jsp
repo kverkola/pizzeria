@@ -56,13 +56,13 @@
                     <a href="<c:url value='/about'/>">About</a>
                 </li>
 
-                <%--<sec:authorize access="hasRole('ROLE_COOK')">--%>
+                <sec:authorize access="hasRole('ROLE_COOK')">
                      <li <c:if test="${pageContext.request.requestURI == '/pizzeria/cook'}">
                         class="active"
                     </c:if> >
-                        <a href="<c:url value='/cook'/>">cook(after DElete test)</a>
+                        <a href="<c:url value='/cook'/>">Pizzas query</a>
                     </li>
-                <%--</sec:authorize>--%>
+                </sec:authorize>
                 
             </ul>
             <ul class="nav navbar-nav navbar-right">

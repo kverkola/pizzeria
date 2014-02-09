@@ -1,6 +1,8 @@
 package ua.opu.dl.pizzeria.controllers;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+import ua.opu.dl.pizzeria.model.Order;
+import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.model.Status;
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.OrderService;
@@ -60,11 +64,19 @@ public class BaseController {
 
 		return "about";
 	}
-	
-	@RequestMapping(value = "/cook", method = RequestMethod.GET)
-	public String Cook(ModelMap model) {
 
-        model.addAttribute("orders", orderService.loadAllByStatus(Status.IN_WORK));
+	@RequestMapping(value = "/cook", method = RequestMethod.GET)
+	public String cook(ModelMap model) {
+
+        List<Pizza> pizzas = new ArrayList();
+
+        for (Order order : orderService.loadAllByStatus(Status.IN_WORK)) {
+            for (Pizza pizza : order.getProducts(Pizza.class)) {
+                pizzas.add(pizza);
+            }
+        }
+
+        model.addAttribute("pizzas", pizzas);
 		return "cook";
 	}
 }
