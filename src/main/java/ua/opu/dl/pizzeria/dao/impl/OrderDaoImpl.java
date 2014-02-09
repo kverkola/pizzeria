@@ -110,4 +110,8 @@ public class OrderDaoImpl implements OrderDao {
 		return jdbcTemplate.query(loadOrderByPhone, rowMapper, phone);
 	}
 
+    @Override
+    public List<Order> loadAllByStatus(Status status) {
+        return null;
+    }
 }

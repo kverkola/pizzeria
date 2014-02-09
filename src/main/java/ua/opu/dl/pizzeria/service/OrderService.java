@@ -3,6 +3,7 @@ package ua.opu.dl.pizzeria.service;
 import java.util.List;
 
 import ua.opu.dl.pizzeria.model.Order;
+import ua.opu.dl.pizzeria.model.Status;
 
 public interface OrderService {
 
@@ -17,4 +18,6 @@ public interface OrderService {
 	List<Order> loadByPhone(String phone);
 
 	List<Order> loadAllOrder();
+
+    List<Order> loadAllByStatus(Status status);
 }

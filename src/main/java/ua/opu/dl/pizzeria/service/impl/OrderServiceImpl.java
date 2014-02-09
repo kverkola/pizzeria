@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ua.opu.dl.pizzeria.dao.OrderDao;
 import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.dao.impl.AdditionalDaoImpl;
-import ua.opu.dl.pizzeria.model.Additional;
-import ua.opu.dl.pizzeria.model.Order;
-import ua.opu.dl.pizzeria.model.Pizza;
-import ua.opu.dl.pizzeria.model.Product;
+import ua.opu.dl.pizzeria.model.*;
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.PizzaService;
@@ -89,4 +86,9 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return orders;
 	}
+
+    @Override
+    public List<Order> loadAllByStatus(Status status) {
+        return orderDao.loadAllByStatus(status);
+    }
 }

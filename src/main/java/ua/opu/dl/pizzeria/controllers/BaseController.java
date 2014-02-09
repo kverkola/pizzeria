@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+import ua.opu.dl.pizzeria.model.Status;
 import ua.opu.dl.pizzeria.service.AdditionalService;
+import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 
@@ -22,6 +24,9 @@ public class BaseController {
 
 	@Autowired
 	private AdditionalService additionalService;
+
+    @Autowired
+    private OrderService orderService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
@@ -58,7 +63,8 @@ public class BaseController {
 	
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
 	public String Cook(ModelMap model) {
-	
+
+        model.addAttribute("orders", orderService.loadAllByStatus(Status.IN_WORK));
 		return "cook";
 	}
 }

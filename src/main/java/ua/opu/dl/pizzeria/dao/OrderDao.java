@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import ua.opu.dl.pizzeria.model.Order;
+import ua.opu.dl.pizzeria.model.Status;
 
 public interface OrderDao {
 
@@ -17,4 +18,6 @@ public interface OrderDao {
 	List<Order> loadByPhone(String phone);
 
 	List<Order> loadAllOrders();
+
+    List<Order> loadAllByStatus(Status status);
 }
