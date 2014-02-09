@@ -11,10 +11,11 @@ public class Pizza extends Product {
 	private String cook;
 
 	public Pizza() {
+
 	}
 
     public Pizza(String name, String logo,
-                 String description, long id, double price,String cook) {
+                 String description, long id, double price, String cook) {
 
         super(id, name, 1, price);
 

@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.List;
+import java.util.*;
 import javax.sql.DataSource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.CallableStatementCallback;
@@ -13,9 +13,7 @@ import org.springframework.jdbc.core.CallableStatementCreator;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import ua.opu.dl.pizzeria.dao.OrderDao;
-import ua.opu.dl.pizzeria.model.Customer;
-import ua.opu.dl.pizzeria.model.Order;
-import ua.opu.dl.pizzeria.model.Status;
+import ua.opu.dl.pizzeria.model.*;
 
 public class OrderDaoImpl implements OrderDao {
 
@@ -112,6 +110,24 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> loadAllByStatus(Status status) {
-        return null;
+
+        List<Order> orders = new ArrayList();
+
+        List<Product> products = new ArrayList();
+        Map<Ingredient, Integer> ingredients = new HashMap();
+        ingredients.put(new Ingredient("Cheese", 20, 15), 1);
+        ingredients.put(new Ingredient("Vegetables", 30, 5), 1);
+        ingredients.put(new Ingredient("Mushrooms", 10, 30), 1);
+
+        Pizza pizza = new Pizza("TestPizza", "", "", 10L, 29, "cook1");
+        pizza.setMap(ingredients);
+        products.add(pizza);
+        products.add(pizza);
+
+        Order order = new Order(products, new Date(), new Date(),
+                                150, new Customer());
+        orders.add(order);
+
+        return orders;
     }
 }
