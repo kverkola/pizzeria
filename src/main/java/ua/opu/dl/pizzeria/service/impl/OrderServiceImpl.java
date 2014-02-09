@@ -89,6 +89,16 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> loadAllByStatus(Status status) {
-        return orderDao.loadAllByStatus(status);
+         orderDao.loadAllByStatus(status);
+        products = new ArrayList<Product>();
+		for (Order order : orders) {
+			products.addAll(pizzaService.loadByOrder(order.getId()));
+			products.addAll(additionalService.loadByOrder(order.getId()));
+			order.setProducts(products);
+		}
+		return orders;
+        
+        
+        
     }
 }
