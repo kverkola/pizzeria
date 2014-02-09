@@ -31,15 +31,22 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void addOrder(Order order) {
 		long id = orderDao.addOrder(order);
+
 		List<Pizza> pizzas = order.getProducts(Pizza.class);
 		List<Additional> additionals = order.getProducts(Additional.class);
 		for (Pizza pizza : pizzas) {
-			pizza.setOrderId(id);
-			pizzaService.addPizza(pizza);
+			for (int i = 1; i <= pizza.getQuantity(); i++) {
+				pizza.setOrderId(id);
+				pizzaService.addPizza(pizza);
+			}
+
 		}
 		for (Additional additional : additionals) {
-			additional.setOrderId(id);
-			additionalService.addAdditional(additional);
+
+			for (int i = 1; i < additional.getQuantity(); i++) {
+				additional.setOrderId(id);
+				additionalService.addAdditional(additional);
+			}
 		}
 
 	}
@@ -87,18 +94,16 @@ public class OrderServiceImpl implements OrderService {
 		return orders;
 	}
 
-    @Override
-    public List<Order> loadAllByStatus(Status status) {
-         orderDao.loadAllByStatus(status);
-        products = new ArrayList<Product>();
+	@Override
+	public List<Order> loadAllByStatus(Status status) {
+		orderDao.loadAllByStatus(status);
+		products = new ArrayList<Product>();
 		for (Order order : orders) {
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));
 			order.setProducts(products);
 		}
 		return orders;
-        
-        
-        
-    }
+
+	}
 }
