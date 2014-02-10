@@ -39,18 +39,19 @@ public class PizzaServiceImpl implements PizzaService {
 
 	@Override
 	public void addPizza(Pizza pizza) {
+
 		Map<Ingredient, Integer> ingredients = pizza.getMap();
 		long id = pizzaDao.addPizza(pizza);
 		int count;
-		for (Ingredient i : ingredients.keySet()) {
-			count = ingredients.get(i);
+
+        for (Map.Entry<Ingredient, Integer> entry : ingredients.entrySet()) {
+			count = entry.getValue();
 			for (int j = 1; j <= count; j++) {
+                Ingredient i = entry.getKey();
 				i.setPizzaId(id);
 				ingredientService.addIngredient(i);
 			}
-
 		}
-
 	}
 
 	@Override
