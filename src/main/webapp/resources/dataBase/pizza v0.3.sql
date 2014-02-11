@@ -299,8 +299,55 @@ END addOrder;
 
 --call addOrder('1033dsssf00','100331','23','IN_WORK','333','ssss','eee');
 
+--update order
+CREATE OR REPLACE
+procedure UpdateOrder(
+ id number,
+ status in varchar2,
+    starttime IN VARCHAR2,
+    endtime in varchar2,
+    price in varchar2,
+    phone in varchar2,
+    nameCustomer in varchar2,
+    address in varchar2
+    
+    
+   ) 
+is
 
+BEGIN
 
+ update 
+ ATTRIBUTES 
+ set value=starttime
+ WHERE object_id=id and attr_id=11; 
+  update 
+ ATTRIBUTES 
+ set value=status
+ WHERE object_id=id and attr_id=28; 
+   update 
+ ATTRIBUTES 
+ set value=endtime
+ WHERE object_id=id and attr_id=12; 
+    update 
+ ATTRIBUTES 
+ set value=price
+ WHERE object_id=id and attr_id=13; 
+     update 
+ ATTRIBUTES 
+ set value=phone
+ WHERE object_id=id and attr_id=14; 
+      update 
+ ATTRIBUTES 
+ set value=nameCustomer
+ WHERE object_id=id and attr_id=32; 
+       update 
+ ATTRIBUTES 
+ set value=address
+ WHERE object_id=id and attr_id=33; 
+ 
+END UpdateOrder;
+/
 
 --add user
 CREATE OR REPLACE
@@ -393,8 +440,3 @@ END addd;
 call addd();
 
 commit;
-
-
-
-
-
