@@ -15,7 +15,7 @@
                         </span>
                         
                     </div><br>
-                                               <select class="form-control">
+                                               <select class="form-control"   name="typeSearch" >
   <option>Search Orders By Phone</option>
   <option>Search Order By Id</option>
   <option>Search Order By Status</option>
