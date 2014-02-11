@@ -79,4 +79,10 @@ public class BaseController {
         model.addAttribute("pizzas", pizzas);
 		return "cook";
 	}
+	@RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+	public String admin(ModelMap model) {
+
+      
+		return "adminPanel";
+	}
 }

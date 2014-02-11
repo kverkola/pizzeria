@@ -67,7 +67,7 @@
                      <li <c:if test="${pageContext.request.requestURI == '/pizzeria/adminPanel'}">
                         class="active"
                     </c:if> >
-                        <a href="<c:url value='/adminPanel'/>">Pizzas query</a>
+                        <a href="<c:url value='/adminPanel'/>">adminPanel</a>
                     </li>
                 </sec:authorize>
                 
