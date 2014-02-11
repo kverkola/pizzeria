@@ -32,7 +32,9 @@
         <intercept-url pattern="/ingredients/addNewIngr/*" access="permitAll" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/cook" access="permitAll" />
-        <intercept-url pattern="/adminPanel" access="permitAll" />
+        <intercept-url pattern="/adminPanel" access="permitAll" /><!-- Role Admin -->
+        <intercept-url pattern="/updateOrder" access="permitAll" /><!-- Role Admin -->
+        <intercept-url pattern="/adminSearchOrder" access="permitAll" /><!-- Role Admin -->
 
         <intercept-url pattern="/**" access="isAuthenticated()" />
         <form-login login-page="/login" default-target-url="/"

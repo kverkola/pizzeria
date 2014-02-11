@@ -8,8 +8,8 @@
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     Order <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Update</a></li>
+  <ul class="dropdown-menu" >
+    <li><a href="/updateOrder">Update</a></li>
     <li><a href="#">Delete</a></li>
   </ul>
 </div>
@@ -17,7 +17,7 @@
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     User <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" >
     <li><a href="#">Update</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Add User</a></li>
@@ -27,7 +27,7 @@
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     Pizza <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" >
     <li><a href="#">Update</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Add Pizza</a></li>
@@ -37,7 +37,7 @@
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     Additional <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" >
     <li><a href="#">Update</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Add Pizza</a></li>
@@ -47,7 +47,7 @@
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     Ingredient <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" role="menu">
+  <ul class="dropdown-menu" >
     <li><a href="#">Update</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Add Pizza</a></li>
