@@ -37,7 +37,8 @@
         <intercept-url pattern="/admin/adminSearchOrder" access="permitAll" /><!-- Role Admin -->
         <intercept-url pattern="/admin/updateOrderView" access="permitAll" /><!-- Role Admin -->
         <intercept-url pattern="/admin/updateUserView" access="permitAll" /><!-- Role Admin -->
-
+        <intercept-url pattern="/admin/adminSearchUser" access="permitAll" /><!-- Role Admin -->
+        <intercept-url pattern="/admin/updateUser" access="permitAll" /><!-- Role Admin -->
         <intercept-url pattern="/**" access="isAuthenticated()" />
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-url="/loginFailed" />

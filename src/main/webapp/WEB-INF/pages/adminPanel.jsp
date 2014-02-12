@@ -18,7 +18,7 @@
     User <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" >
-    <li><a href="#">Update</a></li>
+    <li><a href="/admin/updateUserView">Update</a></li>
     <li><a href="#">Delete</a></li>
     <li><a href="#">Add User</a></li>
   </ul>

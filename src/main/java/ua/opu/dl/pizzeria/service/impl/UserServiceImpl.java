@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.opu.dl.pizzeria.dao.UserDao;
 import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.UserRole;
 import ua.opu.dl.pizzeria.service.UserService;
 
 public class UserServiceImpl implements UserService {
@@ -44,8 +45,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
 	public List<User> loadAlluser() {
-		// TODO Auto-generated method stub
+		
 		return null;
+	}
+
+	@Override
+	public List<User> loadByRole(UserRole role) {
+		
+		return userDao.loadByRole(role);
 	}
 
 }

@@ -3,6 +3,7 @@ package ua.opu.dl.pizzeria.dao;
 import java.util.List;
 
 import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.UserRole;
 
 public interface UserDao {
 
@@ -14,7 +15,9 @@ public interface UserDao {
 
 	User loadById(long id);
 
-    User loadByLogin(String name);
+	User loadByLogin(String name);
+
+	List<User> loadByRole(UserRole role);
 
 	List<User> loadAllusers();
 }

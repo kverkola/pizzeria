@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Status;
+import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.UserRole;
 import ua.opu.dl.pizzeria.service.OrderService;
+import ua.opu.dl.pizzeria.service.UserService;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -22,8 +25,11 @@ public class AdminController {
 
 	@Autowired
 	private OrderService orderService;
-	List <Order>orders;
-
+	@Autowired
+	private UserService userService;
+	private List <Order>orders;
+	private List <User>users;
+    private User user;
 	@RequestMapping(value = "/adminSearchOrder", method = RequestMethod.GET)
 	public String searchOrder(@RequestParam("param") String param,
 			@RequestParam("typeSearch") String typeSEarch, HttpSession session,
@@ -94,4 +100,33 @@ public class AdminController {
 		
 		return "/admin/updateUser";
 	}
+	
+	@RequestMapping(value = "/adminSearchUser", method = RequestMethod.GET)
+	public String searchUser(@RequestParam("param") String param,
+			@RequestParam("typeSearch") String typeSEarch, HttpSession session,
+			ModelMap model) {
+
+		
+		if (typeSEarch.equals("Search User By login")) {
+			user = userService.loadByLogin(param);
+			users.add(user);
+		} else if (typeSEarch.equals("Search User By Id")) {
+		
+			user = userService.loadById(Long.valueOf(param));
+			users.add(user);
+
+		} else if (typeSEarch.equals("Search Users By Role")) {
+			users = userService.loadByRole(UserRole.valueOf(param));
+		}
+
+		model.addAttribute("users", users);
+		session.setAttribute("usersUpdate", users);
+		return "/admin/updateUser";
+	}
+	
+	
+	
+	
+	
+	
 }
