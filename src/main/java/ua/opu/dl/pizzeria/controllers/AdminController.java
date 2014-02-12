@@ -81,10 +81,17 @@ public class AdminController {
 		return "/admin/updateOrder";
 	}
 	@RequestMapping(value = "/updateOrderView", method = RequestMethod.GET)
-	public String update(
+	public String updateOrderView(
 		ModelMap model) {
 		
 			
 		return "/admin/updateOrder";
+	}
+	@RequestMapping(value = "/updateUserView", method = RequestMethod.GET)
+	public String update(
+			ModelMap model) {
+		
+		
+		return "/admin/updateUser";
 	}
 }

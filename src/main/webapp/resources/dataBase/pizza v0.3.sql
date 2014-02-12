@@ -303,10 +303,10 @@ END addOrder;
 CREATE OR REPLACE
 procedure UpdateOrder(
  id number,
- status in varchar2,
     starttime IN VARCHAR2,
     endtime in varchar2,
     price in varchar2,
+    status in varchar2,
     phone in varchar2,
     nameCustomer in varchar2,
     address in varchar2
@@ -356,7 +356,8 @@ procedure addUser(
     last_name in varchar2,
     login in varchar2,
     passsword in varchar2,
-    warker in varchar2) 
+    warker in varchar2,
+    idUser number) 
 is
  id   NUMBER(20);
 BEGIN
@@ -373,6 +374,30 @@ select * from dual;
 END addUser;
 /
 --ua.opu.dl.pizzeria.model.Pizza
+--Update user
+CREATE OR REPLACE
+procedure updateUser(
+    first_name IN VARCHAR2,
+    last_name in varchar2,
+    login in varchar2,
+    passsword in varchar2,
+    warker in varchar2,
+    id number) 
+is
+ 
+BEGIN
+update ATTRIBUTES
+set value=first_name WHERE object_id=id and attr_id=1;
+update ATTRIBUTES
+set value=last_name WHERE object_id=id and attr_id=2;
+update ATTRIBUTES
+set value=login WHERE object_id=id and attr_id=3;
+update ATTRIBUTES
+set value=passsword WHERE object_id=id and attr_id=4;
+update ATTRIBUTES
+set value=warker WHERE object_id=id and attr_id=5;
+END updateUser;
+/
 
 CREATE OR REPLACE
 procedure addd 
@@ -440,3 +465,7 @@ END addd;
 call addd();
 
 commit;
+
+
+
+
