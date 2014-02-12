@@ -27,24 +27,25 @@ public class AdminController {
 	private OrderService orderService;
 	@Autowired
 	private UserService userService;
-	private List <Order>orders;
-	private List <User>users;
-    private User user;
+	private List<Order> orders;
+	private List<User> users;
+	private User user;
+
 	@RequestMapping(value = "/adminSearchOrder", method = RequestMethod.GET)
 	public String searchOrder(@RequestParam("param") String param,
 			@RequestParam("typeSearch") String typeSEarch, HttpSession session,
 			ModelMap model) {
+		orders = new ArrayList<Order>();
 
-		
 		if (typeSEarch.equals("Search Orders By Phone")) {
-			orders = orderService.loadByPhone(param);
+			orders.addAll(orderService.loadByPhone(param));
 		} else if (typeSEarch.equals("Search Order By Id")) {
-		
-			Order	order = orderService.loadById(Long.valueOf(param));
+
+			Order order = orderService.loadById(Long.valueOf(param));
 			orders.add(order);
 
 		} else if (typeSEarch.equals("Search Order By Status")) {
-			orders = orderService.loadAllByStatus(Status.valueOf(param));
+			orders.addAll(orderService.loadAllByStatus(Status.valueOf(param)));
 		}
 
 		model.addAttribute("orders", orders);
@@ -53,80 +54,79 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/updateOrder", method = RequestMethod.GET)
-	public String updateOrder(
-			@RequestParam("id") long id,
+	public String updateOrder(@RequestParam("id") long id,
 			@RequestParam("newStarttime") String newStarttime,
 			@RequestParam("newEndtime") String newEndtime,
 			@RequestParam("newStatus") Status newStatus,
 			@RequestParam("newPrice") Double newPrice,
 			@RequestParam("newCustomerName") String newCustomerName,
 			@RequestParam("newCustomerAddress") String newCustomerAddress,
-			@RequestParam("newPhone") String newPhone,ModelMap model,HttpSession session) {
-		
-     orders=(List<Order>)session.getAttribute("ordersUpdate");
-	
-	for (Order order : orders) {
-		if(order.getId()==id){
-			if(newStarttime!=""){
-		order.setStarttime(newStarttime);}
-			if(newEndtime!=""){
-		order.setEndtime(newEndtime);}			
-		order.setStatus(newStatus);
-			if(newPrice!=null){
-		order.setPrice(newPrice);}
-			if(newCustomerName!=""){
-		order.getCustomer().setName(newCustomerName);}
-			if(newCustomerAddress!=""){
-		order.getCustomer().setAddress(newCustomerAddress);}
-			if(newPhone!=""){
-		order.getCustomer().setPhone(newPhone);}
-		orderService.updateOrder(order);break;
+			@RequestParam("newPhone") String newPhone, ModelMap model,
+			HttpSession session) {
+
+		orders = (List<Order>) session.getAttribute("ordersUpdate");
+
+		for (Order order : orders) {
+			if (order.getId() == id) {
+				if (newStarttime != "") {
+					order.setStarttime(newStarttime);
+				}
+				if (newEndtime != "") {
+					order.setEndtime(newEndtime);
+				}
+				order.setStatus(newStatus);
+				if (newPrice != null) {
+					order.setPrice(newPrice);
+				}
+				if (newCustomerName != "") {
+					order.getCustomer().setName(newCustomerName);
+				}
+				if (newCustomerAddress != "") {
+					order.getCustomer().setAddress(newCustomerAddress);
+				}
+				if (newPhone != "") {
+					order.getCustomer().setPhone(newPhone);
+				}
+				orderService.updateOrder(order);
+				break;
+			}
 		}
-	}
-		
+
 		return "/admin/updateOrder";
 	}
+
 	@RequestMapping(value = "/updateOrderView", method = RequestMethod.GET)
-	public String updateOrderView(
-		ModelMap model) {
-		
-			
+	public String updateOrderView(ModelMap model) {
+
 		return "/admin/updateOrder";
 	}
+
 	@RequestMapping(value = "/updateUserView", method = RequestMethod.GET)
-	public String update(
-			ModelMap model) {
-		
-		
+	public String update(ModelMap model) {
+
 		return "/admin/updateUser";
 	}
-	
+
 	@RequestMapping(value = "/adminSearchUser", method = RequestMethod.GET)
 	public String searchUser(@RequestParam("param") String param,
 			@RequestParam("typeSearch") String typeSEarch, HttpSession session,
 			ModelMap model) {
-
-		
+		users = new ArrayList<User>();
 		if (typeSEarch.equals("Search User By login")) {
 			user = userService.loadByLogin(param);
 			users.add(user);
 		} else if (typeSEarch.equals("Search User By Id")) {
-		
+
 			user = userService.loadById(Long.valueOf(param));
 			users.add(user);
 
 		} else if (typeSEarch.equals("Search Users By Role")) {
-			users = userService.loadByRole(UserRole.valueOf(param));
+			users.addAll(userService.loadByRole(UserRole.valueOf(param)));
 		}
 
 		model.addAttribute("users", users);
 		session.setAttribute("usersUpdate", users);
 		return "/admin/updateUser";
 	}
-	
-	
-	
-	
-	
-	
+
 }
