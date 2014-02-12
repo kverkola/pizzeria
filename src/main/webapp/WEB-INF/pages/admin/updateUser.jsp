@@ -17,7 +17,14 @@
 	</select>
 </form>
 
+<div style="position: absolute; top: 400px; left: -200px">
 
+	<div style='position: fixed;'>
+
+		<a href="<c:url value='/adminPanel'/>"> <img
+			src="<c:url value='/resources/forward.png'/>" /></a>
+	</div>
+</div>
 
 
 
@@ -79,10 +86,13 @@
 				
 
 			</table>
- <span class="input-group-btn">
+ 
                             <button type="submit" class="btn btn-default" type="button">Update</button>
-                        </span>
-
+                        
+                        <div class="pull-right">
+                        <input class="btn btn-sm btn-info" type="reset" value="Reset!"></div><br>
+                        
+-----------------------------------------------------------------------------------------
 		</c:forEach>
 
 	</div>

@@ -303,10 +303,10 @@ END addOrder;
 CREATE OR REPLACE
 procedure UpdateOrder(
  id number,
+     status in varchar2,
     starttime IN VARCHAR2,
     endtime in varchar2,
     price in varchar2,
-    status in varchar2,
     phone in varchar2,
     nameCustomer in varchar2,
     address in varchar2
@@ -356,8 +356,7 @@ procedure addUser(
     last_name in varchar2,
     login in varchar2,
     passsword in varchar2,
-    warker in varchar2,
-    idUser number) 
+    warker in varchar2) 
 is
  id   NUMBER(20);
 BEGIN
@@ -465,5 +464,10 @@ END addd;
 call addd();
 
 commit;
+
+
+
+
+
 
 

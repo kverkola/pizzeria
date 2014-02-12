@@ -30,6 +30,7 @@ public class AdminController {
 	private List<Order> orders;
 	private List<User> users;
 	private User user;
+	private Order order;
 
 	@RequestMapping(value = "/adminSearchOrder", method = RequestMethod.GET)
 	public String searchOrder(@RequestParam("param") String param,
@@ -41,7 +42,7 @@ public class AdminController {
 			orders.addAll(orderService.loadByPhone(param));
 		} else if (typeSEarch.equals("Search Order By Id")) {
 
-			Order order = orderService.loadById(Long.valueOf(param));
+			order = orderService.loadById(Long.valueOf(param));
 			orders.add(order);
 
 		} else if (typeSEarch.equals("Search Order By Status")) {
@@ -74,7 +75,9 @@ public class AdminController {
 				if (newEndtime != "") {
 					order.setEndtime(newEndtime);
 				}
-				order.setStatus(newStatus);
+				if (order.getStatus() != newStatus) {
+					order.setStatus(newStatus);
+				}
 				if (newPrice != null) {
 					order.setPrice(newPrice);
 				}
@@ -129,4 +132,40 @@ public class AdminController {
 		return "/admin/updateUser";
 	}
 
+	@RequestMapping(value = "/updateUser", method = RequestMethod.GET)
+	public String updateUser(@RequestParam("id") long id,
+			@RequestParam("newfirstName") String newfirstName,
+			@RequestParam("newlastName") String newlastName,
+			@RequestParam("newRole") UserRole newRole,
+			@RequestParam("newLogin") String newLogin,
+			@RequestParam("newpassword") String newpassword,
+
+			HttpSession session) {
+
+		users = (List<User>) session.getAttribute("usersUpdate");
+		for (User user : users) {
+			if (user.getId() == id) {
+				if (newfirstName != "") {
+					user.setFirstName(newfirstName);
+				}
+				if (newlastName != "") {
+					user.setLastName(newlastName);
+				}
+				if (user.getRole() != (newRole)) {
+					user.setRole(newRole);
+				}
+				if (newLogin != "") {
+					user.setLogin(newLogin);
+				}
+				if (newpassword != "") {
+					user.setPassword(newpassword);
+				}
+
+				userService.updateUser(user);
+				break;
+			}
+		}
+
+		return "/admin/updateUser";
+	}
 }
