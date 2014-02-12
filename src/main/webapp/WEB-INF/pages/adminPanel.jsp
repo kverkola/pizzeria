@@ -9,7 +9,7 @@
     Order <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" >
-    <li><a href="/updateOrder">Update</a></li>
+    <li><a href="/admin/updateOrderView">Update</a></li>
     <li><a href="#">Delete</a></li>
   </ul>
 </div>

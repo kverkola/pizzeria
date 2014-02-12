@@ -4,7 +4,7 @@
 
 
 
-<form method="GET" action="<c:url value='/adminSearchOrder'/>">
+<form method="GET" action="<c:url value='/admin/adminSearchOrder'/>">
 
 	<div class="input-group text-center">
 		<input type="text" class="form-control" placeholder="Search order"
@@ -22,7 +22,7 @@
 
 
 
-<form>
+<form method="GET" action="<c:url value='/admin/updateOrder'/>">
 	<div>
 
 		<c:forEach var="order" items="${orders}">
@@ -33,7 +33,9 @@
 				<tr>
 					<td>OrderId:</td>
 					<td>${order.id}</td>
-					<td></td>
+					<td><div>
+							<input type="hidden" class="inp" name="id" value="${order.id}">
+						</div></td>
 				</tr>
 				<tr>
 					<td>Start Time:</td>
