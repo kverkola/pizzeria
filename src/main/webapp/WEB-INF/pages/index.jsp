@@ -31,7 +31,7 @@
         <h4>Find your order and check status</h4>
 
         <form method="GET" action="<c:url value='order/searchOrder'/>">
-                <form>
+           
                     <div class="input-group text-center">
                         <input type="text" class="form-control" placeholder="Search order"
                                class="inp" name="phone" >
@@ -40,7 +40,7 @@
                         </span>
                     </div>
                 </form>
-        </form>
+      
     </div>
 </div>
               
