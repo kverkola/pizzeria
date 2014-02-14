@@ -356,7 +356,8 @@ procedure addUser(
     last_name in varchar2,
     login in varchar2,
     passsword in varchar2,
-    warker in varchar2) 
+    warker in varchar2,
+    id_ number) 
 is
  id   NUMBER(20);
 BEGIN
@@ -464,10 +465,5 @@ END addd;
 call addd();
 
 commit;
-
-
-
-
-
 
 

@@ -2,22 +2,22 @@ package ua.opu.dl.pizzeria.dao;
 
 import java.util.List;
 
-import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.model.UserRole;
 
 public interface UserDao {
 
-	void addUser(User user);
+	void addUser(Users user);
 
-	void updateUser(User user);
+	void updateUser(Users user);
 
-	void deleteUser(User user);
+	void deleteUser(Users user);
 
-	User loadById(long id);
+	Users loadById(long id);
 
-	User loadByLogin(String name);
+	Users loadByLogin(String name);
 
-	List<User> loadByRole(UserRole role);
+	List<Users> loadByRole(UserRole role);
 
-	List<User> loadAllusers();
+	List<Users> loadAllusers();
 }

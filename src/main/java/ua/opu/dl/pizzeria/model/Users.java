@@ -1,13 +1,15 @@
 package ua.opu.dl.pizzeria.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.security.core.GrantedAuthority;
+
 import ua.opu.dl.pizzeria.util.constraints.Matches;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 @Matches(fields={"password"}, verifyFields={"confirmPassword"})
-public class User {
+public class Users implements GrantedAuthority {
 
     @NotEmpty
     @Size(min = 3, max = 20)
@@ -31,11 +33,11 @@ public class User {
     private UserRole role;
     private long id;
 
-    public User() {
+    public Users() {
 
     }
 
-    public User(String firstName, String lastName, String login,
+    public Users(String firstName, String lastName, String login,
                 String password, Customer customer, UserRole role, long id) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -109,4 +111,10 @@ public class User {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+	@Override
+	public String getAuthority() {
+		// TODO Auto-generated method stub
+		return role.toString();
+	}
 }

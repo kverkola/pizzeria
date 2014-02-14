@@ -60,7 +60,7 @@ public class UserController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(ModelMap model) {
 
-		model.addAttribute("user", new User());
+		model.addAttribute("user", new Users());
 
 		return "user/register";
 	}
@@ -71,7 +71,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String addUser(@Valid @ModelAttribute("user") User user,
+	public String addUser(@Valid @ModelAttribute("user") Users user,
 			BindingResult result, ModelMap model, HttpSession session) {
 
 		user.getCustomer().setName(user.getFirstName());
@@ -89,7 +89,7 @@ public class UserController {
 			LOG.info("Added user with first name: " + user.getFirstName()
 					+ ", last name: " + user.getLastName() + ", phone: "
 					+ user.getCustomer().getPhone());
-			user.setRole(UserRole.CUSTOMER);// для проверки (незабыть удалить)
+			user.setRole(UserRole.ROLE_USER);// для проверки (незабыть удалить)
 			userService.addUser(user);
 			session.setAttribute("showResult", "registerSuccess");
 
@@ -109,7 +109,7 @@ public class UserController {
 
 		Order order = (Order) session.getAttribute("order");
 
-		User user = userService.loadByLogin(principal.getName());
+		Users user = userService.loadByLogin(principal.getName());
 
 		LOG.info(principal.getName());
 

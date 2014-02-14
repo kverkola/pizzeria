@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Status;
-import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.model.UserRole;
 import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.UserService;
@@ -28,8 +28,8 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	private List<Order> orders;
-	private List<User> users;
-	private User user;
+	private List<Users> users;
+	private Users user;
 	private Order order;
 
 	@RequestMapping(value = "/adminSearchOrder", method = RequestMethod.GET)
@@ -114,7 +114,7 @@ public class AdminController {
 	public String searchUser(@RequestParam("param") String param,
 			@RequestParam("typeSearch") String typeSEarch, HttpSession session,
 			ModelMap model) {
-		users = new ArrayList<User>();
+		users = new ArrayList<Users>();
 		if (typeSEarch.equals("Search User By login")) {
 			user = userService.loadByLogin(param);
 			users.add(user);
@@ -142,8 +142,8 @@ public class AdminController {
 
 			HttpSession session) {
 
-		users = (List<User>) session.getAttribute("usersUpdate");
-		for (User user : users) {
+		users = (List<Users>) session.getAttribute("usersUpdate");
+		for (Users user : users) {
 			if (user.getId() == id) {
 				if (newfirstName != "") {
 					user.setFirstName(newfirstName);

@@ -63,10 +63,10 @@
 					<td>Role:</td>
 					<td>${user.role}</td>
 					<td><select class="control" name="newRole">
-							<option>COOK</option>
-							<option>MANAGER</option>
-							<option>ADMIN</option>
-							<option>CUSTOMER</option>
+							<option>ROLE_COOK</option>
+							<option>ROLE_MANAGER</option>
+							<option>ROLE_ADMIN</option>
+							<option>ROLE_USER</option>
 					</select></td>
 				</tr>
 				<tr>

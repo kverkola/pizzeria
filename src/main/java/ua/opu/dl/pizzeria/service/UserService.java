@@ -2,22 +2,22 @@ package ua.opu.dl.pizzeria.service;
 
 import java.util.List;
 
-import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.model.UserRole;
 
 public interface UserService {
 
-	void addUser(User user);
+	void addUser(Users user);
 
-	void updateUser(User user);
+	void updateUser(Users user);
 
-	void deleteUser(User user);
+	void deleteUser(Users user);
 
-	User loadById(long id);
+	Users loadById(long id);
 
-	User loadByLogin(String login);
+	Users loadByLogin(String login);
 
-	List<User> loadAlluser();
+	List<Users> loadAlluser();
 
-	List<User> loadByRole(UserRole role);
+	List<Users> loadByRole(UserRole role);
 }

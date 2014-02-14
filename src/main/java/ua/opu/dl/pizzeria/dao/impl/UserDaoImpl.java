@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import ua.opu.dl.pizzeria.dao.UserDao;
-import ua.opu.dl.pizzeria.model.User;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.model.UserRole;
 
 public class UserDaoImpl implements UserDao {
@@ -24,10 +24,10 @@ private final String loadUserByRole="with tab1 as(  select att.value first_name,
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	private RowMapper<User> rowMapper = new RowMapper<User>() {
+	private RowMapper<Users> rowMapper = new RowMapper<Users>() {
 		@Override
-		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-			User user = new User();
+		public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Users user = new Users();
 			user.setFirstName(rs.getString("first_Name"));
 			user.setLastName(rs.getString("last_Name"));
 			user.setLogin(rs.getString("login"));
@@ -39,7 +39,7 @@ private final String loadUserByRole="with tab1 as(  select att.value first_name,
 		}
 	};
 	private PreparedStatementSetter getPreparedStatementSetter(
-			final User user) {
+			final Users user) {
 		return new PreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
@@ -55,40 +55,40 @@ private final String loadUserByRole="with tab1 as(  select att.value first_name,
 		};
 	}
 	@Override
-	public void addUser(User user) {
+	public void addUser(Users user) {
 		jdbcTemplate.update(addUser,
 				getPreparedStatementSetter(user));
 	}
 
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(Users user) {
 		jdbcTemplate.update(updateUser,
 				getPreparedStatementSetter(user));	
 	}
 
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(Users user) {
 
 	}
 
 	@Override
-	public User loadById(long id) {
+	public Users loadById(long id) {
 
 		return jdbcTemplate.queryForObject(loadUserById, rowMapper, id);
 	}
 
 	@Override
-	public User loadByLogin(String name) {
+	public Users loadByLogin(String name) {
 		return jdbcTemplate.queryForObject(loadUserByLogin, rowMapper, name);
 	}
 
 	@Override
-	public List<User> loadAllusers() {
+	public List<Users> loadAllusers() {
 
 		return null;
 	}
 	@Override
-	public List<User> loadByRole(UserRole role) {
+	public List<Users> loadByRole(UserRole role) {
 		
 		return jdbcTemplate.query(loadUserByRole, rowMapper,role.toString());
 	}

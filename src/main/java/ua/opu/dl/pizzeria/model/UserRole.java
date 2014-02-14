@@ -1,5 +1,5 @@
 package ua.opu.dl.pizzeria.model;
 
 public enum UserRole {
-	COOK, MANAGER, ADMIN, CUSTOMER
+	ROLE_COOK,ROLE_MANAGER, ROLE_ADMIN, ROLE_USER
 }
