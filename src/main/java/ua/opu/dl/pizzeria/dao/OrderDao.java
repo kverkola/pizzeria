@@ -15,7 +15,7 @@ public interface OrderDao {
 	void deleteOrder(Order order);
 
 	Order loadById(long id);
-	List<Order> loadByPhone(String phone);
+	Order loadByCustomer(long Id);
 
 	List<Order> loadAllOrders();
 

@@ -10,6 +10,7 @@ import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.dao.impl.AdditionalDaoImpl;
 import ua.opu.dl.pizzeria.model.*;
 import ua.opu.dl.pizzeria.service.AdditionalService;
+import ua.opu.dl.pizzeria.service.CustomerService;
 import ua.opu.dl.pizzeria.service.OrderService;
 import ua.opu.dl.pizzeria.service.PizzaService;
 
@@ -19,7 +20,8 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderDao orderDao;
-
+	@Autowired
+	CustomerService customerService;
 	@Autowired
 	private PizzaService pizzaService;
 	@Autowired
@@ -27,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
 
 	private List<Product> products;
 	private List<Order> orders;
+	private List<Customer> customers;
+	private Customer customer;
 
 	@Override
 	public void addOrder(Order order) {
@@ -40,7 +44,7 @@ public class OrderServiceImpl implements OrderService {
 
 				pizza.setOrderId(id);
 
-			    pizzaService.addPizza(pizza);
+				pizzaService.addPizza(pizza);
 			}
 
 		}
@@ -71,13 +75,14 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order loadById(long id) {
-		
+
 		order = orderDao.loadById(id);
 		products = new ArrayList<Product>();
 		products.addAll(pizzaService.loadByOrder(id));
 		products.addAll(additionalService.loadByOrder(id));
 		order.setProducts(products);
-
+		customer = customerService.loadByOrderId(order.getId());
+		order.setCustomer(customer);
 		return order;
 	}
 
@@ -89,24 +94,31 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> loadByPhone(String phone) {
-		orders = orderDao.loadByPhone(phone);
+		
+		customers=customerService.loadByPhone(phone);
 		products = new ArrayList<Product>();
-		for (Order order : orders) {
+		orders = new ArrayList<Order>();
+		for (Customer customer : customers) {
+			order=orderDao.loadByCustomer(customer.getId());
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));
 			order.setProducts(products);
+			order.setCustomer(customer);
+			orders.add(order);
 		}
 		return orders;
 	}
 
 	@Override
 	public List<Order> loadAllByStatus(Status status) {
-		orders=orderDao.loadAllByStatus(status);
+		orders = orderDao.loadAllByStatus(status);
 		products = new ArrayList<Product>();
 		for (Order order : orders) {
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));
 			order.setProducts(products);
+			customer = customerService.loadByOrderId(order.getId());
+			order.setCustomer(customer);
 		}
 		return orders;
 
