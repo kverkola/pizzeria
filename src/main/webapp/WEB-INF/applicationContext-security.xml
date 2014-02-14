@@ -24,7 +24,7 @@
         <intercept-url pattern="/order/send-order" access="permitAll" />
         <intercept-url pattern="/order/remove-product/*" access="permitAll" />
         <intercept-url pattern="/order/change-product-count" access="permitAll" />
-        <intercept-url pattern="/order/searchOrder" access="permitAll" />
+        <intercept-url pattern="/order/searchOrder" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/ingredients/countMinus/*" access="permitAll" />
         <intercept-url pattern="/ingredients/countPlus/*" access="permitAll" />
         <intercept-url pattern="/ingredients/reset/*" access="permitAll" />

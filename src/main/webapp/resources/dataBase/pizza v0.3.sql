@@ -34,6 +34,7 @@ INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (2,n
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (3,NULL,'Ingredient','игридиент',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (4,null,'Order','заказ',NULL);
 INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (5,null,'pizza','пицца',NULL);
+INSERT INTO OBJTYPE (OBJECT_TYPE_ID,PARENT_ID,CODE,NAME,DESCRIPTION) VALUES (6,null,'Customer','Customer',NULL);
 
 
 
@@ -71,7 +72,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (10,3,'weight','п�
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (11,4,'start_time','старт заказа');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (12,4,'end_time','конец заказа');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (13,4,'price','общая стоимость');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (14,4,'phone','телефон');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (14,4,'IdCustomer','Customer');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (15,5,'NAME','название');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (16,5,'price','цена');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (22,3,'pizzaId','id pizza for ingredients ');
@@ -85,7 +86,11 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (29,4,'logo','Logo'
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (30,4,'description','description');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (31,5,'cook','cook');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (32,4,'nameCustomer','nameCustomer');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,4,'address','address');
+--INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,4,'address','address');
+--INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,4,'address','address');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,6,'name','NameCustomer');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (34,6,'address','address');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (35,6,'phone','phone');
 
 
 
@@ -273,9 +278,7 @@ procedure addOrder(
     endtime in varchar2,
     price in varchar2,
     status in varchar2,
-    phone in varchar2,
-    nameCustomer in varchar2,
-    address in varchar2,
+    customerid number,
     id_ out number
    ) 
 is
@@ -288,9 +291,7 @@ INTO ATTRIBUTES values(11,id,starttime,null)
 INTO ATTRIBUTES values(28,id,status,null)
 INTO ATTRIBUTES values(12,id,endtime,null)
 INTO ATTRIBUTES values(13,id,price,null)
-INTO ATTRIBUTES values(14,id,phone,null)
-INTO ATTRIBUTES values(32,id,nameCustomer,null)
-INTO ATTRIBUTES values(33,id,address,null)
+into OBJREFERENCE values(14,customerid,id)
 select * from dual;
 id_:=id;
 END addOrder;
@@ -308,8 +309,9 @@ procedure UpdateOrder(
     endtime in varchar2,
     price in varchar2,
     phone in varchar2,
-    nameCustomer in varchar2,
-    address in varchar2
+    name in varchar2,
+    address in varchar2,
+    idCustomer number
     
     
    ) 
@@ -336,15 +338,15 @@ BEGIN
      update 
  ATTRIBUTES 
  set value=phone
- WHERE object_id=id and attr_id=14; 
+ WHERE object_id=id and attr_id=35; 
       update 
  ATTRIBUTES 
- set value=nameCustomer
- WHERE object_id=id and attr_id=32; 
+ set value=name
+ WHERE object_id=idCustomer and attr_id=33; 
        update 
  ATTRIBUTES 
  set value=address
- WHERE object_id=id and attr_id=33; 
+ WHERE object_id=idCustomer and attr_id=34; 
  
 END UpdateOrder;
 /
@@ -398,6 +400,40 @@ update ATTRIBUTES
 set value=warker WHERE object_id=id and attr_id=5;
 END updateUser;
 /
+
+--add Customer
+CREATE OR REPLACE
+procedure addCustomer(
+    name IN VARCHAR2,
+    address in varchar2,
+    phone in varchar2,
+    id_ out number
+  ) 
+is
+ id   NUMBER(20);
+BEGIN
+id:=SEQUENCE1.NEXTVAL;
+ insert all 
+INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,6,'Customer',NULL)
+INTO ATTRIBUTES values(33,id,name,null)
+INTO ATTRIBUTES values(34,id,address,null)
+INTO ATTRIBUTES values(35,id,phone,null)
+select * from dual;
+id_:=id;
+END addCustomer;
+/
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE OR REPLACE
 procedure addd 
@@ -467,4 +503,8 @@ END addd;
 call addd();
 
 commit;
+
+
+
+
 

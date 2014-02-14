@@ -16,7 +16,7 @@ public class Customer {
     @NotEmpty
     @Size(min = 7, max = 12)
     private String phone;
-
+    private Long id;
     public Customer() {
 
     }
@@ -43,11 +43,20 @@ public class Customer {
         this.address = address;
     }
 
-    public String getPhone() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    
 }
