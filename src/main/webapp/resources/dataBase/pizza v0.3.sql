@@ -91,6 +91,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (32,4,'nameCustomer
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,6,'name','NameCustomer');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (34,6,'address','address');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (35,6,'phone','phone');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (36,1,'IdCustomer','Customer');
 
 
 
@@ -278,13 +279,17 @@ procedure addOrder(
     endtime in varchar2,
     price in varchar2,
     status in varchar2,
-    customerid number,
+    phone in varchar2,
+    name in varchar2,
+    address in varchar,
     id_ out number
    ) 
 is
  id   NUMBER(20);
+ customerid number(20);
 BEGIN
 id:=SEQUENCE1.NEXTVAL;
+addCustomer(name,address,phone,customerid);
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,4,'order',NULL)
 INTO ATTRIBUTES values(11,id,starttime,null)
@@ -303,7 +308,7 @@ END addOrder;
 --update order
 CREATE OR REPLACE
 procedure UpdateOrder(
- id number,
+     id number,
      status in varchar2,
     starttime IN VARCHAR2,
     endtime in varchar2,
@@ -312,13 +317,9 @@ procedure UpdateOrder(
     name in varchar2,
     address in varchar2,
     idCustomer number
-    
-    
    ) 
 is
-
 BEGIN
-
  update 
  ATTRIBUTES 
  set value=starttime
@@ -335,18 +336,7 @@ BEGIN
  ATTRIBUTES 
  set value=price
  WHERE object_id=id and attr_id=13; 
-     update 
- ATTRIBUTES 
- set value=phone
- WHERE object_id=id and attr_id=35; 
-      update 
- ATTRIBUTES 
- set value=name
- WHERE object_id=idCustomer and attr_id=33; 
-       update 
- ATTRIBUTES 
- set value=address
- WHERE object_id=idCustomer and attr_id=34; 
+ updatecustomer(name,address,phone,idCustomer);
  
 END UpdateOrder;
 /
@@ -359,11 +349,17 @@ procedure addUser(
     login in varchar2,
     passsword in varchar2,
     warker in varchar2,
-    id_ number) 
+    id_ number,
+    name in varchar2,
+    address in varchar2,
+    phone in varchar2,
+    idCustomer number) 
 is
  id   NUMBER(20);
+ customerid number(20);
 BEGIN
 id:=SEQUENCE1.NEXTVAL;
+addCustomer(name,address,phone,customerid);
  insert all 
 INTO OBJECTS (OBJECT_ID,PARENT_ID,OBJECT_TYPE_ID,NAME,DESCRIPTION) VALUES (id,null,1,'user',NULL)
 INTO ATTRIBUTES values(1,id,first_name,null)
@@ -371,6 +367,7 @@ INTO ATTRIBUTES values(2,id,last_name,null)
 INTO ATTRIBUTES values(3,id,login,null)
 INTO ATTRIBUTES values(4,id,passsword,null)
 INTO ATTRIBUTES values(5,id,warker,null)
+into OBJREFERENCE values(36,customerid,id)
 select * from dual;
 
 END addUser;
@@ -384,7 +381,11 @@ procedure updateUser(
     login in varchar2,
     passsword in varchar2,
     warker in varchar2,
-    id number) 
+    id number,
+    name in varchar2,
+    address in varchar2,
+     phone in varchar2,
+    idCustomer number ) 
 is
  
 BEGIN
@@ -398,6 +399,7 @@ update ATTRIBUTES
 set value=passsword WHERE object_id=id and attr_id=4;
 update ATTRIBUTES
 set value=warker WHERE object_id=id and attr_id=5;
+updatecustomer(name,address,phone,idCustomer);
 END updateUser;
 /
 
@@ -423,7 +425,26 @@ id_:=id;
 END addCustomer;
 /
 
+--Update customer
+CREATE OR REPLACE
+procedure updateCustomer(
+    name IN VARCHAR2,
+    address in varchar2,
+    phone in varchar2,
+    id  number
+    ) 
+is
+ 
+BEGIN
+update ATTRIBUTES
+set value=name WHERE object_id=id and attr_id=33;
+update ATTRIBUTES
+set value=address WHERE object_id=id and attr_id=34;
+update ATTRIBUTES
+set value=phone WHERE object_id=id and attr_id=35;
 
+END updateCustomer;
+/
 
 
 
@@ -491,9 +512,9 @@ addIngredients(0,'cucumber','1','30','cucumber.png','Meat');
 addIngredients(0,'red_pepper','3','50','red_pepper.png','Meat');
 
 
-addUser('vasya','vasyleevich','admin','1','ROLE_ADMIN',0);
-addUser('ivan','ivanovich','cook','1','ROLE_COOK',0);
-addUser('user','userovich','customer','1','ROLE_USER',0);
+addUser('vasya','vasyleevich','admin','1','ROLE_ADMIN',0,'vasya hlop','odessa','5656565561',0);
+addUser('ivan','ivanovich','cook','1','ROLE_COOK',0,'ivan ivanovich','odessa','5656565562',0);
+addUser('user','userovich','customer','1','ROLE_USER',0,'user visilov','odessa','5656565563',0);
 
 
 END addd;
@@ -503,7 +524,6 @@ END addd;
 call addd();
 
 commit;
-
 
 
 

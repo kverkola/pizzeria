@@ -18,13 +18,14 @@ public class Customer {
     private String phone;
     private Long id;
     public Customer() {
-
+    id=(long) 0;
     }
 
     public Customer(String name, String address, String phone) {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        id=(long) 0;
     }
 
     public String getName() {
