@@ -33,12 +33,7 @@
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/cook" access="permitAll" />
         <intercept-url pattern="/adminPanel" access="permitAll" /><!-- Role Admin -->
-        <intercept-url pattern="/admin/updateOrder" access="permitAll"  /><!-- Role Admin -->
-        <intercept-url pattern="/admin/adminSearchOrder" access="permitAll"  /><!-- Role Admin -->
-        <intercept-url pattern="/admin/updateOrderView" access="permitAll"  /><!-- Role Admin -->
-        <intercept-url pattern="/admin/updateUserView" access="permitAll"  /><!-- Role Admin -->
-        <intercept-url pattern="/admin/adminSearchUser" access="permitAll"  /><!-- Role Admin -->
-        <intercept-url pattern="/admin/updateUser" access="permitAll"  /><!-- Role Admin -->
+        <intercept-url pattern="/admin/**" access="ROLE_ADMIN"  /><!-- Role Admin -->
         
         
         <intercept-url pattern="/**" access="isAuthenticated()" />
@@ -46,24 +41,13 @@
                     authentication-failure-url="/loginFailed" />
         <logout logout-success-url="/" />
     </http>
-      <!--   <jdbc-user-service 
    
-     
-              <password-encoder hash="sha"/>
-            <user-service>
-                <user name="admin" password="356a192b7913b04c54574d18c28d46e6395428ab"
-                      authorities="ROLE_ADMIN" /> 
-                <user name="user" password="356a192b7913b04c54574d18c28d46e6395428ab"
-                      authorities="ROLE_USER" />  
-                <user name="cook" password="356a192b7913b04c54574d18c28d46e6395428ab"
-                      authorities="ROLE_COOK" />  
-            </user-service> -->
 
     <authentication-manager>
         <authentication-provider
         
          user-service-ref="myUserDetailsService">
-    
+          
         </authentication-provider>
     </authentication-manager>
 

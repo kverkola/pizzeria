@@ -455,7 +455,9 @@ addIngredients(0,'cucumber','1','30','cucumber.png','Meat');
 addIngredients(0,'red_pepper','3','50','red_pepper.png','Meat');
 
 
-
+addUser('vasya','vasyleevich','admin','1','ROLE_ADMIN',0);
+addUser('ivan','ivanovich','cook','1','ROLE_COOK',0);
+addUser('user','userovich','customer','1','ROLE_USER',0);
 
 
 END addd;
@@ -465,5 +467,4 @@ END addd;
 call addd();
 
 commit;
-
 
