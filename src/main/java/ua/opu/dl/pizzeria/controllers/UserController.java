@@ -48,13 +48,13 @@ public class UserController {
 	@RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
 	public String loginError(ModelMap model) {
 
-		model.addAttribute("error", "true");
+		model.addAttribute("error", "Incorrect login or password!");
 		return "user/login";
 	}
 
 	/**
 	 * Show registration page
-	 * 
+     *
 	 * @return
 	 */
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -119,6 +119,8 @@ public class UserController {
 		order.setCustomer(new Customer(user.getFirstName(), user.getCustomer()
 				.getAddress(), user.getCustomer().getPhone()));
 		order.setStarttime(new Date().toString());
+        order.setStatus(Status.IN_WORK);
+
 		orderService.addOrder(order);
 
 		order = new Order();

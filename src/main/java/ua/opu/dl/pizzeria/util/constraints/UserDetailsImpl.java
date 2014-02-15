@@ -19,6 +19,7 @@ public class UserDetailsImpl implements UserDetailsService {
     @Autowired
     private UserDao userDao;
 
+    @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException, DataAccessException {
         Users user = userDao.loadByLogin(username);

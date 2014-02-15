@@ -6,7 +6,7 @@
     <c:if test="${not empty error}">
         <div class="alert alert-dismissable alert-danger">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</strong>
+            <strong>${error}</strong>
         </div>
     </c:if>
 

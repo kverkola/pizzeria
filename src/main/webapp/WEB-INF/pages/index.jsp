@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div style="padding-top: 50px;">
 
@@ -25,22 +26,23 @@
         </div>
     </c:if>
 
-    <c:remove var="showResult" scope="session" />
+    <c:remove var="showResult" scope="session"/>
 
-    <div>
-        <h4>Find your order and check status</h4>
+    <sec:authorize access="isAuthenticated()">
+        <div>
+            <h4>Find your order and check status</h4>
 
-        <form method="GET" action="<c:url value='order/searchOrder'/>">
-           
-                    <div class="input-group text-center">
-                        <input type="text" class="form-control" placeholder="Search order"
-                               class="inp" name="phone" >
+            <form method="GET" action="<c:url value='order/searchOrder'/>">
+                <div class="input-group text-center">
+                    <input type="text" class="form-control" placeholder="Search order"
+                           class="inp" name="phone">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default" type="button">Search</button>
                         </span>
-                    </div>
-                </form>
-      
-    </div>
+                </div>
+            </form>
+        </div>
+    </sec:authorize>
+
 </div>
               

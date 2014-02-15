@@ -118,9 +118,11 @@ public class OrderServiceImpl implements OrderService {
 
         List<Order> orders = orderDao.loadAllByStatus(status);
 
+        List<Product> products;
+
 		for (Order order : orders) {
 
-            List<Product> products = new ArrayList();
+            products = new ArrayList();
 
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));
@@ -130,10 +132,6 @@ public class OrderServiceImpl implements OrderService {
             Customer customer = customerService.loadByOrderId(order.getId());
 			order.setCustomer(customer);
 		}
-
-        for (Order order : orders) {
-            LOG.info("Products in order: " + order.getId() + " - " + order.getProducts().size());
-        }
 
 		return orders;
 	}

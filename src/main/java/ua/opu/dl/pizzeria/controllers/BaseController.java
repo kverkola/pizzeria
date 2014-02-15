@@ -80,8 +80,6 @@ public class BaseController {
             }
         }
 
-        LOG.info(">>>> Pizzas count on cook page: " + pizzas.size());
-
         model.addAttribute("pizzas", pizzas);
 		return "cook";
 	}
