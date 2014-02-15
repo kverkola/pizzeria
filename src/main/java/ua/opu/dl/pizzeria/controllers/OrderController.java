@@ -93,7 +93,8 @@ public class OrderController {
 			order.setStarttime(new Date().toString());
 			order.setCustomer(customer);
             order.setStatus(Status.IN_WORK);
-			orderService.addOrder(order);
+
+            orderService.addOrder(order);
 
 			order = new Order();
 			order.setProducts(new ArrayList<Product>());

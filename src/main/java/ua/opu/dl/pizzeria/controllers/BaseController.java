@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +24,8 @@ import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 
 @Controller
 public class BaseController {
+
+    private static final Logger LOG  = LoggerFactory.getLogger(BaseController.class);
 
 	@Autowired
 	private PizzaService pizzaService;
@@ -76,13 +80,15 @@ public class BaseController {
             }
         }
 
+        LOG.info(">>>> Pizzas count on cook page: " + pizzas.size());
+
         model.addAttribute("pizzas", pizzas);
 		return "cook";
 	}
+
 	@RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
 	public String admin(ModelMap model) {
 
-      
 		return "adminPanel";
 	}
 }

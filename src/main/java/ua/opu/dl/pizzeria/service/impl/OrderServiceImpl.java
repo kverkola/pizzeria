@@ -3,6 +3,8 @@ package ua.opu.dl.pizzeria.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ua.opu.dl.pizzeria.dao.OrderDao;
@@ -17,6 +19,8 @@ import ua.opu.dl.pizzeria.service.PizzaService;
 import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderServiceImpl.class);
 
 	@Autowired
 	private OrderDao orderDao;
@@ -77,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
 	public Order loadById(long id) {
 
 		order = orderDao.loadById(id);
-		products = new ArrayList<Product>();
+        products = new ArrayList<Product>();
 		products.addAll(pizzaService.loadByOrder(id));
 		products.addAll(additionalService.loadByOrder(id));
 		order.setProducts(products);
@@ -111,16 +115,26 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public List<Order> loadAllByStatus(Status status) {
-		orders = orderDao.loadAllByStatus(status);
-		products = new ArrayList<Product>();
+
+        List<Order> orders = orderDao.loadAllByStatus(status);
+
 		for (Order order : orders) {
+
+            List<Product> products = new ArrayList();
+
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));
-			order.setProducts(products);
-			customer = customerService.loadByOrderId(order.getId());
+
+            order.setProducts(products);
+
+            Customer customer = customerService.loadByOrderId(order.getId());
 			order.setCustomer(customer);
 		}
-		return orders;
 
+        for (Order order : orders) {
+            LOG.info("Products in order: " + order.getId() + " - " + order.getProducts().size());
+        }
+
+		return orders;
 	}
 }
