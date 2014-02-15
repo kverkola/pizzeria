@@ -1,5 +1,6 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 	http://www.springframework.org/schema/security
@@ -7,45 +8,45 @@
 
     <http auto-config="true" use-expressions="true">
 
-        <intercept-url pattern="/" access="permitAll" />
-        <intercept-url pattern="/menu" access="permitAll" />
-        <intercept-url pattern="/feedback" access="permitAll" />
-        <intercept-url pattern="/additional" access="permitAll" />
-        <intercept-url pattern="/about" access="permitAll" />
-        <intercept-url pattern="/login" access="permitAll" />
-        <intercept-url pattern="/register" access="permitAll" />
-        <intercept-url pattern="/loginFailed" access="permitAll" />
-        <intercept-url pattern="/favicon.ico" access="permitAll" />
-        <intercept-url pattern="/ingredients/addIngredients/*" access="permitAll" />
-        <intercept-url pattern="/order/make-order" access="permitAll" />
-        <intercept-url pattern="/order/add-pizza/*" access="permitAll" />
-        <intercept-url pattern="/order/add-custom-pizza" access="permitAll" />
-        <intercept-url pattern="/order/add-additional/*" access="permitAll" />
-        <intercept-url pattern="/order/send-order" access="permitAll" />
-        <intercept-url pattern="/order/remove-product/*" access="permitAll" />
-        <intercept-url pattern="/order/change-product-count" access="permitAll" />
-        <intercept-url pattern="/order/searchOrder" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/ingredients/countMinus/*" access="permitAll" />
-        <intercept-url pattern="/ingredients/countPlus/*" access="permitAll" />
-        <intercept-url pattern="/ingredients/reset/*" access="permitAll" />
-        <intercept-url pattern="/ingredients/upgradePizza" access="permitAll" />
-        <intercept-url pattern="/ingredients/addNewIngr/*" access="permitAll" />
-        <intercept-url pattern="/resources/**" access="permitAll" />
-        <intercept-url pattern="/cook" access="permitAll" />
+        <intercept-url pattern="/" access="permitAll"/>
+        <intercept-url pattern="/menu" access="permitAll"/>
+        <intercept-url pattern="/feedback" access="permitAll"/>
+        <intercept-url pattern="/additional" access="permitAll"/>
+        <intercept-url pattern="/about" access="permitAll"/>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/register" access="permitAll"/>
+        <intercept-url pattern="/loginFailed" access="permitAll"/>
+        <intercept-url pattern="/favicon.ico" access="permitAll"/>
+        <intercept-url pattern="/ingredients/addIngredients/*" access="permitAll"/>
+        <intercept-url pattern="/order/make-order" access="permitAll"/>
+        <intercept-url pattern="/order/add-pizza/*" access="permitAll"/>
+        <intercept-url pattern="/order/add-custom-pizza" access="permitAll"/>
+        <intercept-url pattern="/order/add-additional/*" access="permitAll"/>
+        <intercept-url pattern="/order/send-order" access="permitAll"/>
+        <intercept-url pattern="/order/remove-product/*" access="permitAll"/>
+        <intercept-url pattern="/order/change-product-count" access="permitAll"/>
+        <intercept-url pattern="/order/searchOrder" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/ingredients/countMinus/*" access="permitAll"/>
+        <intercept-url pattern="/ingredients/countPlus/*" access="permitAll"/>
+        <intercept-url pattern="/ingredients/reset/*" access="permitAll"/>
+        <intercept-url pattern="/ingredients/upgradePizza" access="permitAll"/>
+        <intercept-url pattern="/ingredients/addNewIngr/*" access="permitAll"/>
+        <intercept-url pattern="/resources/**" access="permitAll"/>
+        <intercept-url pattern="/cook" access="hasRole('ROLE_COOK')"/>
         <intercept-url pattern="/adminPanel" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/**" access="isAuthenticated()" />
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login login-page="/login" default-target-url="/"
-                    authentication-failure-url="/loginFailed" />
-        <logout logout-success-url="/" />
+                    authentication-failure-url="/loginFailed"/>
+        <logout logout-success-url="/"/>
     </http>
-   
+
 
     <authentication-manager>
         <authentication-provider
-        
-         user-service-ref="myUserDetailsService">
-          
+
+                user-service-ref="myUserDetailsService">
+
         </authentication-provider>
     </authentication-manager>
 

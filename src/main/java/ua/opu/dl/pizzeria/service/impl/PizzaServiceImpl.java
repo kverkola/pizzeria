@@ -90,4 +90,10 @@ public class PizzaServiceImpl implements PizzaService {
 
 		return pizzaDao.loadAll();
 	}
+
+    @Override
+    public void setCook(long id, String name) {
+
+        pizzaDao.setCook(id, name);
+    }
 }

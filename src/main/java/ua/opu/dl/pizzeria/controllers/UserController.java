@@ -111,6 +111,9 @@ public class UserController {
 
 		Users user = userService.loadByLogin(principal.getName());
 
+        LOG.info("User login from DB: " + user.getCustomer()
+                .getAddress());
+
 		LOG.info(principal.getName());
 
 		order.setCustomer(new Customer(user.getFirstName(), user.getCustomer()

@@ -8,6 +8,8 @@ public interface PizzaDao {
 
 	long addPizza(Pizza pizza);
 
+    void setCook(long id, String name);
+
 	void updatePizza(Pizza pizza);
 
 	void deletePizza(Pizza pizza);

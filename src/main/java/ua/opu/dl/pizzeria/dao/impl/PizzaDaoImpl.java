@@ -100,4 +100,10 @@ public class PizzaDaoImpl implements PizzaDao {
 
 		return null;
 	}
+
+    @Override
+    public void setCook(long id, String name) {
+
+        // set cook for pizza
+    }
 }

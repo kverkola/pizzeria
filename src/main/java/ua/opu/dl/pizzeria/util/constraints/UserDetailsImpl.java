@@ -14,23 +14,23 @@ import ua.opu.dl.pizzeria.dao.UserDao;
 import ua.opu.dl.pizzeria.model.Users;
 
 
+public class UserDetailsImpl implements UserDetailsService {
 
-	public class UserDetailsImpl implements  UserDetailsService{
-		@Autowired
-		private UserDao userDao;
-	 
-	    public UserDetails loadUserByUsername(String username)
-	            throws UsernameNotFoundException, DataAccessException {
-	 Users user=userDao.loadByLogin(username);
-	 List<Users> authList = new ArrayList<Users>();
-	        authList.add(user);
-	        return new User(user.getLogin(),
-	                user.getPassword(),
-	                true,
-	                true,
-	                true,
-	                true,
-	                authList );
-	    }
-	} 
+    @Autowired
+    private UserDao userDao;
+
+    public UserDetails loadUserByUsername(String username)
+            throws UsernameNotFoundException, DataAccessException {
+        Users user = userDao.loadByLogin(username);
+        List<Users> authList = new ArrayList<Users>();
+        authList.add(user);
+        return new User(user.getLogin(),
+                user.getPassword(),
+                true,
+                true,
+                true,
+                true,
+                authList);
+    }
+}
 

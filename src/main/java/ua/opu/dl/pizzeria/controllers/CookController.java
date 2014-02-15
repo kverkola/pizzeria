@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,10 +20,12 @@ public class CookController {
 	@Autowired
 	private PizzaService pizzaService;
 
-    @RequestMapping(value = "/cook/assign", method = RequestMethod.GET)
-    public String assign(Principal principal) {
+    @RequestMapping(value = "/cook/assign/{pizzaId}", method = RequestMethod.GET)
+    public String assign(@PathVariable("pizzaId") long id, Principal principal) {
 
         LOG.info("Pizza assigned to: " + principal.getName());
+
+        pizzaService.setCook(id, principal.getName());
 
         return "redirect:/cook";
     }

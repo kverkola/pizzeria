@@ -14,7 +14,9 @@
                     <p style="padding-top: 10px;">
                         <span class="label label-info">contains:</span><br>
                         <c:forEach var="ingredient" items="${pizza.map}">
-                            ${ingredient.key.name} - <span class="badge">${ingredient.value}</span>&nbsp;
+                            <p>
+                                ${ingredient.key.name} - <span class="badge">${ingredient.value}</span>&nbsp;
+                            </p>
                         </c:forEach>
                     </p>
                 </td>
@@ -22,9 +24,9 @@
                     ${pizza.cook}
                 </td>
                 <td style="vertical-align: middle;">
-                    <a href="<c:url value='/cook/assign'/>"
+                    <a href="<c:url value='/cook/assign/${pizza.id}'/>"
                        class="btn btn-success"
-                       <c:if test="${pizza.cook != null}">
+                       <c:if test="${pizza.cook != 'Empty'}">
                             disabled
                        </c:if>>
                         Assign To Me

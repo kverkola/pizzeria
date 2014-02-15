@@ -92,6 +92,7 @@ public class OrderController {
 			Order order = (Order) session.getAttribute("order");
 			order.setStarttime(new Date().toString());
 			order.setCustomer(customer);
+            order.setStatus(Status.IN_WORK);
 			orderService.addOrder(order);
 
 			order = new Order();
