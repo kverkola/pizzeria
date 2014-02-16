@@ -66,7 +66,7 @@ public class UserController {
 	}
 
 	/**
-	 * Add new customer user
+	 * Add new customer
 	 * 
 	 * @return
 	 */
@@ -89,8 +89,10 @@ public class UserController {
 			LOG.info("Added user with first name: " + user.getFirstName()
 					+ ", last name: " + user.getLastName() + ", phone: "
 					+ user.getCustomer().getPhone());
-			user.setRole(UserRole.ROLE_USER);// для проверки (незабыть удалить)
+			user.setRole(UserRole.ROLE_USER);
+
 			userService.addUser(user);
+
 			session.setAttribute("showResult", "registerSuccess");
 
 			return "redirect:/";
@@ -110,9 +112,6 @@ public class UserController {
 		Order order = (Order) session.getAttribute("order");
 
 		Users user = userService.loadByLogin(principal.getName());
-
-        LOG.info("User login from DB: " + user.getCustomer()
-                .getAddress());
 
 		LOG.info(principal.getName());
 

@@ -72,15 +72,22 @@ public class BaseController {
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
 	public String cook(ModelMap model) {
 
-        List<Pizza> pizzas = new ArrayList();
+        List<Pizza> unsignedPizzas = new ArrayList();
+        List<Pizza> assignedPizzas = new ArrayList();
 
         for (Order order : orderService.loadAllByStatus(Status.IN_WORK)) {
             for (Pizza pizza : order.getProducts(Pizza.class)) {
-                pizzas.add(pizza);
+
+                if (pizza.getCook().equals("Empty")) {
+                    unsignedPizzas.add(pizza);
+                } else {
+                    assignedPizzas.add(pizza);
+                }
             }
         }
 
-        model.addAttribute("pizzas", pizzas);
+        model.addAttribute("unsignedPizzas", unsignedPizzas);
+        model.addAttribute("assignedPizzas", assignedPizzas);
 		return "cook";
 	}
 
