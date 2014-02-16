@@ -114,7 +114,7 @@ public class Users implements GrantedAuthority {
 
 	@Override
 	public String getAuthority() {
-		// TODO Auto-generated method stub
+		
 		return role.toString();
 	}
 }

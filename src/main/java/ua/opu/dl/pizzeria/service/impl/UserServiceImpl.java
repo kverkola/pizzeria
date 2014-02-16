@@ -18,6 +18,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private CustomerService customerService;
 	private Users user;
+	private List<Users> users;
+	private Customer customer;
 
 	@Override
 	public void addUser(Users user) {
@@ -39,14 +41,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Users loadById(long id) {
 		user = userDao.loadById(id);
-		Customer customer=customerService.loadByUserId(user.getId());
+		customer = customerService.loadByUserId(user.getId());
 		user.setCustomer(customer);
 		return user;
 	}
 
 	@Override
 	public Users loadByLogin(String login) {
-		return userDao.loadByLogin(login);
+		user = userDao.loadByLogin(login);
+		customer = customerService.loadByUserId(user.getId());
+		user.setCustomer(customer);
+		return user;
 	}
 
 	@Override
@@ -58,7 +63,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Users> loadByRole(UserRole role) {
 
-		return userDao.loadByRole(role);
+		users = userDao.loadByRole(role);
+		for (Users user : users) {
+			customer = customerService.loadByUserId(user.getId());
+			user.setCustomer(customer);
+		}
+		return users;
+
 	}
 
 }
