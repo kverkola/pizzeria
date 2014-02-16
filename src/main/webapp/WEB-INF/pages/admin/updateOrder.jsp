@@ -29,11 +29,11 @@
 	</div>
 </div>
 
-<form method="GET" action="<c:url value='/admin/updateOrder'/>">
+
 	<div>
 
 		<c:forEach var="order" items="${orders}">
-
+<form method="GET" action="<c:url value='/admin/updateOrder'/>">
 			<table class="table table-condensed">
 
 
@@ -111,13 +111,13 @@
                         <input class="btn btn-sm btn-info" type="reset" value="Reset!"></div><br>
                         
 -----------------------------------------------------------------------------------------
-
+</form>
 		</c:forEach>
 
 	</div>
 
 
-</form>
+
 
 
 

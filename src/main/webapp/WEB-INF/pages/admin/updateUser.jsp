@@ -27,12 +27,10 @@
 </div>
 
 
-
-<form method="GET" action="<c:url value='/admin/updateUser'/>">
 	<div>
 
 		<c:forEach var="user" items="${users}">
-
+<form method="GET" action="<c:url value='/admin/updateUser'/>">
 			<table class="table table-condensed">
 
 
@@ -83,6 +81,20 @@
 							<input type="text" class="inp" name="newpassword">
 						</div></td>
 				</tr>
+				<tr>
+					<td>Phone:</td>
+					<td>${user.customer.phone}</td>
+					<td><div>
+							<input type="text" class="inp" name="newphone">
+						</div></td>
+				</tr>
+				<tr>
+					<td>Address:</td>
+					<td>${user.customer.address}</td>
+					<td><div>
+							<input type="text" class="inp" name="newaddress">
+						</div></td>
+				</tr>
 				
 
 			</table>
@@ -91,11 +103,11 @@
                         
                         <div class="pull-right">
                         <input class="btn btn-sm btn-info" type="reset" value="Reset!"></div><br>
-                        
+               </form>         
 -----------------------------------------------------------------------------------------
 		</c:forEach>
 
 	</div>
 
 
-</form>
+

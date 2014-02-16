@@ -139,6 +139,8 @@ public class AdminController {
 			@RequestParam("newRole") UserRole newRole,
 			@RequestParam("newLogin") String newLogin,
 			@RequestParam("newpassword") String newpassword,
+			@RequestParam("newphone") String newphone,
+			@RequestParam("newaddress") String newaddress,
 
 			HttpSession session) {
 
@@ -159,6 +161,12 @@ public class AdminController {
 				}
 				if (newpassword != "") {
 					user.setPassword(newpassword);
+				}
+				if (newphone != "") {
+					user.getCustomer().setPhone(newphone);
+				}
+				if (newaddress!= "") {
+					user.getCustomer().setAddress(newaddress);
 				}
 
 				userService.updateUser(user);
