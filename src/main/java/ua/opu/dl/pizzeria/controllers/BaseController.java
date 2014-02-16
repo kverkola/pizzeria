@@ -1,6 +1,7 @@
 package ua.opu.dl.pizzeria.controllers;
 
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -70,7 +71,7 @@ public class BaseController {
 	}
 
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
-	public String cook(ModelMap model) {
+	public String cook(ModelMap model, Principal principal) {
 
         List<Pizza> unsignedPizzas = new ArrayList();
         List<Pizza> assignedPizzas = new ArrayList();
@@ -80,7 +81,7 @@ public class BaseController {
 
                 if (pizza.getCook().equals("Empty")) {
                     unsignedPizzas.add(pizza);
-                } else {
+                } else if (pizza.getCook().equals(principal.getName())) {
                     assignedPizzas.add(pizza);
                 }
             }

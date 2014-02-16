@@ -33,10 +33,7 @@
                             </td>
                             <td style="vertical-align: middle;">
                                 <a href="<c:url value='/cook/assign/${pizza.id}'/>"
-                                   class="btn btn-success"
-                                        <c:if test="${pizza.cook != 'Empty'}">
-                                            disabled
-                                        </c:if>>
+                                   class="btn btn-success">
                                     Assign To Me
                                 </a>
                             </td>

@@ -28,7 +28,7 @@
 
     <c:remove var="showResult" scope="session"/>
 
-    <sec:authorize access="isAuthenticated()">
+    <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
         <div>
             <h4>Find your order and check status</h4>
 
