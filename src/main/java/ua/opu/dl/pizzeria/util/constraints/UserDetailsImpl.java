@@ -21,8 +21,9 @@ public class UserDetailsImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username)
-            throws UsernameNotFoundException, DataAccessException {
+            throws UsernameNotFoundException, DataAccessException,NullPointerException {
         Users user = userDao.loadByLogin(username);
+        if(user==null){return null;}
         List<Users> authList = new ArrayList<Users>();
         authList.add(user);
         return new User(user.getLogin(),

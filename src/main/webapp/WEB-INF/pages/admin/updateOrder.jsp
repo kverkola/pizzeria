@@ -28,7 +28,12 @@
 			src="<c:url value='/resources/forward.png'/>" /></a>
 	</div>
 </div>
-
+ <c:if test="${not empty nothing }">
+        <div class="alert alert-dismissable alert-danger">
+           <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>${nothing}</strong>
+        </div>
+    </c:if>
 
 	<div>
 

@@ -41,16 +41,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Users loadById(long id) {
 		user = userDao.loadById(id);
+		if(user!=null){
 		customer = customerService.loadByUserId(user.getId());
-		user.setCustomer(customer);
+		user.setCustomer(customer);}
 		return user;
 	}
 
 	@Override
 	public Users loadByLogin(String login) {
 		user = userDao.loadByLogin(login);
+		if(user!=null){
 		customer = customerService.loadByUserId(user.getId());
-		user.setCustomer(customer);
+		user.setCustomer(customer);}
 		return user;
 	}
 

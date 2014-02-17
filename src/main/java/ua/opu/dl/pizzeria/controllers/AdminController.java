@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,12 +44,15 @@ public class AdminController {
 		} else if (typeSEarch.equals("Search Order By Id")) {
 
 			order = orderService.loadById(Long.valueOf(param));
-			orders.add(order);
-
+			if (order != null) {
+				orders.add(order);
+			}
 		} else if (typeSEarch.equals("Search Order By Status")) {
 			orders.addAll(orderService.loadAllByStatus(Status.valueOf(param)));
 		}
-
+		if (orders.isEmpty()) {
+			model.addAttribute("nothing", "Nothing search!");
+		}
 		model.addAttribute("orders", orders);
 		session.setAttribute("ordersUpdate", orders);
 		return "/admin/updateOrder";
@@ -117,16 +121,22 @@ public class AdminController {
 		users = new ArrayList<Users>();
 		if (typeSEarch.equals("Search User By login")) {
 			user = userService.loadByLogin(param);
-			users.add(user);
+			if (user != null) {
+				users.add(user);
+			}
 		} else if (typeSEarch.equals("Search User By Id")) {
 
 			user = userService.loadById(Long.valueOf(param));
-			users.add(user);
+			if (user != null) {
+				users.add(user);
+			}
 
 		} else if (typeSEarch.equals("Search Users By Role")) {
 			users.addAll(userService.loadByRole(UserRole.valueOf(param)));
 		}
-
+		if (users.isEmpty()) {
+			model.addAttribute("nothing", "Nothing search!");
+		}
 		model.addAttribute("users", users);
 		session.setAttribute("usersUpdate", users);
 		return "/admin/updateUser";
@@ -165,7 +175,7 @@ public class AdminController {
 				if (newphone != "") {
 					user.getCustomer().setPhone(newphone);
 				}
-				if (newaddress!= "") {
+				if (newaddress != "") {
 					user.getCustomer().setAddress(newaddress);
 				}
 

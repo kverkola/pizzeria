@@ -81,12 +81,13 @@ public class OrderServiceImpl implements OrderService {
 	public Order loadById(long id) {
 
 		order = orderDao.loadById(id);
+		if(order!=null){
         products = new ArrayList<Product>();
 		products.addAll(pizzaService.loadByOrder(id));
 		products.addAll(additionalService.loadByOrder(id));
 		order.setProducts(products);
 		customer = customerService.loadByOrderId(order.getId());
-		order.setCustomer(customer);
+		order.setCustomer(customer);}
 		return order;
 	}
 
