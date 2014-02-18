@@ -176,6 +176,7 @@ public class OrderController {
 			HttpSession session, ModelMap model) {
 		List<Order> orders = new ArrayList<Order>();
 		orders = orderService.loadByPhone(phone);
+		
 		session.setAttribute("orderById", orders);
 		model.addAttribute("orders", orders);
 		return "searchOrder";
