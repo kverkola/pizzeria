@@ -34,7 +34,13 @@
             <strong>${nothing}</strong>
         </div>
     </c:if>
-
+    
+<c:if test="${not empty illegalArgument }">
+	<div class="alert alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>${illegalArgument}</strong>
+	</div>
+</c:if>
 	<div>
 
 		<c:forEach var="order" items="${orders}">

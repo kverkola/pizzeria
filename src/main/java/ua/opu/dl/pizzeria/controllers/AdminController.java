@@ -48,7 +48,12 @@ public class AdminController {
 				orders.add(order);
 			}
 		} else if (typeSEarch.equals("Search Order By Status")) {
-			orders.addAll(orderService.loadAllByStatus(Status.valueOf(param)));
+			try{
+			orders.addAll(orderService.loadAllByStatus(Status.valueOf(param)));}
+			catch (IllegalArgumentException e) {
+				model.addAttribute("illegalArgument",
+						"Input data should only be : PRE_ORDER, DELIVERY, IN_WORK, CLOSE");
+			}
 		}
 		if (orders.isEmpty()) {
 			model.addAttribute("nothing", "Nothing search!");
@@ -132,7 +137,12 @@ public class AdminController {
 			}
 
 		} else if (typeSEarch.equals("Search Users By Role")) {
-			users.addAll(userService.loadByRole(UserRole.valueOf(param)));
+			try {
+				users.addAll(userService.loadByRole(UserRole.valueOf(param)));
+			} catch (IllegalArgumentException e) {
+				model.addAttribute("illegalArgument",
+						"Input data should only be : ROLE_COOK,ROLE_MANAGER, ROLE_ADMIN, ROLE_USER");
+			}
 		}
 		if (users.isEmpty()) {
 			model.addAttribute("nothing", "Nothing search!");

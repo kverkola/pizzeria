@@ -26,16 +26,21 @@
 	</div>
 </div>
 <c:if test="${not empty nothing }">
-        <div class="alert alert-dismissable alert-danger">
-           <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>${nothing}</strong>
-        </div>
-    </c:if>
+	<div class="alert alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>${nothing}</strong>
+	</div>
+</c:if>
+<c:if test="${not empty illegalArgument }">
+	<div class="alert alert-dismissable alert-danger">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>${illegalArgument}</strong>
+	</div>
+</c:if>
+<div>
 
-	<div>
-
-		<c:forEach var="user" items="${users}">
-<form method="GET" action="<c:url value='/admin/updateUser'/>">
+	<c:forEach var="user" items="${users}">
+		<form method="GET" action="<c:url value='/admin/updateUser'/>">
 			<table class="table table-condensed">
 
 
@@ -100,19 +105,21 @@
 							<input type="text" class="inp" name="newaddress">
 						</div></td>
 				</tr>
-				
+
 
 			</table>
- 
-                            <button type="submit" class="btn btn-default" type="button">Update</button>
-                        
-                        <div class="pull-right">
-                        <input class="btn btn-sm btn-info" type="reset" value="Reset!"></div><br>
-               </form>         
+
+			<button type="submit" class="btn btn-default" type="button">Update</button>
+
+			<div class="pull-right">
+				<input class="btn btn-sm btn-info" type="reset" value="Reset!">
+			</div>
+			<br>
+		</form>         
 -----------------------------------------------------------------------------------------
 		</c:forEach>
 
-	</div>
+</div>
 
 
 
