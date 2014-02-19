@@ -94,7 +94,6 @@ public class BaseController {
 
 	@RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
 	public String admin(ModelMap model) {
-
 		return "adminPanel";
 	}
 }
