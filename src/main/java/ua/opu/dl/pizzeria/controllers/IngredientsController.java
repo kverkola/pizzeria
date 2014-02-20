@@ -101,9 +101,6 @@ public class IngredientsController {
 		session.setAttribute("customPizza", pizza);
 		model.addAttribute("pizza", pizza);
 
-	
-	
-		
 		return "/addIngredients";
 	}
 
@@ -131,12 +128,14 @@ public class IngredientsController {
 					break;
 				}
 				ingrMap.put(ingr, key + 1);
+				pizza.countTotalPrice();
 				session.setAttribute("customPizza", pizza);
 				return "redirect:/ingredients/upgradePizza";
 
 			}
 		}
 		ingrMap.put(ingredient, 1);
+		pizza.countTotalPrice();
 		session.setAttribute("customPizza", pizza);
 		return "redirect:/ingredients/upgradePizza";
 	}
