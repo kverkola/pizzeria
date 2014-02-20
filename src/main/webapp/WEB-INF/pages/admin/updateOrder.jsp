@@ -73,7 +73,7 @@
 					<td>End Time:</td>
 					<td>${order.endtime}</td>
 					<td><div>
-							<input type="text" class="inp" name="newEndtime">
+							<input type="text" class="inp"  name="newEndtime">
 						</div></td>
 				</tr>
 				<tr>
@@ -89,9 +89,9 @@
 				<tr>
 					<td>Price:</td>
 					<td>${order.price}</td>
-					<td>
-					<sec:authorize access="hasAnyRole('ROLE_ADMIN')"><div>
-							<input type="text" class="inp" name="newPrice">
+					<td><sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+					<div>
+							<p><input name="newPrice" pattern="^[ 0-9]+$"></p>
 						</div>
 						</sec:authorize></td>
 				</tr>

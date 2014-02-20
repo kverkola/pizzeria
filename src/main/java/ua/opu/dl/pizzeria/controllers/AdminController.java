@@ -41,14 +41,22 @@ public class AdminController {
 			orders.addAll(orderService.loadByPhone(param));
 		} else if (typeSEarch.equals("Search Order By Id")) {
 
-			order = orderService.loadById(Long.valueOf(param));
-			if (order != null) {
-				orders.add(order);
+			try {
+				order = orderService.loadById(Long.valueOf(param));
+				if (order != null) {
+					orders.add(order);
+				}
+			} catch (NumberFormatException e) {
+				model.addAttribute("illegalArgument", "Input number only");
 			}
-		} else if (typeSEarch.equals("Search Order By Status")) {
-			try{
-			orders.addAll(orderService.loadAllByStatus(Status.valueOf(param)));}
-			catch (IllegalArgumentException e) {
+			;
+		}
+
+		else if (typeSEarch.equals("Search Order By Status")) {
+			try {
+				orders.addAll(orderService.loadAllByStatus(Status
+						.valueOf(param)));
+			} catch (IllegalArgumentException e) {
 				model.addAttribute("illegalArgument",
 						"Input data should only be : PRE_ORDER, DELIVERY, IN_WORK, CLOSE");
 			}
@@ -66,7 +74,7 @@ public class AdminController {
 			@RequestParam("newStarttime") String newStarttime,
 			@RequestParam("newEndtime") String newEndtime,
 			@RequestParam("newStatus") Status newStatus,
-			@RequestParam("newPrice") Double newPrice,
+			@RequestParam("newPrice") String newPrice,
 			@RequestParam("newCustomerName") String newCustomerName,
 			@RequestParam("newCustomerAddress") String newCustomerAddress,
 			@RequestParam("newPhone") String newPhone, ModelMap model,
@@ -85,8 +93,8 @@ public class AdminController {
 				if (order.getStatus() != newStatus) {
 					order.setStatus(newStatus);
 				}
-				if (newPrice != null) {
-					order.setPrice(newPrice);
+				if (newPrice != "") {
+					order.setPrice(Double.valueOf(newPrice));
 				}
 				if (newCustomerName != "") {
 					order.getCustomer().setName(newCustomerName);
@@ -128,12 +136,15 @@ public class AdminController {
 				users.add(user);
 			}
 		} else if (typeSEarch.equals("Search User By Id")) {
-
-			user = userService.loadById(Long.valueOf(param));
-			if (user != null) {
-				users.add(user);
+			try {
+				user = userService.loadById(Long.valueOf(param));
+				if (user != null) {
+					users.add(user);
+				}
+			} catch (NumberFormatException e) {
+				model.addAttribute("illegalArgument", "Input number only");
 			}
-			
+
 		} else if (typeSEarch.equals("Search Users By Role")) {
 			try {
 				users.addAll(userService.loadByRole(UserRole.valueOf(param)));

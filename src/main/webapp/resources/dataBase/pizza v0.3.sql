@@ -518,6 +518,7 @@ addIngredients(0,'red_pepper','3','50','red_pepper.png','Meat');
 addUser('vasya','vasyleevich','admin','1','ROLE_ADMIN',0,'vasya hlop','odessa','5656565561',0);
 addUser('ivan','ivanovich','cook','1','ROLE_COOK',0,'ivan ivanovich','odessa','5656565562',0);
 addUser('user','userovich','customer','1','ROLE_USER',0,'user visilov','odessa','5656565563',0);
+addUser('manager','userovich','manager','1','ROLE_MANAGER',0,'user visilov','odessa','5656565563',0);
 
 
 END addd;
