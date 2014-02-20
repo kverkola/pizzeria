@@ -63,11 +63,11 @@
                         <a href="<c:url value='/cook'/>">Pizzas query</a>
                     </li>
                 </sec:authorize>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN,ROLE_MANAGER')">
                      <li <c:if test="${pageContext.request.requestURI == '/pizzeria/adminPanel'}">
                         class="active"
                     </c:if> >
-                        <a href="<c:url value='/adminPanel'/>">adminPanel</a>
+                        <a href="<c:url value='/adminPanel'/>">Admin Panel</a>
                     </li>
                 </sec:authorize>
                 

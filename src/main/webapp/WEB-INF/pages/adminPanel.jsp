@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h1>AdminPanel</h1>
-
-
 
 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -13,6 +12,7 @@
     <li><a href="#">Delete</a></li>
   </ul>
 </div>
+<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     User <span class="caret"></span>
@@ -23,6 +23,7 @@
     <li><a href="#">Add User</a></li>
   </ul>
 </div>
+</sec:authorize>
 <div class="btn-group">
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
     Pizza <span class="caret"></span>

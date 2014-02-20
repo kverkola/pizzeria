@@ -33,8 +33,8 @@
         <intercept-url pattern="/ingredients/addNewIngr/*" access="permitAll"/>
         <intercept-url pattern="/resources/**" access="permitAll"/>
         <intercept-url pattern="/cook" access="hasRole('ROLE_COOK')"/>
-        <intercept-url pattern="/adminPanel" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/adminPanel" access="hasAnyRole('ROLE_ADMIN,ROLE_MANAGER')"/>
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN,ROLE_MANAGER')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-url="/loginFailed"/>

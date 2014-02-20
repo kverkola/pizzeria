@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <h1>updateOrder</h1>
 
 
@@ -51,7 +52,9 @@
 				<tr>
 					<td>OrderId:</td>
 					<td>${order.id}</td>
-					<td><div>
+					<td>
+					
+					<div>
 							<input type="hidden" class="inp" name="id" value="${order.id}">
 						</div></td>
 				</tr>
@@ -59,9 +62,11 @@
 					<td>Start Time:</td>
 					<td>${order.starttime}</td>
 					<td>
+					<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<div>
 							<input type="text" class="inp" name="newStarttime">
 						</div>
+						</sec:authorize>
 					</td>
 				</tr>
 				<tr>
@@ -84,9 +89,11 @@
 				<tr>
 					<td>Price:</td>
 					<td>${order.price}</td>
-					<td><div>
+					<td>
+					<sec:authorize access="hasAnyRole('ROLE_ADMIN')"><div>
 							<input type="text" class="inp" name="newPrice">
-						</div></td>
+						</div>
+						</sec:authorize></td>
 				</tr>
 				<tr>
 					<td>Customer name:</td>
