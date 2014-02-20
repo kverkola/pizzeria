@@ -73,10 +73,10 @@ public class BaseController {
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
 	public String cook(ModelMap model, Principal principal) {
 
-        List<Pizza> unsignedPizzas = new ArrayList();
-        List<Pizza> assignedPizzas = new ArrayList();
+        List<Pizza> unsignedPizzas = new ArrayList<Pizza>();
+        List<Pizza> assignedPizzas = new ArrayList<Pizza>();
 
-        for (Order order : orderService.loadAllByStatus(Status.IN_WORK)) {
+        for (Order order : orderService.loadAllByStatus(Status.PRE_ORDER)) {
             for (Pizza pizza : order.getProducts(Pizza.class)) {
 
                 if (pizza.getCook().equals("Empty")) {

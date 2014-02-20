@@ -92,9 +92,9 @@ public class OrderController {
 			Order order = (Order) session.getAttribute("order");
 			order.setStarttime(new Date().toString());
 			order.setCustomer(customer);
-            order.setStatus(Status.IN_WORK);
+			//order.setStatus(Status.IN_WORK);
 
-            orderService.addOrder(order);
+			orderService.addOrder(order);
 
 			order = new Order();
 			order.setProducts(new ArrayList<Product>());
@@ -172,7 +172,10 @@ public class OrderController {
 			HttpSession session, ModelMap model) {
 		List<Order> orders = new ArrayList<Order>();
 		orders = orderService.loadByPhone(phone);
-		
+		if (orders.isEmpty()) {
+			model.addAttribute("nothing", "Nothing search!");
+			return "searchOrder";
+		}
 		session.setAttribute("orderById", orders);
 		model.addAttribute("orders", orders);
 		return "searchOrder";

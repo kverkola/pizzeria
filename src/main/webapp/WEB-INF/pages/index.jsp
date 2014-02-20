@@ -28,7 +28,7 @@
 
     <c:remove var="showResult" scope="session"/>
 
-    <sec:authorize access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+    <sec:authorize access="hasAnyRole('ROLE_USER','ROLE_MANAGER')">
         <div>
             <h4>Find your order and check status</h4>
 
@@ -39,9 +39,14 @@
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default" type="button">Search</button>
                         </span>
+                        
+                        
+                        
                 </div>
             </form>
         </div>
+        
+        
     </sec:authorize>
 
 </div>
