@@ -9,7 +9,6 @@ public class Pizza extends Product {
 	private String logo;
 	private String description;
 	private Users cook;
-
 	public Pizza() {
 		cook = new Users();
 		cook.setId(0);
