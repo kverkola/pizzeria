@@ -105,8 +105,8 @@ public class PizzaServiceImpl implements PizzaService {
 	}
 
 	@Override
-	public void setCook(long id, String name) {
+	public void setCook(long id, long cookId) {
 
-		pizzaDao.setCook(id, name);
+		
 	}
 }

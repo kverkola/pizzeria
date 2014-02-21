@@ -23,10 +23,10 @@ public class CookController {
     @RequestMapping(value = "/cook/assign/{pizzaId}", method = RequestMethod.GET)
     public String assign(@PathVariable("pizzaId") long id, Principal principal) {
 
-        LOG.info("Pizza assigned to: " + principal.getName());
+        LOG.info("Pizza assigned to: " + principal.getName());//заменить getName на getId
 
-        pizzaService.setCook(id, principal.getName());
-
+        //pizzaService.setCook(id, principal.getName().);
+       // pizzaService.setCook(id,principal.getId();
         return "redirect:/cook";
     }
 }

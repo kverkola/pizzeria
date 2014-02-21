@@ -9,7 +9,7 @@ public interface PizzaDao {
 
 	long addPizza(Pizza pizza);
 
-    void setCook(long id, String name);
+    void setCook(long id, long Cookid);
 
 	void updatePizza(Pizza pizza);
 

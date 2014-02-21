@@ -79,9 +79,9 @@ public class BaseController {
         for (Order order : orderService.loadAllByStatus(Status.PRE_ORDER)) {
             for (Pizza pizza : order.getProducts(Pizza.class)) {
 
-                if (pizza.getCook().equals("Empty")) {
+                if (pizza.getCook().getId()==0) {
                     unsignedPizzas.add(pizza);
-                } else if (pizza.getCook().equals(principal.getName())) {
+                } else if (pizza.getCook().equals(principal.getName())) {//исправить на cook.getId
                     assignedPizzas.add(pizza);
                 }
             }
