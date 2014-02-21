@@ -113,7 +113,8 @@ public class OrderController {
 
 	@RequestMapping(value = "/add-additional/{id}", method = RequestMethod.GET)
 	public String addAdditional(@PathVariable("id") long id, HttpSession session) {
-		Order order = (Order) session.getAttribute("order");
+
+        Order order = (Order) session.getAttribute("order");
 		if (order == null) {
 			order = new Order();
 			order.setProducts(new ArrayList<Product>());

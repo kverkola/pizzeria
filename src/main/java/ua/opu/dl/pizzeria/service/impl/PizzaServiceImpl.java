@@ -43,6 +43,8 @@ public class PizzaServiceImpl implements PizzaService {
 			cook = new Users();
 		}
 		pizza.setCook(cook);
+        pizza.incrementQuantity();
+
 		return pizza;
 	}
 
