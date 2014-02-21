@@ -171,11 +171,96 @@ drop  SEQUENCE "ATIKIN"."SEQUENCE1";
 
 
 
+create or replace 
+PACKAGE pizza IS
 
+PROCEDURE addAdditional(
+    name     IN VARCHAR2,
+    order_id IN VARCHAR2,
+    price    IN VARCHAR2,
+    logo     IN VARCHAR2 ) ;
 
+PROCEDURE addIngredients(
+    pizza_id in varchar2,
+    name  IN VARCHAR2,
+    price IN VARCHAR2,
+    weight in varchar2,
+    logo in varchar2,
+    description in varchar2
+    );
+procedure addPizza(
+     name  IN VARCHAR2,
+    order_id in varchar2,
+    price IN VARCHAR2,
+    logo in varchar2,
+    description in varchar2,
+    cook in number,
+    id_ out number ) ;
+
+procedure addOrder(
+    starttime IN VARCHAR2,
+    endtime in varchar2,
+    price in varchar2,
+    status in varchar2,
+    phone in varchar2,
+    name in varchar2,
+    address in varchar,
+    id_ out number
+   ) ;
+procedure UpdateOrder(
+     id number,
+     status in varchar2,
+    starttime IN VARCHAR2,
+    endtime in varchar2,
+    price in varchar2,
+    phone in varchar2,
+    name in varchar2,
+    address in varchar2,
+    idCustomer number
+   ) ;
+   procedure addUser(
+    first_name IN VARCHAR2,
+    last_name in varchar2,
+    login in varchar2,
+    passsword in varchar2,
+    warker in varchar2,
+    id_ number,
+    name in varchar2,
+    address in varchar2,
+    phone in varchar2,
+    idCustomer number) ;
+    
+procedure updateUser(
+    first_name IN VARCHAR2,
+    last_name in varchar2,
+    login in varchar2,
+    passsword in varchar2,
+    warker in varchar2,
+    id number,
+    name in varchar2,
+    address in varchar2,
+     phone in varchar2,
+    idCustomer number ) ;
+    
+    procedure addCustomer(
+    name IN VARCHAR2,
+    address in varchar2,
+    phone in varchar2,
+    id_ out number
+  ) ;
+  procedure updateCustomer(
+    name IN VARCHAR2,
+    address in varchar2,
+    phone in varchar2,
+    id  number
+    ) ;
+    procedure addd;
+    end pizza;
+/
+CREATE OR REPLACE PACKAGE BODY pizza IS
 
 -- add additional
-CREATE OR REPLACE
+
 PROCEDURE addAdditional(
     name     IN VARCHAR2,
     order_id IN VARCHAR2,
@@ -199,14 +284,14 @@ if order_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (24,order_id,id);
 end if;
 END ;
-/
+
 
 
 
 
 
 --add ingredients
-CREATE OR REPLACE
+
 PROCEDURE addIngredients(
     pizza_id in varchar2,
     name  IN VARCHAR2,
@@ -235,11 +320,11 @@ if pizza_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (22,pizza_id,id);
 end if;
 END addIngredients;
-/
+
 
 
 --add pizza
-CREATE OR REPLACE
+
 procedure addPizza(
      name  IN VARCHAR2,
     order_id in varchar2,
@@ -270,12 +355,13 @@ INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (31,cook,id);
 end if;
 end if;
 END addPizza;
-/
+
+
 
 
 
 --add order
-CREATE OR REPLACE
+
 procedure addOrder(
     starttime IN VARCHAR2,
     endtime in varchar2,
@@ -302,13 +388,13 @@ into OBJREFERENCE values(14,customerid,id)
 select * from dual;
 id_:=id;
 END addOrder;
-/
+
 
 
 --call addOrder('1033dsssf00','100331','23','IN_WORK','333','ssss','eee');
 
 --update order
-CREATE OR REPLACE
+
 procedure UpdateOrder(
      id number,
      status in varchar2,
@@ -341,10 +427,10 @@ BEGIN
  updatecustomer(name,address,phone,idCustomer);
  
 END UpdateOrder;
-/
+
 
 --add user
-CREATE OR REPLACE
+
 procedure addUser(
     first_name IN VARCHAR2,
     last_name in varchar2,
@@ -373,10 +459,10 @@ into OBJREFERENCE values(36,customerid,id)
 select * from dual;
 
 END addUser;
-/
+
 --ua.opu.dl.pizzeria.model.Pizza
 --Update user
-CREATE OR REPLACE
+
 procedure updateUser(
     first_name IN VARCHAR2,
     last_name in varchar2,
@@ -403,10 +489,10 @@ update ATTRIBUTES
 set value=warker WHERE object_id=id and attr_id=5;
 updatecustomer(name,address,phone,idCustomer);
 END updateUser;
-/
+
 
 --add Customer
-CREATE OR REPLACE
+
 procedure addCustomer(
     name IN VARCHAR2,
     address in varchar2,
@@ -425,10 +511,10 @@ INTO ATTRIBUTES values(35,id,phone,null)
 select * from dual;
 id_:=id;
 END addCustomer;
-/
+
 
 --Update customer
-CREATE OR REPLACE
+
 procedure updateCustomer(
     name IN VARCHAR2,
     address in varchar2,
@@ -446,19 +532,7 @@ update ATTRIBUTES
 set value=phone WHERE object_id=id and attr_id=35;
 
 END updateCustomer;
-/
 
-
-
-
-
-
-
-
-
-
-
-CREATE OR REPLACE
 procedure addd 
 is
 id number(20);
@@ -524,10 +598,11 @@ addUser('manager','userovich','manager','1','ROLE_MANAGER',0,'user visilov','ode
 
 
 END addd;
+end pizza;
 /
 
 
-call addd();
+call pizza.addd();
 
 commit;
 

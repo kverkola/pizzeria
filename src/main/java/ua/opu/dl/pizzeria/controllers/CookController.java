@@ -28,7 +28,7 @@ public class CookController {
 	public String assign(@PathVariable("pizzaId") long id, Principal principal) {
 		LOG.info("Pizza assigned to: " + principal.getName());
 		Users cook = userService.loadByLogin(principal.getName());
-		pizzaService.setCook(id, cook.getId());
+		pizzaService.setCook(id, cook.getId());	
 		return "redirect:/cook";
 	}
 }

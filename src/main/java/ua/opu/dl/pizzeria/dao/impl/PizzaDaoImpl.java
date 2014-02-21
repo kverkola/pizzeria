@@ -105,7 +105,7 @@ public class PizzaDaoImpl implements PizzaDao {
 
 	@Override
 	public void setCook(long id,long cookId) {
-		jdbcTemplate.update(addCookFromPizza,id,cookId);
+		jdbcTemplate.update(addCookFromPizza,cookId,id);
 		
 	}
 }
