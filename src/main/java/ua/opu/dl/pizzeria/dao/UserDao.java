@@ -20,4 +20,6 @@ public interface UserDao {
 	List<Users> loadByRole(UserRole role);
 
 	List<Users> loadAllusers();
+
+	Users loadCookByPizzaId(long pizzaId);
 }

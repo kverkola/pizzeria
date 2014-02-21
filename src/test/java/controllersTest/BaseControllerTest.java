@@ -7,6 +7,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.ui.ExtendedModelMap;
 import ua.opu.dl.pizzeria.controllers.BaseController;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.service.PizzaService;
 import config.AbstractControllerTest;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +21,7 @@ public class BaseControllerTest extends AbstractControllerTest {
 	@Before
 	public void initPizzas() {
 		Pizza pizza = new Pizza();
-		pizza.setCook("22");
+		pizza.setCook(new Users());
 		pizza.setDescription("best pizza");
 		pizza.setId(1);
 		pizza.setLogo("logo");

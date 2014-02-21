@@ -74,4 +74,10 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	public Users loadCookByPizzaId(long pizzaId) {
+		
+		return userDao.loadCookByPizzaId(pizzaId);
+	}
+
 }

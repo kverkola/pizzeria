@@ -84,7 +84,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (27,5,'description'
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (28,4,'status','Status');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (29,4,'logo','Logo');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (30,4,'description','description');
-INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (31,5,'cook','cook');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (31,5,'cook','cookId');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (32,4,'nameCustomer','nameCustomer');
 --INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,4,'address','address');
 --INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,4,'address','address');
@@ -246,10 +246,9 @@ procedure addPizza(
     price IN VARCHAR2,
     logo in varchar2,
     description in varchar2,
-    cook in varchar2,
+    cook in number,
     id_ out number ) 
 is
-
  id   NUMBER(20);
 BEGIN
 id:=SEQUENCE1.NEXTVAL;
@@ -266,6 +265,9 @@ select * from dual;
 id_:=id;
 if order_id>0 then
 INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (23,order_id,id);
+if cook>0 then
+INSERT INTO OBJREFERENCE (ATTR_ID,REFERENCE,OBJECT_ID) VALUES (31,cook,id);
+end if;
 end if;
 END addPizza;
 /
@@ -461,8 +463,8 @@ procedure addd
 is
 id number(20);
 BEGIN
-addpizza('Custom Pizza','0','0','CustomerPizza.png','Custom Pizza','Empty',id);
-addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit','Empty',id);
+addpizza('Custom Pizza','0','0','CustomerPizza.png','Custom Pizza',0,id);
+addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit',0,id);
 
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -471,17 +473,7 @@ addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 
-addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.','Empty',id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Sauce','6','40','','Sauce');
-
-addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.','Empty',id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.',0,id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
@@ -489,8 +481,18 @@ addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Sauce','6','40','','Sauce');
 
+addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',0,id);
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
 
-addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.','Empty',id);
+
+addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',0,id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -528,6 +530,7 @@ END addd;
 call addd();
 
 commit;
+
 
 
 

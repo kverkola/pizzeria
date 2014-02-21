@@ -10,16 +10,20 @@ import ua.opu.dl.pizzeria.dao.IngredientDao;
 import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.PizzaService;
+import ua.opu.dl.pizzeria.service.UserService;
 
 public class PizzaServiceImpl implements PizzaService {
-
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private PizzaDao pizzaDao;
 	@Autowired
 	private IngredientServiceImpl ingredientService;
 	private Pizza pizza;
+	private Users cook;
 	private HashMap<Ingredient, Integer> ingredientsMap;
 	private List<Ingredient> listIngredients;
 
@@ -27,6 +31,7 @@ public class PizzaServiceImpl implements PizzaService {
 	public Pizza loadById(long id) {
 		ingredientsMap = new HashMap<Ingredient, Integer>();
 		pizza = pizzaDao.loadById(id);
+		cook = userService.loadCookByPizzaId(pizza.getId());
 		listIngredients = ingredientService.loadByPizza(pizza.getId());
 		Integer am;
 		for (Ingredient i : listIngredients) {
@@ -34,6 +39,10 @@ public class PizzaServiceImpl implements PizzaService {
 			ingredientsMap.put(i, am == null ? 1 : am + 1);
 		}
 		pizza.setMap(ingredientsMap);
+		if (cook == null) {
+			cook = new Users();
+		}
+		pizza.setCook(cook);
 		return pizza;
 	}
 
@@ -44,10 +53,10 @@ public class PizzaServiceImpl implements PizzaService {
 		long id = pizzaDao.addPizza(pizza);
 		int count;
 
-        for (Map.Entry<Ingredient, Integer> entry : ingredients.entrySet()) {
+		for (Map.Entry<Ingredient, Integer> entry : ingredients.entrySet()) {
 			count = entry.getValue();
 			for (int j = 1; j <= count; j++) {
-                Ingredient i = entry.getKey();
+				Ingredient i = entry.getKey();
 				i.setPizzaId(id);
 				ingredientService.addIngredient(i);
 			}
@@ -71,6 +80,7 @@ public class PizzaServiceImpl implements PizzaService {
 		List<Pizza> listPizzas = pizzaDao.loadByOrder(orderId);
 		for (int a = 0; a < listPizzas.size(); a++) {
 			pizza = listPizzas.get(a);
+			cook = userService.loadCookByPizzaId(pizza.getId());
 			listIngredients = ingredientService.loadByPizza(pizza.getId());
 			ingredientsMap = new HashMap<Ingredient, Integer>();
 			Integer am;
@@ -79,7 +89,10 @@ public class PizzaServiceImpl implements PizzaService {
 				ingredientsMap.put(i, am == null ? 1 : am + 1);
 			}
 			pizza.setMap(ingredientsMap);
-
+			if (cook == null) {
+				cook = new Users();
+			}
+			pizza.setCook(cook);
 		}
 
 		return listPizzas;
@@ -91,9 +104,9 @@ public class PizzaServiceImpl implements PizzaService {
 		return pizzaDao.loadAll();
 	}
 
-    @Override
-    public void setCook(long id, String name) {
+	@Override
+	public void setCook(long id, String name) {
 
-        pizzaDao.setCook(id, name);
-    }
+		pizzaDao.setCook(id, name);
+	}
 }

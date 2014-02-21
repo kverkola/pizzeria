@@ -20,4 +20,5 @@ public interface UserService {
 	List<Users> loadAlluser();
 
 	List<Users> loadByRole(UserRole role);
+	Users loadCookByPizzaId(long pizzaId);
 }

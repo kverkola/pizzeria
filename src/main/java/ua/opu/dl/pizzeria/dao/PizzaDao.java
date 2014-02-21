@@ -1,6 +1,7 @@
 package ua.opu.dl.pizzeria.dao;
 
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Users;
 
 import java.util.List;
 
@@ -19,4 +20,5 @@ public interface PizzaDao {
 	List<Pizza> loadByOrder(long orderId);
 
     List<Pizza> loadAll();
+   
 }

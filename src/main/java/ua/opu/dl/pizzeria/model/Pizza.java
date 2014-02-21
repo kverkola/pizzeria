@@ -8,32 +8,23 @@ public class Pizza extends Product {
 	private long orderId;
 	private String logo;
 	private String description;
-	private String cook;
+	private Users cook;
 
 	public Pizza() {
-
+		cook = new Users();
+		cook.setId(0);
 	}
-
-    public Pizza(String name, String logo,
-                 String description, long id, double price, String cook) {
-
-        super(id, name, 1, price);
-
-        this.logo = logo;
-        this.cook = cook;
-        this.description = description;
-    }
 
 	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
 			String description, long id, double price) {
 
-        super(id, name, 1, price);
+		super(id, name, 1, price);
 
-        this.map = map;
+		this.map = map;
 		this.logo = logo;
 		this.description = description;
 
-        countTotalPrice();
+		countTotalPrice();
 	}
 
 	public Map<Ingredient, Integer> getMap() {
@@ -79,11 +70,11 @@ public class Pizza extends Product {
 		setPrice(price);
 	}
 
-	public String getCook() {
+	public Users getCook() {
 		return cook;
 	}
 
-	public void setCook(String cook) {
+	public void setCook(Users cook) {
 		this.cook = cook;
 	}
 
@@ -128,5 +119,4 @@ public class Pizza extends Product {
 		return true;
 	}
 
-	
 }
