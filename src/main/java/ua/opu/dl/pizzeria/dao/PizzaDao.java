@@ -1,6 +1,7 @@
 package ua.opu.dl.pizzeria.dao;
 
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Status;
 import ua.opu.dl.pizzeria.model.Users;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface PizzaDao {
 
 	long addPizza(Pizza pizza);
 
-    void setCook(long id, long Cookid);
+	void setCook(long id, long Cookid);
 
 	void updatePizza(Pizza pizza);
 
@@ -19,6 +20,8 @@ public interface PizzaDao {
 
 	List<Pizza> loadByOrder(long orderId);
 
-    List<Pizza> loadAll();
-   
+	List<Pizza> loadAll();
+
+	 void UpdateStatus(long pizzaId,Status status);
+
 }

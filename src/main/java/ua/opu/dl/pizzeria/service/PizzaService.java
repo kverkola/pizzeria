@@ -3,6 +3,7 @@ package ua.opu.dl.pizzeria.service;
 import java.util.List;
 
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Status;
 
 public interface PizzaService {
 
@@ -19,4 +20,5 @@ public interface PizzaService {
 	List<Pizza> loadByOrder(long orderId);
 
     List<Pizza> loadAll();
+    void UpdateStatus(long pizzaId,Status status);
 }

@@ -92,6 +92,7 @@ INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (33,6,'name','NameC
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (34,6,'address','address');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (35,6,'phone','phone');
 INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (36,1,'IdCustomer','Customer');
+INSERT INTO ATTRTYPE (ATTR_ID,ATTR_TYPE_ID,CODE,NAME) VALUES (37,5,'status','status');
 
 
 
@@ -195,6 +196,7 @@ procedure addPizza(
     logo in varchar2,
     description in varchar2,
     cook in number,
+    status in varchar2,
     id_ out number ) ;
 
 procedure addOrder(
@@ -332,6 +334,7 @@ procedure addPizza(
     logo in varchar2,
     description in varchar2,
     cook in number,
+    status in varchar2,
     id_ out number ) 
 is
  id   NUMBER(20);
@@ -346,6 +349,7 @@ INTO ATTRIBUTES values(16,id,price,null)
 INTO ATTRIBUTES values(26,id,logo,null)
 INTO ATTRIBUTES values(27,id,description,null)
 INTO ATTRIBUTES values(31,id,cook,null)
+INTO ATTRIBUTES values(37,id,status,null)
 select * from dual;
 id_:=id;
 if order_id>0 then
@@ -537,8 +541,8 @@ procedure addd
 is
 id number(20);
 BEGIN
-addpizza('Custom Pizza','0','0','CustomerPizza.png','Custom Pizza',0,id);
-addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit',0,id);
+addpizza('Custom Pizza','0','0','CustomerPizza.png','Custom Pizza',0,'PRE_ORDER',id);
+addpizza('pizza1','0','29','chikenita_middle.png','Lorem ipsum dolor sit amet  consectetuer adipiscing elit',0,'PRE_ORDER',id);
 
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -547,17 +551,7 @@ addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 
-addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.',0,id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Ham','5','100','','hum');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Vegetables','10','100','','Vegetables');
-addIngredients(id,'Sauce','6','40','','Sauce');
-
-addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',0,id);
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
-addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addpizza('pizza2','0','29','img_2.png','Aenean commodo ligula eget dolor. Aenean massa.',0,'PRE_ORDER',id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Ham','5','100','','hum');
 addIngredients(id,'Ham','5','100','','hum');
@@ -565,8 +559,18 @@ addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Vegetables','10','100','','Vegetables');
 addIngredients(id,'Sauce','6','40','','Sauce');
 
+addpizza('pizza3','0','35','pizza_middle.png','Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',0,'PRE_ORDER',id);
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Cheese','3','50','chees.png','Cheese');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Ham','5','100','','hum');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Vegetables','10','100','','Vegetables');
+addIngredients(id,'Sauce','6','40','','Sauce');
 
-addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',0,id);
+
+addpizza('pizza4','0','47','tanu_mini.png','Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.',0,'PRE_ORDER',id);
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
 addIngredients(id,'Cheese','3','50','chees.png','Cheese');
@@ -605,7 +609,6 @@ end pizza;
 call pizza.addd();
 
 commit;
-
 
 
 

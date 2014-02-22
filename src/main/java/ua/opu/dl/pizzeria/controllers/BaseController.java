@@ -1,6 +1,5 @@
 package ua.opu.dl.pizzeria.controllers;
 
-
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import ua.opu.dl.pizzeria.model.Order;
 import ua.opu.dl.pizzeria.model.Pizza;
 import ua.opu.dl.pizzeria.model.Status;
@@ -26,7 +24,8 @@ import ua.opu.dl.pizzeria.service.impl.IngredientServiceImpl;
 @Controller
 public class BaseController {
 
-    private static final Logger LOG  = LoggerFactory.getLogger(BaseController.class);
+	private static final Logger LOG = LoggerFactory
+			.getLogger(BaseController.class);
 
 	@Autowired
 	private PizzaService pizzaService;
@@ -34,14 +33,14 @@ public class BaseController {
 	@Autowired
 	private AdditionalService additionalService;
 
-    @Autowired
-    private OrderService orderService;
+	@Autowired
+	private OrderService orderService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String welcome() {
 
-        Locale.setDefault(Locale.ENGLISH);
-        return "index";
+		Locale.setDefault(Locale.ENGLISH);
+		return "index";
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
@@ -73,21 +72,23 @@ public class BaseController {
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
 	public String cook(ModelMap model, Principal principal) {
 
-        List<Pizza> unsignedPizzas = new ArrayList<Pizza>();
-        List<Pizza> assignedPizzas = new ArrayList<Pizza>();
+		List<Pizza> unsignedPizzas = new ArrayList<Pizza>();
+		List<Pizza> assignedPizzas = new ArrayList<Pizza>();
 
-        for (Order order : orderService.loadAllByStatus(Status.PRE_ORDER)) {
-            for (Pizza pizza : order.getProducts(Pizza.class)) {
-                if (pizza.getCook().getId()==0) {
-                    unsignedPizzas.add(pizza);
-                } else if (pizza.getCook().getLogin().equals(principal.getName())) {
-                    assignedPizzas.add(pizza);
-                }
-            }
-        }
+		for (Order order : orderService.loadAllByStatus(Status.PRE_ORDER)) {
+			for (Pizza pizza : order.getProducts(Pizza.class)) {
+				if (pizza.getCook().getId() == 0) {
+					unsignedPizzas.add(pizza);
+				} else if (pizza.getCook().getLogin()
+						.equals(principal.getName())
+						& pizza.getStatus() != Status.CLOSE) {
+					assignedPizzas.add(pizza);
+				}
+			}
+		}
 
-        model.addAttribute("unsignedPizzas", unsignedPizzas);
-        model.addAttribute("assignedPizzas", assignedPizzas);
+		model.addAttribute("unsignedPizzas", unsignedPizzas);
+		model.addAttribute("assignedPizzas", assignedPizzas);
 		return "cook";
 	}
 

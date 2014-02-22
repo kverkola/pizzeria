@@ -9,9 +9,11 @@ public class Pizza extends Product {
 	private String logo;
 	private String description;
 	private Users cook;
+	private Status status;
 	public Pizza() {
 		cook = new Users();
 		cook.setId(0);
+		
 	}
 
 	public Pizza(String name, Map<Ingredient, Integer> map, String logo,
@@ -56,6 +58,14 @@ public class Pizza extends Product {
 
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public void countTotalPrice() {

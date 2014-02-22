@@ -10,6 +10,7 @@ import ua.opu.dl.pizzeria.dao.IngredientDao;
 import ua.opu.dl.pizzeria.dao.PizzaDao;
 import ua.opu.dl.pizzeria.model.Ingredient;
 import ua.opu.dl.pizzeria.model.Pizza;
+import ua.opu.dl.pizzeria.model.Status;
 import ua.opu.dl.pizzeria.model.Users;
 import ua.opu.dl.pizzeria.service.AdditionalService;
 import ua.opu.dl.pizzeria.service.PizzaService;
@@ -110,5 +111,11 @@ public class PizzaServiceImpl implements PizzaService {
 	public void setCook(long id, long cookId) {
 		pizzaDao.setCook(id, cookId);
 		
+	}
+
+	@Override
+	public void UpdateStatus(long pizzaId,Status status) {
+	
+		pizzaDao.UpdateStatus(pizzaId,status);
 	}
 }
