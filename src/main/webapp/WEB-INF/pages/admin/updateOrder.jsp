@@ -115,13 +115,60 @@
 					<td><div>
 							<input type="text" class="inp" name="newPhone">
 						</div></td>
-				</tr>
+				</tr><c:forEach var="product" items="${order.products}">
+<tr>
 
+<td>product:</td>
+<td><a href="#" class="big-link"
+					data-reveal-id="${product.id}"> ${product.name} </a>
+					
+					
+					
+					 <div id="${product.id}" class="reveal-modal">
+				<h1>${product.name}</h1>
+				<c:if test="${product.getClass().toString().equals('class ua.opu.dl.pizzeria.model.Pizza')}">
+				
+				           
+              <table class="table table-hover" style="width: 50%;">
+	<thead>
+		<tr>
+			<th>Ingredient</th>
+			<th>Weight</th>
+			<th>Count</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<c:forEach var="entry" items="${product.map}">
+		<tr>
+			<td>${entry.key.name}</td>
+			<td>${entry.key.weight}</td>
+			<td>${entry.value}</td>
+			<td>${entry.key.price}&nbsp;$</td>
+		</tr>
+	</c:forEach>
+	
+</table>    
+       <p>Cook:</p><p>${product.getCook().firstName}&nbsp;${product.getCook().lastName}</p>
+                       </c:if>
+				
+				
+				
+				<h1>${product.price}&nbsp;$</h1>
+				<img src="<c:url value='/resources/${product.logo}'/>" /> <a
+					class="close-reveal-modal">&#215;</a>
+				
+				
+				
+				
 
+				</div></td>
 
-
-
+</tr></c:forEach>
 			</table>
+			
+			
+			
+			
  
                             <button type="submit" class="btn btn-default" type="button">Update</button>
                         
