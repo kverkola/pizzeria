@@ -18,6 +18,7 @@ public interface OrderDao {
 	Order loadByCustomer(long Id);
 
 	List<Order> loadAllOrders();
+	List<Order> loadOrdersForCook();
 
     List<Order> loadAllByStatus(Status status);
 }

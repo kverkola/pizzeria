@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
 
         List<Order> orders = orderDao.loadAllByStatus(status);
 
-        List<Product> products;
+       // List<Product> products;
 
 		for (Order order : orders) {
 
@@ -135,5 +135,26 @@ public class OrderServiceImpl implements OrderService {
 		}
 
 		return orders;
+	}
+
+	@Override
+	public List<Order> loadOrdersForCook() {
+		orders=orderDao.loadOrdersForCook();
+		 // List<Product> products;
+
+			for (Order order : orders) {
+
+	            products = new ArrayList();
+
+				products.addAll(pizzaService.loadByOrder(order.getId()));
+				products.addAll(additionalService.loadByOrder(order.getId()));
+
+	            order.setProducts(products);
+
+	            Customer customer = customerService.loadByOrderId(order.getId());
+				order.setCustomer(customer);
+			}
+		return  orders;
+		
 	}
 }

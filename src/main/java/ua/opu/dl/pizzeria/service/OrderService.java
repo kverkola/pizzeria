@@ -19,5 +19,7 @@ public interface OrderService {
 
 	List<Order> loadAllOrder();
 
-    List<Order> loadAllByStatus(Status status);
+	List<Order> loadOrdersForCook();
+
+	List<Order> loadAllByStatus(Status status);
 }

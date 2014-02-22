@@ -32,7 +32,7 @@
                                     ${pizza.cook}
                             </td>
                             <td style="vertical-align: middle;">
-                                <a href="<c:url value='/cook/assign/${pizza.id}'/>"
+                                <a href="<c:url value='/cook/assign/${pizza.id},${pizza.orderId}'/>"
                                    class="btn btn-success">
                                     Assign To Me
                                 </a>

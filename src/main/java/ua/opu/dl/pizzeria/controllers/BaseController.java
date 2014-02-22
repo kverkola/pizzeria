@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +73,9 @@ public class BaseController {
 
 	@RequestMapping(value = "/cook", method = RequestMethod.GET)
 	public String cook(ModelMap model, Principal principal) {
-
 		List<Pizza> unsignedPizzas = new ArrayList<Pizza>();
 		List<Pizza> assignedPizzas = new ArrayList<Pizza>();
-
-		for (Order order : orderService.loadAllByStatus(Status.PRE_ORDER)) {
+		for (Order order : orderService.loadOrdersForCook()) {
 			for (Pizza pizza : order.getProducts(Pizza.class)) {
 				if (pizza.getCook().getId() == 0) {
 					unsignedPizzas.add(pizza);

@@ -41,6 +41,7 @@ public class PizzaDaoImpl implements PizzaDao {
 			pizza.setDescription(rs.getString("description"));
 			pizza.setId(rs.getLong("id"));
 			pizza.setPrice(rs.getDouble("price"));
+			pizza.setOrderId(rs.getLong("orderid"));
 			pizza.setStatus(Status.valueOf(rs.getString("status")));
 			return pizza;
 		}
