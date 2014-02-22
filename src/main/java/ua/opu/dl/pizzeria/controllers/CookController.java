@@ -1,6 +1,7 @@
 package ua.opu.dl.pizzeria.controllers;
 
 import java.security.Principal;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,6 +42,7 @@ public class CookController {
 		Order order = orderService.loadById(orderId);
 		if (order.getStatus().toString().equals("PRE_ORDER")) {
 			order.setStatus(Status.IN_WORK);
+			order.setEndtime(new Date().toString());
 			orderService.updateOrder(order);
 		}
 		return "redirect:/cook";
