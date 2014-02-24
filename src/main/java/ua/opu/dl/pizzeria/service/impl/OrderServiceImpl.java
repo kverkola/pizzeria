@@ -104,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
 		products = new ArrayList<Product>();
 		orders = new ArrayList<Order>();
 		for (Customer customer : customers) {
+			
 			order=orderDao.loadByCustomer(customer.getId());
 			products.addAll(pizzaService.loadByOrder(order.getId()));
 			products.addAll(additionalService.loadByOrder(order.getId()));

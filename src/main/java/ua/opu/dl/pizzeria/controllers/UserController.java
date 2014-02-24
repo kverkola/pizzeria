@@ -118,10 +118,10 @@ public class UserController {
 		order.setCustomer(new Customer(user.getFirstName(), user.getCustomer()
 				.getAddress(), user.getCustomer().getPhone()));
 		order.setStarttime(new Date().toString());
-        order.setStatus(Status.IN_WORK);
+        //order.setStatus(Status.IN_WORK);
 
 		orderService.addOrder(order);
-
+		
 		order = new Order();
 		order.setProducts(new ArrayList<Product>());
 
