@@ -12,7 +12,7 @@
             <td>
                 <table>
                     <th>Pizza</th>
-                    <th style="text-align: center;">Cook</th>
+                    <th style="text-align: center;">Pizza Id</th>
                     <th></th>
                     <c:forEach var="pizza" items="${unsignedPizzas}">
                         <tr>
@@ -29,7 +29,7 @@
                                 </p>
                             </td>
                             <td style="text-align: center; vertical-align: middle; min-width: 150px;">
-                                    ${pizza.cook}
+                                    <h4> ${pizza.id}</h4>
                             </td>
                             <td style="vertical-align: middle;">
                                 <a href="<c:url value='/cook/assign/${pizza.id},${pizza.orderId}'/>"
@@ -47,6 +47,8 @@
             <td>
                 <table>
                     <th>Pizza</th>
+                     <th style="text-align: center;">Pizza Id</th>
+                    <th></th>
                     <c:forEach var="pizza" items="${assignedPizzas}">
                         <tr>
                             <td style="text-align: left; min-width: 200px;">
@@ -60,7 +62,11 @@
                                 </p>
                                 </c:forEach>
                                 </p>
+                                 </td>
+                            <td style="text-align: center; vertical-align: middle; min-width: 150px;">
+                                   <h4> ${pizza.id}</h4>
                             </td>
+                            
                             <td style="vertical-align: middle;">
                                 <a href="<c:url value='/cook/finish-pizza/${pizza.id}'/>"
                                    class="btn btn-warning">
